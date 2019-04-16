@@ -1,0 +1,42 @@
+{
+  "defaultURLs": "https://demo.nexttrucking.com",
+  "defaultURLsSignInUp": "https://demo.nexttrucking.com",
+  "defaultURLsGuest": "https://demo.nexttrucking.com",
+  "defaultURL": "http://admin-demo.nexttrucking.com/admin-portal",
+
+
+  "SIGNIN": "SIGNUP",
+
+        "FOR": "GEST",
+            "Invalid_Data": "",
+                "invalidFirstName": "1234",
+                "invalidLastName": "1234",
+                "invalidPhoneNumber": "123",
+                "invalidCompanyName": "1",
+                "invalidEmail": "123@111",
+                "shortPassword": "222",
+            "Correct_Data": "",
+                "companyName": "NEXT",
+                "emailForGest": "neeck24@ukr.net",
+                "firstName": "Nik",
+                "lastName": "Serg",
+                "phoneNumber": "2343423423",
+                "password6_1": "111111",
+                "passwordForGest": "xfqrf2424",
+
+        "FOR": "SignInAsDispatcher",
+                "dispatcherEmail": "aliehu67+fleet@gmail.com",
+                "dispatcherPassword": "111111",
+
+        "FOR": "SignInAsOwnerOperator",
+                "ownerOperatorEmail": "aliehu67+trucker@gmail.com",
+                "ownerOperatorPassword": "111111",
+
+        "FOR": "SignInAsShipper",
+                "shipperEmail": "aliehu67+shipper@gmail.com",
+                "shipperPassword": "111111",
+
+        "FOR": "AdminPortal",
+                "usernameAdminPortal": "sergii",
+                "passwordAdminPortal": "xfqrf2424N"
+}
