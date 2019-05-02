@@ -1,4 +1,4 @@
-# JavaMobileTest
+# JavaMobileAutoTest
 
 ### Introduction
 Currant project includes smoking autotests for NEXT Mobile APP. JavaMobileTest project was written by Java + Selenium      Webdriver + Appium. Project can be used for APPs for different environment, such as Dev, Test, Demo and Prod. 
