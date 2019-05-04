@@ -1,25 +1,11 @@
 package MobileAPP;
 
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.remote.MobilePlatform;
-import org.junit.After;
-import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import com.microsoft.appcenter.appium.Factory;
-import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
-import org.junit.rules.TestWatcher;
 import zProperty.SetProperty;
 
 
 public class TestClass extends SetProperty {
-
-
-
 
 
     @Test
@@ -55,8 +41,6 @@ public class TestClass extends SetProperty {
 //        driver.findElementByAccessibilityId("login_button_login").click();
 
 
-
-
 //        driver.findElement(By.name("Email")).sendKeys("aliehu67+driverone@gmail.com");
 //        MobileElement signUpButton = adriver.findElement(By.xpath("//*[contains(@text, '2')]"));
 //        MobileElement signUpButton = (MobileElement) adriver.findElement(By.xpath("//*[contains(@text, '2')]"));
@@ -83,9 +67,4 @@ public class TestClass extends SetProperty {
 //        adriver.get("https://nexttrucking.com");
 //        adriver.quit();
     }
-
-
-
-
-
 }
