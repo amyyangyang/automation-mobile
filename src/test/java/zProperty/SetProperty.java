@@ -1,88 +1,85 @@
 package zProperty;
 
 
+import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
+import com.microsoft.appcenter.appium.EnhancedIOSDriver;
+import com.microsoft.appcenter.appium.Factory;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.After;
 import org.junit.Rule;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.io.FileReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 
 public abstract class SetProperty {
 
-    public static WebDriver driver;
+
     public static JavascriptExecutor jse;
     public static Object obj;
-    public static String filePath;
+    public static AppiumDriver<MobileElement> driver;
+//    public static EnhancedIOSDriver<MobileElement> driver;
+//    public static EnhancedAndroidDriver<MobileElement> driver;
 
 
-    public void setUpWebDriver(String driverName) {
+    public void setUpWebDriver() throws MalformedURLException, InterruptedException{
+        URL url = new URL("http://127.0.0.1:4723/wd/hub");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
+        capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
 
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")){
-            //Operating system is based on Windows
-            switch (driverName) {
-                case "Chrome":
-                    System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriver.exe");
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("start-maximized"); // open Browser in maximized mode
-                    options.addArguments("disable-infobars"); // disabling infobars
-                    options.addArguments("--disable-extensions"); // disabling extensions
-                    options.addArguments("--disable-gpu"); // applicable to windows os only
-                    options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-                    options.addArguments("--no-sandbox"); // Bypass OS security model
-                    driver = new ChromeDriver(options);
-                    String profile = System.getProperty("ENV_VAR_L");
-                    switch (profile) {
-                        case "Local":
-                            filePath = "C:\\Users\\Administrator\\Downloads\\";
-                            break;
-                        case "Server":
-                            Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
-                            String browserVersion = caps.getVersion();
-                            filePath = String.format("C:\\Program Files (x86)\\Google\\Chrome\\Application\\%s\\", browserVersion);
-                            break;
-                    }
-                    break;
-                case "FireFox":
-                    System.setProperty("webdriver.gecko.driver", "src//test//resources//drivers//geckodriver.exe");
-                    driver = new FirefoxDriver();
-                    break;
-            }
+        String profile = System.getProperty("PLATFORM_NAME");
+        System.out.println(profile);
+        switch (profile) {
+            case "android":
+                capabilities.setCapability("app", "C:\\Users\\Administrator\\Downloads\\NEXT TEST-V2.0.3 (3).apk");
+                capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
+                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
+                capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
+                capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
+                capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                driver = Factory.createAndroidDriver(url, capabilities);
+                break;
+
+            case "ios":
+//                capabilities.setCapability("app", "C:\\");
+//                capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.IOS);
+//                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "1b07bf30");
+//                capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
+//                capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
+//                capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                driver = Factory.createIOSDriver(url, capabilities);
+
+                break;
         }
-        else if (os.contains("nix") || os.contains("aix") || os.contains("nux") || os.contains("NUX")){
-            //Operating system is based on Linux/Unix/*AIX
-            switch (driverName) {
-                case "Chrome":
-                    System.setProperty("webdriver.chrome.driver", "src//test//resources//drivers//chromedriver");
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("start-maximized"); // open Browser in maximized mode
-                    options.addArguments("disable-infobars"); // disabling infobars
-                    options.addArguments("--disable-extensions"); // disabling extensions
-                    options.addArguments("--disable-gpu"); // applicable to windows os only
-                    options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-                    options.addArguments("--no-sandbox"); // Bypass OS security model
-                    driver = new ChromeDriver(options);
-                    filePath = "//home//dev//Downloads//";
-                    break;
-                case "FireFox":
-                    System.setProperty("webdriver.gecko.driver", "src//test//resources//drivers//geckodriver");
-                    driver = new FirefoxDriver();
-                    break;
-            }
-        }
+
+//        if (driver instanceof EnhancedAndroidDriver) {
+//            androidDriver = (EnhancedAndroidDriver<MobileElement>) driver;
+//        } else {
+//            iosDriver = (EnhancedIOSDriver<MobileElement>) driver;
+//        }
+        driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
         jse = (JavascriptExecutor)driver;
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
     }
+
+
+
+
+
 
 
     public String getTestData(String parameterName) {
@@ -109,13 +106,16 @@ public abstract class SetProperty {
         return parameterValue;
       }
 
-
     @Rule
     public RetryRule retryRule = new RetryRule(3);
 
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
 
     @After
-    public void turnDown(){
+    public void TearDown(){
+
+//        driver.label("Stopping App");
         driver.quit();
     }
 }

@@ -7,171 +7,64 @@
     <groupId>inhpstoretest</groupId>
     <artifactId>inhpstoretest</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>5.1.4.RELEASE</version>
+            <groupId>com.microsoft.appcenter</groupId>
+            <artifactId>appium-test-extension</artifactId>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.13.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-server-standalone</artifactId>-->
-            <!--<version>2.46.0</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-            <scope>test</scope>
-
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
-        <!--<dependency>-->
-            <!--<groupId>net.sf.json-lib</groupId>-->
-            <!--<artifactId>json-lib</artifactId>-->
-            <!--<version>2.4</version>-->
-            <!--<classifier>jdk15</classifier>-->
-        <!--</dependency>-->
-        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.5.5</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>7.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.android.support.test.espresso/espresso-core -->
-        <!--<dependency>-->
-            <!--<groupId>com.android.support.test.espresso</groupId>-->
-            <!--<artifactId>espresso-core</artifactId>-->
-            <!--<version>3.0.2</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/com.android.support.test/runner -->
-        <!--<dependency>-->
-            <!--<groupId>com.android.support.test</groupId>-->
-            <!--<artifactId>runner</artifactId>-->
-            <!--<version>1.0.2</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/androidx.test/rules -->
-        <!--<dependency>-->
-            <!--<groupId>androidx.test</groupId>-->
-            <!--<artifactId>rules</artifactId>-->
-            <!--<version>1.1.0-alpha1</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>androidx.test.uiautomator</groupId>-->
-            <!--<artifactId>uiautomator</artifactId>-->
-            <!--<version>2.2.0-alpha4</version>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.android.support/support-v4 &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.android.support</groupId>-->
-            <!--<artifactId>support-v4</artifactId>-->
-            <!--<version>24.1.1</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-            <version>4.1.1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.uphyca</groupId>
-            <artifactId>android-junit4</artifactId>
-            <version>0.5</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.googlecode.flyway/flyway-maven-plugin-largetest -->
-        <dependency>
-            <groupId>com.googlecode.flyway</groupId>
-            <artifactId>flyway-maven-plugin-largetest</artifactId>
-            <version>1.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.1.5.RELEASE</version>
-        </dependency>
-
-
-
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.6.0</version>
-                <configuration>
-                    <goalPrefix>plugin</goalPrefix>
-                    <outputDirectory>target/dir</outputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.12.4</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>3.0.0-M3</version>
                 <configuration>
-
                     <systemPropertyVariables>
-                        <ENV_VAR>Test</ENV_VAR>
-                        <ENV_VAR_L>Local</ENV_VAR_L>
+                        <PLATFORM_NAME>android</PLATFORM_NAME>
                     </systemPropertyVariables>
                     <properties>
-                           <maven.test.failure.ignore>true</maven.test.failure.ignore>
+                        <maven.test.failure.ignore>true</maven.test.failure.ignore>
                     </properties>
-
                     <includes>
                         <testFailureIgnore>true</testFailureIgnore>
                         <include>**/*</include>
                     </includes>
-
-
-
                 </configuration>
-            </plugin>
-            <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <!--<configuration>-->
-                         <!--<testFailureIgnore>false</testFailureIgnore>-->
-                    <!--</configuration>-->
-
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -182,17 +75,89 @@
                 </configuration>
             </plugin>
         </plugins>
-
         <resources>
             <resource>
                 <directory>src/test/resources</directory>
                 <filtering>false</filtering>
             </resource>
-    </resources>
+        </resources>
     </build>
 
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+    </repositories>
 
-
-
+    <profiles>
+        <profile>
+            <id>prepare-for-upload</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.10</version>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/upload/dependency-jars/</outputDirectory>
+                                    <useRepositoryLayout>true</useRepositoryLayout>
+                                    <copyPom>true</copyPom>
+                                    <addParentPoms>true</addParentPoms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+                        <version>2.2</version>
+                        <executions>
+                            <execution>
+                                <id>generate-pom</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>effective-pom</goal>
+                                </goals>
+                                <configuration>
+                                    <output>${project.build.directory}/upload/pom.xml</output>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-testclasses</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>testResources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/upload/test-classes</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>
+                                                ${project.build.testOutputDirectory}
+                                            </directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 
