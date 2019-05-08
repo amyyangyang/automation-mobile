@@ -1,0 +1,169 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2.1
+
+commands:
+  push_to_S3:
+    description: "sync application or msv package files to aws s3"
+    parameters:
+      from:
+        type: string
+      to:
+        type: string
+      overwrite:
+        default: true
+        type: boolean
+    steps:
+      - run:
+          name: Publish to S3
+          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+
+  pull_from_S3:
+    description: "pull application or msv package files to local docker"
+    parameters:
+      from:
+        type: string
+      to:
+        type: string
+      overwrite:
+        default: true
+        type: boolean
+    steps:
+      - run:
+          name: create path
+          command: |
+            mkdir -p << parameters.to >>
+      - run:
+          name: Publish to S3
+          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+
+  mvn_package:
+    description: "mvn package for multi-env and different devices"
+    parameters:
+      envType:
+        type: string
+        default: "dev"
+      deviceType:
+        type: string
+        default: "android"
+    steps:
+      - run:
+          name: << parameters.envType >> | << parameters.deviceType >> === mvn package
+          command: |
+            mvn -DskipTests -P prepare-for-upload -DdeviceType=<< parameters.deviceType >> -DenvType=<< parameters.envType >> package
+
+      - run:
+          name: << parameters.envType >> | << parameters.deviceType >> === backup package
+          command: |
+            mkdir -p artifactWorkspace/<<parameters.envType>>
+            move outputs artifactWorkspace/<<parameters.envType>>
+            ls artifactWorkspace
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - mvn_package:
+          envType: "dev"
+          deviceType: "Android"
+
+      - mvn_package:
+          envType: "dev"
+          deviceType: "iOS"
+
+      - persist_to_workspace:
+          # Save the files in persist_to_workspace
+          root: ~/
+          paths:
+            - artifactWorkspace
+
+  prepareFilesByS3:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo/
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - push_to_S3: #TODO save all env outputs in one site? Why we push the output to S3? If we want run the ui test on App project, we need these files.
+          from: "artifactWorkspace"
+          to: "TODO"
+
+      - pull_from_S3: #TODO get the application files from S3
+          from: "TODO"
+          to: "TODO"
+
+      - persist_to_workspace:
+          # Save the files in persist_to_workspace
+          root: ~/
+          paths:
+            - artifactWorkspace
+
+
+  testDevUI:
+    docker:
+      - image: circleci/node:lts-jessie
+    steps:
+      - attach_workspace:
+          at: ~/repo/
+      - run:
+          name: install app center cli
+          command: npm install -g appcenter-cli
+
+      - run:
+          name: test app UI -- Android
+          command: appcenter test run appium --app "NEXTTrucking/NEXTTrucking-Android" --devices 924a3baa --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir target/upload
+
+      - run:
+          name: test app UI -- iOS
+          command: appcenter test run appium --app "NEXTTrucking/NEXTTrucking-iOS" --devices 924a3baa --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir target/upload
+
+
+workflows:
+  version: 2
+  app-ui-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - /^release\/.*/
+                - /feature/circleci
+      - prepareFilesByS3:
+          requires:
+            - build
+      - hold_testDevUI:
+          type: approval
+          requires:
+            - build
+      - testDevUI:
+          requires:
+            -hold_testDevUI
+
+
