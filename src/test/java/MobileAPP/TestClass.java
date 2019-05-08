@@ -1,20 +1,20 @@
 package MobileAPP;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import java.net.MalformedURLException;
 import zProperty.SetProperty;
 
-
+@Slf4j
 public class TestClass extends SetProperty {
 
 
     @Test
     public void getHomePage() throws InterruptedException, MalformedURLException {
 
-
         setUpWebDriver();
 
-        System.out.println("Step 1");
+        log.info("Step 1");
         System.out.println(driver);
         Thread.sleep(5000);
         System.out.println("Step 2");
