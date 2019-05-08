@@ -2,6 +2,7 @@ package MobileAPP;
 
 import org.junit.Test;
 import java.net.MalformedURLException;
+import org.openqa.selenium.By;
 import zProperty.SetProperty;
 
 
@@ -20,23 +21,23 @@ public class TestClass extends SetProperty {
         System.out.println("Step 2");
         Thread.sleep(5000);
 
-        driver.findElementByAccessibilityId("language_button_save").click();
-//        driver.findElement(By.xpath("//*[contains(@text, 'Save')]")).click();
+//        driver.findElementByAccessibilityId("language_button_save").click();
+        driver.findElement(By.xpath("//*[contains(@text, 'Save')]")).click();
         System.out.println("Step 3");
         Thread.sleep(6000);
 
-        driver.findElementByAccessibilityId("welcome_button_signIn").click();
+//        driver.findElementByAccessibilityId("welcome_button_signIn").click();
 //        driver.findElement(By.xpath("//*[contains(@text, 'Sign In')]")).click();
         System.out.println("Step 4");
 
 //        driver.findElement(By.xpath("//*[contains(@resource-id='login_input_email')]")).sendKeys("aliehu67+driverone@gmail.com");
 //        driver.findElement(By.xpath("//*[@content-desc='login_input_email']")).sendKeys("aliehu67+driverone@gmail.com");
-        driver.findElementByAccessibilityId("login_input_email").sendKeys("aliehu67+driverone@gmail.com");
+//        driver.findElementByAccessibilityId("login_input_email").sendKeys("aliehu67+driverone@gmail.com");
 
 
 //        driver.findElement(By.xpath("//*[contains(@resource-id='login_input_password')]")).sendKeys("111111");
 //        driver.findElement(By.xpath("//*[@content-desc='login_input_password']")).sendKeys("111111");
-        driver.findElementByAccessibilityId("login_input_password").sendKeys("111111");
+//        driver.findElementByAccessibilityId("login_input_password").sendKeys("111111");
 
 //        driver.findElementByAccessibilityId("login_button_login").click();
 

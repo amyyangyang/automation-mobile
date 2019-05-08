@@ -48,13 +48,6 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
-                                capabilities.setCapability("app", "C:\\Users\\Administrator\\Downloads\\NEXT TEST-V2.0.3 (3).apk");
-                                capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
-                                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
-                                capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
-                                capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
-                                capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
@@ -72,13 +65,25 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
-                                capabilities.setCapability("app", "C:\\Users\\Administrator\\Downloads\\NEXT TEST-V2.0.3 (3).apk");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
                                 capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
-                                capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                                    switch (prop.getProperty("env.name")) {
+                                        case "dev":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
+                                            break;
+                                        case "test":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                                            break;
+                                        case "demo":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
+                                            break;
+                                    }
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
@@ -118,7 +123,7 @@ public abstract class SetProperty {
                             case "demo":
                                 obj = parser.parse(new FileReader("test-classes//json//Demo_testData.json"));
                                 break;
-                    }
+                        }
                         JSONObject jsonObject = (JSONObject) obj;
                         parameterValue = (String) jsonObject.get(parameterName);
                     } catch (Exception e) {
@@ -164,6 +169,6 @@ public abstract class SetProperty {
     @After
     public void TearDown(){
 //        driver.label("Stopping App");
-        driver.quit();
+//        driver.quit();
     }
 }
