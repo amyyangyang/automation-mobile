@@ -29,6 +29,6 @@ To create package we can use:
 
       mvn clean -DPLATFORM_NAME=android -DENV_NAME=test -DLOCATION_NAME=local -DskipTests -P prepare-for-upload package
 
-Depend on value of PLATFORM_NAME variable we can choose platform (Android or iOS) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
+Depend on value of PLATFORM_NAME variable we can choose platform (android or ios) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
 Depend on value of ENV_NAME variable we can choose environment (dev, test, demo or prod) where is we want to run our Java project (default: -DENV_NAME=dev).
 Depend on value of LOCATION_NAME variable we can choose environment (local or server) where is we want to run our Java project (default: -DLOCATION_NAME=server).
