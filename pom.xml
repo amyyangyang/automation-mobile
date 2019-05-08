@@ -53,16 +53,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
                 <configuration>
-                    <!--<systemProperties>-->
-                        <!--<property>-->
-                            <!--<name>PLATFORM_NAME</name>-->
-                            <!--<value>${platform}</value>-->
-                        <!--</property>-->
-                    <!--</systemProperties>-->
-                    <!--<systemPropertyVariables>-->
-                        <!--<PLATFORM_NAME>F</PLATFORM_NAME>-->
-                        <!--&lt;!&ndash;<argLine>-DPLATFORM_NAME=android</argLine>&ndash;&gt;-->
-                    <!--</systemPropertyVariables>-->
+                    <systemPropertyVariables>
+                        <LOCATION_NAME>server</LOCATION_NAME>
+                    </systemPropertyVariables>
                     <properties>
                         <maven.test.failure.ignore>true</maven.test.failure.ignore>
                     </properties>
@@ -107,6 +100,7 @@
             <id>prepare-for-upload</id>
             <properties>
                 <PLATFORM_NAME>android</PLATFORM_NAME>
+                <ENV_NAME>dev</ENV_NAME>
             </properties>
             <build>
                 <plugins>

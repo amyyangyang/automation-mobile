@@ -30,38 +30,73 @@ public abstract class SetProperty {
     public static Object obj;
     public static AppiumDriver<MobileElement> driver;
 
-    public void setUpWebDriver() throws MalformedURLException, InterruptedException{
+
+    public void setUpWebDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
         capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
 
-        try (InputStream input = new FileInputStream("test-classes//application.properties")) {
-//        try (InputStream input = new FileInputStream("target//upload//test-classes//application.properties")) {
-
-            Properties prop = new Properties();
-            // load a properties file
-            prop.load(input);
-            // get the property value and print it out
-            System.out.println(prop.getProperty("platform.name"));
-            switch (prop.getProperty("platform.name")) {
-                case "android":
-                    capabilities.setCapability("app", "C:\\Users\\Administrator\\Downloads\\NEXT TEST-V2.0.3 (3).apk");
-                    capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
-                    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
-                    capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
-                    capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
-                    capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
-                    driver = Factory.createAndroidDriver(url, capabilities);
+        try {
+            String profile = System.getProperty("LOCATION_NAME");
+            switch (profile) {
+                case "server":
+                    try (InputStream input = new FileInputStream("test-classes//application.properties")) {
+                        Properties prop = new Properties();
+                        prop.load(input);
+                        System.out.println(prop.getProperty("platform.name"));
+                        switch (prop.getProperty("platform.name")) {
+                            case "android":
+                                driver = Factory.createAndroidDriver(url, capabilities);
+                                break;
+                            case "ios":
+                                driver = Factory.createIOSDriver(url, capabilities);
+                                break;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     break;
-                case "ios":
-                    driver = Factory.createIOSDriver(url, capabilities);
+                case "local":
+                    try (InputStream input = new FileInputStream("target//upload//test-classes//application.properties")) {
+                        Properties prop = new Properties();
+                        prop.load(input);
+                        System.out.println(prop.getProperty("platform.name"));
+                        switch (prop.getProperty("platform.name")) {
+                            case "android":
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
+                                capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
+                                capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
+                                    switch (prop.getProperty("env.name")) {
+                                        case "dev":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
+                                            break;
+                                        case "test":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                                            break;
+                                        case "demo":
+                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
+                                            break;
+                                    }
+                                driver = Factory.createAndroidDriver(url, capabilities);
+                                break;
+                            case "ios":
+                                driver = Factory.createIOSDriver(url, capabilities);
+                                break;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     break;
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         jse = (JavascriptExecutor)driver;
@@ -71,25 +106,59 @@ public abstract class SetProperty {
         JSONParser parser = new JSONParser();
         String parameterValue = null;
         try {
-            String profile = System.getProperty("ENV_VAR");
+            String profile = System.getProperty("LOCATION_NAME");
             switch (profile) {
-                case "Dev":
-                    obj = parser.parse(new FileReader("src//test//resources//json//Dev_testData.json"));
+                case "server":
+                    try (InputStream input = new FileInputStream("test-classes//application.properties")) {
+                        Properties prop = new Properties();
+                        prop.load(input);
+                        System.out.println(prop.getProperty("env.name"));
+                        switch (prop.getProperty("env.name")) {
+                            case "dev":
+                                obj = parser.parse(new FileReader("test-classes//json//Dev_testData.json"));
+                                break;
+                            case "test":
+                                obj = parser.parse(new FileReader("test-classes//json//Test_testData.json"));
+                                break;
+                            case "demo":
+                                obj = parser.parse(new FileReader("test-classes//json//Demo_testData.json"));
+                                break;
+                        }
+                        JSONObject jsonObject = (JSONObject) obj;
+                        parameterValue = (String) jsonObject.get(parameterName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
-                case "Test":
-                    obj = parser.parse(new FileReader("src//test//resources//json//Test_testData.json"));
+                case "local":
+                    try (InputStream input = new FileInputStream("target//upload//test-classes//application.properties")) {
+                        Properties prop = new Properties();
+                        prop.load(input);
+                        System.out.println(prop.getProperty("env.name"));
+                        switch (prop.getProperty("env.name")) {
+                            case "dev":
+                                obj = parser.parse(new FileReader("src//main//resources//json//Dev_testData.json"));
+                                break;
+                            case "test":
+                                obj = parser.parse(new FileReader("src//main//resources//json//Test_testData.json"));
+                                break;
+                            case "demo":
+                                obj = parser.parse(new FileReader("src//main//resources//json//Demo_testData.json"));
+                                break;
+                        }
+                        JSONObject jsonObject = (JSONObject) obj;
+                        parameterValue = (String) jsonObject.get(parameterName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
-                case "Demo":
-                    obj = parser.parse(new FileReader("src//test//resources//json//Demo_testData.json"));
-                    break;
-        }
-            JSONObject jsonObject = (JSONObject) obj;
-            parameterValue = (String) jsonObject.get(parameterName);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return parameterValue;
       }
+
 
     @Rule
     public RetryRule retryRule = new RetryRule(3);
@@ -100,6 +169,6 @@ public abstract class SetProperty {
     @After
     public void TearDown(){
 //        driver.label("Stopping App");
-        driver.quit();
+//        driver.quit();
     }
 }

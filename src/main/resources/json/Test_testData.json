@@ -1,0 +1,14 @@
+{  "SIGNIN": "SIGNUP",
+
+        "FOR": "SignInAsDispatcher",
+                "dispatcherEmail": "aliehu67+fleet@gmail.com",
+                "dispatcherPassword": "111111",
+
+        "FOR": "SignInAsOwnerOperator",
+                "ownerOperatorEmail": "aliehu67+trucker@gmail.com",
+                "ownerOperatorPassword": "111111",
+
+        "FOR": "SignInAsDriver",
+                "driverEmail": "aliehu67+driverone@gmail.com",
+                "driverPassword": "111111"
+}

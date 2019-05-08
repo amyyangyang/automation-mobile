@@ -1,0 +1,10 @@
+{  "SIGNIN": "SIGNUP",
+
+        "FOR": "SignInAsDispatcher",
+                "dispatcherEmail": "nikitin.sergii+fleet@nexttrucking.com",
+                "dispatcherPassword": "111111",
+
+        "FOR": "SignInAsOwnerOperator",
+                "ownerOperatorEmail": "aliehu67+trucker@gmail.com",
+                "ownerOperatorPassword": "111111"
+}
