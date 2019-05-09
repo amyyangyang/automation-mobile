@@ -5,16 +5,17 @@ Currant project includes smoking autotests for NEXT Mobile APP. JavaMobileAutoTe
  
 ### Project structure
 Project was build according PageObject pattern. pom.xml is the main execution file. It describes all project dependencies. Project includes three parts: 
-   1. Page Classes (\src\main\java\...). Each Page Class describes one web page and includes methods to work with this page.
+   1. Page Classes (\src\main\java\...). Each Page Class describes one app page and includes methods to work with this page.
    2. Test Classes (\src\test\java\...). Test Classes include Test methods.
-   3. Test Data (\src\test\java\resources\json\...). Folder includes three .json files with Test data for three environments.
+   3. Test Data (\src\main\resources\json\...). Folder includes three .json files with Test data for three environments.
     
 ### Installation
 In the bottom you can see software list which should be install to run JavaAutoTest project:
 - Java
+- android-sdk
+- android-sdk tools
 - Maven
 - Nodejs
-- Google Chrome
 - Appium
 - UiAutomator2
 

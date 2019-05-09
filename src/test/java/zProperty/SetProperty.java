@@ -8,14 +8,12 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.xGuest.StartPage;
-
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
