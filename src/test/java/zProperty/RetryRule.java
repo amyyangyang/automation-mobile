@@ -28,7 +28,7 @@ public class RetryRule implements TestRule {
                         return;
                     } catch (Throwable t) {
                         caughtThrowable = t;
-                        //  System.out.println(": run " + (i+1) + " failed");
+                        System.out.println(": run " + (i+1) + " failed");
                         System.err.println(description.getDisplayName() + ": run " + (i + 1) + " failed.");
                     }
                 }
