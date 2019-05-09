@@ -16,6 +16,7 @@ In the bottom you can see software list which should be install to run JavaAutoT
 - android-sdk tools
 - Maven
 - Nodejs
+- IntelliJ IDEA
 - Appium
 - UiAutomator2
 
