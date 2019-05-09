@@ -72,16 +72,16 @@ public abstract class SetProperty {
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
 //                                            capabilities.setCapability("app", "https://s3-us-west-2.amazonaws.com/next-app-ui-test/dev/NEXT+DEV.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                             break;
                                         case "demo":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                             break;
                                     }
