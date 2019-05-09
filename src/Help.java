@@ -36,33 +36,33 @@ public class Help {
 //             appium --address 127.0.0.1 --port 4723
 
 
-//        jse.executeScript("arguments[0].click();", pages.driver.findElement(authenticateLink));
-//        jse.executeScript("arguments[0].value=arguments[1].toString();", pages.driver.findElement(passwordField), "xfqrf2424N");
-//        actions.moveToElement(pages.driver.findElement(checkbox)).click().perform();
+//        jse.executeScript("arguments[0].click();", com.nexttrucking.automation.mobile.pages.driver.findElement(authenticateLink));
+//        jse.executeScript("arguments[0].value=arguments[1].toString();", com.nexttrucking.automation.mobile.pages.driver.findElement(passwordField), "xfqrf2424N");
+//        actions.moveToElement(com.nexttrucking.automation.mobile.pages.driver.findElement(checkbox)).click().perform();
 
 
-//        pages.driver.findElementByAccessibilityId("language_button_save").click();
+//        com.nexttrucking.automation.mobile.pages.driver.findElementByAccessibilityId("language_button_save").click();
 //        driver.findElement(By.xpath("//*[contains(@text, 'Save')]")).click();
 //        System.out.println("Step 3");
 //        Thread.sleep(6000);
 //
-////        pages.driver.findElementByAccessibilityId("welcome_button_signIn").click();
-////        pages.driver.findElement(By.xpath("//*[contains(@text, 'Sign In')]")).click();
+////        com.nexttrucking.automation.mobile.pages.driver.findElementByAccessibilityId("welcome_button_signIn").click();
+////        com.nexttrucking.automation.mobile.pages.driver.findElement(By.xpath("//*[contains(@text, 'Sign In')]")).click();
 //        System.out.println("Step 4");
 
-//        pages.driver.findElement(By.xpath("//*[contains(@resource-id='login_input_email')]")).sendKeys("aliehu67+driverone@gmail.com");
-//        pages.driver.findElement(By.xpath("//*[@content-desc='login_input_email']")).sendKeys("aliehu67+driverone@gmail.com");
-//        pages.driver.findElementByAccessibilityId("login_input_email").sendKeys("aliehu67+driverone@gmail.com");
+//        com.nexttrucking.automation.mobile.pages.driver.findElement(By.xpath("//*[contains(@resource-id='login_input_email')]")).sendKeys("aliehu67+driverone@gmail.com");
+//        com.nexttrucking.automation.mobile.pages.driver.findElement(By.xpath("//*[@content-desc='login_input_email']")).sendKeys("aliehu67+driverone@gmail.com");
+//        com.nexttrucking.automation.mobile.pages.driver.findElementByAccessibilityId("login_input_email").sendKeys("aliehu67+driverone@gmail.com");
 
 
-//        pages.driver.findElement(By.xpath("//*[contains(@resource-id='login_input_password')]")).sendKeys("111111");
-//        pages.driver.findElement(By.xpath("//*[@content-desc='login_input_password']")).sendKeys("111111");
-//        pages.driver.findElementByAccessibilityId("login_input_password").sendKeys("111111");
+//        com.nexttrucking.automation.mobile.pages.driver.findElement(By.xpath("//*[contains(@resource-id='login_input_password')]")).sendKeys("111111");
+//        com.nexttrucking.automation.mobile.pages.driver.findElement(By.xpath("//*[@content-desc='login_input_password']")).sendKeys("111111");
+//        com.nexttrucking.automation.mobile.pages.driver.findElementByAccessibilityId("login_input_password").sendKeys("111111");
 
-//        pages.driver.findElementByAccessibilityId("login_button_login").click();
+//        com.nexttrucking.automation.mobile.pages.driver.findElementByAccessibilityId("login_button_login").click();
 
 
-//        pages.driver.findElement(By.name("Email")).sendKeys("aliehu67+driverone@gmail.com");
+//        com.nexttrucking.automation.mobile.pages.driver.findElement(By.name("Email")).sendKeys("aliehu67+driverone@gmail.com");
 //        MobileElement signUpButton = adriver.findElement(By.xpath("//*[contains(@text, '2')]"));
 //        MobileElement signUpButton = (MobileElement) adriver.findElement(By.xpath("//*[contains(@text, '2')]"));
 //        MobileElement signUpButton = adriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View/android.view.View"));

@@ -1,4 +1,4 @@
-package zProperty;
+package property;
 
 
 import com.microsoft.appcenter.appium.Factory;
@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import pages.xGuest.StartPage;
+import com.nexttrucking.automation.mobile.xguest.StartPage;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -169,7 +169,7 @@ public abstract class SetProperty {
 
     @AfterClass
     public static void TearDown(){
-//        pages.driver.label("Stopping App");
+//        com.nexttrucking.automation.mobile.pages.driver.label("Stopping App");
         driver.quit();
     }
 }

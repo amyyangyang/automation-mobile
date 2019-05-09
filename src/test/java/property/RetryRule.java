@@ -1,4 +1,4 @@
-package zProperty;
+package property;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

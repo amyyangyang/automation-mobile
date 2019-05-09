@@ -1,14 +1,15 @@
-package pages.xGuest;
+package com.nexttrucking.automation.mobile.xguest;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import static org.openqa.selenium.By.xpath;
 
 
 public class StartPage {
-    private WebDriver driver;
+    private AppiumDriver<MobileElement> driver;
 
-    public StartPage(WebDriver driver){
+    public StartPage(AppiumDriver<MobileElement> driver){
         this.driver = driver;
     }
 

@@ -1,11 +1,10 @@
-package testCases.xGuest;
+package testcases.xguest;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.net.MalformedURLException;
-import pages.xGuest.StartPage;
-import zProperty.SetProperty;
+import com.nexttrucking.automation.mobile.xguest.StartPage;
+import property.SetProperty;
 
 
 public class GetGuestPages extends SetProperty {
@@ -21,7 +20,6 @@ public class GetGuestPages extends SetProperty {
     public void getStartPage() {
         startPage.clickSaveButton();
     }
-
 
     @Test
     public void getSignUp() {
