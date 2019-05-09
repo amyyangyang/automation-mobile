@@ -8,7 +8,7 @@ import pages.xGuest.StartPage;
 import zProperty.SetProperty;
 
 
-public class signUpAsDispatcher extends SetProperty {
+public class GetGuestPages extends SetProperty {
 
 
     @BeforeClass
