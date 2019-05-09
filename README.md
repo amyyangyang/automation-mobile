@@ -10,17 +10,19 @@ Project was build according PageObject pattern. pom.xml is the main execution fi
    3. Test Data (\src\main\resources\json\...). Folder includes three .json files with Test data for three environments.
     
 ### Installation
-In the bottom you can see software list which should be install to run JavaAutoTest project:
-- Java
-- android-sdk
-- android-sdk tools
-- Maven
-- Nodejs
-- IntelliJ IDEA
-- Appium
-- UiAutomator2
+   1. In the bottom you can see software list which should be install to run JavaAutoTest project:
+    - Java
+    - android-sdk
+    - android-sdk tools
+    - Maven
+    - Nodejs
+    - IntelliJ IDEA
+    - Appium
+    - UiAutomator2
 
 Note: Do not forget set up environment variables if required.
+
+   2. Download apps and put .apk files to "D:\\app" folder.
 
 ### Run project
 To run JavaMobileAutoTest project we should execute "mvn" maven command from project folder, for example:
