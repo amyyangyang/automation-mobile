@@ -1,4 +1,4 @@
-package zProperty;
+package property;
 
 
 import com.microsoft.appcenter.appium.Factory;
@@ -8,11 +8,12 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import com.nexttrucking.automation.mobile.xguest.StartPage;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,15 +30,14 @@ public abstract class SetProperty {
     public static JavascriptExecutor jse;
     public static Object obj;
     public static AppiumDriver<MobileElement> driver;
+    public static StartPage startPage;
 
 
-    public void setUpWebDriver() throws MalformedURLException {
+    public static void setUpWebDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-        capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
-
         try {
             String profile = System.getProperty("LOCATION_NAME");
             switch (profile) {
@@ -72,15 +72,16 @@ public abstract class SetProperty {
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
+//                                            capabilities.setCapability("app", "https://s3-us-west-2.amazonaws.com/next-app-ui-test/dev/NEXT+DEV.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                             break;
                                         case "demo":
-                                            capabilities.setCapability("app", "D:\\QA projects\\JavaMobileAutoTest\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                             break;
                                     }
@@ -166,9 +167,9 @@ public abstract class SetProperty {
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
 
-    @After
-    public void TearDown(){
-//        driver.label("Stopping App");
-//        driver.quit();
+    @AfterClass
+    public static void TearDown(){
+//        com.nexttrucking.automation.mobile.pages.driver.label("Stopping App");
+        driver.quit();
     }
 }
