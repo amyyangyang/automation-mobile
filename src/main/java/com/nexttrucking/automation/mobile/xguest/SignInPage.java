@@ -17,8 +17,8 @@ public class SignInPage {
     public WelcomePage welcomePage;
     public SignInPage signInPage;
     private By backButton = xpath("//*[contains(@text, '\uF3CF')]");
-    private String emailInput = "login_input_email";
-    private String passwordInput = "login_input_password";
+    private By emailInput = xpath("//*[contains(@text, 'Email')]/following-sibling::*[1]");
+    private By passwordInput = xpath("//*[contains(@text, 'Password')]/following-sibling::*[1]");
     private By signInButton = xpath("//*[contains(@text, 'Sign In')]");
     private By email = xpath("//*[contains(@text, 'Email')]");
 
@@ -45,11 +45,11 @@ public class SignInPage {
     }
 
     public void typeEmail(String email){
-        driver.findElementByAccessibilityId(emailInput).sendKeys(email);
+        driver.findElement(emailInput).sendKeys(email);
     }
 
     public void typePassword(String password){
-        driver.findElementByAccessibilityId(passwordInput).sendKeys(password);
+        driver.findElement(passwordInput).sendKeys(password);
     }
 
     public AllowLocationPage clickSignInButton() {

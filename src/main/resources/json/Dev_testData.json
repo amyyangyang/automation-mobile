@@ -1,4 +1,5 @@
-{  "SIGNIN": "SIGNUP",
+{
+"SIGNIN": "SIGNUP",
 
         "FOR": "SignInAsDispatcher",
                 "dispatcherEmail": "seraabel2017+fleet@gmail.com",
@@ -10,5 +11,19 @@
 
         "FOR": "SignInAsDriver",
                 "driverEmail": "seraabel2017+driver@gmail.com",
-                "driverPassword": "111111"
+                "driverPassword": "111111",
+
+
+"SIGNIN": "SIGNUP",
+
+        "FOR": "GEST",
+                "companyName": "NEXT",
+                "emailForGuest": "neeck@ukr.net",
+                "firstName": "Nik",
+                "cityName": "New York",
+                "lastName": "Serg",
+                "phoneNumber": "2343423423",
+                "password6_1": "111111",
+                "passwordForGuest": "xfqrf2424"
+
 }
