@@ -1,11 +1,11 @@
-package zProperty;
+package property;
 
-import lombok.extern.slf4j.Slf4j;
+
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-@Slf4j
+
 public class RetryRule implements TestRule {
     private int retryCount;
 
@@ -30,7 +30,7 @@ public class RetryRule implements TestRule {
                         return;
                     } catch (Throwable t) {
                         caughtThrowable = t;
-                        log.error("{} : run {} failed", description.getDisplayName(), (i + 1));
+//                        log.error("{} : run {} failed", description.getDisplayName(), (i + 1));
                     }
                 }
                 System.err.println(description.getDisplayName() + ": giving up after " + retryCount + " failures.");
