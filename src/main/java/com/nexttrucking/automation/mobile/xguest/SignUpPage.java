@@ -10,6 +10,7 @@ public class SignUpPage {
 
     private AppiumDriver<MobileElement> driver;
     private By backButton = xpath("//*[contains(@text, '\uF3CF')]");
+    private By closeButton = xpath("//*[contains(@text, '\uF406')]");
     private By emailInput = xpath("//*[contains(@text, 'Email')]/following-sibling::*[1]");
     private By passwordInput = xpath("//*[contains(@text, 'Password')]/following-sibling::*[1]");
     private By ownerCheckbox = xpath("//*[contains(@text, 'Owner')]/following-sibling::*[1]");
@@ -80,7 +81,13 @@ public class SignUpPage {
 
     public void clickSignUpButton(){
         driver.findElement(signUpButton).click();
+
     }
+
+    public void clickCloseButton(){
+        driver.findElement(closeButton).click();
+    }
+
 
 
 
