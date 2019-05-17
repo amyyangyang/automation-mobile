@@ -2,52 +2,47 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+
 version: 2.1
 
+executors:
+  execute_test_cases:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:lts
+
 commands:
-  push_to_S3:
+  push_test_case_package:
     description: "sync application or msv package files to aws s3"
     parameters:
       from:
         type: string
       to:
         type: string
-      overwrite:
-        default: true
-        type: boolean
     steps:
       - run:
-          name: Publish to S3
-          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+          name: push test case package to s3
+          command: "aws s3 sync << parameters.from >> << parameters.to >> --delete"
 
-  pull_from_S3:
+  pull_mobile_app_from_s3:
     description: "pull application or msv package files to local docker"
     parameters:
       from:
         type: string
       to:
         type: string
-      overwrite:
-        default: true
-        type: boolean
     steps:
       - run:
-          name: create path
-          command: |
-            mkdir -p << parameters.to >>
-      - run:
-          name: Publish to S3
-          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+          name: pull mobile app from s3
+          command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
 
   mvn_package:
     description: "mvn package for multi-env and different devices"
     parameters:
       envType:
         type: string
-        default: "dev"
       deviceType:
         type: string
-        default: "android"
     steps:
       - run:
           name: << parameters.envType >> | << parameters.deviceType >> === mvn package
@@ -57,9 +52,39 @@ commands:
       - run:
           name: << parameters.envType >> | << parameters.deviceType >> === backup package
           command: |
-            mkdir -p artifactWorkspace/<<parameters.envType>>
-            move outputs artifactWorkspace/<<parameters.envType>>
+            mkdir -p artifactWorkspace
+            mv target/upload artifactWorkspace/upload-<<parameters.envType>>-<< parameters.deviceType >>
+            ls artifactWorkspace/
+
+  run_test_cases:
+    description: "run the test case on the AppCenter platform"
+    parameters:
+      envType:
+        type: string
+      appName:
+        type: string
+    steps:
+      - attach_workspace:
+          at: ~/repo/
+      - run:
+          name: install app center cli
+          command: sudo npm install -g appcenter-cli
+
+      - run:
+          name: list artifactWorkspace
+          command: |
             ls artifactWorkspace
+
+      - run:
+          name: test app UI -- Android
+          command: |
+            appcenter test run appium --app "NEXTTrucking/NEXTTrucking-Android" --devices 924a3baa --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+
+      - run:
+          name: test app UI -- iOS
+          command: |
+            appcenter test run appium --app "NEXTTrucking/NEXTTrucking-iOS" --devices ba4337ad --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+
 
 jobs:
   build:
@@ -86,19 +111,35 @@ jobs:
 
       - mvn_package:
           envType: "dev"
-          deviceType: "Android"
+          deviceType: "android"
+
+      - mvn_package:
+          envType: "test"
+          deviceType: "android"
+
+      - mvn_package:
+          envType: "demo"
+          deviceType: "android"
 
       - mvn_package:
           envType: "dev"
-          deviceType: "iOS"
+          deviceType: "ios"
+
+      - mvn_package:
+          envType: "test"
+          deviceType: "ios"
+
+      - mvn_package:
+          envType: "demo"
+          deviceType: "ios"
 
       - persist_to_workspace:
           # Save the files in persist_to_workspace
-          root: ~/
+          root: ~/repo
           paths:
             - artifactWorkspace
 
-  prepareFilesByS3:
+  prepare_test_cases_and_mobile_app:
     docker:
       - image: circleci/python:2.7-jessie
     working_directory: ~/repo
@@ -110,39 +151,46 @@ jobs:
           name: Install awscli
           command: sudo pip install awscli
 
-      - push_to_S3: #TODO save all env outputs in one site? Why we push the output to S3? If we want run the ui test on App project, we need these files.
+      - push_test_case_package:
           from: "artifactWorkspace"
-          to: "TODO"
+          to: "s3://next-app-ui-test/test-package"
 
-      - pull_from_S3: #TODO get the application files from S3
-          from: "TODO"
-          to: "TODO"
+      - pull_mobile_app_from_s3:
+          from: "s3://next-app-ui-test/app-package"
+          to: "artifactWorkspace"
+
+      - run:
+          name: list artifactWorkspace
+          command: |
+            ls artifactWorkspace
 
       - persist_to_workspace:
           # Save the files in persist_to_workspace
-          root: ~/
+          root: ~/repo
           paths:
             - artifactWorkspace
 
 
-  testDevUI:
-    docker:
-      - image: circleci/node:lts-jessie
+  testDevAPP:
+    executor: execute_test_cases
     steps:
-      - attach_workspace:
-          at: ~/repo/
-      - run:
-          name: install app center cli
-          command: npm install -g appcenter-cli
+      - run_test_cases:
+          envType: "dev"
+          appName: "$APP_NAME_DEV"
 
-      - run:
-          name: test app UI -- Android
-          command: appcenter test run appium --app "NEXTTrucking/NEXTTrucking-Android" --devices 924a3baa --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir target/upload
+  testTestAPP:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases:
+          envType: "test"
+          appName: "$APP_NAME_TEST"
 
-      - run:
-          name: test app UI -- iOS
-          command: appcenter test run appium --app "NEXTTrucking/NEXTTrucking-iOS" --devices 924a3baa --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir target/upload
-
+  testDemoAPP:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases:
+          envType: "demo"
+          appName: "$APP_NAME_DEMO"
 
 workflows:
   version: 2
@@ -154,16 +202,33 @@ workflows:
               only:
                 - master
                 - /^release\/.*/
-                - /feature/circleci
-      - prepareFilesByS3:
+                - feature/circleci
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
           requires:
             - build
       - hold_testDevUI:
           type: approval
           requires:
-            - build
-      - testDevUI:
+            - prepare_test_cases_and_mobile_app
+      - testDevAPP:
+          context: next-platform-build
           requires:
-            -hold_testDevUI
-
+            - hold_testDevUI
+      - hold_testTestUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - testTestAPP:
+          context: next-platform-build
+          requires:
+            - hold_testTestUI
+      - hold_testDemoUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - testDemoAPP:
+          context: next-platform-build
+          requires:
+            - hold_testDemoUI
 
