@@ -2,23 +2,95 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+
+version: 2.1
+
+executors:
+  execute_test_cases:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:lts
+
+commands:
+  push_test_case_package:
+    description: "sync application or msv package files to aws s3"
+    parameters:
+      from:
+        type: string
+      to:
+        type: string
+    steps:
+      - run:
+          name: push test case package to s3
+          command: "aws s3 sync << parameters.from >> << parameters.to >> --delete"
+
+  pull_mobile_app_from_s3:
+    description: "pull application or msv package files to local docker"
+    parameters:
+      from:
+        type: string
+      to:
+        type: string
+    steps:
+      - run:
+          name: pull mobile app from s3
+          command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
+
+  package_test_case :
+    description: "mvn package for multi-env and different devices"
+    parameters:
+      envType:
+        type: string
+      deviceType:
+        type: string
+    steps:
+      - run:
+          name: << parameters.envType >> | << parameters.deviceType >> === mvn package
+          command: |
+            mvn -DskipTests -P prepare-for-upload -DdeviceType=<< parameters.deviceType >> -DenvType=<< parameters.envType >> package
+
+      - run:
+          name: << parameters.envType >> | << parameters.deviceType >> === backup package
+          command: |
+            mkdir -p artifactWorkspace
+            mv target/upload artifactWorkspace/upload-<<parameters.envType>>-<< parameters.deviceType >>
+            ls artifactWorkspace/
+
+  run_test_cases:
+    description: "run the test case on the AppCenter platform"
+    parameters:
+      envType:
+        type: string
+      appName:
+        type: string
+    steps:
+      - attach_workspace:
+          at: ~/repo/
+      - run:
+          name: install app center cli
+          command: sudo npm install -g appcenter-cli
+
+      - run:
+          name: list artifactWorkspace
+          command: |
+            ls artifactWorkspace
+
+      - run:
+          name: test app UI -- Android
+          command: |
+            appcenter test run appium --app "NEXTTrucking/NEXTTrucking-Android" --devices 924a3baa --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+
+      - run:
+          name: test app UI -- iOS
+          command: |
+            appcenter test run appium --app "NEXTTrucking/NEXTTrucking-iOS" --devices ba4337ad --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+
+
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
     working_directory: ~/repo
-
-    environment:
-      # Customize the JVM maximum heap limit
-      MAVEN_OPTS: -Xmx3200m
 
     steps:
       - checkout
@@ -36,3 +108,127 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - package_test_case :
+          envType: "dev"
+          deviceType: "android"
+
+      - package_test_case :
+          envType: "dev"
+          deviceType: "ios"
+
+      - package_test_case :
+          envType: "test"
+          deviceType: "android"
+
+      - package_test_case :
+          envType: "test"
+          deviceType: "ios"
+
+      - package_test_case :
+          envType: "demo"
+          deviceType: "android"
+
+      - package_test_case :
+          envType: "demo"
+          deviceType: "ios"
+
+      - persist_to_workspace:
+          # Save the files in persist_to_workspace
+          root: ~/repo
+          paths:
+            - artifactWorkspace
+
+  prepare_test_cases_and_mobile_app:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo/
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - push_test_case_package:
+          from: "artifactWorkspace"
+          to: "s3://next-app-ui-test/test-package"
+
+      - pull_mobile_app_from_s3:
+          from: "s3://next-app-ui-test/app-package"
+          to: "artifactWorkspace"
+
+      - run:
+          name: list artifactWorkspace
+          command: |
+            ls artifactWorkspace
+
+      - persist_to_workspace:
+          # Save the files in persist_to_workspace
+          root: ~/repo
+          paths:
+            - artifactWorkspace
+
+
+  testDevAPP:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases:
+          envType: "dev"
+          appName: "$APP_NAME_DEV"
+
+  testTestAPP:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases:
+          envType: "test"
+          appName: "$APP_NAME_TEST"
+
+  testDemoAPP:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases:
+          envType: "demo"
+          appName: "$APP_NAME_DEMO"
+
+workflows:
+  version: 2
+  app-ui-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - /^release\/.*/
+                - feature/circleci
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+      - hold_testDevUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - hold_testDevUI
+      - hold_testTestUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - testTestAPP:
+          context: next-platform-build
+          requires:
+            - hold_testTestUI
+      - hold_testDemoUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - testDemoAPP:
+          context: next-platform-build
+          requires:
+            - hold_testDemoUI
+
