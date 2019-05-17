@@ -36,7 +36,7 @@ commands:
           name: pull mobile app from s3
           command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
 
-  mvn_package:
+  package_test_case :
     description: "mvn package for multi-env and different devices"
     parameters:
       envType:
@@ -109,27 +109,27 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - mvn_package:
+      - package_test_case :
           envType: "dev"
           deviceType: "android"
 
-      - mvn_package:
+      - package_test_case :
+          envType: "dev"
+          deviceType: "ios"
+
+      - package_test_case :
           envType: "test"
           deviceType: "android"
 
-      - mvn_package:
+      - package_test_case :
+          envType: "test"
+          deviceType: "ios"
+
+      - package_test_case :
           envType: "demo"
           deviceType: "android"
 
-      - mvn_package:
-          envType: "dev"
-          deviceType: "ios"
-
-      - mvn_package:
-          envType: "test"
-          deviceType: "ios"
-
-      - mvn_package:
+      - package_test_case :
           envType: "demo"
           deviceType: "ios"
 
