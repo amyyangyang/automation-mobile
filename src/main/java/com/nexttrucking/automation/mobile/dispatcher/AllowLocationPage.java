@@ -32,6 +32,7 @@ public class AllowLocationPage {
 
         {  driver.findElement(MobileBy.xpath("//*[@class='android.widget.Button'][2]")).click();
         }
+//            driver.execute('mobile:alert',  {'accept'});
 
 //            driver.findElement(allowLocationSysButton).click();
     }
