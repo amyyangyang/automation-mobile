@@ -41,15 +41,18 @@ public abstract class SetProperty {
     public static AvailableLoadsAllPage availableLoadsAllPage;
 
 
-    public static void setUpWebDriver() throws MalformedURLException {
+    public static void setUpDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 50);
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
 //        capabilities.setCapability("autoDismissAlerts", true);
         capabilities.setCapability("autoAcceptAlerts",true);
+//        capabilities.setCapability("autoGrantPermissions", true);
+//        capabilities.setCapability("gpsEnabled", true);
         try {
             String profile = System.getProperty("LOCATION_NAME");
+            System.out.println(profile);
             switch (profile) {
                 case "server":
                     try (InputStream input = new FileInputStream("test-classes//application.properties")) {
@@ -61,6 +64,7 @@ public abstract class SetProperty {
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
+//                                capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -111,7 +115,7 @@ public abstract class SetProperty {
             e.printStackTrace();
         }
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        jse = (JavascriptExecutor)driver;
+//        jse = (JavascriptExecutor)driver;
     }
 
     public static String getTestData(String parameterName) {

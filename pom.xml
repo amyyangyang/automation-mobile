@@ -112,8 +112,8 @@
                 <directory>src/test/resources</directory>
                 <filtering>false</filtering>
             </resource>
-
         </resources>
+        <outputDirectory>${project.build.directory}/upload/test-classes</outputDirectory>
     </build>
 
     <repositories>
