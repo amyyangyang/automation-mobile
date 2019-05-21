@@ -14,8 +14,8 @@ public class GetWelcomePagesTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException {
-        setUpWebDriver();
+    public static void setUp() throws MalformedURLException, InterruptedException {
+        setUpDriver();
         welcomePage = new WelcomePage(driver);
         signInPage = new SignInPage(driver);
         signUpPage = new SignUpPage(driver);
