@@ -3,7 +3,6 @@ package com.nexttrucking.automation.mobile.xguest;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-
 import static org.openqa.selenium.By.xpath;
 
 
@@ -26,9 +25,8 @@ public class WelcomePage {
     }
 
     public void clickSaveButton() {
-            driver.findElement(saveButton).click();
+        driver.findElement(saveButton).click();
     }
-
 
     public SignInPage clickSignInButton() {
         driver.findElement(signInButton).click();
