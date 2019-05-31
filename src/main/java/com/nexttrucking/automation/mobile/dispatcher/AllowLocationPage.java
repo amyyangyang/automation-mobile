@@ -14,9 +14,11 @@ public class AllowLocationPage {
 
 
     private AppiumDriver<MobileElement> driver;
-    private By okAllowLocationButton = xpath("//*[contains(@text, 'OK')]");
-    private By allowLocationSysButton = xpath("//*[contains(@text, 'ALLOW')]");
-    private By locationTitle = xpath("//*[contains(@text, 'Can we have your location?')]");
+    private By okAllowLocationButton = xpath("//*[@name='OK']");
+    private By allowLocationButtonAndroid = xpath("//*[@class='android.widget.Button'][2]");
+    private By allowLocationButtonIOS = xpath("//XCUIElementTypeButton[@name='Allow']");
+//    private By okAllowLocationButton = xpath("//*[contains(@text, 'OK')]");
+
 
 
 
@@ -28,12 +30,11 @@ public class AllowLocationPage {
     }
 
     public void clickAllowLocationButton() {
-        if (driver.findElements(MobileBy.xpath("//*[@class='android.widget.Button'][2]")).size()>0){
-            driver.findElement(MobileBy.xpath("//*[@class='android.widget.Button'][2]")).click();
+        if (driver.findElements(allowLocationButtonAndroid).size()>0){
+            driver.findElement(allowLocationButtonAndroid).click();
+        } else if (driver.findElements(allowLocationButtonIOS).size()>0){
+            driver.findElement(allowLocationButtonIOS).click();
         }
-//            driver.execute('mobile:alert',  {'accept'});
-
-//            driver.findElement(allowLocationSysButton).click();
     }
 
 }

@@ -13,8 +13,10 @@ public class AvailableLoadsAllPage {
     }
 
     private AppiumDriver<MobileElement> driver;
-    private String title = "//*[contains(@text, \"%s\")]";
-    private By localButton = xpath("//*[contains(@text, 'Local')]");
+    private String title = "(//*[contains(@name, \"%s\")])[last()]";
+    private By localButton = xpath("(//*[contains(@name, 'Local')])[last()]");
+//    private String title = "//*[contains(@text, \"%s\")]";
+//    private By localButton = xpath("//*[contains(@text, 'Local')]");
 
     public String getTitle(String titleText) {
         return driver.findElement(xpath(String.format(title, titleText))).getText();

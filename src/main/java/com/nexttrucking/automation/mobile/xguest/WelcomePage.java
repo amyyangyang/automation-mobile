@@ -14,10 +14,23 @@ public class WelcomePage {
     }
 
 
-    private By saveButton = xpath("//*[contains(@text, 'Save')]");
-    private By signInButton = xpath("//*[contains(@text, 'Sign In')]");
-    private By signUpButton = xpath("//*[contains(@text, 'Sign Up')]");
-    private String title = "//*[contains(@text, \"%s\")]";
+    private By saveButton = xpath("//*[@name='Save']");
+    private By signInButton = xpath("//*[@name='Sign In']");
+    private By signUpButton = xpath("(//*[@name='Sign Up'])[last()]");
+    private String title = "(//*[contains(@name, \"%s\")])[last()]";
+    private By allowButton = xpath("(//*[contains(@name, 'Allow')])[last()]");
+
+//    private By saveButton = xpath("//*[contains(@text, 'Save')]");
+//    private By signInButton = xpath("//*[contains(@text, 'Sign In')]");
+//    private By signUpButton = xpath("//*[contains(@text, 'Sign Up')]");
+//    private String title = "//*[contains(@text, \"%s\")]";
+
+    public WelcomePage clickAllowNotificationsButton(){
+        if (driver.findElements(allowButton).size()>0) {
+            driver.findElement(allowButton).click();
+        }
+        return new WelcomePage(driver);
+    }
 
 
     public String getTitle(String titleText) {

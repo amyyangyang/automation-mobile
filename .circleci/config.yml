@@ -47,7 +47,7 @@ commands:
       - run:
           name: << parameters.envType >> | << parameters.deviceType >> === mvn package
           command: |
-            mvn -DskipTests -P prepare-for-upload -DdeviceType=<< parameters.deviceType >> -DenvType=<< parameters.envType >> package
+            mvn clean -DPLATFORM_NAME=<< parameters.deviceType >> -DENV_NAME=<< parameters.envType >> -DskipTests -P prepare-for-upload package
 
       - run:
           name: << parameters.envType >> | << parameters.deviceType >> === backup package

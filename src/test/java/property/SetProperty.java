@@ -26,6 +26,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import com.microsoft.appcenter.appium.Factory;
+import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
 
 
 public abstract class SetProperty {
@@ -44,10 +48,11 @@ public abstract class SetProperty {
     public static void setUpDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
+//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
+//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
 //        capabilities.setCapability("autoDismissAlerts", true);
-        capabilities.setCapability("autoAcceptAlerts",true);
+//        capabilities.setCapability("autoAcceptAlerts",true);
 //        capabilities.setCapability("autoGrantPermissions", true);
 //        capabilities.setCapability("gpsEnabled", true);
         try {
@@ -61,10 +66,10 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
+                                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
-//                                capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -79,6 +84,7 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
+                                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
@@ -87,8 +93,6 @@ public abstract class SetProperty {
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
                                             capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk");
-//                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk_2.0.4.apk");
-//                                            capabilities.setCapability("app", "https://s3-us-west-2.amazonaws.com/next-app-ui-test/dev/NEXT+DEV.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
@@ -103,6 +107,17 @@ public abstract class SetProperty {
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
+                                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+                                System.out.println(555);
+                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone (10.3.1)");
+                                System.out.println(666);
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
+                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.4.ipa");
+                                System.out.println(777);
+//                                capabilities.setCapability("bundleId", "XXXXXXXXXXXXXXX");
+                                capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
+                                System.out.println(888);
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -174,7 +189,7 @@ public abstract class SetProperty {
       }
 
 
-    @Rule
+//    @Rule
     public RetryRule retryRule = new RetryRule(3);
 
     @Rule
