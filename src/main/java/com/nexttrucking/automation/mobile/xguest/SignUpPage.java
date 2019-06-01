@@ -8,7 +8,14 @@ import static org.openqa.selenium.By.xpath;
 
 public class SignUpPage {
 
+    public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
+        this.driver = driver;
+        this.attributeName = attributeName;
+    }
+    //  Notice:
+    //  All xPath locators from this class should be modified according new way for create xPath locators for both (Android and iOS) systems
     private AppiumDriver<MobileElement> driver;
+    public static String attributeName;
     private By backButton = xpath("//*[contains(@text, '\uF3CF')]");
     private By closeButton = xpath("//*[contains(@text, '\uF406')]");
     private By emailInput = xpath("//*[contains(@text, 'Email')]/following-sibling::*[1]");
@@ -26,14 +33,11 @@ public class SignUpPage {
 
 
 
-    public SignUpPage(AppiumDriver<MobileElement> driver) {
-        this.driver = driver;
-    }
-
     public WelcomePage clickBackButton() {
         driver.findElement(backButton).click();
-        return new WelcomePage(driver);
+        return new WelcomePage(driver, attributeName);
     }
+
     public void typeEmail(String email){
         driver.findElement(emailInput).sendKeys(email);
     }
@@ -73,8 +77,6 @@ public class SignUpPage {
         driver.findElement(lastNameInput).sendKeys(lastName);
     }
 
-
-
     public void typePhoneNumber(String phoneNumber){
         driver.findElement(phoneNumberInput).sendKeys(phoneNumber);
     }
@@ -87,8 +89,5 @@ public class SignUpPage {
     public void clickCloseButton(){
         driver.findElement(closeButton).click();
     }
-
-
-
 
 }

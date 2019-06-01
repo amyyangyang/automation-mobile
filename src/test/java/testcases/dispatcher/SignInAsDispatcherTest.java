@@ -3,41 +3,42 @@ package testcases.dispatcher;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.xguest.SignInPage;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.nexttrucking.automation.mobile.xguest.WelcomePage;
+import org.junit.*;
 import property.SetProperty;
-import com.microsoft.appcenter.appium.Factory;
-import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
-import org.junit.rules.TestWatcher;
-import org.junit.Rule;
-
 import java.net.MalformedURLException;
 
+
 public class SignInAsDispatcherTest extends SetProperty {
-//
+
+
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
-        setUpDriver();
-        System.out.println(11);
-        signInPage = new SignInPage(driver);
-        allowLocationPage = new AllowLocationPage(driver);
-        availableLoadsAllPage = new AvailableLoadsAllPage(driver);
-        System.out.println(22);
+    public static void setUp() throws InterruptedException {
+        availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
+        allowLocationPage = new AllowLocationPage(driver, attributeName);
+        welcomePage = new WelcomePage(driver, attributeName);
+        signInPage = new SignInPage(driver, attributeName);
+        welcomePage.getWelcomePage();
+    }
+
+    @Before
+    public void signIn() throws MalformedURLException, InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        System.out.println(33);
-        Thread.sleep(10000);
         allowLocationPage.clickOkAllowLocationButton();
-        Thread.sleep(7000);
         allowLocationPage.clickAllowLocationButton();
-        Thread.sleep(7000);
     }
 
     @Test
-    public void dispatcherSignIn() throws MalformedURLException, InterruptedException {
-
-        availableLoadsAllPage.clickLocalButton();
+    public void dispatcherSignIn() throws InterruptedException {
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
+        Thread.sleep(7000);
+    }
+
+    @After
+    public void logOut() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
     }
 
 }

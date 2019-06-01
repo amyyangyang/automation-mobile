@@ -10,13 +10,15 @@ import static org.openqa.selenium.By.xpath;
 
 public class SignInPage {
 
-    public SignInPage(AppiumDriver<MobileElement> driver) {
+
+    public SignInPage(AppiumDriver<MobileElement> driver, String attributeName) {
         this.driver = driver;
+        this.attributeName = attributeName;
     }
 
+
+    public static String attributeName;
     private AppiumDriver<MobileElement> driver;
-    public WelcomePage welcomePage;
-    public SignInPage signInPage;
     private By backButtonAndroid = xpath("//*[@text='\uF3CF']");
     private By backButtonIOS = xpath("//XCUIElementTypeStaticText");
     private By emailInput = xpath("//*[@name='Email']/following-sibling::*[1]");
@@ -25,43 +27,32 @@ public class SignInPage {
     private By email = xpath("//*[@name='Email']");
 
 
-//    private By backButton = xpath("//*[contains(@text, '\uF3CF')]");
-//    private By emailInput = xpath("//*[contains(@text, 'Email')]/following-sibling::*[1]");
-//    private By passwordInput = xpath("//*[contains(@text, 'Password')]/following-sibling::*[1]");
-//    private By signInButton = xpath("//*[contains(@text, 'Sign In')]");
-//    private By email = xpath("//*[contains(@text, 'Email')]");
-
-
     public void signIn(String Email, String Password) throws InterruptedException {
-        System.out.println(1);
-        welcomePage = new WelcomePage(driver);
-        System.out.println(2);
-        signInPage = new SignInPage(driver);
-        System.out.println(3);
+        WelcomePage welcomePage = new WelcomePage(driver, attributeName);
+        SignInPage signInPage = new SignInPage(driver, attributeName);
+        AllowLocationPage allowLocationPage = new AllowLocationPage(driver, attributeName);
         Thread.sleep(5000);
         welcomePage.clickAllowNotificationsButton();
-        System.out.println(4);
         welcomePage.clickSaveButton();
-        System.out.println(5);
         welcomePage.clickSignInButton();
         //LogIn as Dispatcher
         signInPage.findEmail();
         signInPage.typeEmail(Email);
         signInPage.typePassword(Password);
         signInPage.clickSignInButton();
-
+        Thread.sleep(10000);
+        allowLocationPage.clickOkAllowLocationButton();
+        allowLocationPage.clickAllowLocationButton();
     }
-
-
-
 
     public WelcomePage clickBackButton() {
         if (driver.findElements(backButtonAndroid).size()>0) {
             driver.findElement(backButtonAndroid).click();
-        } else driver.findElement(backButtonIOS).click();
-        return new WelcomePage(driver);
+        } else if (driver.findElements(backButtonIOS).size()>0){
+            driver.findElement(backButtonIOS).click();
+        }
+        return new WelcomePage(driver, attributeName);
     }
-
 
     public void findEmail(){
         driver.findElement(email);
@@ -77,14 +68,7 @@ public class SignInPage {
 
     public AllowLocationPage clickSignInButton() {
         driver.findElement(signInButton).click();
-
-        return new AllowLocationPage(driver);
+        return new AllowLocationPage(driver, attributeName);
     }
-
-
-
-
-
-
 
 }

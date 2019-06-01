@@ -1,10 +1,7 @@
-package testcases.xguest;
+package testcases.aguest;
 
 import com.nexttrucking.automation.mobile.xguest.SignInPage;
-import com.nexttrucking.automation.mobile.xguest.SignUpPage;
 import org.junit.*;
-
-import java.net.MalformedURLException;
 import com.nexttrucking.automation.mobile.xguest.WelcomePage;
 import property.SetProperty;
 
@@ -13,19 +10,15 @@ public class GetWelcomePagesTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
-        setUpDriver();
-        welcomePage = new WelcomePage(driver);
-        signInPage = new SignInPage(driver);
-        signUpPage = new SignUpPage(driver);
-        welcomePage.clickAllowNotificationsButton();
-        welcomePage.clickSaveButton();
+    public static void setUp() throws InterruptedException {
+        welcomePage = new WelcomePage(driver, attributeName);
+        signInPage = new SignInPage(driver, attributeName);
+        welcomePage.getWelcomePage();
     }
-
 
     @Test
     public void getWelcomePage() {
-        Assert.assertTrue(welcomePage.getTitle("Already have an account? ").contains("Already"));
+        Assert.assertTrue(welcomePage.getTitle("Already have an account?").contains("Already"));
     }
 
     @Test
@@ -39,7 +32,6 @@ public class GetWelcomePagesTest extends SetProperty {
         welcomePage.clickSignUpButton();
         Assert.assertTrue(welcomePage.getTitle("Let's").contains("Let's"));
     }
-
 
     @After
     public void goBack() {

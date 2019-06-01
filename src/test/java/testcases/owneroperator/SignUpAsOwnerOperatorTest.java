@@ -5,23 +5,23 @@ import com.nexttrucking.automation.mobile.xguest.SignUpPage;
 import com.nexttrucking.automation.mobile.xguest.WelcomePage;
 import org.junit.BeforeClass;
 import property.SetProperty;
-
 import java.net.MalformedURLException;
+
 
 public class SignUpAsOwnerOperatorTest extends SetProperty {
 
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
-        setUpDriver();
-        welcomePage = new WelcomePage(driver);
-        signUpPage = new SignUpPage(driver);
-        allowLocationPage = new AllowLocationPage(driver);
+        welcomePage = new WelcomePage(driver, attributeName);
+        signUpPage = new SignUpPage(driver, attributeName);
+        allowLocationPage = new AllowLocationPage(driver, attributeName);
+        welcomePage.getWelcomePage();
     }
 
 //    @Test
-    public void signInAsOwnerOperator() {
-        welcomePage.clickSaveButton();
+//    All method from this test should be modified according new way for create xPath locators for both (Android and iOS) systems
+    public void signInAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuest"));
         signUpPage.typePassword(getTestData("passwordForGuest"));

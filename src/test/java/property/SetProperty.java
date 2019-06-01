@@ -12,7 +12,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,6 +29,7 @@ import com.microsoft.appcenter.appium.Factory;
 import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
 import org.junit.rules.TestWatcher;
 import org.junit.Rule;
+import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
 
 public abstract class SetProperty {
@@ -43,18 +43,23 @@ public abstract class SetProperty {
     public static SignUpPage signUpPage;
     public static AllowLocationPage allowLocationPage;
     public static AvailableLoadsAllPage availableLoadsAllPage;
+    public static String attributeName;
+
+    private static boolean started = false;
+    static{
+        if (!started) {
+            started = true;
+            try {
+                setUpDriver();
+            } catch (MalformedURLException e) {
+            }
+        }
+    }
 
 
     public static void setUpDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 20);
-//        capabilities.setCapability("autoDismissAlerts", true);
-//        capabilities.setCapability("autoAcceptAlerts",true);
-//        capabilities.setCapability("autoGrantPermissions", true);
-//        capabilities.setCapability("gpsEnabled", true);
         try {
             String profile = System.getProperty("LOCATION_NAME");
             System.out.println(profile);
@@ -66,11 +71,14 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
+                                attributeName = "text";
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
+                                attributeName = "name";
                                 driver = Factory.createIOSDriver(url, capabilities);
+                                System.out.println("DRIVER IS: " + driver);
                                 break;
                         }
                     } catch (IOException ex) {
@@ -84,6 +92,7 @@ public abstract class SetProperty {
                         System.out.println(prop.getProperty("platform.name"));
                         switch (prop.getProperty("platform.name")) {
                             case "android":
+                                attributeName = "text";
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -107,17 +116,13 @@ public abstract class SetProperty {
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
+                                attributeName = "name";
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                                System.out.println(555);
-                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone (10.3.1)");
-                                System.out.println(666);
+                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-//                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
-                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.4.ipa");
-                                System.out.println(777);
-//                                capabilities.setCapability("bundleId", "XXXXXXXXXXXXXXX");
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
+                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
-                                System.out.println(888);
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -129,7 +134,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
@@ -188,16 +193,10 @@ public abstract class SetProperty {
         return parameterValue;
       }
 
-
 //    @Rule
     public RetryRule retryRule = new RetryRule(3);
 
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
 
-    @AfterClass
-    public static void TearDown(){
-//        com.nexttrucking.automation.mobile.pages.driver.label("Stopping App");
-        driver.quit();
-    }
 }

@@ -8,32 +8,30 @@ import static org.openqa.selenium.By.xpath;
 
 public class AllowLocationPage {
 
-    public AllowLocationPage(AppiumDriver<MobileElement> driver) {
+    public AllowLocationPage(AppiumDriver<MobileElement> driver, String attributeName) {
         this.driver = driver;
     }
 
-
     private AppiumDriver<MobileElement> driver;
-    private By okAllowLocationButton = xpath("//*[@name='OK']");
+    private By okAllowLocationButton = xpath("(//*[@name='OK'])[last()]");
     private By allowLocationButtonAndroid = xpath("//*[@class='android.widget.Button'][2]");
-    private By allowLocationButtonIOS = xpath("//XCUIElementTypeButton[@name='Allow']");
-//    private By okAllowLocationButton = xpath("//*[contains(@text, 'OK')]");
+    private By allowLocationButtonIOS = xpath("//*[@name='Always Allow']");
 
 
-
-
-    public void clickOkAllowLocationButton() {
+    public void clickOkAllowLocationButton() throws InterruptedException {
         if (driver.findElements(okAllowLocationButton).size()>0) {
             driver.findElement(okAllowLocationButton).click();
+            Thread.sleep(7000);
         }
-
     }
 
-    public void clickAllowLocationButton() {
+    public void clickAllowLocationButton() throws InterruptedException {
         if (driver.findElements(allowLocationButtonAndroid).size()>0){
             driver.findElement(allowLocationButtonAndroid).click();
+            Thread.sleep(7000);
         } else if (driver.findElements(allowLocationButtonIOS).size()>0){
             driver.findElement(allowLocationButtonIOS).click();
+            Thread.sleep(7000);
         }
     }
 
