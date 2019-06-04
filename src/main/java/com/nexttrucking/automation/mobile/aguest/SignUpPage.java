@@ -5,12 +5,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 
-import static org.openqa.selenium.By.xpath;
 
 public class SignUpPage extends PageProperty {
 
-    //  Notice:
-    //  All xPath locators from this class should be modified according new way for create xPath locators for both (Android and iOS) systems
+
     private AppiumDriver<MobileElement> driver;
     public static String attributeName;
     private String backButton = "//*[contains(@%s, '\uF3CF')]";
@@ -27,6 +25,7 @@ public class SignUpPage extends PageProperty {
     private String phoneNumberInput = "//*[contains(@%s, 'Phone')]/following-sibling::*[1]";
     private String signUpButton = "//*[contains(@%s, 'Sign Up')]";
     private String selectCityCheckbox = "//*[contains(@%1$s, \"%2$s\") and contains(@%1$s, 'USA')]";
+    private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -34,7 +33,11 @@ public class SignUpPage extends PageProperty {
 
 
     public WelcomePage clickBackButton() {
-        clickElement(backButton);
+        if (attributeName=="text") {
+            clickElement(backButton);
+        } else if (attributeName=="name"){
+            driver.findElement(By.xpath(closeButtonIOS)).click();
+        }
         return new WelcomePage(driver, attributeName);
     }
 
@@ -86,7 +89,12 @@ public class SignUpPage extends PageProperty {
     }
 
     public void clickCloseButton(){
-        clickElement(closeButton); //you should fix this method to use it fot iOS testing. We can not use "//*[contains(@%s, '\uF406')]" locator for iOS.
+        if (attributeName=="text") {
+            clickElement(closeButton);
+        } else if (attributeName=="name"){
+            driver.findElement(By.xpath(closeButtonIOS)).click();
+        }
+
     }
 
 }
