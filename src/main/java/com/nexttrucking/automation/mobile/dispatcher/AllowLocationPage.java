@@ -30,7 +30,7 @@ public class AllowLocationPage extends PageProperty {
         if (attributeName=="text" && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
             driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
             Thread.sleep(3000);
-        } else if (attributeName=="name"){
+        } else if (attributeName=="name" && sizeOfElements(allowLocationButtonIOS)>0){
             clickElement(allowLocationButtonIOS);
             Thread.sleep(3000);
         }

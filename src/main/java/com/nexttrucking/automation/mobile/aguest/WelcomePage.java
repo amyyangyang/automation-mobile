@@ -51,9 +51,9 @@ public class WelcomePage extends PageProperty {
 
     public void getWelcomePage() throws InterruptedException {
         clickAllowNotificationsButton();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         clickSaveButton();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
 }
