@@ -2,8 +2,8 @@ package testcases.dispatcher;
 
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.xguest.SignInPage;
-import com.nexttrucking.automation.mobile.xguest.WelcomePage;
+import com.nexttrucking.automation.mobile.aguest.SignInPage;
+import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import org.junit.*;
 import property.SetProperty;
 import java.net.MalformedURLException;
@@ -31,7 +31,6 @@ public class SignInAsDispatcherTest extends SetProperty {
     @Test
     public void dispatcherSignIn() throws InterruptedException {
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
-        Thread.sleep(7000);
     }
 
     @After

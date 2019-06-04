@@ -1,37 +1,38 @@
 package com.nexttrucking.automation.mobile.dispatcher;
 
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import static org.openqa.selenium.By.xpath;
 
-public class AllowLocationPage {
+public class AllowLocationPage extends PageProperty {
+
+
+    private String okAllowLocationButton = "(//*[@%s='OK'])[last()]";
+    private String allowLocationButtonAndroid = "(//*[@class='android.widget.Button'])[2]";
+    private String allowLocationButtonIOS = "//*[@%s='Always Allow']";
 
     public AllowLocationPage(AppiumDriver<MobileElement> driver, String attributeName) {
-        this.driver = driver;
+        super(driver, attributeName);
     }
-
-    private AppiumDriver<MobileElement> driver;
-    private By okAllowLocationButton = xpath("(//*[@name='OK'])[last()]");
-    private By allowLocationButtonAndroid = xpath("//*[@class='android.widget.Button'][2]");
-    private By allowLocationButtonIOS = xpath("//*[@name='Always Allow']");
 
 
     public void clickOkAllowLocationButton() throws InterruptedException {
-        if (driver.findElements(okAllowLocationButton).size()>0) {
-            driver.findElement(okAllowLocationButton).click();
-            Thread.sleep(7000);
+        if (sizeOfElements(okAllowLocationButton)>0) {
+            clickElement(okAllowLocationButton);
+            Thread.sleep(3000);
         }
     }
 
     public void clickAllowLocationButton() throws InterruptedException {
-        if (driver.findElements(allowLocationButtonAndroid).size()>0){
-            driver.findElement(allowLocationButtonAndroid).click();
-            Thread.sleep(7000);
-        } else if (driver.findElements(allowLocationButtonIOS).size()>0){
-            driver.findElement(allowLocationButtonIOS).click();
-            Thread.sleep(7000);
+        if (attributeName=="text" && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
+            driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
+            Thread.sleep(3000);
+        } else if (attributeName=="name"){
+            clickElement(allowLocationButtonIOS);
+            Thread.sleep(3000);
         }
     }
 

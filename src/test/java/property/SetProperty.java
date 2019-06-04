@@ -4,8 +4,8 @@ package property;
 import com.microsoft.appcenter.appium.Factory;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.xguest.SignInPage;
-import com.nexttrucking.automation.mobile.xguest.SignUpPage;
+import com.nexttrucking.automation.mobile.aguest.SignInPage;
+import com.nexttrucking.automation.mobile.aguest.SignUpPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -16,7 +16,7 @@ import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import com.nexttrucking.automation.mobile.xguest.WelcomePage;
+import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,11 +25,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import com.microsoft.appcenter.appium.Factory;
-import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
-import org.junit.rules.TestWatcher;
-import org.junit.Rule;
-import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
 
 public abstract class SetProperty {

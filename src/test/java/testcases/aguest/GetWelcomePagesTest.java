@@ -1,8 +1,8 @@
 package testcases.aguest;
 
-import com.nexttrucking.automation.mobile.xguest.SignInPage;
+import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import org.junit.*;
-import com.nexttrucking.automation.mobile.xguest.WelcomePage;
+import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import property.SetProperty;
 
 
@@ -16,13 +16,10 @@ public class GetWelcomePagesTest extends SetProperty {
         welcomePage.getWelcomePage();
     }
 
-    @Test
-    public void getWelcomePage() {
-        Assert.assertTrue(welcomePage.getTitle("Already have an account?").contains("Already"));
-    }
 
     @Test
     public void getSignIn() {
+        Assert.assertTrue(welcomePage.getTitle("Already have an account?").contains("Already"));
         welcomePage.clickSignInButton();
         Assert.assertTrue(welcomePage.getTitle("Welcome Back").contains("Welcome Back"));
     }
