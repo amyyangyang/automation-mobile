@@ -23,8 +23,6 @@ public class SignInAsDispatcherTest extends SetProperty {
     @Before
     public void signIn() throws MalformedURLException, InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        allowLocationPage.clickOkAllowLocationButton();
-        allowLocationPage.clickAllowLocationButton();
     }
 
     @Test

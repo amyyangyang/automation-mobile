@@ -39,6 +39,7 @@ public class SignInPage extends PageProperty {
         Thread.sleep(10000);
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
+        Thread.sleep(3000);
     }
 
     public WelcomePage clickBackButton() {
