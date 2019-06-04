@@ -21,7 +21,6 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
     }
 
 //    @Test
-//    All method from this test should be modified according new way for create xPath locators for both (Android and iOS) systems
     public void signInAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuest"));
@@ -38,7 +37,7 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
         Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
-        signUpPage.clickCloseButton(); //you should fix this method to use it fot iOS testing
+        signUpPage.clickCloseButton();
 
         //here some build should be added to delete created account from AdminPortal
 
