@@ -18,7 +18,6 @@ public class SignInAsDispatcherTest extends SetProperty {
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        welcomePage.getWelcomePage();
     }
 
     @Before

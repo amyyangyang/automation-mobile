@@ -24,7 +24,7 @@ public class WelcomePage extends PageProperty {
 
 
     public void clickAllowNotificationsButton(){
-        if (attributeName=="name") {
+        if (attributeName=="name" && sizeOfElements(allowButton)>0) {
             clickElement(allowButton);
         }
     }
