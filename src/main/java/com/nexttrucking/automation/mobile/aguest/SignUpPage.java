@@ -9,8 +9,6 @@ import org.openqa.selenium.By;
 public class SignUpPage extends PageProperty {
 
 
-    private AppiumDriver<MobileElement> driver;
-    public static String attributeName;
     private String backButton = "//*[contains(@%s, '\uF3CF')]";
     private String closeButton = "//*[contains(@%s, '\uF406')]";
     private String emailInput = "//*[contains(@%s, 'Email')]/following-sibling::*[1]";
