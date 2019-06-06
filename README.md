@@ -25,13 +25,14 @@ Note: Do not forget set up environment variables if required.
    2. Download apps and put .apk files to "D:\\app" folder.
 
 ### Run project
-To run JavaMobileAutoTest project we should execute "mvn" maven command from project folder, for example:
+   1. Create package. To create package we can use:
+
+      mvn clean -DPLATFORM_NAME=ios -DENV_NAME=dev -DskipTests -P prepare-for-upload package
+
+
+   2. Run project. To run JavaMobileAutoTest project we should execute "mvn" maven command from project folder, for example:
 
       mvn -DPLATFORM_NAME=android -DENV_NAME=test -DLOCATION_NAME=local clean verify
-
-To create package we can use:
-
-      mvn clean -DPLATFORM_NAME=android -DENV_NAME=test -DskipTests -P prepare-for-upload package
 
 Depend on value of PLATFORM_NAME variable we can choose platform (android or ios) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
 Depend on value of ENV_NAME variable we can choose environment (dev, test, demo or prod) where is we want to run our Java project (default: -DENV_NAME=dev).

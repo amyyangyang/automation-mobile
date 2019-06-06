@@ -1,39 +1,39 @@
 package com.nexttrucking.automation.mobile.dispatcher;
 
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import static org.openqa.selenium.By.xpath;
 
-public class AllowLocationPage {
+public class AllowLocationPage extends PageProperty {
 
-    public AllowLocationPage(AppiumDriver<MobileElement> driver) {
-        this.driver = driver;
+
+    private String okAllowLocationButton = "(//*[@%s='OK'])[last()]";
+    private String allowLocationButtonAndroid = "(//*[@class='android.widget.Button'])[2]";
+    private String allowLocationButtonIOS = "//*[@%s='Always Allow']";
+
+    public AllowLocationPage(AppiumDriver<MobileElement> driver, String attributeName) {
+        super(driver, attributeName);
     }
 
 
-    private AppiumDriver<MobileElement> driver;
-    private By okAllowLocationButton = xpath("//*[contains(@text, 'OK')]");
-    private By allowLocationSysButton = xpath("//*[contains(@text, 'ALLOW')]");
-    private By locationTitle = xpath("//*[contains(@text, 'Can we have your location?')]");
-
-
-
-    public void clickOkAllowLocationButton() {
-        if (driver.findElements(okAllowLocationButton).size()>0) {
-            driver.findElement(okAllowLocationButton).click();
+    public void clickOkAllowLocationButton() throws InterruptedException {
+        if (sizeOfElements(okAllowLocationButton)>0) {
+            clickElement(okAllowLocationButton);
+            Thread.sleep(3000);
         }
-
     }
 
-    public void clickAllowLocationButton() {
-        if (driver.findElements(MobileBy.xpath("//*[@class='android.widget.Button'][2]")).size()>0){
-            driver.findElement(MobileBy.xpath("//*[@class='android.widget.Button'][2]")).click();
+    public void clickAllowLocationButton() throws InterruptedException {
+        if (attributeName=="text" && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
+            driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
+            Thread.sleep(3000);
+        } else if (attributeName=="name" && sizeOfElements(allowLocationButtonIOS)>0){
+            clickElement(allowLocationButtonIOS);
+            Thread.sleep(3000);
         }
-//            driver.execute('mobile:alert',  {'accept'});
-
-//            driver.findElement(allowLocationSysButton).click();
     }
 
 }

@@ -1,27 +1,27 @@
 package testcases.owneroperator;
 
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
-import com.nexttrucking.automation.mobile.xguest.SignUpPage;
-import com.nexttrucking.automation.mobile.xguest.WelcomePage;
+import com.nexttrucking.automation.mobile.aguest.SignUpPage;
+import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import property.SetProperty;
-
 import java.net.MalformedURLException;
+
 
 public class SignUpAsOwnerOperatorTest extends SetProperty {
 
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
-        setUpDriver();
-        welcomePage = new WelcomePage(driver);
-        signUpPage = new SignUpPage(driver);
-        allowLocationPage = new AllowLocationPage(driver);
+        welcomePage = new WelcomePage(driver, attributeName);
+        signUpPage = new SignUpPage(driver, attributeName);
+        allowLocationPage = new AllowLocationPage(driver, attributeName);
+        welcomePage.getWelcomePage();
     }
 
 //    @Test
-    public void signInAsOwnerOperator() {
-        welcomePage.clickSaveButton();
+    public void signInAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuest"));
         signUpPage.typePassword(getTestData("passwordForGuest"));
@@ -34,6 +34,7 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
         signUpPage.typeLastName(getTestData("lastName"));
         signUpPage.typePhoneNumber(getTestData("phoneNumber"));
         signUpPage.clickSignUpButton();
+        Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
         signUpPage.clickCloseButton();
