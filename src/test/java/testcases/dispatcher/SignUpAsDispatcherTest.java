@@ -1,15 +1,16 @@
-package testcases.owneroperator;
+package testcases.dispatcher;
 
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.aguest.SignUpPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
+import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import org.junit.*;
 import property.SetProperty;
+
 import java.net.MalformedURLException;
 
 
-public class SignUpAsOwnerOperatorTest extends SetProperty {
+public class SignUpAsDispatcherTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -22,12 +23,12 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
     }
 
     @Test
-    public void signUpAsOwnerOperator() throws InterruptedException{
+    public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
-        signUpPage.typeEmail(getTestData("emailForGuestOO"));
+        signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
         signUpPage.typePassword(getTestData("passwordForGuest"));
         signUpPage.clickContinueButton();
-        signUpPage.chooseUserRole("OwnerOperator");
+        signUpPage.chooseUserRole("Dispatcher");
         signUpPage.clickContinueButton();
         signUpPage.chooseCity(getTestData("cityName"));
         signUpPage.clickSaveHomeButton();

@@ -5,17 +5,19 @@ import org.junit.*;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import property.SetProperty;
 
+import java.net.MalformedURLException;
+
 
 public class GetWelcomePagesTest extends SetProperty {
 
-
     @BeforeClass
-    public static void setUp() throws InterruptedException {
+    public static void setUp() throws InterruptedException, MalformedURLException {
+
+        setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         welcomePage.getWelcomePage();
     }
-
 
     @Test
     public void getSignIn() {

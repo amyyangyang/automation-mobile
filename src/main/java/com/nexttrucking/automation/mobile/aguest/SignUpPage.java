@@ -15,14 +15,14 @@ public class SignUpPage extends PageProperty {
     private String passwordInput = "//*[contains(@%s, 'Password')]/following-sibling::*[1]";
     private String ownerCheckbox = "//*[contains(@%s, 'Owner')]/following-sibling::*[1]";
     private String dispatcherCheckbox = "//*[contains(@%s, 'Dispatcher')]/following-sibling::*[1]";
-    private String typeCityInput = "//*[contains(@%s, 'Type')]";
+    private String typeCityInput = "//*[contains(@%s, 'city')]";
     private String continueButton = "//*[contains(@%s, 'Continue')]";
-    private String saveHomeButton = "//*[contains(@%s, 'Save Home')]";
-    private String firstNameInput = "//*[contains(@%s, 'First')]/following-sibling::*[2]";
-    private String lastNameInput = "//*[contains(@%s, 'Last')]/following-sibling::*[2]";
-    private String phoneNumberInput = "//*[contains(@%s, 'Phone')]/following-sibling::*[1]";
-    private String signUpButton = "//*[contains(@%s, 'Sign Up')]";
-    private String selectCityCheckbox = "//*[contains(@%1$s, \"%2$s\") and contains(@%1$s, 'USA')]";
+    private String saveHomeButton = "(//*[contains(@%s, 'Save Home')])[last()]";
+    private String firstNameInput = "createAccount_input_fistName";
+    private String lastNameInput = "createAccount_input_lastName";
+    private String phoneNumberInput = "createAccount_input_phone";
+    private String signUpButton = "//*[@%s='Sign Up']";
+    private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s\") and contains(@%1$s, 'USA')])[last()]";
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -31,9 +31,9 @@ public class SignUpPage extends PageProperty {
 
 
     public WelcomePage clickBackButton() {
-        if (attributeName=="text") {
+        if (attributeName.equals("text")) {
             clickElement(backButton);
-        } else if (attributeName=="name"){
+        } else if (attributeName.equals("name")){
             driver.findElement(By.xpath(closeButtonIOS)).click();
         }
         return new WelcomePage(driver, attributeName);
@@ -60,9 +60,11 @@ public class SignUpPage extends PageProperty {
         } else System.out.println("Please choose correct User role");
     }
 
-    public void chooseCity(String city){
+    public void chooseCity(String city) throws InterruptedException {
         sendKeyToElement(typeCityInput, city);
+        Thread.sleep(2000);
         clickMenu(selectCityCheckbox, city);
+        Thread.sleep(2000);
     }
 
     public SignUpPage clickSaveHomeButton() {
@@ -71,15 +73,16 @@ public class SignUpPage extends PageProperty {
     }
 
     public void typeFirstName(String firstName){
-        sendKeyToElement(firstNameInput, firstName);
+        driver.findElementByAccessibilityId(firstNameInput).sendKeys(firstName);
     }
 
     public void typeLastName(String lastName){
-        sendKeyToElement(lastNameInput, lastName);
+        driver.findElementByAccessibilityId(lastNameInput).sendKeys(lastName);
     }
 
-    public void typePhoneNumber(String phoneNumber){
-        sendKeyToElement(phoneNumberInput, phoneNumber);
+    public void typePhoneNumber(String phoneNumber) throws InterruptedException {
+        driver.findElementByAccessibilityId(phoneNumberInput).sendKeys(phoneNumber);
+        Thread.sleep(3000);
     }
 
     public void clickSignUpButton(){
@@ -87,9 +90,9 @@ public class SignUpPage extends PageProperty {
     }
 
     public void clickCloseButton(){
-        if (attributeName=="text") {
+        if (attributeName.equals("text")) {
             clickElement(closeButton);
-        } else if (attributeName=="name"){
+        } else if (attributeName.equals("name")){
             driver.findElement(By.xpath(closeButtonIOS)).click();
         }
 

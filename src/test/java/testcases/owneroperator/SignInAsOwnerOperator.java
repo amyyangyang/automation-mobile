@@ -1,16 +1,16 @@
-package testcases.dispatcher;
+package testcases.owneroperator;
 
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
-import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
+import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
+import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import org.junit.*;
-
 import property.SetProperty;
+
 import java.net.MalformedURLException;
 
 
-public class SignInAsDispatcherTest extends SetProperty {
+public class SignInAsOwnerOperator extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
@@ -22,12 +22,12 @@ public class SignInAsDispatcherTest extends SetProperty {
     }
 
     @Before
-    public void signIn() throws MalformedURLException, InterruptedException {
+    public void signIn() throws InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
     }
 
     @Test
-    public void signInAsDispatcher() throws InterruptedException {
+    public void signInAsOwnerOperator() throws InterruptedException {
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
@@ -39,6 +39,5 @@ public class SignInAsDispatcherTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
         availableLoadsAllPage.confirmLogout();
     }
-
 
 }

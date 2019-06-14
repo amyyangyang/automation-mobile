@@ -27,10 +27,10 @@ public class AllowLocationPage extends PageProperty {
     }
 
     public void clickAllowLocationButton() throws InterruptedException {
-        if (attributeName=="text" && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
+        if (attributeName.equals("text") && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
             driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
             Thread.sleep(3000);
-        } else if (attributeName=="name" && sizeOfElements(allowLocationButtonIOS)>0){
+        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS)>0){
             clickElement(allowLocationButtonIOS);
             Thread.sleep(3000);
         }
