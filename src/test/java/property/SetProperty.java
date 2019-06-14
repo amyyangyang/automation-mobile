@@ -41,16 +41,16 @@ public abstract class SetProperty {
     public static AvailableLoadsAllPage availableLoadsAllPage;
     public static String attributeName;
 
-//    private static boolean started = false;
-//    static{
-//        if (!started) {
-//            started = true;
-//            try {
-//                setUpDriver();
-//            } catch (MalformedURLException e) {
-//            }
-//        }
-//    }
+    private static boolean started = false;
+    static{
+        if (!started) {
+            started = true;
+            try {
+                setUpDriver();
+            } catch (MalformedURLException e) {
+            }
+        }
+    }
 
 
     public static void setUpDriver() throws MalformedURLException {
@@ -121,7 +121,12 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
                                 capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
+                                capabilities.setCapability("waitForQuietness", "false");
+                                capabilities.setCapability("resetOnSessionStartOnly", "false");
+                                System.out.println("step 11");
                                 driver = Factory.createIOSDriver(url, capabilities);
+                                System.out.println("step 12");
+
                                 break;
                         }
                     } catch (IOException ex) {
@@ -199,9 +204,10 @@ public abstract class SetProperty {
 
     @AfterClass
     public static void quit(){
-        if (driver != null) {
-            driver.quit();
-        }
+        driver.resetApp();
+
+
+
     }
 
 }

@@ -95,12 +95,12 @@
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.10</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.testng</groupId>-->
+<!--            <artifactId>testng</artifactId>-->
+<!--            <version>6.10</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
 
     </dependencies>
@@ -118,7 +118,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <LOCATION_NAME>server</LOCATION_NAME>
+                        <LOCATION_NAME>local</LOCATION_NAME>
                     </systemPropertyVariables>
                     <properties>
                         <maven.test.failure.ignore>true</maven.test.failure.ignore>

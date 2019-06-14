@@ -15,20 +15,16 @@ public class SignInAsDriverTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws InterruptedException, MalformedURLException {
-        setUpDriver();
+//        setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
     }
 
-    @Before
-    public void signIn() throws MalformedURLException, InterruptedException {
-        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
-    }
-
     @Test
     public void signInAsDriver() throws InterruptedException {
+        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         Thread.sleep(3000);

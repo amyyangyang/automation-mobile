@@ -13,16 +13,16 @@ public class SignUpPage extends PageProperty {
     private String closeButton = "//*[contains(@%s, '\uF406')]";
     private String emailInput = "//*[contains(@%s, 'Email')]/following-sibling::*[1]";
     private String passwordInput = "//*[contains(@%s, 'Password')]/following-sibling::*[1]";
-    private String ownerCheckbox = "//*[contains(@%s, 'Owner')]/following-sibling::*[1]";
-    private String dispatcherCheckbox = "//*[contains(@%s, 'Dispatcher')]/following-sibling::*[1]";
-    private String typeCityInput = "//*[contains(@%s, 'city')]";
-    private String continueButton = "//*[contains(@%s, 'Continue')]";
+    private String ownerCheckbox = "(//*[contains(@%s, 'Owner')])[last()]";
+    private String dispatcherCheckbox = "(//*[contains(@%s, 'Dispatcher')])[last()]";
+    private String typeCityInput = "(//*[contains(@%s, 'city')])[last()]";
+    private String continueButton = "(//*[contains(@%s, 'Continue')])[last()]";
     private String saveHomeButton = "(//*[contains(@%s, 'Save Home')])[last()]";
     private String firstNameInput = "createAccount_input_fistName";
     private String lastNameInput = "createAccount_input_lastName";
     private String phoneNumberInput = "createAccount_input_phone";
-    private String signUpButton = "//*[@%s='Sign Up']";
-    private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s\") and contains(@%1$s, 'USA')])[last()]";
+    private String signUpButton = "(//*[@%s='Sign Up'])[last()]";
+    private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s, NY\")])[last()]";
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {

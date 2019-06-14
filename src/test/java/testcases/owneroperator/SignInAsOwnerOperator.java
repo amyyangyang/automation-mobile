@@ -14,20 +14,16 @@ public class SignInAsOwnerOperator extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-        setUpDriver();
+//        setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
     }
 
-    @Before
-    public void signIn() throws InterruptedException {
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-    }
-
     @Test
     public void signInAsOwnerOperator() throws InterruptedException {
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
