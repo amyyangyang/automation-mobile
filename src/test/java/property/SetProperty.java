@@ -54,7 +54,7 @@ public abstract class SetProperty {
 
 
     public static void setUpDriver() throws MalformedURLException {
-        URL url = new URL("http://localhost:4723/wd/hub");
+        URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         try {
             String profile = System.getProperty("LOCATION_NAME");
@@ -73,7 +73,7 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
-                                capabilities.setCapability("waitForQuietness", "false");
+                                capabilities.setCapability("waitForQuiescence", "false");
                                 capabilities.setCapability("resetOnSessionStartOnly", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 System.out.println("DRIVER IS: " + driver);
@@ -118,15 +118,12 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
                                 capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
-                                capabilities.setCapability("waitForQuietness", "false");
+                                capabilities.setCapability("waitForQuiescence", "false");
                                 capabilities.setCapability("resetOnSessionStartOnly", "false");
-                                System.out.println("step 11");
                                 driver = Factory.createIOSDriver(url, capabilities);
-                                System.out.println("step 12");
-
                                 break;
                         }
                     } catch (IOException ex) {
@@ -137,7 +134,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
@@ -203,9 +200,9 @@ public abstract class SetProperty {
     public TestWatcher watcher = Factory.createWatcher();
 
     @AfterClass
-    public static void quit(){
+    public static void quit() throws InterruptedException {
         driver.resetApp();
-
+        Thread.sleep(2000);
 
 
     }

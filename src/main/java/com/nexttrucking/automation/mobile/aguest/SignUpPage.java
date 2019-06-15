@@ -85,8 +85,9 @@ public class SignUpPage extends PageProperty {
         Thread.sleep(3000);
     }
 
-    public void clickSignUpButton(){
+    public void clickSignUpButton() throws InterruptedException {
         clickElement(signUpButton);
+        Thread.sleep(5000);
     }
 
     public void clickCloseButton(){
