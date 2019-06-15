@@ -13,7 +13,7 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
-//        setUpDriver();
+        setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);

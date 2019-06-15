@@ -41,16 +41,16 @@ public abstract class SetProperty {
     public static AvailableLoadsAllPage availableLoadsAllPage;
     public static String attributeName;
 
-    private static boolean started = false;
-    static{
-        if (!started) {
-            started = true;
-            try {
-                setUpDriver();
-            } catch (MalformedURLException e) {
-            }
-        }
-    }
+//    private static boolean started = false;
+//    static{
+//        if (!started) {
+//            started = true;
+//            try {
+//                setUpDriver();
+//            } catch (MalformedURLException e) {
+//            }
+//        }
+//    }
 
 
     public static void setUpDriver() throws MalformedURLException {
@@ -134,7 +134,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
@@ -201,8 +201,9 @@ public abstract class SetProperty {
 
     @AfterClass
     public static void quit() throws InterruptedException {
-        driver.resetApp();
-        Thread.sleep(2000);
+        driver.quit();
+//        driver.resetApp();
+//        Thread.sleep(2000);
 
 
     }

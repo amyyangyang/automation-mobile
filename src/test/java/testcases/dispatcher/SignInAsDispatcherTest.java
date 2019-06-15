@@ -14,7 +14,7 @@ public class SignInAsDispatcherTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-//        setUpDriver();
+        setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);

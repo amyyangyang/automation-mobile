@@ -13,7 +13,7 @@ public class GetWelcomePagesTest extends SetProperty {
     @BeforeClass
     public static void setUp() throws InterruptedException, MalformedURLException {
 
-//        setUpDriver();
+        setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         welcomePage.getWelcomePage();
