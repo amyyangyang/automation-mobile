@@ -15,9 +15,8 @@ public abstract class PageProperty {
         this.attributeName = attributeName;
     }
 
-    public static String attributeName;
-    public static AppiumDriver<MobileElement> driver;
-//    public static AppiumDriver<MobileElement> driver;
+    public String attributeName;
+    public AppiumDriver<MobileElement> driver;
 
     public int sizeOfElements(String element){
         return driver.findElements(By.xpath(String.format(element, attributeName))).size();

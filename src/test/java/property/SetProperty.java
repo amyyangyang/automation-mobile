@@ -12,7 +12,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,22 +26,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
 public abstract class SetProperty {
 
-
+    public static AppiumDriver<MobileElement> driver;
+    public static String attributeName;
     public static JavascriptExecutor jse;
     public static Object obj;
-    public static AppiumDriver<MobileElement> driver;
     public static WelcomePage welcomePage;
     public static SignInPage signInPage;
     public static SignUpPage signUpPage;
     public static AllowLocationPage allowLocationPage;
     public static AvailableLoadsAllPage availableLoadsAllPage;
-    public static String attributeName;
+
 
 //    private static boolean started = false;
 //    static{
@@ -73,9 +76,13 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
+//                                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+//                                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
                                 capabilities.setCapability("waitForQuiescence", "false");
-                                capabilities.setCapability("resetOnSessionStartOnly", "false");
+//                                capabilities.setCapability("resetOnSessionStartOnly", "true");
                                 driver = Factory.createIOSDriver(url, capabilities);
+                                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
                                 System.out.println("DRIVER IS: " + driver);
                                 break;
                         }
@@ -97,20 +104,21 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
                                 capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
-                                    switch (prop.getProperty("env.name")) {
-                                        case "dev":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
-                                            break;
-                                        case "test":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
-                                            break;
-                                        case "demo":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
-                                            break;
-                                    }
+                                capabilities.setCapability("waitForQuiescence", "false");
+                                switch (prop.getProperty("env.name")) {
+                                    case "dev":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
+                                        break;
+                                    case "test":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                                        break;
+                                    case "demo":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
+                                        break;
+                                }
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
@@ -191,21 +199,43 @@ public abstract class SetProperty {
             e.printStackTrace();
         }
         return parameterValue;
-      }
+    }
 
-//    @Rule
-    public RetryRule retryRule = new RetryRule(3);
+    @Rule
+    public RetryRule retryRule = new RetryRule(2);
 
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
 
-    @AfterClass
-    public static void quit() throws InterruptedException {
-        driver.quit();
-//        driver.resetApp();
-//        Thread.sleep(2000);
+//    @BeforeClass
+//    public static void set() throws InterruptedException, MalformedURLException {
+////        setUpDriver();
+//        driver.launchApp();
+//    }
 
 
-    }
+//    @AfterClass
+//    public static void quit() throws InterruptedException {
+//        driver.quit();
+//        System.out.println("DRIVER AFTER QUIT() IS: " + driver);
+//    }
+
+
+
+
+
+
+//        driver.launchApp();
+//        driver.closeApp();
+//        try{driver.runAppInBackground(Duration.ofDays(1));}catch (Exception e) {}
+//        Thread.sleep(20000);
+
+//        if (driver == null) {
+//            return;
+//        }
+//        driver.quit();
+//        driver = null;
+
+
 
 }

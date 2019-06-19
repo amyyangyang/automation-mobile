@@ -25,7 +25,7 @@ public class WelcomePage extends PageProperty {
 
     public void clickAllowNotificationsButton() throws InterruptedException {
         Thread.sleep(5000);
-        if (attributeName.equals("name")) {
+        if (attributeName.equals("name") && sizeOfElements(allowButton)>0) {
             clickElement(allowButton);
         }
     }
