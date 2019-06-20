@@ -31,11 +31,7 @@ public class SignUpPage extends PageProperty {
 
 
     public WelcomePage clickBackButton() {
-        if (attributeName.equals("text")) {
-            clickElement(backButton);
-        } else if (attributeName.equals("name")){
-            driver.findElement(By.xpath(closeButtonIOS)).click();
-        }
+        clickElementWithDiferentLocator(backButton, closeButtonIOS);
         return new WelcomePage(driver, attributeName);
     }
 

@@ -49,9 +49,5 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
         availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
         availableLoadsAllPage.confirmLogout();
-
     }
-
-
-
 }
