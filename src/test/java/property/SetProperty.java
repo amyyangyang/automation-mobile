@@ -62,7 +62,7 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
-//                                capabilities.setCapability("waitForQuiescence", "false");
+                                capabilities.setCapability("waitForQuiescence", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
