@@ -14,13 +14,7 @@ public class SignInAsDispatcherTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-//        if (driver == null) {
-//            setUpDriver();
-//        }
         setUpDriver();
-//        driver.launchApp();
-//        setUpDriver();
-//        driver.launchApp();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -36,12 +30,12 @@ public class SignInAsDispatcherTest extends SetProperty {
         Thread.sleep(3000);
     }
 
-//    @After
-//    public void logOut() throws InterruptedException {
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-//        availableLoadsAllPage.confirmLogout();
-//    }
+    @After
+    public void logOut() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+    }
 
 
 }

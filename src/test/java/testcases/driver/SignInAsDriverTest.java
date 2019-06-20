@@ -14,13 +14,8 @@ import java.net.MalformedURLException;
 public class SignInAsDriverTest extends SetProperty {
 
     @BeforeClass
-    public static void setUp() throws InterruptedException, MalformedURLException {
-//        if (driver == null) {
-//            setUpDriver();
-//        }
-//        driver.launchApp();
+    public static void setUp() throws MalformedURLException {
         setUpDriver();
-//        driver.launchApp();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -35,11 +30,11 @@ public class SignInAsDriverTest extends SetProperty {
         Thread.sleep(3000);
     }
 
-//    @After
-//    public void logOut() throws InterruptedException {
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-//        availableLoadsAllPage.confirmLogout();
-//    }
+    @After
+    public void logOut() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+    }
 
 }

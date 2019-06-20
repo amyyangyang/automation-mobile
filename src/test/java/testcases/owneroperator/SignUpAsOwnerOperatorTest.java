@@ -13,12 +13,7 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
-//        if (driver == null) {
-//            setUpDriver();
-//        }
-//        driver.launchApp();
         setUpDriver();
-//        driver.launchApp();
         welcomePage = new WelcomePage(driver, attributeName);
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
@@ -49,13 +44,13 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
 
     }
 
-//    @After
-//    public void deleteCreatedUser() throws InterruptedException {
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-//        availableLoadsAllPage.confirmLogout();
-//
-//    }
+    @After
+    public void deleteCreatedUser() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+
+    }
 
 
 

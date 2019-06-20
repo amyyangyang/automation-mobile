@@ -14,13 +14,7 @@ public class SignUpAsDispatcherTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
-//        if (driver == null) {
-//            setUpDriver();
-//        }
         setUpDriver();
-//        driver.launchApp();
-//        setUpDriver();
-//        driver.launchApp();
         welcomePage = new WelcomePage(driver, attributeName);
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
@@ -51,13 +45,12 @@ public class SignUpAsDispatcherTest extends SetProperty {
 
     }
 
-//    @After
-//    public void deleteCreatedUser() throws InterruptedException {
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-//        availableLoadsAllPage.confirmLogout();
-//
-//    }
+    @After
+    public void deleteCreatedUser() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+    }
 
 
 

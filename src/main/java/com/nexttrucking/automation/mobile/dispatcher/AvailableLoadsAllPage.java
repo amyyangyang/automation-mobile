@@ -8,7 +8,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
-import static org.openqa.selenium.By.xpath;
 
 public class AvailableLoadsAllPage extends PageProperty {
 

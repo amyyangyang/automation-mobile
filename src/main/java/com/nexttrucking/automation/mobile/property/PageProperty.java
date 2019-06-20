@@ -1,9 +1,6 @@
 package com.nexttrucking.automation.mobile.property;
 
-import com.microsoft.appcenter.appium.EnhancedIOSDriver;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
