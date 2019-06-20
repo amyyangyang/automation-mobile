@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class SetProperty {
 
+
     public static JavascriptExecutor jse;
     public static Object obj;
     public static AppiumDriver<MobileElement> driver;
@@ -86,15 +87,15 @@ public abstract class SetProperty {
                                 capabilities.setCapability("waitForQuiescence", "false");
                                 switch (prop.getProperty("env.name")) {
                                     case "dev":
-                                        capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk");
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.5.apk");
                                         capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                         break;
                                     case "test":
-                                        capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                        capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.5.apk");
                                         capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                         break;
                                     case "demo":
-                                        capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.5.apk");
                                         capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                         break;
                                 }

@@ -1,5 +1,4 @@
-{
-"SIGNIN": "SIGNUP",
+{  "SIGNIN": "SIGNUP",
 
         "FOR": "SignInAsDispatcher",
                 "dispatcherEmail": "seraabel2017+fleet@gmail.com",
@@ -16,13 +15,13 @@
  "SIGNIN": "SIGNUP",
 
         "FOR": "GEST",
-        "companyName": "NEXT",
-        "emailForGuest": "neeck@gmail.com",
-        "emailForGuestOO": "seraabel2017+oo@gmail.com",
-        "emailForGuestDispatcher": "seraabel2017+dispatcher@gmail.com",
-        "firstName": "Nik",
-        "cityName": "New York",
-        "lastName": "Serg",
-        "phoneNumber": "2343423423",
-        "passwordForGuest": "111111"
+               "companyName": "NEXT",
+               "emailForGuest": "neeck@gmail.com",
+               "emailForGuestOO": "seraabel2017+oo@gmail.com",
+               "emailForGuestDispatcher": "seraabel2017+dispatcher@gmail.com",
+               "firstName": "Nik",
+               "cityName": "New York",
+               "lastName": "Serg",
+               "phoneNumber": "2343423423",
+               "passwordForGuest": "111111"
 }

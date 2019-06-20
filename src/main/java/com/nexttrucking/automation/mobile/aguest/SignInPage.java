@@ -5,7 +5,7 @@ import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-
+import static org.openqa.selenium.By.xpath;
 
 
 public class SignInPage extends PageProperty {
