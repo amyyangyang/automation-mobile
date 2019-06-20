@@ -5,12 +5,12 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import org.junit.*;
-
 import property.SetProperty;
 import java.net.MalformedURLException;
 
 
 public class SignInAsDispatcherTest extends SetProperty {
+
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
@@ -36,6 +36,5 @@ public class SignInAsDispatcherTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
         availableLoadsAllPage.confirmLogout();
     }
-
 
 }

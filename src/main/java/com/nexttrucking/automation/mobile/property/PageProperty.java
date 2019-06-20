@@ -37,5 +37,13 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName, menuName))).click();
     }
 
+    public void clickElementWithDiferentLocator(String androidElement, String iOSElement){
+        if (attributeName=="text") {
+            clickElement(androidElement);
+        } else if (attributeName=="name"){
+            driver.findElement(By.xpath(iOSElement)).click();
+        }
+    }
+
 
 }

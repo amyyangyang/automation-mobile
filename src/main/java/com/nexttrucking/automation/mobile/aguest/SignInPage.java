@@ -43,11 +43,7 @@ public class SignInPage extends PageProperty {
     }
 
     public WelcomePage clickBackButton() {
-        if (attributeName=="text") {
-            clickElement(backButtonAndroid);
-        } else if (attributeName=="name"){
-            driver.findElement(By.xpath(backButtonIOS)).click();
-        }
+        clickElementWithDiferentLocator(backButtonAndroid, backButtonIOS);
         return new WelcomePage(driver, attributeName);
     }
 

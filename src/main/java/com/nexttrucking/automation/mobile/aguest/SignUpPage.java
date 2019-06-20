@@ -91,12 +91,7 @@ public class SignUpPage extends PageProperty {
     }
 
     public void clickCloseButton(){
-        if (attributeName.equals("text")) {
-            clickElement(closeButton);
-        } else if (attributeName.equals("name")){
-            driver.findElement(By.xpath(closeButtonIOS)).click();
-        }
-
+        clickElementWithDiferentLocator(closeButton, closeButtonIOS);
     }
 
 }
