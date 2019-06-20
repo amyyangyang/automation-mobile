@@ -62,8 +62,7 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
-                                capabilities.setCapability("waitForQuiescence", "false");
-                                capabilities.setCapability("resetOnSessionStartOnly", "false");
+//                                capabilities.setCapability("waitForQuiescence", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -189,7 +188,7 @@ public abstract class SetProperty {
     public TestWatcher watcher = Factory.createWatcher();
 
     @AfterClass
-    public static void quit() throws InterruptedException {
+    public static void quit() {
         driver.quit();
     }
 

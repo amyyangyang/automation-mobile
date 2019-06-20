@@ -3,7 +3,6 @@ package com.nexttrucking.automation.mobile.aguest;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 
 
 public class SignUpPage extends PageProperty {
@@ -31,7 +30,7 @@ public class SignUpPage extends PageProperty {
 
 
     public WelcomePage clickBackButton() {
-        clickElementWithDiferentLocator(backButton, closeButtonIOS);
+        clickElementWithDifferentLocator(backButton, closeButtonIOS);
         return new WelcomePage(driver, attributeName);
     }
 
@@ -87,7 +86,7 @@ public class SignUpPage extends PageProperty {
     }
 
     public void clickCloseButton(){
-        clickElementWithDiferentLocator(closeButton, closeButtonIOS);
+        clickElementWithDifferentLocator(closeButton, closeButtonIOS);
     }
 
 }

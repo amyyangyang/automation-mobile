@@ -44,10 +44,4 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
 
     }
 
-    @After
-    public void deleteCreatedUser() throws InterruptedException {
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-        availableLoadsAllPage.confirmLogout();
-    }
 }
