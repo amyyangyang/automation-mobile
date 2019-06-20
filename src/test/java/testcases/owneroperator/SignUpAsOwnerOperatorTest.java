@@ -21,7 +21,7 @@ public class SignUpAsOwnerOperatorTest extends SetProperty {
         welcomePage.getWelcomePage();
     }
 
-    @Test
+//    @Test
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));

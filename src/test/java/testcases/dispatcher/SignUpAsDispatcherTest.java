@@ -22,7 +22,7 @@ public class SignUpAsDispatcherTest extends SetProperty {
         welcomePage.getWelcomePage();
     }
 
-    @Test
+//    @Test
     public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
