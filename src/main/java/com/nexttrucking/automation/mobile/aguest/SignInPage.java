@@ -4,6 +4,8 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 
 
 public class SignInPage extends PageProperty {
@@ -15,6 +17,10 @@ public class SignInPage extends PageProperty {
     private String emailInput = "//*[@%s='Email']/following-sibling::*[1]";
     private String signInButton = "//*[@%s='Sign In']";
     private String email = "//*[@%s='Email']";
+    private String forgotPasswordButton = "//*[@%s='Forgot?']";
+    private String forgotPasswordEmail = "(//*[@%s='Enter your email to find your account']/following-sibling::*[1])[1]";
+    private String sendNewPasswordButton = "//*[@%s='Send']";
+    private String emailSentOKButton = "//*[@%s='OK']";
 
 
     public SignInPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -56,6 +62,28 @@ public class SignInPage extends PageProperty {
     public AllowLocationPage clickSignInButton() {
         clickElement(signInButton);
         return new AllowLocationPage(driver, attributeName);
+    }
+
+    public void clickForgotButton(){
+        clickElement(forgotPasswordButton);
+    }
+
+    public void inputEmailForForgotPassword(String email){
+        sendKeyToElement(forgotPasswordEmail, email);
+    }
+
+    public void clickSendNewPasswordButton(){
+        clickElement(sendNewPasswordButton);
+    }
+
+    public void clickEmailSentOKButton() throws InterruptedException {
+        if (attributeName.equals("text")) {
+            clickElement(emailSentOKButton);
+        } else if (attributeName.equals("name")) {
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point(190, 615)).perform();
+        }
+        Thread.sleep(3000);
     }
 
 }

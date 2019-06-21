@@ -7,7 +7,7 @@ import property.SetProperty;
 import java.net.MalformedURLException;
 
 
-public class GetWelcomePagesTest extends SetProperty {
+public class ForgotPasswordTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws InterruptedException, MalformedURLException {
@@ -15,6 +15,16 @@ public class GetWelcomePagesTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         welcomePage.getWelcomePage();
+    }
+
+    @Test
+    public void forgotPassword() throws InterruptedException {
+        welcomePage.clickSignInButton();
+        signInPage.clickForgotButton();
+        signInPage.inputEmailForForgotPassword(getTestData("driverEmail"));
+        signInPage.clickSendNewPasswordButton();
+        Assert.assertTrue(welcomePage.getTitle("Email Sent").contains("Email Sent"));
+        signInPage.clickEmailSentOKButton();
     }
 
     @Test
