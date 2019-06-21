@@ -1,4 +1,4 @@
-package testcases.dispatcher;
+package testcases.common;
 
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -9,7 +9,7 @@ import property.SetProperty;
 import java.net.MalformedURLException;
 
 
-public class SignInAsDispatcherTest extends SetProperty {
+public class SignInTest extends SetProperty {
 
 
     @BeforeClass
@@ -29,6 +29,25 @@ public class SignInAsDispatcherTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
     }
+
+
+    @Test
+    public void signInAsDriver() throws InterruptedException {
+        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
+        Thread.sleep(3000);
+        Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
+        Thread.sleep(3000);
+    }
+
+
+    @Test
+    public void signInAsOwnerOperator() throws InterruptedException {
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        Thread.sleep(3000);
+        Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
+        Thread.sleep(3000);
+    }
+
 
     @After
     public void logOut() throws InterruptedException {

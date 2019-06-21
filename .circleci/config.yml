@@ -197,16 +197,17 @@ workflows:
   app-ui-test:
     jobs:
       - build:
+
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
           filters:
             branches:
               only:
                 - master
                 - /^release\/.*/
                 - feature/circleci
-      - prepare_test_cases_and_mobile_app:
-          context: next-platform-build
-          requires:
-            - build
       - hold_testDevUI:
           type: approval
           requires:

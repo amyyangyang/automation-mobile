@@ -1,4 +1,4 @@
-package testcases.aguest;
+package testcases.common;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import org.junit.*;
