@@ -3,7 +3,6 @@ package com.nexttrucking.automation.mobile.aguest;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 
 
 public class SignUpPage extends PageProperty {
@@ -13,16 +12,16 @@ public class SignUpPage extends PageProperty {
     private String closeButton = "//*[contains(@%s, '\uF406')]";
     private String emailInput = "//*[contains(@%s, 'Email')]/following-sibling::*[1]";
     private String passwordInput = "//*[contains(@%s, 'Password')]/following-sibling::*[1]";
-    private String ownerCheckbox = "//*[contains(@%s, 'Owner')]/following-sibling::*[1]";
-    private String dispatcherCheckbox = "//*[contains(@%s, 'Dispatcher')]/following-sibling::*[1]";
-    private String typeCityInput = "//*[contains(@%s, 'Type')]";
-    private String continueButton = "//*[contains(@%s, 'Continue')]";
-    private String saveHomeButton = "//*[contains(@%s, 'Save Home')]";
-    private String firstNameInput = "//*[contains(@%s, 'First')]/following-sibling::*[2]";
-    private String lastNameInput = "//*[contains(@%s, 'Last')]/following-sibling::*[2]";
-    private String phoneNumberInput = "//*[contains(@%s, 'Phone')]/following-sibling::*[1]";
-    private String signUpButton = "//*[contains(@%s, 'Sign Up')]";
-    private String selectCityCheckbox = "//*[contains(@%1$s, \"%2$s\") and contains(@%1$s, 'USA')]";
+    private String ownerCheckbox = "(//*[contains(@%s, 'Owner')])[last()]";
+    private String dispatcherCheckbox = "(//*[contains(@%s, 'Dispatcher')])[last()]";
+    private String typeCityInput = "(//*[contains(@%s, 'city')])[last()]";
+    private String continueButton = "(//*[contains(@%s, 'Continue')])[last()]";
+    private String saveHomeButton = "(//*[contains(@%s, 'Save Home')])[last()]";
+    private String firstNameInput = "createAccount_input_fistName";
+    private String lastNameInput = "createAccount_input_lastName";
+    private String phoneNumberInput = "createAccount_input_phone";
+    private String signUpButton = "(//*[@%s='Sign Up'])[last()]";
+    private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s, NY\")])[last()]";
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -31,11 +30,7 @@ public class SignUpPage extends PageProperty {
 
 
     public WelcomePage clickBackButton() {
-        if (attributeName=="text") {
-            clickElement(backButton);
-        } else if (attributeName=="name"){
-            driver.findElement(By.xpath(closeButtonIOS)).click();
-        }
+        clickElementWithDifferentLocator(backButton, closeButtonIOS);
         return new WelcomePage(driver, attributeName);
     }
 
@@ -60,9 +55,11 @@ public class SignUpPage extends PageProperty {
         } else System.out.println("Please choose correct User role");
     }
 
-    public void chooseCity(String city){
+    public void chooseCity(String city) throws InterruptedException {
         sendKeyToElement(typeCityInput, city);
+        Thread.sleep(2000);
         clickMenu(selectCityCheckbox, city);
+        Thread.sleep(2000);
     }
 
     public SignUpPage clickSaveHomeButton() {
@@ -71,28 +68,25 @@ public class SignUpPage extends PageProperty {
     }
 
     public void typeFirstName(String firstName){
-        sendKeyToElement(firstNameInput, firstName);
+        driver.findElementByAccessibilityId(firstNameInput).sendKeys(firstName);
     }
 
     public void typeLastName(String lastName){
-        sendKeyToElement(lastNameInput, lastName);
+        driver.findElementByAccessibilityId(lastNameInput).sendKeys(lastName);
     }
 
-    public void typePhoneNumber(String phoneNumber){
-        sendKeyToElement(phoneNumberInput, phoneNumber);
+    public void typePhoneNumber(String phoneNumber) throws InterruptedException {
+        driver.findElementByAccessibilityId(phoneNumberInput).sendKeys(phoneNumber);
+        Thread.sleep(3000);
     }
 
-    public void clickSignUpButton(){
+    public void clickSignUpButton() throws InterruptedException {
         clickElement(signUpButton);
+        Thread.sleep(5000);
     }
 
     public void clickCloseButton(){
-        if (attributeName=="text") {
-            clickElement(closeButton);
-        } else if (attributeName=="name"){
-            driver.findElement(By.xpath(closeButtonIOS)).click();
-        }
-
+        clickElementWithDifferentLocator(closeButton, closeButtonIOS);
     }
 
 }

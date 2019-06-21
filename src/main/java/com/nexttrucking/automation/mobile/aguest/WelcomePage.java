@@ -3,9 +3,7 @@ package com.nexttrucking.automation.mobile.aguest;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 
-import static org.openqa.selenium.By.xpath;
 
 
 public class WelcomePage extends PageProperty {
@@ -23,8 +21,8 @@ public class WelcomePage extends PageProperty {
 
 
 
-    public void clickAllowNotificationsButton(){
-        if (attributeName=="name" && sizeOfElements(allowButton)>0) {
+    public void clickAllowNotificationsButton() throws InterruptedException {
+        if (attributeName.equals("name") && sizeOfElements(allowButton)>0) {
             clickElement(allowButton);
         }
     }

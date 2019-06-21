@@ -4,8 +4,6 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import static org.openqa.selenium.By.xpath;
 
 
 public class SignInPage extends PageProperty {
@@ -39,15 +37,11 @@ public class SignInPage extends PageProperty {
         Thread.sleep(10000);
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
-        Thread.sleep(3000);
+        Thread.sleep(7000);
     }
 
     public WelcomePage clickBackButton() {
-        if (attributeName=="text") {
-            clickElement(backButtonAndroid);
-        } else if (attributeName=="name"){
-            driver.findElement(By.xpath(backButtonIOS)).click();
-        }
+        clickElementWithDifferentLocator(backButtonAndroid, backButtonIOS);
         return new WelcomePage(driver, attributeName);
     }
 

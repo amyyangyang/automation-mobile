@@ -18,12 +18,13 @@
 
         "FOR": "GEST",
                 "companyName": "NEXT",
-                "emailForGuest": "neeck@ukr.net",
+                "emailForGuest": "neeck@gmail.com",
+                "emailForGuestOO": "seraabel2017+oo@gmail.com",
+                "emailForGuestDispatcher": "seraabel2017+dispatcher@gmail.com",
                 "firstName": "Nik",
                 "cityName": "New York",
                 "lastName": "Serg",
                 "phoneNumber": "2343423423",
-                "password6_1": "111111",
-                "passwordForGuest": "xfqrf2424"
+                "passwordForGuest": "111111"
 
 }

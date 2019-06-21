@@ -8,7 +8,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
-import static org.openqa.selenium.By.xpath;
 
 public class AvailableLoadsAllPage extends PageProperty {
 
@@ -31,7 +30,7 @@ public class AvailableLoadsAllPage extends PageProperty {
 
 
     public void clickMenuButtonFirstLevel(String menuName) throws InterruptedException {
-        if (attributeName=="text") {
+        if (attributeName.equals("text")) {
             clickElement(menuButtonAndroid);
         } else driver.findElement(By.xpath(menuButtonIOS)).click();
         Thread.sleep(3000);
@@ -44,13 +43,14 @@ public class AvailableLoadsAllPage extends PageProperty {
         Thread.sleep(3000);
     }
 
-    public WelcomePage confirmLogout(){
-        if (attributeName=="text") {
+    public WelcomePage confirmLogout() throws InterruptedException {
+        if (attributeName.equals("text")) {
            clickElement(confirmLogOutButton);
-        } else if (attributeName=="name"){
+        } else if (attributeName.equals("name")){
             TouchAction touchAction = new TouchAction(driver);
             touchAction.tap(PointOption.point(270, 600)).perform();
         }
+        Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);
     }
 

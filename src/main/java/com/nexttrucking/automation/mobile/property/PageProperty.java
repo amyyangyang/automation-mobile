@@ -14,8 +14,8 @@ public abstract class PageProperty {
         this.attributeName = attributeName;
     }
 
-    public static String attributeName;
-    public static AppiumDriver<MobileElement> driver;
+    public String attributeName;
+    public AppiumDriver<MobileElement> driver;
 
     public int sizeOfElements(String element){
         return driver.findElements(By.xpath(String.format(element, attributeName))).size();
@@ -35,6 +35,14 @@ public abstract class PageProperty {
 
     public void clickMenu(String element, String menuName){
         driver.findElement(By.xpath(String.format(element, attributeName, menuName))).click();
+    }
+
+    public void clickElementWithDifferentLocator(String androidElement, String iOSElement){
+        if (attributeName=="text") {
+            clickElement(androidElement);
+        } else if (attributeName=="name"){
+            driver.findElement(By.xpath(iOSElement)).click();
+        }
     }
 
 

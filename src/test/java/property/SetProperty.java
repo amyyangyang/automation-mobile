@@ -12,6 +12,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
@@ -40,17 +41,6 @@ public abstract class SetProperty {
     public static AvailableLoadsAllPage availableLoadsAllPage;
     public static String attributeName;
 
-    private static boolean started = false;
-    static{
-        if (!started) {
-            started = true;
-            try {
-                setUpDriver();
-            } catch (MalformedURLException e) {
-            }
-        }
-    }
-
 
     public static void setUpDriver() throws MalformedURLException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
@@ -72,8 +62,8 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
+                                capabilities.setCapability("waitForQuiescence", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
-                                System.out.println("DRIVER IS: " + driver);
                                 break;
                         }
                     } catch (IOException ex) {
@@ -94,17 +84,18 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
                                 capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
+                                capabilities.setCapability("waitForQuiescence", "false");
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV-V2.0.5.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.5.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                             break;
                                         case "demo":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.4.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.5.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                             break;
                                     }
@@ -115,9 +106,11 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3.1");
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
                                 capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
+                                capabilities.setCapability("waitForQuiescence", "false");
+                                capabilities.setCapability("resetOnSessionStartOnly", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -129,7 +122,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
@@ -186,12 +179,17 @@ public abstract class SetProperty {
             e.printStackTrace();
         }
         return parameterValue;
-      }
+    }
 
 //    @Rule
-    public RetryRule retryRule = new RetryRule(3);
+    public RetryRule retryRule = new RetryRule(2);
 
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
+
+    @AfterClass
+    public static void quit() {
+        driver.quit();
+    }
 
 }
