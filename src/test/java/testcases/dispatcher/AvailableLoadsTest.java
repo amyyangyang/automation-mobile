@@ -28,33 +28,38 @@ public class AvailableLoadsTest extends SetProperty {
 
     @Test
     public void AvailableLoadPage() {
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-        if (isPresentLoad) {
-            Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
+        System.out.println(driver.getPageSource());
+        Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
+        if (attributeName.equals("android")) {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton), "All");
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localButton), "Local");
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulButton), "Short Haul");
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.longHaulButton), "Long Haul");
-            if (attributeName.equals("android")) {
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
+            if (isPresentLoad) {
                 Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allNumber)));
                 Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localNumber)));
                 Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulNumber)));
+                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
             }
-            Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-            System.out.println(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout));
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
-            if (attributeName.equals("android")) {
+             else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
                 Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber), "0");
                 Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber), "0");
                 Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber), "0");
             }
+        }
+        else{
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton).contains("All"));
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localButton).contains("Local"));
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulButton).contains("Short Haul"));
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.longHaulButton).contains("Long Haul"));
         }
     }
 
@@ -79,17 +84,19 @@ public class AvailableLoadsTest extends SetProperty {
     @Test
     public void theFirstLoadOfLocal() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.localButton);
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-        if (isPresentLoad) {
-            Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+        if(attributeName.equals("android")){
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
+            if (isPresentLoad) {
+                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            }
         }
         availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
     }
@@ -97,35 +104,39 @@ public class AvailableLoadsTest extends SetProperty {
     @Test
     public void theFirstLoadOfShortHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.shortHaulButton);
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-        if (isPresentLoad) {
-            Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+        if(attributeName.equals("android")){
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
+            if (isPresentLoad) {
+                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            }
+            availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
         }
-        availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
     }
 
     @Test
     public void theFirstLoadOfLongHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.longHaulButton);
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-        if (isPresentLoad) {
-            Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+        if(attributeName.equals("android")){
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
+            if (isPresentLoad) {
+                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            }
         }
         availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
 
@@ -133,7 +144,7 @@ public class AvailableLoadsTest extends SetProperty {
 
     @Test
     public void filterPage() throws InterruptedException {
-        availableLoadsAllPage.clickElement(availableLoadsAllPage.filterButton);
+        availableLoadsAllPage.clickElement(availableLoadsAllPage.filterButtonAnroid);
         Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.reeferRadio).isSelected());
         Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.dryVanRadio).isSelected());
         Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.flatbedRadio).isSelected());
@@ -150,7 +161,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
 
-        availableLoadsAllPage.clickElement(availableLoadsAllPage.filterButton);
+        availableLoadsAllPage.clickElement(availableLoadsAllPage.filterButtonAnroid);
         availableLoadsAllPage.clickElement(availableLoadsAllPage.clearButton);
         Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.powerOnlyRadio).isSelected());
         if (availableLoadsAllPage.getElement(availableLoadsAllPage.showButton).isEnabled()) {
