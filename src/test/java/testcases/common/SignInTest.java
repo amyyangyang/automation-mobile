@@ -24,7 +24,7 @@ public class SignInTest extends SetProperty {
 
     @Test
     public void signInAsDispatcher() throws InterruptedException {
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
