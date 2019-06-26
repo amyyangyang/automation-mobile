@@ -6,6 +6,7 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.SignUpPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -36,6 +37,7 @@ public abstract class SetProperty {
     public static AppiumDriver<MobileElement> driver;
     public static WelcomePage welcomePage;
     public static SignInPage signInPage;
+    public static MyDriversPage myDriversPage;
     public static SignUpPage signUpPage;
     public static AllowLocationPage allowLocationPage;
     public static AvailableLoadsAllPage availableLoadsAllPage;
