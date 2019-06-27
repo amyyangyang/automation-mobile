@@ -31,5 +31,6 @@
                 "driverAddPassword": "111111",
                 "driveFirstName": "TestFirstName",
                 "driveLastName": "TestLastName",
-                "drivePhoneNumber": "2343423424"
+                "drivePhoneNumber": "2343423424",
+                "driveNewPhoneNumber": "2343423425"
 }

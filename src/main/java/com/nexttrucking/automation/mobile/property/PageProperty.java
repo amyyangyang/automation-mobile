@@ -25,6 +25,10 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName))).click();
     }
 
+    public void clickElementByName(String element, String elementName){
+        driver.findElement(By.xpath(String.format(element, attributeName, elementName))).click();
+    }
+
     public void sendKeyToElement(String element, String keys){
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
@@ -47,6 +51,24 @@ public abstract class PageProperty {
 
     public void selectRadioButton(String element, String radioButtonName){
         driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
+    }
+
+    public void deleteValue(String element) throws InterruptedException {
+        driver.findElement(By.xpath(String.format(element, attributeName))).clear();
+        driver.findElement(By.xpath(String.format(element, attributeName))).clear();
+        Thread.sleep(2000);
+    }
+
+    public void editInputValue(String inputFieldForiOS, String inputFieldForAndroid, String newValue) throws InterruptedException {
+        if (attributeName.equals("name")) {
+            deleteValue(inputFieldForiOS);
+            Thread.sleep(1000);
+            sendKeyToElement(inputFieldForiOS, newValue);
+        } else if (attributeName.equals("text")){
+            deleteValue(inputFieldForAndroid);
+            Thread.sleep(1000);
+            sendKeyToElement(inputFieldForAndroid, newValue);
+        }
     }
 
 }
