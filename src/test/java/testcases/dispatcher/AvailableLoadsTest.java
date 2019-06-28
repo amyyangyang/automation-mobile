@@ -30,7 +30,7 @@ public class AvailableLoadsTest extends SetProperty {
     public void AvailableLoadPage() {
         System.out.println(driver.getPageSource());
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
-        if (attributeName.equals("android")) {
+        if (attributeName.equals("text")) {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton), "All");
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localButton), "Local");
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulButton), "Short Haul");
@@ -84,7 +84,7 @@ public class AvailableLoadsTest extends SetProperty {
     @Test
     public void theFirstLoadOfLocal() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.localButton);
-        if(attributeName.equals("android")){
+        if(attributeName.equals("text")){
             boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentLoad) {
                 Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
@@ -104,7 +104,7 @@ public class AvailableLoadsTest extends SetProperty {
     @Test
     public void theFirstLoadOfShortHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.shortHaulButton);
-        if(attributeName.equals("android")){
+        if(attributeName.equals("text")){
             boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentLoad) {
                 Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
@@ -124,7 +124,7 @@ public class AvailableLoadsTest extends SetProperty {
     @Test
     public void theFirstLoadOfLongHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.longHaulButton);
-        if(attributeName.equals("android")){
+        if(attributeName.equals("text")){
             boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentLoad) {
                 Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
