@@ -64,13 +64,15 @@ public abstract class PageProperty {
 
     public void editInputValue(String inputFieldForiOS, String inputFieldForAndroid, String newValue) throws InterruptedException {
         if (attributeName.equals("name")) {
-            deleteValue(inputFieldForiOS);
-            Thread.sleep(1000);
-            sendKeyToElement(inputFieldForiOS, newValue);
+            driver.findElement(By.xpath(String.format(inputFieldForiOS, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
+//            deleteValue(inputFieldForiOS);
+//            Thread.sleep(1000);
+//            sendKeyToElement(inputFieldForiOS, newValue);
         } else if (attributeName.equals("text")){
-            deleteValue(inputFieldForAndroid);
-            Thread.sleep(1000);
-            sendKeyToElement(inputFieldForAndroid, newValue);
+            driver.findElement(By.xpath(String.format(inputFieldForAndroid, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
+//            deleteValue(inputFieldForAndroid);
+//            Thread.sleep(1000);
+//            sendKeyToElement(inputFieldForAndroid, newValue);
         }
     }
 
