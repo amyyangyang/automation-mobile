@@ -6,6 +6,8 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 public abstract class PageProperty {
 
@@ -54,8 +56,9 @@ public abstract class PageProperty {
     }
 
     public void deleteValue(String element) throws InterruptedException {
-        driver.findElement(By.xpath(String.format(element, attributeName))).clear();
-        driver.findElement(By.xpath(String.format(element, attributeName))).clear();
+        WebElement toClear = driver.findElement(By.xpath(element));
+        toClear.sendKeys(Keys.CONTROL + "a");
+        toClear.sendKeys(Keys.DELETE);
         Thread.sleep(2000);
     }
 

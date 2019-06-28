@@ -27,14 +27,15 @@ public class AllowLocationPage extends PageProperty {
     }
 
     public void clickAllowLocationButton() throws InterruptedException {
+        String profile = System.getProperty("LOCATION_NAME");
         if (attributeName.equals("text") && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
             driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
             Thread.sleep(3000);
-        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS10)>0){
+        } else if (attributeName.equals("name") && profile.equals("server")){
             clickElement(allowLocationButtonIOS10);
             Thread.sleep(3000);
-        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS12)>0){
-            clickElement(allowLocationButtonIOS10);
+        } else if (attributeName.equals("name") && profile.equals("local")){
+            clickElement(allowLocationButtonIOS12);
             Thread.sleep(3000);
         }
     }

@@ -20,7 +20,8 @@ public class MyDriversPage extends PageProperty {
     private String firstDriver = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String selectedDriver = "(//*[contains(@%s, 'Sera')])[last()]";
     private String selectedField = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
-    private String saveButton = "(//*[contains(@%s, 'Save')])[last()]/..";
+    private String saveButtonAndroid = "(//*[contains(@%s, 'Save')])[last()]/..";
+    private String saveButtoniOS = "(//*[contains(@%s, 'Save')])[last()]";
     private String editFirstNameInputForiOS = "(//*[contains(@%s, 'First')]/following-sibling::*)[1]";
     private String editFirstNameInputForAndroid = "(//*[contains(@%s, 'First')]/following-sibling::*)[2]";
     private String editLastNameInputForiOS = "(//*[contains(@%s, 'Last')]/following-sibling::*)[1]";
@@ -92,9 +93,9 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void clickSaveButton() throws InterruptedException {
-        clickElement(saveButton);
+        clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
         Thread.sleep(2000);
-        clickElement(saveButton);
+        clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
         Thread.sleep(5000);
     }
 
@@ -102,8 +103,8 @@ public class MyDriversPage extends PageProperty {
         editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName);
     }
 
-    public void editLastName(String newLasttName) throws InterruptedException {
-        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLasttName);
+    public void editLastName(String newLastName) throws InterruptedException {
+        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName);
     }
 
     public void editPhone(String newPhone) throws InterruptedException {
