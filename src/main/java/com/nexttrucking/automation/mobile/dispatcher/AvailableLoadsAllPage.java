@@ -8,6 +8,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class AvailableLoadsAllPage extends PageProperty {
 
@@ -36,15 +40,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String deliveryTime = "destination_date";
     public String payout = "job_price";
 
-    public String selectButton = "//*[contains(@text,'\uF1C3')]";
-    public String filterButtonAnroid = "//*[contains(@text,'\uF182')]";
-    public String detailButton = "//*[contains(@text,'\uF079')]";
-    public String dryVanRadio = "//*[contains(@text, 'Dry Van')]/following-sibling::*[1]/child::*[1]";
-    public String reeferRadio = "//*[contains(@text, 'Reefer')]/following-sibling::*[1]/child::*[1]";
-    public String flatbedRadio = "//*[contains(@text, 'Flatbed')]/following-sibling::*[1]/child::*[1]";
-    public String powerOnlyRadio = "//*[contains(@text, 'Power Only')]/following-sibling::*[1]/child::*[1]";
-    public String boxTruckRadio = "//*[contains(@text, 'Box Truck')]/following-sibling::*[1]/child::*[1]";
-    public String backButton = "//*[contains(@text,'\uF406')]";
+    public Map<String, String> buttonMap;
     public String clearButton = "(//*[contains(@%s,'Clear')])[last()]";
     public String showButton = "(//*[contains(@%s,'Show')])[last()]";
     public String noLoad = "(//*[contains(@%s,'Please try another type of load')])[last()]";
@@ -52,13 +48,29 @@ public class AvailableLoadsAllPage extends PageProperty {
 
     public AvailableLoadsAllPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
+        buttonMap = new HashMap<>();
+        if (attributeName.equals("text")) {
+            buttonMap.put("filterButton", "//*[contains(@text,'\uF182')]");
+            buttonMap.put("backButton", "//*[contains(@text,'\uF406')]");
+            buttonMap.put("dryVanRadio", "//*[contains(@text, 'Dry Van')]/following-sibling::*[1]/child::*[1]");
+            buttonMap.put("reeferRadio", "//*[contains(@text, 'Reefer')]/following-sibling::*[1]/child::*[1]");
+            buttonMap.put("flatbedRadio", "//*[contains(@text, 'Flatbed')]/following-sibling::*[1]/child::*[1]");
+            buttonMap.put("powerOnlyRadio", "//*[contains(@text, 'Power Only')]/following-sibling::*[1]/child::*[1]");
+            buttonMap.put("boxTruckRadio", "//*[contains(@text, 'Box Truck')]/following-sibling::*[1]/child::*[1]");
+        } else {
+            buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
+            buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
+            buttonMap.put("dryVanRadio", "(//*[contains(@name, 'Dry Van')])[last()]");
+            buttonMap.put("reeferRadio", "(//*[contains(@name, 'Reefer')])[last()]");
+            buttonMap.put("flatbedRadio", "(//*[contains(@name, 'Flatbed')])[last()]");
+            buttonMap.put("powerOnlyRadio", "(//*[contains(@name, 'Power Only')])[last()]");
+            buttonMap.put("boxTruckRadio", "(//*[contains(@name, 'Box Truck')])[last()]");
+        }
     }
-
 
     public String getTitle(String titleText) {
         return getText(title, titleText);
     }
-
 
     public void clickMenuButtonFirstLevel(String menuName) throws InterruptedException {
         if (attributeName.equals("text")) {
