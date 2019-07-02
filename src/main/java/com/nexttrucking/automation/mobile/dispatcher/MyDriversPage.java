@@ -95,8 +95,6 @@ public class MyDriversPage extends PageProperty {
     public void clickSaveButton() throws InterruptedException {
         clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
         Thread.sleep(2000);
-        clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
-        Thread.sleep(5000);
     }
 
     public void editFirstName(String newFirstName) throws InterruptedException {

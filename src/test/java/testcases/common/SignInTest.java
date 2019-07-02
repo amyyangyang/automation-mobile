@@ -22,7 +22,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-    @Test
+//    @Test
     public void signInAsDispatcher() throws InterruptedException {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         Thread.sleep(3000);
@@ -31,7 +31,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-    @Test
+//    @Test
     public void signInAsDriver() throws InterruptedException {
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(3000);
@@ -40,7 +40,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-    @Test
+//    @Test
     public void signInAsOwnerOperator() throws InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         Thread.sleep(3000);

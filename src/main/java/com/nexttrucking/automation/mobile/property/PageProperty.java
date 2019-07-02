@@ -2,9 +2,6 @@ package com.nexttrucking.automation.mobile.property;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -55,24 +52,25 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
     }
 
-    public void deleteValue(String element) throws InterruptedException {
-        WebElement toClear = driver.findElement(By.xpath(element));
-        toClear.sendKeys(Keys.CONTROL + "a");
-        toClear.sendKeys(Keys.DELETE);
-        Thread.sleep(2000);
+    public void deleteValueForAndroid(String element) throws InterruptedException {
+        driver.findElement(By.xpath(String.format(element, attributeName))).clear();
+//        WebElement toClear = driver.findElement(By.xpath(element));
+//        toClear.sendKeys(Keys.CONTROL + "a");
+//        toClear.sendKeys(Keys.DELETE);
+//        Thread.sleep(2000);
     }
 
     public void editInputValue(String inputFieldForiOS, String inputFieldForAndroid, String newValue) throws InterruptedException {
         if (attributeName.equals("name")) {
-            driver.findElement(By.xpath(String.format(inputFieldForiOS, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
-//            deleteValue(inputFieldForiOS);
-//            Thread.sleep(1000);
-//            sendKeyToElement(inputFieldForiOS, newValue);
+//            driver.findElement(By.xpath(String.format(inputFieldForiOS, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
+            deleteValueForAndroid(inputFieldForiOS);
+            Thread.sleep(1000);
+            sendKeyToElement(inputFieldForiOS, newValue);
         } else if (attributeName.equals("text")){
-            driver.findElement(By.xpath(String.format(inputFieldForAndroid, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
-//            deleteValue(inputFieldForAndroid);
-//            Thread.sleep(1000);
-//            sendKeyToElement(inputFieldForAndroid, newValue);
+//            driver.findElement(By.xpath(String.format(inputFieldForAndroid, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
+            deleteValueForAndroid(inputFieldForAndroid);
+            Thread.sleep(1000);
+            sendKeyToElement(inputFieldForAndroid, newValue);
         }
     }
 
