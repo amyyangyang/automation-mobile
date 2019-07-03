@@ -29,6 +29,7 @@ Note: Do not forget set up environment variables if required.
 
     for iOS
       mvn clean -DPLATFORM_NAME=ios -DENV_NAME=dev -DskipTests -P prepare-for-upload package
+
     for Android
       mvn clean -DPLATFORM_NAME=android -DENV_NAME=dev -DskipTests -P prepare-for-upload package
 
@@ -37,6 +38,7 @@ Note: Do not forget set up environment variables if required.
 
     for iOS
       mvn -DPLATFORM_NAME=ios -DENV_NAME=dev -DLOCATION_NAME=local clean verify
+
     for Android
       mvn -DPLATFORM_NAME=android -DENV_NAME=dev -DLOCATION_NAME=local clean verify
 
@@ -45,12 +47,11 @@ Note: Do not forget set up environment variables if required.
 
     for iOS
       appcenter test run appium --app "nexttruckingdev/NEXTTrucking-iOS" --devices 63a899df --app-path "D:\app\NEXT DEV.ipa_2.0.5.ipa"  --test-series "master" --locale "en_US" --build-dir target/upload
+
     for Android
       appcenter test run appium --app "nexttruckingdev/NEXTTrucking-Android" --devices 7807b566 --app-path "D:\app\NEXT DEV.apk_2.0.5.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
 
 
 Depend on value of PLATFORM_NAME variable we can choose platform (android or ios) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
-
 Depend on value of ENV_NAME variable we can choose environment (dev, test, demo or prod) where is we want to run our Java project (default: -DENV_NAME=dev).
-
 Depend on value of LOCATION_NAME variable we can choose environment (local or server) where is we want to run our Java project (default: -DLOCATION_NAME=server).
