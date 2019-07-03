@@ -1,5 +1,4 @@
-{
-"SIGNIN": "SIGNUP",
+{"SIGNIN": "SIGNUP",
 
         "FOR": "SignInAsDispatcher",
                 "dispatcherEmail": "seraabel2017+fleet@gmail.com",
@@ -25,6 +24,12 @@
                 "cityName": "New York",
                 "lastName": "Serg",
                 "phoneNumber": "2343423423",
-                "passwordForGuest": "111111"
+                "passwordForGuest": "111111",
 
+        "FOR": "Driver",
+                "driverAddEmail": "seraabel2017+d@gmail.com",
+                "driverAddPassword": "111111",
+                "driveFirstName": "TestFirstName",
+                "driveLastName": "TestLastName",
+                "drivePhoneNumber": "2343423424"
 }

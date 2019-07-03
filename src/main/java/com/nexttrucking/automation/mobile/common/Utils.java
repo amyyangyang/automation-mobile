@@ -10,8 +10,8 @@ public class Utils {
     public static List<String> jobTypeList = new ArrayList<String>(asList("DROP & HOOK", "ROUNDTRIP", "MULTISTOP", "TEAM", "YARD TO YARD"));
     public static List<String> equipmentTypeList = new ArrayList<String>(asList("Flatbed", "Dry Van", "Power Only", "Reefer", "Box Truck"));
 
-    public static boolean isInteger(String str) {
+    public static boolean isInteger(String number) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
-        return pattern.matcher(str).matches();
+        return pattern.matcher(number).matches();
     }
 }

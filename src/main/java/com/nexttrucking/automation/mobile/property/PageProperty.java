@@ -55,6 +55,10 @@ public abstract class PageProperty {
         }
     }
 
+    public void selectRadioButton(String element, String radioButtonName){
+        driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
+    }
+
     public String getElementText(String locator, String element) {
         if (locator.equals("id")) {
             return driver.findElementByAccessibilityId(element).getText();
