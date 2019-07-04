@@ -44,7 +44,7 @@ public abstract class PageProperty {
         if (attributeName=="text") {
             clickElement(androidElement);
         } else if (attributeName=="name"){
-            driver.findElement(By.xpath(iOSElement)).click();
+            clickElement(iOSElement);
         }
     }
 
@@ -54,20 +54,32 @@ public abstract class PageProperty {
 
     public void deleteValueForAndroid(String element) throws InterruptedException {
         driver.findElement(By.xpath(String.format(element, attributeName))).clear();
-//        WebElement toClear = driver.findElement(By.xpath(element));
-//        toClear.sendKeys(Keys.CONTROL + "a");
-//        toClear.sendKeys(Keys.DELETE);
-//        Thread.sleep(2000);
     }
 
-    public void editInputValue(String inputFieldForiOS, String inputFieldForAndroid, String newValue) throws InterruptedException {
+    public void deleteValueForiOS(String element, String valueType) throws InterruptedException {
+        String deleteNumbersButton = "//XCUIElementTypeKey[@name='Delete']";
+        String deleteWordsButton = "//XCUIElementTypeKey[@name='delete']";
+        String selectAllButton = "//*[contains(@name, 'Select All')]";
+        WebElement inputField = driver.findElement(By.xpath(String.format(element, attributeName)));
+        inputField.click();
+        Thread.sleep(1000);
+        inputField.click();
+        driver.findElement(By.xpath(selectAllButton)).click();
+        if (valueType.equals("number")){
+            driver.findElement(By.xpath(deleteNumbersButton)).click();
+        } else {
+            driver.findElement(By.xpath(deleteWordsButton)).click();
+        }
+    }
+
+
+
+    public void editInputValue(String inputFieldForiOS, String inputFieldForAndroid, String newValue, String valueType) throws InterruptedException {
         if (attributeName.equals("name")) {
-//            driver.findElement(By.xpath(String.format(inputFieldForiOS, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
-            deleteValueForAndroid(inputFieldForiOS);
+            deleteValueForiOS(inputFieldForiOS, valueType);
             Thread.sleep(1000);
             sendKeyToElement(inputFieldForiOS, newValue);
         } else if (attributeName.equals("text")){
-//            driver.findElement(By.xpath(String.format(inputFieldForAndroid, attributeName))).sendKeys(Keys.chord(Keys.CONTROL, "a"), newValue);
             deleteValueForAndroid(inputFieldForAndroid);
             Thread.sleep(1000);
             sendKeyToElement(inputFieldForAndroid, newValue);

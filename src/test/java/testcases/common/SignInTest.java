@@ -13,7 +13,7 @@ public class SignInTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException {
+    public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);

@@ -98,15 +98,15 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void editFirstName(String newFirstName) throws InterruptedException {
-        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName);
+        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words");
     }
 
     public void editLastName(String newLastName) throws InterruptedException {
-        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName);
+        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words");
     }
 
     public void editPhone(String newPhone) throws InterruptedException {
-        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone);
+        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number");
     }
 
     public String getSavedData(String dataName) {

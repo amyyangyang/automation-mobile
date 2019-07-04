@@ -44,7 +44,7 @@ public abstract class SetProperty {
     public static String attributeName;
 
 
-    public static void setUpDriver() throws MalformedURLException {
+    public static void setUpDriver() throws MalformedURLException, InterruptedException {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         try {
@@ -111,8 +111,12 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
                                 capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
-                                capabilities.setCapability("waitForQuiescence", "false");
-                                capabilities.setCapability("resetOnSessionStartOnly", "false");
+                                capabilities.setCapability("waitForQuiescence", false);
+                                capabilities.setCapability("resetOnSessionStartOnly", false);
+                                capabilities.setCapability("xcodeOrgID", "mobile@nexttrucking.com");
+                                capabilities.setCapability("xcodeSigningID", "iPhone Developer");
+//                                capabilities.setCapability("autoAcceptAlerts", true);
+//                                capabilities.setCapability("useNewWDA", "true");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
@@ -124,7 +128,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
@@ -192,6 +196,7 @@ public abstract class SetProperty {
     @AfterClass
     public static void quit() {
         driver.quit();
+//        driver = null;
     }
 
 }

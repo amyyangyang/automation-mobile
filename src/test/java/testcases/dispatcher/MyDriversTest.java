@@ -85,8 +85,8 @@ public class MyDriversTest extends SetProperty {
         myDriversPage.editPhone("2343423111");
         myDriversPage.clickSaveButton();
         Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("2343423111"));
+        System.out.println("New Phone is: " + myDriversPage.getSavedData("Phone"));
         myDriversPage.selectField("Phone");
-        myDriversPage.editPhone("2343423424");
         myDriversPage.editPhone("2343423424");
         myDriversPage.clickSaveButton();
         Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("2343423111") && myDriversPage.getSavedData("Phone").contains("2343423424"));
