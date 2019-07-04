@@ -78,12 +78,12 @@ commands:
       - run:
           name: test app UI -- Android
           command: |
-            appcenter test run appium --app "nexttruckingdev/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+            appcenter test run appium --app "NEXT_DEV/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
 
       - run:
           name: test app UI -- iOS
           command: |
-            appcenter test run appium --app "nexttruckingdev/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+            appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
 
 
 jobs:
