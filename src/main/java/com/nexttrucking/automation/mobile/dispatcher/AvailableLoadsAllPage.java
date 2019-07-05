@@ -22,15 +22,15 @@ public class AvailableLoadsAllPage extends PageProperty {
     private String menuNameButton = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String confirmLogOutButton = "(//*[contains(@%s, 'Yes')])[last()]";
 
-    public String localButton = "(//*[contains(@%s, 'Local')])[last()]";
-    public String shortHaulButton = "(//*[contains(@%s, 'Short Haul')])[last()]";
-    public String longHaulButton = "(//*[contains(@%s, 'Long Haul')])[last()]";
-    public String allButton = "(//*[contains(@%s, 'All')])[last()]";
+    public String localButton = "LOCAL";
+    public String shortHaulButton = "SHORT_HAUL";
+    public String longHaulButton = "LONG_HAUL";
+    public String allButton = "ALL";
 
-    public String shortHaulNumber = "//*[contains(@text, 'Short Haul')]/following-sibling::*[1]/child::*[1]";
-    public String longHaulNumber = "//*[contains(@text, 'Long Haul')]/following-sibling::*[1]/child::*[1]";
-    public String localNumber = "//*[contains(@text, 'Local')]/following-sibling::*[1]/child::*[1]";
-    public String allNumber = "//*[contains(@text, 'All')]/following-sibling::*[1]/child::*[1]";
+    public String shortHaulNumber = "//*[contains(@%s, 'Short Haul')]/following-sibling::*[1]/child::*[1]";
+    public String longHaulNumber = "//*[contains(@%s, 'Long Haul')]/following-sibling::*[1]/child::*[1]";
+    public String localNumber = "//*[contains(@%s, 'Local')]/following-sibling::*[1]/child::*[1]";
+    public String allNumber = "//*[contains(@%s, 'All')]/following-sibling::*[1]/child::*[1]";
 
     public String jobType = "job_action";
     public String equipmentType = "job_equipmentType";

@@ -67,8 +67,20 @@ public abstract class PageProperty {
         }
     }
 
-    public MobileElement getElement(String element) {
-        return driver.findElement(By.xpath(String.format(element, attributeName)));
+    public void clickElementByLocator(String locator, String element) {
+        if (locator.equals("id")) {
+            driver.findElementByAccessibilityId(element).click();
+        } else {
+            driver.findElement(By.xpath(String.format(element, attributeName))).click();
+        }
+    }
+
+    public MobileElement getElement(String locator,String element) {
+        if(locator.equals("id")) {
+            return driver.findElementByAccessibilityId(element);
+        }else{
+            return driver.findElement(By.xpath(String.format(element, attributeName)));
+        }
     }
 
     public boolean isElementPresent(String locator, String element) {
