@@ -232,4 +232,25 @@ workflows:
           context: next-platform-build
           requires:
             - hold_testDemoUI
-
+  app-ui-timing-test:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - prepare_test_cases_and_mobile_app
