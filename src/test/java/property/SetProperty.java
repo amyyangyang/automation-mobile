@@ -124,7 +124,7 @@ public abstract class SetProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        jse = (JavascriptExecutor)driver;
     }
 
