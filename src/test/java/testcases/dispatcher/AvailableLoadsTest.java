@@ -26,7 +26,7 @@ public class AvailableLoadsTest extends SetProperty {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
-    @Test
+//    @Test
     public void AvailableLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         if (attributeName.equals("text")) {
@@ -78,7 +78,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+//    @Test
     public void theFirstLoadOfLocal() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.localButton);
         if (attributeName.equals("text")) {
@@ -98,7 +98,7 @@ public class AvailableLoadsTest extends SetProperty {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
     }
 
-    @Test
+//    @Test
     public void theFirstLoadOfShortHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.shortHaulButton);
         if (attributeName.equals("text")) {
@@ -118,7 +118,7 @@ public class AvailableLoadsTest extends SetProperty {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.allButton);
     }
 
-    @Test
+//    @Test
     public void theFirstLoadOfLongHaul() {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.longHaulButton);
         if (attributeName.equals("text")) {
@@ -139,7 +139,7 @@ public class AvailableLoadsTest extends SetProperty {
 
     }
 
-    @Test
+//    @Test
     public void filterPage() throws InterruptedException {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.buttonMap.get("filterButton"));
 //        Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.buttonMap.get("reeferRadio")).isSelected());
