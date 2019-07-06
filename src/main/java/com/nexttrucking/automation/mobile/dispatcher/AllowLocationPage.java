@@ -3,8 +3,6 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
 
@@ -39,10 +37,6 @@ public class AllowLocationPage extends PageProperty {
             clickElement(allowLocationButtonIOS10);
             Thread.sleep(3000);
         }
-//        } else if (attributeName.equals("name")){
-//            TouchAction touchAction = new TouchAction(driver);
-//            touchAction.tap(PointOption.point(250, 400)).perform();
-//        }
     }
 
 }
