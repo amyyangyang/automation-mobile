@@ -60,7 +60,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+//    @Test
     public void theSecondLoadOfAll() {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
         if (isPresentLoad) {
