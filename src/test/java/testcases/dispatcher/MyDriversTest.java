@@ -17,7 +17,7 @@ public class MyDriversTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, Exception {
         setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
@@ -26,6 +26,7 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        Thread.sleep(40000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
@@ -50,7 +51,7 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     public void editDriverFirstName() throws InterruptedException {
-        myDriversPage.selectDriver();
+        myDriversPage.selectDriver("Sera");
         myDriversPage.selectField("Name");
         myDriversPage.editFirstName("SeraNew");
         myDriversPage.clickSaveButton();
@@ -65,7 +66,7 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     public void editDriverLastName() throws InterruptedException {
-        myDriversPage.selectDriver();
+        myDriversPage.selectDriver("Sera");
         myDriversPage.selectField("Name");
         myDriversPage.editLastName("AbeNew");
         myDriversPage.clickSaveButton();
@@ -80,16 +81,17 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     public void editDriverPhone() throws InterruptedException {
-        myDriversPage.selectDriver();
+        myDriversPage.selectDriver("Sera");
         myDriversPage.selectField("Phone");
         myDriversPage.editPhone("2343423111");
         myDriversPage.clickSaveButton();
-        Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("2343423111"));
-        System.out.println("New Phone is: " + myDriversPage.getSavedData("Phone"));
         myDriversPage.selectField("Phone");
+        Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
         myDriversPage.editPhone("2343423424");
         myDriversPage.clickSaveButton();
-        Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("2343423111") && myDriversPage.getSavedData("Phone").contains("2343423424"));
+        myDriversPage.selectField("Phone");
+        Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
+        myDriversPage.clickSaveButton();
         signInPage.clickBackButton();
     }
 

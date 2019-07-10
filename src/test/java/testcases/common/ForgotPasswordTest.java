@@ -10,14 +10,14 @@ import java.net.MalformedURLException;
 public class ForgotPasswordTest extends SetProperty {
 
     @BeforeClass
-    public static void setUp() throws InterruptedException, MalformedURLException {
+    public static void setUp() throws InterruptedException, MalformedURLException, Exception {
         setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         welcomePage.getWelcomePage();
     }
 
-    @Test
+//    @Test
     public void forgotPassword() throws InterruptedException {
         welcomePage.clickSignInButton();
         signInPage.clickForgotButton();
@@ -27,14 +27,14 @@ public class ForgotPasswordTest extends SetProperty {
         signInPage.clickEmailSentOKButton();
     }
 
-    @Test
+//    @Test
     public void getSignIn() {
         Assert.assertTrue(welcomePage.getTitle("Already have an account?").contains("Already"));
         welcomePage.clickSignInButton();
         Assert.assertTrue(welcomePage.getTitle("Welcome Back").contains("Welcome Back"));
     }
 
-    @Test
+//    @Test
     public void getSignUp() {
         welcomePage.clickSignUpButton();
         Assert.assertTrue(welcomePage.getTitle("Let's").contains("Let's"));

@@ -42,6 +42,7 @@ public abstract class SetProperty {
     public static AllowLocationPage allowLocationPage;
     public static AvailableLoadsAllPage availableLoadsAllPage;
     public static String attributeName;
+    public static String attributeValue;
 
 
     public static void setUpDriver() throws MalformedURLException, InterruptedException {
@@ -59,11 +60,13 @@ public abstract class SetProperty {
                         switch (prop.getProperty("platform.name")) {
                             case "android":
                                 attributeName = "text";
+                                attributeValue = "text";
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
                                 attributeName = "name";
+                                attributeValue = "value";
                                 capabilities.setCapability("waitForQuiescence", "false");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
