@@ -40,8 +40,9 @@ public abstract class PageProperty {
     public String getValue(String element, String titleText) {
         if (attributeName.equals("name")) {
             attributeValue = "value";
+        } else {
+            attributeValue = "text";
         }
-        attributeValue = "text";
         return driver.findElement(By.xpath(String.format(element, attributeValue, titleText))).getText();
     }
 
