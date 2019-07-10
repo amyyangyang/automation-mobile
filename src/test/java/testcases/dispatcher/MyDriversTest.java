@@ -17,7 +17,7 @@ public class MyDriversTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException, Exception {
+    public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
@@ -26,7 +26,6 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-//        Thread.sleep(40000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
@@ -86,6 +85,7 @@ public class MyDriversTest extends SetProperty {
         myDriversPage.editPhone("2343423111");
         myDriversPage.clickSaveButton();
         myDriversPage.selectField("Phone");
+        System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
         Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
         myDriversPage.editPhone("2343423424");
         myDriversPage.clickSaveButton();

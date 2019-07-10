@@ -21,7 +21,7 @@ public abstract class PageProperty {
         return driver.findElements(By.xpath(String.format(element, attributeName))).size();
     }
 
-    public void clickElement(String element) {
+    public void clickElement(String element){
         driver.findElement(By.xpath(String.format(element, attributeName))).click();
     }
 
@@ -41,6 +41,7 @@ public abstract class PageProperty {
         if (attributeName.equals("name")) {
             attributeValue = "value";
         }
+        attributeValue = "text";
         return driver.findElement(By.xpath(String.format(element, attributeValue, titleText))).getText();
     }
 

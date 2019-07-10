@@ -88,8 +88,9 @@ public class MyDriversPage extends PageProperty {
         clickElementByName(selectedDriver, driverName);
     }
 
-    public void selectField(String elementName){
+    public void selectField(String elementName) throws InterruptedException {
         clickElementByName(selectedField, elementName);
+        Thread.sleep(2000);
     }
 
     public void clickSaveButton() throws InterruptedException {

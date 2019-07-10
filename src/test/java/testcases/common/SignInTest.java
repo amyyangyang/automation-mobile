@@ -13,7 +13,7 @@ public class SignInTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException {
         setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
@@ -22,7 +22,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-//    @Test
+    @Test
     public void signInAsDispatcher() throws InterruptedException {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         Thread.sleep(3000);
@@ -31,7 +31,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-//    @Test
+    @Test
     public void signInAsDriver() throws InterruptedException {
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(3000);
@@ -40,7 +40,7 @@ public class SignInTest extends SetProperty {
     }
 
 
-//    @Test
+    @Test
     public void signInAsOwnerOperator() throws InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         Thread.sleep(3000);
