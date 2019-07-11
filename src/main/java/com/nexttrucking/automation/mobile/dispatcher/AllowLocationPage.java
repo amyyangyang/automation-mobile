@@ -20,20 +20,20 @@ public class AllowLocationPage extends PageProperty {
 
 
     public void clickOkAllowLocationButton() throws InterruptedException {
-        if (sizeOfElements(okAllowLocationButton)>0) {
+        if (sizeOfElements(okAllowLocationButton) > 0) {
             clickElement(okAllowLocationButton);
             Thread.sleep(3000);
         }
     }
 
     public void clickAllowLocationButton() throws InterruptedException {
-        if (attributeName.equals("text") && driver.findElements(By.xpath(allowLocationButtonAndroid)).size()>0) {
+        if (attributeName.equals("text") && driver.findElements(By.xpath(allowLocationButtonAndroid)).size() > 0) {
             driver.findElement(By.xpath(allowLocationButtonAndroid)).click();
             Thread.sleep(3000);
-        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS10)>0){
+        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS10) > 0) {
             clickElement(allowLocationButtonIOS10);
             Thread.sleep(3000);
-        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS12)>0){
+        } else if (attributeName.equals("name") && sizeOfElements(allowLocationButtonIOS12) > 0) {
             clickElement(allowLocationButtonIOS12);
             Thread.sleep(3000);
         }
