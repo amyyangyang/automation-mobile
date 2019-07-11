@@ -1,27 +1,40 @@
 package com.nexttrucking.automation.mobile.property;
 
+import io.appium.java_client.*;
+import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import java.time.Duration;
 
 public abstract class PageProperty {
+    private int width;
+    private int height;
+    public int nanos = (int) (2 * 1000);
+    public Duration duration = Duration.ofNanos(nanos);
 
     public PageProperty(AppiumDriver<MobileElement> driver, String attributeName) {
         this.driver = driver;
         this.attributeName = attributeName;
+        width = driver.manage().window().getSize().width;
+        height = driver.manage().window().getSize().height;
     }
 
     public String attributeName;
     public String attributeValue;
     public AppiumDriver<MobileElement> driver;
 
-    public int sizeOfElements(String element){
+    public int sizeOfElements(String element) {
         return driver.findElements(By.xpath(String.format(element, attributeName))).size();
     }
 
-    public void clickElement(String element){
+    public void clickElement(String element) {
         driver.findElement(By.xpath(String.format(element, attributeName))).click();
     }
 
@@ -46,7 +59,7 @@ public abstract class PageProperty {
         return driver.findElement(By.xpath(String.format(element, attributeValue, titleText))).getText();
     }
 
-    public void clickMenu(String element, String menuName){
+    public void clickMenu(String element, String menuName) {
         driver.findElement(By.xpath(String.format(element, attributeName, menuName))).click();
     }
 
@@ -61,7 +74,6 @@ public abstract class PageProperty {
     public void selectRadioButton(String element, String radioButtonName){
         driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
     }
-
     public void deleteValueForAndroid(String element) throws InterruptedException {
         driver.findElement(By.xpath(String.format(element, attributeName))).clear();
     }
@@ -95,5 +107,43 @@ public abstract class PageProperty {
             sendKeyToElement(inputFieldForAndroid, newValue);
         }
     }
+
+    public String getElementText(String locator, String element) {
+        if (locator.equals("id")) {
+            return driver.findElementByAccessibilityId(element).getText();
+        } else {
+            return driver.findElement(By.xpath(String.format(element, attributeName))).getText();
+        }
+    }
+
+    public MobileElement getElement(String element) {
+        return driver.findElement(By.xpath(String.format(element, attributeName)));
+    }
+
+    public boolean isElementPresent(String locator, String element) {
+        try {
+            if (locator.equals("id")) {
+                driver.findElementByAccessibilityId(element);
+            } else {
+                driver.findElement(By.xpath(String.format(element, attributeName)));
+            }
+            return true;
+        } catch (NoSuchElementException exception) {
+            return false;
+        }
+    }
+
+    public void swipeToUp() {
+        try {
+            new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).
+                    waitAction(WaitOptions.waitOptions(duration)).
+                    moveTo(PointOption.point(0, height / 4)).release().perform();
+            Thread.sleep(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
