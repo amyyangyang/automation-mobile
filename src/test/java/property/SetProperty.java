@@ -111,8 +111,10 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
                                 capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
-                                capabilities.setCapability("waitForQuiescence", "false");
-                                capabilities.setCapability("resetOnSessionStartOnly", "false");
+                                capabilities.setCapability("waitForQuiescence", false);
+                                capabilities.setCapability("resetOnSessionStartOnly", false);
+                                capabilities.setCapability("xcodeOrgID", "mobile@nexttrucking.com");
+                                capabilities.setCapability("xcodeSigningID", "iPhone Developer");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }

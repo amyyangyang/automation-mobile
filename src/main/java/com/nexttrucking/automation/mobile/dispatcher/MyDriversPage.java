@@ -3,7 +3,7 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-
+import org.openqa.selenium.By;
 
 
 public class MyDriversPage extends PageProperty {
@@ -18,6 +18,19 @@ public class MyDriversPage extends PageProperty {
     private String phoneNumberInput = "createAccount_input_phone";
     private String sendInviteButton = "(//*[@%s='Send Invite'])[last()]";
     private String firstDriver = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+    private String selectedDriver = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+    private String selectedField = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+    private String saveButtonAndroid = "(//*[contains(@%s, 'Save')])[last()]/..";
+    private String saveButtoniOS = "(//*[contains(@%s, 'Save')])[last()]";
+    private String editFirstNameInputForiOS = "(//*[contains(@%s, 'First')]/following-sibling::*)[1]";
+    private String editFirstNameInputForAndroid = "(//*[contains(@%s, 'First')]/following-sibling::*)[2]";
+    private String editLastNameInputForiOS = "(//*[contains(@%s, 'Last')]/following-sibling::*)[1]";
+    private String editLastNameInputForAndroid = "(//*[contains(@%s, 'Last')]/following-sibling::*)[2]";
+    private String editPhoneInputForiOS = "(//*[contains(@name, 'Phone')]/*/*)[last()]";
+    private String editPhoneInputForAndroid = "(//*[contains(@%s, 'Phone')]/following-sibling::*)[1]";
+    private String editedData = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+
+
 
     public MyDriversPage(AppiumDriver< MobileElement > driver, String attributeName) {
         super(driver, attributeName);
@@ -70,4 +83,53 @@ public class MyDriversPage extends PageProperty {
     public String getFirstDriverName(String driverFirstName){
         return getText(firstDriver, driverFirstName);
     }
+
+    public void selectDriver(String driverName){
+        clickElementByName(selectedDriver, driverName);
+    }
+
+    public void selectField(String elementName) throws InterruptedException {
+        clickElementByName(selectedField, elementName);
+        Thread.sleep(2000);
+    }
+
+    public void clickSaveButton() throws InterruptedException {
+        clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
+        Thread.sleep(2000);
+    }
+
+    public void editFirstName(String newFirstName) throws InterruptedException {
+        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", 1);
+    }
+
+    public void editLastName(String newLastName) throws InterruptedException {
+        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", 2);
+    }
+
+    public void editPhone(String newPhone) throws InterruptedException {
+        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", 2);
+    }
+
+    public String getSavedData(String dataName) {
+        String newString = null;
+        switch (dataName) {
+            case "FirstName":
+                newString = getText(editedData, "Sera");
+                break;
+            case "LastName":
+                newString = getText(editedData, "Abe");
+                break;
+            case "Phone":
+                newString = getValue(editedData, "234");
+                break;
+            case "Email":
+                newString = getText(editedData, "sergii");
+                break;
+            case "Equipment":
+                newString = getText(editedData, "48");
+                break;
+        }
+        return newString;
+    }
+
 }
