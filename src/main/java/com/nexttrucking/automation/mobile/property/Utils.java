@@ -1,4 +1,4 @@
-package com.nexttrucking.automation.mobile.common;
+package com.nexttrucking.automation.mobile.property;
 
 import java.util.ArrayList;
 import java.util.List;
