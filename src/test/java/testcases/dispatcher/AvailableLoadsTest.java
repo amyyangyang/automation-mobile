@@ -40,7 +40,7 @@ public class AvailableLoadsTest extends SetProperty {
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulNumber)));
             Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
+            //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
@@ -62,7 +62,7 @@ public class AvailableLoadsTest extends SetProperty {
                 availableLoadsAllPage.swipeToUp();
                 Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
-                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
+                //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originAddress")));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
@@ -88,7 +88,7 @@ public class AvailableLoadsTest extends SetProperty {
         if (isPresentLoad) {
             Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
+            //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
@@ -116,7 +116,7 @@ public class AvailableLoadsTest extends SetProperty {
         if (isPresentLoad) {
             Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
+            //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
@@ -144,7 +144,7 @@ public class AvailableLoadsTest extends SetProperty {
         if (isPresentLoad) {
             Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
+            //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
