@@ -26,7 +26,7 @@ public class AvailableLoadsTest extends SetProperty {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
-//    @Test
+    @Test
     public void AvailableLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton), "All");
@@ -53,7 +53,7 @@ public class AvailableLoadsTest extends SetProperty {
             }
     }
 
-//    @Test
+    @Test
     public void theSecondLoadOfAll() {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
@@ -71,7 +71,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
     }
 
-//    @Test
+    @Test
     public void theFirstLoadOfLocal() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.localButton);
         boolean isPresentMessage=availableLoadsAllPage.isElementPresent("path",availableLoadsAllPage.localHaulMile);
@@ -99,7 +99,7 @@ public class AvailableLoadsTest extends SetProperty {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.allButton);
     }
 
-//    @Test
+    @Test
     public void theFirstLoadOfShortHaul() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.shortHaulButton);
         boolean isPresentMessage=availableLoadsAllPage.isElementPresent("path",availableLoadsAllPage.shortHaulMile);
@@ -127,7 +127,7 @@ public class AvailableLoadsTest extends SetProperty {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.allButton);
     }
 
-//    @Test
+    @Test
     public void theFirstLoadOfLongHaul() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.longHaulButton);
         boolean isPresentMessage=availableLoadsAllPage.isElementPresent("path",availableLoadsAllPage.longHaulMile);
@@ -156,7 +156,7 @@ public class AvailableLoadsTest extends SetProperty {
 
     }
 
-//    @Test
+    @Test
     public void filterPage() throws InterruptedException {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.buttonMap.get("filterButton"));
 //        Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.buttonMap.get("reeferRadio")).isSelected());
