@@ -1,9 +1,13 @@
 package testcases.common;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
-import org.junit.*;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import property.SetProperty;
+
 import java.net.MalformedURLException;
 
 

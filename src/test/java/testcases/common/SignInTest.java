@@ -26,7 +26,7 @@ public class SignInTest extends SetProperty {
     public void signInAsDispatcher() throws InterruptedException {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getElementText("id", "ALL").contains("All"));
+        Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
     }
 
@@ -44,7 +44,7 @@ public class SignInTest extends SetProperty {
     public void signInAsOwnerOperator() throws InterruptedException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getElementText("id", "ALL").contains("All"));
+        Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
         Thread.sleep(3000);
     }
 

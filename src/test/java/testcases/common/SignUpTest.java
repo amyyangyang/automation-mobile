@@ -45,8 +45,7 @@ public class SignUpTest extends SetProperty {
 
     }
 
-
-    //    @Test
+//    @Test
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));
@@ -67,6 +66,13 @@ public class SignUpTest extends SetProperty {
 
         //here some build should be added to delete created account from AdminPortal
 
+    }
+
+    @After
+    public void logOut() throws InterruptedException {
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
     }
 
 

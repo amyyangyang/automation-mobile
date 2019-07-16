@@ -26,13 +26,12 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        Thread.sleep(3000);
+        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
 
 //    @Test
     public void addDriver() throws InterruptedException {
-        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
         myDriversPage.typePassword(getTestData("driverAddPassword"));
@@ -45,7 +44,58 @@ public class MyDriversTest extends SetProperty {
         myDriversPage.typeLastName(getTestData("driveLastName"));
         myDriversPage.typePhoneNumber(getTestData("drivePhoneNumber"));
         myDriversPage.clickSignUpButton();
-        Thread.sleep(5000);
         Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }
+
+
+    @Test
+    public void editDriverFirstName() throws InterruptedException {
+        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectField("Name");
+        myDriversPage.editFirstName("SeraNew");
+        myDriversPage.clickSaveButton();
+        Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
+        myDriversPage.selectField("Name");
+        myDriversPage.editFirstName("Sera");
+        myDriversPage.clickSaveButton();
+        Assert.assertTrue(!myDriversPage.getSavedData("FirstName").contains("SeraNew") && myDriversPage.getSavedData("FirstName").contains("Sera"));
+        signInPage.clickBackButton();
+    }
+
+
+    @Test
+    public void editDriverLastName() throws InterruptedException {
+        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectField("Name");
+        myDriversPage.editLastName("AbeNew");
+        myDriversPage.clickSaveButton();
+        Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
+        myDriversPage.selectField("Name");
+        myDriversPage.editLastName("Abe");
+        myDriversPage.clickSaveButton();
+        Assert.assertTrue(!myDriversPage.getSavedData("LastName").contains("AbeNew") && myDriversPage.getSavedData("LastName").contains("Abe"));
+        signInPage.clickBackButton();
+    }
+
+
+    @Test
+    public void editDriverPhone() throws InterruptedException {
+        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectField("Phone");
+        myDriversPage.editPhone("2343423111");
+        myDriversPage.clickSaveButton();
+        myDriversPage.selectField("Phone");
+        System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
+        Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
+        myDriversPage.editPhone("2343423424");
+        myDriversPage.clickSaveButton();
+        myDriversPage.selectField("Phone");
+        Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
+        myDriversPage.clickSaveButton();
+        signInPage.clickBackButton();
+    }
+
+
+
+
 }
