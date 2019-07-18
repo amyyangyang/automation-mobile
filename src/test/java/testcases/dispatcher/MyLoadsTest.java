@@ -33,20 +33,21 @@ public class MyLoadsTest extends SetProperty {
     @Test
     public void MyLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
-        boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
-        if (isPresentLoad) {
-            Assert.assertThat(Utils.jobStateList, hasItem(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobState"))));
-            Assert.assertNotNull(myloadsPage.getElementText("path",myloadsPage.myLoadsCardMap.get("jobNum")));
-            Assert.assertTrue(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("payout")).contains("$"));
-            Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("originationAddress")));
-            Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("destinationAddress")));
-            Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("pickupTime")));
-            Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("deliveryTime")));
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+        if (attributeName.equals("text")) {
+            boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                Assert.assertThat(Utils.jobStateList, hasItem(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobState"))));
+                Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobNum")));
+                Assert.assertTrue(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("payout")).contains("$"));
+                Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("originationAddress")));
+                Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("destinationAddress")));
+                Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("pickupTime")));
+                Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("deliveryTime")));
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Go claim some loads in the \"Available Loads\" section and get loaded.");
             }
+        }
     }
-
 }
 
 
