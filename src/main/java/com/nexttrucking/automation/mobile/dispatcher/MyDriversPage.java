@@ -100,7 +100,6 @@ public class MyDriversPage extends PageProperty {
 
     public void editFirstName(String newFirstName) throws InterruptedException {
         editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", 1);
-        System.out.println("Written data is: " + getWrittenData("FirstName"));
         while (!getWrittenData("FirstName").contains(newFirstName)) {
             editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", 1);
         }
@@ -108,18 +107,19 @@ public class MyDriversPage extends PageProperty {
 
     public void editLastName(String newLastName) throws InterruptedException {
         editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", 2);
-        System.out.println("Written data is: " + getWrittenData("LastName"));
         while (!getWrittenData("LastName").contains(newLastName)) {
             editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", 1);
         }
     }
 
     public void editPhone(String newPhone) throws InterruptedException {
+        int round = 2;
         editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", 2);
         String newPhoneNumber = newPhone.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
-        System.out.println("Written data is: " + getWrittenData("Phone"));
         while (!getWrittenData("Phone").contains(newPhoneNumber)) {
             editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", 1);
+            System.out.println("ROUND NUMBER IS: " + round);
+            round++;
         }
     }
 

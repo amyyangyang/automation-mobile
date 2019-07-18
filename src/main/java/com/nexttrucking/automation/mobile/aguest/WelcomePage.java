@@ -22,7 +22,7 @@ public class WelcomePage extends PageProperty {
 
 
     public void clickAllowNotificationsButton() throws InterruptedException {
-        if (attributeName.equals("name") && sizeOfElements(allowButton)>0) {
+        if (attributeName.equals("name") && isElementPresent("path", allowButton)) {
             clickElement(allowButton);
         }
     }
@@ -32,9 +32,9 @@ public class WelcomePage extends PageProperty {
     }
 
     public void clickSaveButton() {
-        if (sizeOfElements(saveButton)>0){
+//        if (isElementPresent("path", saveButton)){
             clickElement(saveButton);
-        }
+//        }
     }
 
     public SignInPage clickSignInButton() {

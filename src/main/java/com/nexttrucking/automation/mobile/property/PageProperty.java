@@ -6,10 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
 import java.time.Duration;
 
@@ -149,6 +146,8 @@ public abstract class PageProperty {
             }
             return true;
         } catch (NoSuchElementException exception) {
+            return false;
+        } catch (WebDriverException exception) {
             return false;
         }
     }
