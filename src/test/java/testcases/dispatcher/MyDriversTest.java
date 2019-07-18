@@ -26,6 +26,7 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        Thread.sleep(30000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
@@ -48,9 +49,9 @@ public class MyDriversTest extends SetProperty {
     }
 
 
-    @Test
+//    @Test
     public void editDriverFirstName() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectFirstDriver();
         myDriversPage.selectField("Name");
         myDriversPage.editFirstName("SeraNew");
         myDriversPage.clickSaveButton();
@@ -63,9 +64,9 @@ public class MyDriversTest extends SetProperty {
     }
 
 
-    @Test
+//    @Test
     public void editDriverLastName() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectFirstDriver();
         myDriversPage.selectField("Name");
         myDriversPage.editLastName("AbeNew");
         myDriversPage.clickSaveButton();
@@ -80,22 +81,43 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     public void editDriverPhone() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
+        myDriversPage.selectFirstDriver();
         myDriversPage.selectField("Phone");
+
+//
+        myDriversPage.editFirstName("SeraNew");
+        myDriversPage.editLastName("AbeNew");
+//
+
         myDriversPage.editPhone("2343423111");
         myDriversPage.clickSaveButton();
+
+//
+        Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
+        Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
+//
+
+
         myDriversPage.selectField("Phone");
         System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
+
+//
+        myDriversPage.editFirstName("Sera");
+        myDriversPage.editLastName("Abe");
+//
+
         Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
         myDriversPage.editPhone("2343423424");
         myDriversPage.clickSaveButton();
+
+//
+        Assert.assertTrue(!myDriversPage.getSavedData("FirstName").contains("SeraNew") && myDriversPage.getSavedData("FirstName").contains("Sera"));
+        Assert.assertTrue(!myDriversPage.getSavedData("LastName").contains("AbeNew") && myDriversPage.getSavedData("LastName").contains("Abe"));
+//
+
         myDriversPage.selectField("Phone");
         Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
         myDriversPage.clickSaveButton();
         signInPage.clickBackButton();
     }
-
-
-
-
 }

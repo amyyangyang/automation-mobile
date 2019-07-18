@@ -71,6 +71,14 @@ public abstract class PageProperty {
         }
     }
 
+    public String getElementTextWithDifferentLocator(String androidElement, String iOSElement){
+        if (attributeName.equals("text")) {
+            return driver.findElement(By.xpath(androidElement)).getText();
+        } else {
+            return driver.findElement(By.xpath(iOSElement)).getText();
+        }
+    }
+
     public void selectRadioButton(String element, String radioButtonName){
         driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
     }

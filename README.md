@@ -46,10 +46,12 @@ Note: Do not forget set up environment variables if required.
    3. Run project on MS AppCenter (you should change path to your APP file). To run project on MS AppCenter we should create package first (paragraph 1):
 
     for iOS
-      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "D:\app\NEXT DEV.ipa_2.0.5.ipa"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "D:\app\NEXT DEV.ipa_2.0.6.ipa"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "/Users/nexttrucking/NEXT DEV.ipa_2.0.6.ipa"  --test-series "master" --locale "en_US" --build-dir target/upload
 
     for Android
-      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-Android" --devices 7807b566 --app-path "D:\app\NEXT DEV.apk_2.0.5.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-Android" --devices 7807b566 --app-path "D:\app\NEXT DEV.apk_2.0.6.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NEXT_DEV/NEXTTrucking-Android" --devices 7807b566 --app-path "/Users/nexttrucking/NEXT DEV.apk_2.0.6.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
 
 
 Depend on value of PLATFORM_NAME variable we can choose platform (android or ios) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
