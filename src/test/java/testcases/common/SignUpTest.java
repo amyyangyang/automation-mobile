@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import org.junit.*;
+import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
@@ -23,6 +24,7 @@ public class SignUpTest extends SetProperty {
     }
 
 //    @Test
+    @Tag("Write")
     public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
@@ -46,6 +48,7 @@ public class SignUpTest extends SetProperty {
     }
 
 //    @Test
+    @Tag("Write")
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));

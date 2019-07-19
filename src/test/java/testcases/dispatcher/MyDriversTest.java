@@ -8,6 +8,7 @@ import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
@@ -31,6 +32,7 @@ public class MyDriversTest extends SetProperty {
 
 
 //    @Test
+    @Tag("Write")
     public void addDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
