@@ -8,6 +8,7 @@ import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
@@ -31,6 +32,7 @@ public class MyDriversTest extends SetProperty {
 
 
 //    @Test
+    @Tag("write")
     public void addDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
@@ -90,4 +92,20 @@ public class MyDriversTest extends SetProperty {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }
     }
+
+
+    @Test
+    public void editDriverEmail() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Email");
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "You").contains("You can't edit"));
+            myDriversPage.clickDarnOkButton();
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
 }

@@ -3,6 +3,8 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 
 
 public class MyDriversPage extends PageProperty {
@@ -131,6 +133,19 @@ public class MyDriversPage extends PageProperty {
             return selectedDriverForAndroid;
         } else {
             return selectedDriverForiOS;
+        }
+    }
+
+    public String getAnyTitle() {
+        return editedData;
+    }
+
+    public void clickDarnOkButton() {
+        if (attributeName.equals("text")) {
+            clickElementByName(editedData, "OK");
+        } else if (attributeName.equals("name")) {
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point(190, 615)).perform();
         }
     }
 

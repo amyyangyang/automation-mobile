@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import org.junit.*;
+import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
@@ -23,6 +24,7 @@ public class SignUpTest extends SetProperty {
     }
 
 //    @Test
+    @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
@@ -40,12 +42,12 @@ public class SignUpTest extends SetProperty {
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
         signUpPage.clickCloseButton();
-
         //here some build should be added to delete created account from AdminPortal
 
     }
 
 //    @Test
+    @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));

@@ -32,9 +32,9 @@ public class WelcomePage extends PageProperty {
     }
 
     public void clickSaveButton() {
-//        if (isElementPresent("path", saveButton)){
+        if (isElementPresent("path", saveButton)){
             clickElement(saveButton);
-//        }
+        }
     }
 
     public SignInPage clickSignInButton() {
