@@ -90,4 +90,20 @@ public class MyDriversTest extends SetProperty {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }
     }
+
+
+    @Test
+    public void editDriverEmail() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Email");
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "You").contains("You can't edit"));
+            myDriversPage.clickDarnOkButton();
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
 }
