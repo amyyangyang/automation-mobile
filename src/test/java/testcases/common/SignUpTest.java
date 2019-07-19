@@ -24,7 +24,7 @@ public class SignUpTest extends SetProperty {
     }
 
 //    @Test
-    @Tag("Write")
+    @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
@@ -42,13 +42,12 @@ public class SignUpTest extends SetProperty {
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
         signUpPage.clickCloseButton();
-
         //here some build should be added to delete created account from AdminPortal
 
     }
 
 //    @Test
-    @Tag("Write")
+    @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));
