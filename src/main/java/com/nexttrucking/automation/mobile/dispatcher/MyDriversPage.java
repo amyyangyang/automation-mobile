@@ -30,6 +30,8 @@ public class MyDriversPage extends PageProperty {
     private String editPhoneInputForAndroid = "(//*[contains(@text, 'Phone')]/following-sibling::*)[1]";
     private String editedData = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String addDriverTitle = "//*[contains(@%s, 'You')]";
+    private String loadDriverInfo = "//*[contains(@text, 'load')]";
+    private String earnedDriverInfo = "//*[contains(@text, 'earned')]";
 
 
 
@@ -134,6 +136,14 @@ public class MyDriversPage extends PageProperty {
 
     public String getAddDriverTitle() {
         return addDriverTitle;
+    }
+
+    public String getDriverLoadInfo() {
+        return getElementTextWithDifferentLocator(loadDriverInfo, selectedDriverForiOS);
+    }
+
+    public String getDriverEarnedInfo() {
+        return getElementTextWithDifferentLocator(earnedDriverInfo, selectedDriverForiOS);
     }
 
     public String getWrittenData(String dataName) {

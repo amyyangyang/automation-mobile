@@ -49,6 +49,19 @@ public class MyDriversTest extends SetProperty {
 
 
     @Test
+    public void checkDriverList() {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            Assert.assertTrue(myDriversPage.getDriverLoadInfo().contains("load"));
+            Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("earned"));
+            Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("$"));
+        } else {
+        Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
+
+    @Test
     public void editDriverInfo() throws InterruptedException {
         boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
         if (isDriversExist) {
