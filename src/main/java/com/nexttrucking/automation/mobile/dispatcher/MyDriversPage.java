@@ -29,6 +29,7 @@ public class MyDriversPage extends PageProperty {
     private String editPhoneInputForiOS = "(//*[contains(@name, 'Phone')]/*/*)[last()]";
     private String editPhoneInputForAndroid = "(//*[contains(@text, 'Phone')]/following-sibling::*)[1]";
     private String editedData = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+    private String addDriverTitle = "//*[contains(@%s, 'You')]";
 
 
 
@@ -123,7 +124,19 @@ public class MyDriversPage extends PageProperty {
         }
     }
 
-    public String getWrittenData(String dataName){
+    public String getDrivers() {
+        if (attributeName.equals("text")) {
+            return selectedDriverForAndroid;
+        } else {
+            return selectedDriverForiOS;
+        }
+    }
+
+    public String getAddDriverTitle() {
+        return addDriverTitle;
+    }
+
+    public String getWrittenData(String dataName) {
         String newString = null;
         switch (dataName) {
             case "FirstName":
