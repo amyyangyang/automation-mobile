@@ -27,7 +27,6 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-//        Thread.sleep(30000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
@@ -120,6 +119,28 @@ public class MyDriversTest extends SetProperty {
             myDriversPage.clickSaveButton();
             signInPage.clickBackButton();
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
+    @Test
+    public void editDriverEquipment() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Equipment");
+            myDriversPage.selectDriverType("Reefer");
+            myDriversPage.clickContinueButton();
+            myDriversPage.selectDriverSize("53");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(myDriversPage.isEquipmentEdited());
+            myDriversPage.selectField("Equipment");
+            myDriversPage.selectDriverType("Flatbed");
+            myDriversPage.clickContinueButton();
+            myDriversPage.selectDriverSize("48");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(myDriversPage.isEquipmentFixed());
         } else {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }

@@ -47,7 +47,8 @@ public abstract class PageProperty {
         if (attributeName.equals("text")) {
             driver.findElement(By.xpath(androidElement)).sendKeys(keys);
         } else {
-            driver.findElement(By.xpath(iOSElement)).sendKeys(keys);        }
+            driver.findElement(By.xpath(iOSElement)).sendKeys(keys);
+        }
     }
 
     public String getText(String element, String titleText) {

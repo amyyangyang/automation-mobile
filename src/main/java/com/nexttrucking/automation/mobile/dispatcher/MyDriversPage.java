@@ -36,6 +36,10 @@ public class MyDriversPage extends PageProperty {
     private String earnedDriverInfo = "//*[contains(@text, 'earned')]";
     private String newPasswordInputForiOS = "//*[contains(@name, 'New Password')]/*/XCUIElementTypeSecureTextField";
     private String newPasswordInputForAndroid = "//*[contains(@text, 'New')]/following-sibling::*[1]";
+    private String editedEquipmentForiOS = "(//*[contains(@name, 'Equipment')])[last()]";
+    private String editedEquipmentForAndroid = "//*[contains(@text, '53 ft Reefer')]";
+    private String fixedEquipmentForiOS = "//*[contains(@name, 'Equipment')]";
+    private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
 
 
 
@@ -203,6 +207,22 @@ public class MyDriversPage extends PageProperty {
 
     public void typeNewPassword(String keys) {
         sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForiOS, keys);
+    }
+
+    public boolean isEquipmentEdited(){
+        if (attributeName.equals("text")) {
+            return isElementPresent("path", editedEquipmentForAndroid);
+        } else  {
+            return isElementPresent("path", editedEquipmentForiOS);
+        }
+    }
+
+    public boolean isEquipmentFixed(){
+        if (attributeName.equals("text")) {
+            return isElementPresent("path", fixedEquipmentForAndroid);
+        } else  {
+            return isElementPresent("path", fixedEquipmentForiOS);
+        }
     }
 
 }
