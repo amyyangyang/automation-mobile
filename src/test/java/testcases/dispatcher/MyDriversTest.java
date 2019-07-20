@@ -141,6 +141,28 @@ public class MyDriversTest extends SetProperty {
             myDriversPage.selectDriverSize("48");
             myDriversPage.clickSaveButton();
             Assert.assertTrue(myDriversPage.isEquipmentFixed());
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
+    @Test
+    public void editDriverPriceVisibility() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Edit");
+            myDriversPage.selectPriceVisibilityRadio("Show");
+            myDriversPage.selectPriceVisibilityRadio("Save");
+            Thread.sleep(3000);
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
+            myDriversPage.selectField("Edit");
+            myDriversPage.selectPriceVisibilityRadio("Hide");
+            myDriversPage.selectPriceVisibilityRadio("Save");
+            Thread.sleep(3000);
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver won't see the price"));
+            signInPage.clickBackButton();
         } else {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }

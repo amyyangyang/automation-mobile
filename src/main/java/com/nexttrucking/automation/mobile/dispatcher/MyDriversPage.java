@@ -69,6 +69,8 @@ public class MyDriversPage extends PageProperty {
         selectRadioButton(radioButtonElement, driverType);
     }
 
+
+
     public void selectDriverSize(String driverSize){
         selectRadioButton(radioButtonElement, driverSize);
     }
@@ -154,6 +156,22 @@ public class MyDriversPage extends PageProperty {
             touchAction.tap(PointOption.point(190, 615)).perform();
         }
     }
+
+    public void selectPriceVisibilityRadio(String radioButton) {
+        if (attributeName.equals("text")) {
+            clickElementByName(editedData, radioButton);
+        } else if (attributeName.equals("name")) {
+            TouchAction touchAction = new TouchAction(driver);
+            if (radioButton.equals("Hide")) {
+                touchAction.tap(PointOption.point(190, 480)).perform();
+            } else if (radioButton.equals("Show")) {
+                touchAction.tap(PointOption.point(190, 550)).perform();
+            } else if (radioButton.equals("Save")) {
+                touchAction.tap(PointOption.point(190, 615)).perform();
+            }
+        }
+    }
+
 
     public String getAddDriverTitle() {
         return addDriverTitle;
