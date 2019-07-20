@@ -141,6 +141,7 @@ public class MyDriversTest extends SetProperty {
             myDriversPage.selectDriverSize("48");
             myDriversPage.clickSaveButton();
             Assert.assertTrue(myDriversPage.isEquipmentFixed());
+            signInPage.clickBackButton();
         } else {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }
