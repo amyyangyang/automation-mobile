@@ -2,7 +2,7 @@ package testcases.dispatcher;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
-import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
+//import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -19,7 +19,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AvailableLoadsTest extends SetProperty {
-    public static JobDetailPage jobDetailPage;
+    //public static JobDetailPage jobDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -28,7 +28,7 @@ public class AvailableLoadsTest extends SetProperty {
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        jobDetailPage = new JobDetailPage(driver, attributeName);
+        //jobDetailPage = new JobDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
@@ -69,7 +69,7 @@ public class AvailableLoadsTest extends SetProperty {
                 Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("jobType"))));
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("equipmentType"))));
                 //Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("payout")).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originAddress")));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("originationAddress")));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("destinationAddress")));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("pickupTime")));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.availableCardMap.get("deliveryTime")));

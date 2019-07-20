@@ -63,7 +63,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             availableCardMap.put("deliveryTime","//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
             availableCardMap.put("payout","//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
             availableCardMap.put("numberOfLoad","//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
-            availableCardMap.put("numberOfLoadTwo","//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]");
+            //availableCardMap.put("numberOfLoadTwo","//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]");
         } else {
             buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
             buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
@@ -72,15 +72,15 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("flatbedRadio", "(//*[contains(@name, 'Flatbed')])[last()]");
             buttonMap.put("powerOnlyRadio", "(//*[contains(@name, 'Power Only')])[last()]");
             buttonMap.put("boxTruckRadio", "(//*[contains(@name, 'Box Truck')])[last()]");
-            availableCardMap.put("jobType","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]");
-            availableCardMap.put("equipmentType","(//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[1])[last()]");
-            availableCardMap.put("originationAddress","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
-            availableCardMap.put("destinationAddress","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]");
-            availableCardMap.put("pickupTime","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
-            availableCardMap.put("deliveryTime","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[2]");
-            availableCardMap.put("payout","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
-            availableCardMap.put("numberOfLoad","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
-            availableCardMap.put("numberOfLoadTwo","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
+            availableCardMap.put("jobType","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
+            availableCardMap.put("equipmentType","(//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[1])[last()]");
+            availableCardMap.put("originationAddress","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
+            availableCardMap.put("destinationAddress","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]");
+            availableCardMap.put("pickupTime","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
+            availableCardMap.put("deliveryTime","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[2]");
+            availableCardMap.put("payout","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
+            availableCardMap.put("numberOfLoad","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
+            //availableCardMap.put("numberOfLoadTwo","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
 
         }
     }
