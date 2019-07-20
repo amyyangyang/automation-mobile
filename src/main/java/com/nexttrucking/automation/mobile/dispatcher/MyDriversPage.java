@@ -34,6 +34,12 @@ public class MyDriversPage extends PageProperty {
     private String addDriverTitle = "//*[contains(@%s, 'You')]";
     private String loadDriverInfo = "//*[contains(@text, 'load')]";
     private String earnedDriverInfo = "//*[contains(@text, 'earned')]";
+    private String newPasswordInputForiOS = "//*[contains(@name, 'New Password')]/*/XCUIElementTypeSecureTextField";
+    private String newPasswordInputForAndroid = "//*[contains(@text, 'New')]/following-sibling::*[1]";
+    private String editedEquipmentForiOS = "(//*[contains(@name, 'Equipment')])[last()]";
+    private String editedEquipmentForAndroid = "//*[contains(@text, '53 ft Reefer')]";
+    private String fixedEquipmentForiOS = "//*[contains(@name, 'Equipment')]";
+    private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
 
 
 
@@ -62,6 +68,8 @@ public class MyDriversPage extends PageProperty {
     public void selectDriverType(String driverType){
         selectRadioButton(radioButtonElement, driverType);
     }
+
+
 
     public void selectDriverSize(String driverSize){
         selectRadioButton(radioButtonElement, driverSize);
@@ -149,6 +157,22 @@ public class MyDriversPage extends PageProperty {
         }
     }
 
+    public void selectPriceVisibilityRadio(String radioButton) {
+        if (attributeName.equals("text")) {
+            clickElementByName(editedData, radioButton);
+        } else if (attributeName.equals("name")) {
+            TouchAction touchAction = new TouchAction(driver);
+            if (radioButton.equals("Hide")) {
+                touchAction.tap(PointOption.point(190, 480)).perform();
+            } else if (radioButton.equals("Show")) {
+                touchAction.tap(PointOption.point(190, 550)).perform();
+            } else if (radioButton.equals("Save")) {
+                touchAction.tap(PointOption.point(190, 615)).perform();
+            }
+        }
+    }
+
+
     public String getAddDriverTitle() {
         return addDriverTitle;
     }
@@ -197,6 +221,26 @@ public class MyDriversPage extends PageProperty {
                 break;
         }
         return newString;
+    }
+
+    public void typeNewPassword(String keys) {
+        sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForiOS, keys);
+    }
+
+    public boolean isEquipmentEdited(){
+        if (attributeName.equals("text")) {
+            return isElementPresent("path", editedEquipmentForAndroid);
+        } else  {
+            return isElementPresent("path", editedEquipmentForiOS);
+        }
+    }
+
+    public boolean isEquipmentFixed(){
+        if (attributeName.equals("text")) {
+            return isElementPresent("path", fixedEquipmentForAndroid);
+        } else  {
+            return isElementPresent("path", fixedEquipmentForiOS);
+        }
     }
 
 }
