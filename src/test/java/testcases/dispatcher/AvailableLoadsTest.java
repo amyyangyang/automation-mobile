@@ -33,7 +33,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void CheckAvailableLoadPage() {
+    public void checkAvailableLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton), "All");
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localButton), "Local");
@@ -60,7 +60,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void theSecondLoadOfAll() {
+    public void checkSecondLoadOfAll() {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
@@ -78,7 +78,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void CheckFirstLoadOfLocal() {
+    public void checkFirstLoadOfLocal() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.localButton);
         boolean isPresentMessage = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.localHaulMile);
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
@@ -101,7 +101,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void CheckFirstLoadOfShortHaul() {
+    public void checkFirstLoadOfShortHaul() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.shortHaulButton);
         boolean isPresentMessage = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.shortHaulMile);
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
@@ -124,7 +124,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void CheckFirstLoadOfLongHaul() {
+    public void checkFirstLoadOfLongHaul() {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.longHaulButton);
         boolean isPresentMessage = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.longHaulMile);
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
