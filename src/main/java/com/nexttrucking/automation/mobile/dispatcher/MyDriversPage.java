@@ -34,6 +34,8 @@ public class MyDriversPage extends PageProperty {
     private String addDriverTitle = "//*[contains(@%s, 'You')]";
     private String loadDriverInfo = "//*[contains(@text, 'load')]";
     private String earnedDriverInfo = "//*[contains(@text, 'earned')]";
+    private String newPasswordInputForiOS = "//*[contains(@name, 'New Password')]/*/XCUIElementTypeSecureTextField";
+    private String newPasswordInputForAndroid = "//*[contains(@text, 'New')]/following-sibling::*[1]";
 
 
 
@@ -197,6 +199,10 @@ public class MyDriversPage extends PageProperty {
                 break;
         }
         return newString;
+    }
+
+    public void typeNewPassword(String keys) {
+        sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForiOS, keys);
     }
 
 }

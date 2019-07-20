@@ -27,6 +27,7 @@ public class MyDriversTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        Thread.sleep(30000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 
@@ -103,6 +104,22 @@ public class MyDriversTest extends SetProperty {
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "You").contains("You can't edit"));
             myDriversPage.clickDarnOkButton();
             signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
+
+    @Test
+    public void editDriverPassword() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Password");
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Edit").contains("Edit Password"));
+            myDriversPage.typeNewPassword("111111");
+            myDriversPage.clickSaveButton();
+            signInPage.clickBackButton();
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
         } else {
             Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }

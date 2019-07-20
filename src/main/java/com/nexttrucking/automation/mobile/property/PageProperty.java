@@ -43,6 +43,13 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
 
+    public void sendKeyToElementWithDifferentLocators(String androidElement, String iOSElement, String keys){
+        if (attributeName.equals("text")) {
+            driver.findElement(By.xpath(androidElement)).sendKeys(keys);
+        } else {
+            driver.findElement(By.xpath(iOSElement)).sendKeys(keys);        }
+    }
+
     public String getText(String element, String titleText) {
         return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
     }
