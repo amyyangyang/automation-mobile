@@ -147,7 +147,7 @@ public class AvailableLoadsTest extends SetProperty {
 
     }
 
-    @Test
+//    @Test
     public void filterLoadPage() throws InterruptedException {
         availableLoadsAllPage.clickElement(availableLoadsAllPage.buttonMap.get("filterButton"));
 //        Assert.assertFalse(availableLoadsAllPage.getElement(availableLoadsAllPage.buttonMap.get("reeferRadio")).isSelected());
