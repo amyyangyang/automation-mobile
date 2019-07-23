@@ -33,12 +33,13 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void checkAvailableLoadPage() {
+    public void checkAvailableLoadPage() throws InterruptedException {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allButton), "All");
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.localButton), "Local");
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.shortHaulButton), "Short Haul");
         Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.longHaulButton), "Long Haul");
+        Thread.sleep(3000);
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allNumber)));
@@ -101,8 +102,9 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void checkFirstLoadOfShortHaul() {
+    public void checkFirstLoadOfShortHaul() throws InterruptedException {
         availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.shortHaulButton);
+        Thread.sleep(3000);
         boolean isPresentMessage = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.shortHaulMile);
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentMessage) {
