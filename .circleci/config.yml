@@ -10,6 +10,9 @@ executors:
     working_directory: ~/repo
     docker:
       - image: circleci/node:lts
+  robot_autotest_executor:
+    machine: true
+    working_directory: ~/robot
 
 commands:
   push_test_case_package:
@@ -85,6 +88,28 @@ commands:
           command: |
             appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
 
+  robot_autotest:
+    description: "Robot auto test, UI testing or build test data"
+    parameters:
+      ENV:
+        type: string
+      TYPE:
+        type: string
+      EXCLUDE:
+        type: string
+        default: ""
+    steps:
+      - run:
+          name: Start << parameters.ENV >> << parameters.TYPE >>
+          environment:
+            ENV: << parameters.ENV >>
+            TYPE: << parameters.TYPE >>
+            EXCLUDE: << parameters.EXCLUDE >>
+          command: |
+            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+            docker pull $DOCKER_REPO_URL/robot-autotest
+            echo "Robot autotest running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
+            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
 
 jobs:
   build:
@@ -171,19 +196,11 @@ jobs:
             - artifactWorkspace
 
   dev_init_data:
-    machine: true
-    working_directory: ~/robot
+    executor: robot_autotest_executor
     steps:
-      - run:
-          name: DEV Init Data
-          environment:
-            ENV: dev
-            TYPE: InitData
-          command: |
-            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-            docker pull $DOCKER_REPO_URL/robot-autotest
-            echo "Init data running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
-            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
+      - robot_autotest:
+          ENV: "dev"
+          TYPE: "InitData"
 
   testDevAPP:
     executor: execute_test_cases
@@ -193,19 +210,11 @@ jobs:
           appName: "$APP_NAME_DEV"
 
   test_init_data:
-    machine: true
-    working_directory: ~/robot
+    executor: robot_autotest_executor
     steps:
-      - run:
-          name: TEST Init Data
-          environment:
-            ENV: test
-            TYPE: InitData
-          command: |
-            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-            docker pull $DOCKER_REPO_URL/robot-autotest
-            echo "Init data running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
-            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
+      - robot_autotest:
+          ENV: "test"
+          TYPE: "InitData"
 
   testTestAPP:
     executor: execute_test_cases
@@ -237,6 +246,7 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
+                - build-data-before-ui-test
 
       - hold_testDevUI:
           type: approval
