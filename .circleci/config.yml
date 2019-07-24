@@ -170,6 +170,20 @@ jobs:
           paths:
             - artifactWorkspace
 
+  dev_init_data:
+    machine: true
+    working_directory: ~/robot
+    steps:
+      - run:
+          name: DEV Init Data
+          environment:
+            ENV: dev
+            TYPE: InitData
+          command: |
+            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+            docker pull $DOCKER_REPO_URL/robot-autotest
+            echo "Init data running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
+            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
 
   testDevAPP:
     executor: execute_test_cases
@@ -177,6 +191,21 @@ jobs:
       - run_test_cases:
           envType: "dev"
           appName: "$APP_NAME_DEV"
+
+  test_init_data:
+    machine: true
+    working_directory: ~/robot
+    steps:
+      - run:
+          name: TEST Init Data
+          environment:
+            ENV: test
+            TYPE: InitData
+          command: |
+            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+            docker pull $DOCKER_REPO_URL/robot-autotest
+            echo "Init data running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
+            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
 
   testTestAPP:
     executor: execute_test_cases
@@ -208,22 +237,31 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
+                - build-data-before-ui-test
       - hold_testDevUI:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - testDevAPP:
+      - dev_init_data:
           context: next-platform-build
           requires:
             - hold_testDevUI
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - dev_init_data
       - hold_testTestUI:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - testTestAPP:
+      - test_init_data:
           context: next-platform-build
           requires:
             - hold_testTestUI
+      - testTestAPP:
+          context: next-platform-build
+          requires:
+            - test_init_data
       - hold_testDemoUI:
           type: approval
           requires:
@@ -250,7 +288,11 @@ workflows:
             branches:
               only:
                 - master
-      - testDevAPP:
+      - dev_init_data:
           context: next-platform-build
           requires:
             - prepare_test_cases_and_mobile_app
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - dev_init_data
