@@ -237,7 +237,7 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
-                - build-data-before-ui-test
+
       - hold_testDevUI:
           type: approval
           requires:
