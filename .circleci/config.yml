@@ -291,14 +291,14 @@ workflows:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - dev_init_data_andoid:
+      - dev_init_data_android:
           context: next-platform-build
           requires:
             - hold_testDevUI
       - testDevAndroid:
           context: next-platform-build
           requires:
-            - dev_init_data_andoid
+            - dev_init_data_android
       - dev_init_data_ios:
           context: next-platform-build
           requires:
