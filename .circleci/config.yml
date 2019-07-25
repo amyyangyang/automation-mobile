@@ -242,7 +242,7 @@ jobs:
           envType: "dev"
           appName: "$APP_NAME_DEV"
 
-  test_init_data_andoid:
+  test_init_data_android:
     executor: robot_autotest_executor
     steps:
       - robot_autotest:
