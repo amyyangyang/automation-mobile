@@ -235,7 +235,7 @@ public class AvailableLoadsTest extends SetProperty {
             Thread.sleep(3000);
             Assert.assertEquals(jobDetailPage.getElementText("path", jobDetailPage.booked), "You're booked!");
             jobDetailPage.clickElementByLocator("path", jobDetailPage.assignOkButton);
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.driverButton);
+            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("driverButton"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.assignButton);
             Thread.sleep(3000);
         }

@@ -13,17 +13,17 @@ public class JobDetailPage extends PageProperty {
 
     private AppiumDriver<MobileElement> driver;
 
-    public String callButton = "//*[contains(@text, 'ALLOW')]";
-    public String bookButton = "//*[contains(@%s, 'Book Now')]";
-    public String theLoadNumberOfJob = "//*[contains(@%s,'This job contains')]";
-    public String isBookButton = "//*[contains(@%s, 'Yes, Book Now')]";
+    //public String callButton = "//*[contains(@text, 'ALLOW')]";
+    public String bookButton = "(//*[contains(@%s, 'Book Now')])[last()]";
+    public String theLoadNumberOfJob = "(//*[contains(@%s,'This job contains')])[last()]";
+    public String isBookButton = "(//*[contains(@%s, 'Yes, Book Now')])[last()]";
     public By isNotBookButton = xpath("//*[contains(@text, '\uF406')]");
     public String isThisOK = "//*[contains(@%s, 'Is this ok?')]";
-    public String booked = "//*[contains(@%s, \"You're booked!\")]";
-    public String skipButton = "//*[contains(@%s,'Skip')]";
-    public String assignOkButton = "//*[@%s='OK']";
+    public String booked = "(//*[contains(@%s, \"You're booked!\")])[last()]";
+    public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
+    public String assignOkButton = "(//*[@%s='OK'])[last()]";
     public String driverButton = "//*[contains(@%s, 'test han')]/following-sibling::*[1]";
-    public String assignButton = "//*[@%s='Assign']";
+    public String assignButton = "(//*[@%s='Assign'])[last()]";
 
     public HashMap<String, String> jobDetailCard;
 
@@ -48,6 +48,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[contains(@text, 'Commodity')]/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
+            jobDetailCard.put("driverButton","//*[contains(@text, 'test han')]/following-sibling::*[1]");
         } else {
 
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -67,6 +68,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::[1]/child::[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\")]");
+            jobDetailCard.put("driverButton","(//*[contains(@name, 'test han')])[last()]");
         }
 
     }

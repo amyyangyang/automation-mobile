@@ -24,22 +24,22 @@ public class MyloadsPage extends PageProperty {
     public By assignButton = xpath("(//*[contains(@text, 'Assign')])[last()]");
     public By addDriverButton = xpath("//*[contains(@text, 'Add a Driver')]");
     public By addButton = xpath("//*[contains(@text, 'Add')]");
-    public String noLoadOnMyLoads="//*[contains(@%s, 'Go claim')]";
+    public String noLoadOnMyLoads = "//*[contains(@%s, 'Go claim')]";
 
-    public Map<String,String> myLoadsCardMap;
-    public MyloadsPage(AppiumDriver<MobileElement> driver,String attributeName) {
-        super(driver,attributeName);
-        if(attributeName.equals("text"))
-        {
-            myLoadsCardMap=new HashMap<>();
-            myLoadsCardMap.put("jobState","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
-            myLoadsCardMap.put("jobNum","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[2]");
-            myLoadsCardMap.put("originationAddress","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[6]");
-            myLoadsCardMap.put("destinationAddress","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[11]");
-            myLoadsCardMap.put("pickupTime","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[8]");
-            myLoadsCardMap.put("deliveryTime","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[13]");
-            myLoadsCardMap.put("payout","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[3]");
-            myLoadsCardMap.put("numberOfLoad","//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*[1]/child::*[1]/child::*[1]/child::*[1]");
+    public Map<String, String> myLoadsCardMap;
+
+    public MyloadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
+        super(driver, attributeName);
+        if (attributeName.equals("text")) {
+            myLoadsCardMap = new HashMap<>();
+            myLoadsCardMap.put("jobState", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
+            myLoadsCardMap.put("jobNum", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[2]");
+            myLoadsCardMap.put("originationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[6]");
+            myLoadsCardMap.put("destinationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[11]");
+            myLoadsCardMap.put("pickupTime", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[8]");
+            myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
+            myLoadsCardMap.put("payout", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
+            myLoadsCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
         }
     }
 
