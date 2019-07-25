@@ -10,6 +10,9 @@ executors:
     working_directory: ~/repo
     docker:
       - image: circleci/node:lts
+  robot_autotest_executor:
+    machine: true
+    working_directory: ~/robot
 
 commands:
   push_test_case_package:
@@ -85,6 +88,28 @@ commands:
           command: |
             appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
 
+  robot_autotest:
+    description: "Robot auto test, UI testing or build test data"
+    parameters:
+      ENV:
+        type: string
+      TYPE:
+        type: string
+      EXCLUDE:
+        type: string
+        default: ""
+    steps:
+      - run:
+          name: Start << parameters.ENV >> << parameters.TYPE >>
+          environment:
+            ENV: << parameters.ENV >>
+            TYPE: << parameters.TYPE >>
+            EXCLUDE: << parameters.EXCLUDE >>
+          command: |
+            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+            docker pull $DOCKER_REPO_URL/robot-autotest
+            echo "Robot autotest running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
+            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
 
 jobs:
   build:
@@ -170,6 +195,12 @@ jobs:
           paths:
             - artifactWorkspace
 
+  dev_init_data:
+    executor: robot_autotest_executor
+    steps:
+      - robot_autotest:
+          ENV: "dev"
+          TYPE: "InitData"
 
   testDevAPP:
     executor: execute_test_cases
@@ -177,6 +208,13 @@ jobs:
       - run_test_cases:
           envType: "dev"
           appName: "$APP_NAME_DEV"
+
+  test_init_data:
+    executor: robot_autotest_executor
+    steps:
+      - robot_autotest:
+          ENV: "test"
+          TYPE: "InitData"
 
   testTestAPP:
     executor: execute_test_cases
@@ -208,22 +246,31 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
+
       - hold_testDevUI:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - testDevAPP:
+      - dev_init_data:
           context: next-platform-build
           requires:
             - hold_testDevUI
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - dev_init_data
       - hold_testTestUI:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - testTestAPP:
+      - test_init_data:
           context: next-platform-build
           requires:
             - hold_testTestUI
+      - testTestAPP:
+          context: next-platform-build
+          requires:
+            - test_init_data
       - hold_testDemoUI:
           type: approval
           requires:
@@ -250,7 +297,11 @@ workflows:
             branches:
               only:
                 - master
-      - testDevAPP:
+      - dev_init_data:
           context: next-platform-build
           requires:
             - prepare_test_cases_and_mobile_app
+      - testDevAPP:
+          context: next-platform-build
+          requires:
+            - dev_init_data
