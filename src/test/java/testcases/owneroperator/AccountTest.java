@@ -1,4 +1,4 @@
-package testcases.dispatcher;
+package testcases.owneroperator;
 
-public class Account {
+public class AccountTest {
 }
