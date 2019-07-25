@@ -270,6 +270,20 @@ jobs:
           envType: "test"
           appName: "$APP_NAME_DEV"
 
+  testDemoAndroid:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases_ios:
+          envType: "demo"
+          appName: "$APP_NAME_DEV"
+
+  testDemoIOS:
+    executor: execute_test_cases
+    steps:
+      - run_test_cases_ios:
+          envType: "demo"
+          appName: "$APP_NAME_DEV"
+
 workflows:
   version: 2
   app-ui-test:
