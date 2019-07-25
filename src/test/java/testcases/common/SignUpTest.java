@@ -72,7 +72,7 @@ public class SignUpTest extends SetProperty {
 
     @After
     public void logOut() throws InterruptedException {
-        availableLoadsAllPage.clickMenuButtonFirstLevel("AccountTest");
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
         availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
         availableLoadsAllPage.confirmLogout();
     }
