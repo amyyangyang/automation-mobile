@@ -214,6 +214,13 @@ jobs:
           paths:
             - artifactWorkspace
 
+  dev_init_data_android:
+    executor: robot_autotest_executor
+    steps:
+      - robot_autotest:
+          ENV: "dev"
+          TYPE: "InitData"
+
   testDevAndroid:
     executor: execute_test_cases
     steps:
@@ -221,8 +228,8 @@ jobs:
           envType: "dev"
           appName: "$APP_NAME_DEV"
 
-  dev_init_data:
-    executor: robot_autotest_executor
+  dev_init_data_ios:
+    exectur: robot_autotest_executor
     steps:
       - robot_autotest:
           ENV: "dev"
@@ -235,6 +242,13 @@ jobs:
           envType: "dev"
           appName: "$APP_NAME_DEV"
 
+  test_init_data_andoid:
+    executor: robot_autotest_executor
+    steps:
+      - robot_autotest:
+          ENV: "test"
+          TYPE: "InitData"
+
   testTestAndroid:
     executor: execute_test_cases
     steps:
@@ -242,7 +256,7 @@ jobs:
           envType: "test"
           appName: "$APP_NAME_DEV"
 
-  test_init_data:
+  test_init_data_ios:
     executor: robot_autotest_executor
     steps:
       - robot_autotest:
@@ -277,42 +291,42 @@ workflows:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - dev_init_data:
+      - dev_init_data_andoid:
           context: next-platform-build
           requires:
             - hold_testDevUI
       - testDevAndroid:
           context: next-platform-build
           requires:
-            - dev_init_data
-      - dev_init_data:
+            - dev_init_data_andoid
+      - dev_init_data_ios:
           context: next-platform-build
           requires:
             - testDevAndroid
       - testDevIOS:
           context: next-platform-build
           requires:
-            - dev_init_data
+            - dev_init_data_ios
       - hold_testTestUI:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - test_init_data:
+      - test_init_data_android:
           context: next-platform-build
           requires:
             - hold_testTestUI
       - testTestAndroid:
           context: next-platform-build
           requires:
-            - test_init_data
-      - test_init_data:
+            - test_init_data_android
+      - test_init_data_ios:
           context: next-platform-build
           requires:
             - testTestAndroid
       - testTestIOS:
           context: next-platform-build
           requires:
-            - test_init_data
+            - test_init_data_ios
       - hold_testDemoUI:
           type: approval
           requires:
@@ -339,19 +353,19 @@ workflows:
             branches:
               only:
                 - master
-      - dev_init_data:
+      - dev_init_data_android:
           context: next-platform-build
           requires:
             - prepare_test_cases_and_mobile_app
       - testDevAndroid:
           context: next-platform-build
           requires:
-            - dev_init_data
-      - dev_init_data:
+            - dev_init_data_android
+      - dev_init_data_ios:
           context: next-platform-build
           requires:
             - testDevAndroid
       - testDevIOS:
           context: next-platform-build
           requires:
-            - dev_init_data
+            - dev_init_data_ios
