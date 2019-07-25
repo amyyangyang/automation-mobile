@@ -41,7 +41,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String showButton = "(//*[contains(@%s,'Show')])[last()]";
     public String noLoadsButton = "//*[contains(@%s,'No Loads')]";
     public String noLoad = "(//*[contains(@%s,'Please try another type of load')])[last()]";
-    public String noLoadAfterFiltering = "(//*[contains(@%s,'Your list is currently filtered so you aren't seeing all of our loads.')])[last()]";
+    public String noLoadAfterFiltering = "(//*[contains(@%s,\"Your list is currently filtered so you aren't seeing all of our loads.\")])[last()]";
 
     public AvailableLoadsAllPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);

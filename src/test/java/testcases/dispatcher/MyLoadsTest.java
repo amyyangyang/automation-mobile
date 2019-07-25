@@ -44,7 +44,7 @@ public class MyLoadsTest extends SetProperty {
                 Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("pickupTime")));
                 Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("deliveryTime")));
             } else {
-                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", myloadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
             }
         }
     }

@@ -24,6 +24,7 @@ public class MyloadsPage extends PageProperty {
     public By assignButton = xpath("(//*[contains(@text, 'Assign')])[last()]");
     public By addDriverButton = xpath("//*[contains(@text, 'Add a Driver')]");
     public By addButton = xpath("//*[contains(@text, 'Add')]");
+    public String noLoadOnMyLoads="//*[contains(@%s, 'Go claim')]";
 
     public Map<String,String> myLoadsCardMap;
     public MyloadsPage(AppiumDriver<MobileElement> driver,String attributeName) {
