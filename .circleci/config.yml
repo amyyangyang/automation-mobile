@@ -331,7 +331,11 @@ workflows:
           type: approval
           requires:
             - prepare_test_cases_and_mobile_app
-      - testDemoAPP:
+      - testDemoAndroid:
+          context: next-platform-build
+          requires:
+            - hold_testDemoUI
+      - testDemoIOS:
           context: next-platform-build
           requires:
             - hold_testDemoUI
