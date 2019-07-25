@@ -229,7 +229,7 @@ jobs:
           appName: "$APP_NAME_DEV"
 
   dev_init_data_ios:
-    exectur: robot_autotest_executor
+    executor: robot_autotest_executor
     steps:
       - robot_autotest:
           ENV: "dev"
