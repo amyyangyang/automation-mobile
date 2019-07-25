@@ -31,7 +31,7 @@ public class MyDriversTest extends SetProperty {
     }
 
 
-//    @Test
+    @Test
     @Tag("write")
     public void addDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();

@@ -23,7 +23,7 @@ public class SignUpTest extends SetProperty {
         welcomePage.getWelcomePage();
     }
 
-//    @Test
+    @Test
     @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException{
         welcomePage.clickSignUpButton();
@@ -46,7 +46,7 @@ public class SignUpTest extends SetProperty {
 
     }
 
-//    @Test
+    @Test
     @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException{
         welcomePage.clickSignUpButton();
