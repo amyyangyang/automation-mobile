@@ -8,6 +8,7 @@ import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
@@ -30,7 +31,8 @@ public class MyDriversTest extends SetProperty {
     }
 
 
-//    @Test
+    @Test
+    @Tag("write")
     public void addDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
@@ -49,53 +51,121 @@ public class MyDriversTest extends SetProperty {
 
 
     @Test
-    public void editDriverFirstName() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
-        myDriversPage.selectField("Name");
-        myDriversPage.editFirstName("SeraNew");
-        myDriversPage.clickSaveButton();
-        Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
-        myDriversPage.selectField("Name");
-        myDriversPage.editFirstName("Sera");
-        myDriversPage.clickSaveButton();
-        Assert.assertTrue(!myDriversPage.getSavedData("FirstName").contains("SeraNew") && myDriversPage.getSavedData("FirstName").contains("Sera"));
-        signInPage.clickBackButton();
+    public void checkDriverList() {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            Assert.assertTrue(myDriversPage.getDriverLoadInfo().contains("load"));
+            Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("earned"));
+            Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("$"));
+        } else {
+        Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
     }
 
 
     @Test
-    public void editDriverLastName() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
-        myDriversPage.selectField("Name");
-        myDriversPage.editLastName("AbeNew");
-        myDriversPage.clickSaveButton();
-        Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
-        myDriversPage.selectField("Name");
-        myDriversPage.editLastName("Abe");
-        myDriversPage.clickSaveButton();
-        Assert.assertTrue(!myDriversPage.getSavedData("LastName").contains("AbeNew") && myDriversPage.getSavedData("LastName").contains("Abe"));
-        signInPage.clickBackButton();
+    public void editDriverInfo() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Phone");
+            myDriversPage.editFirstName("SeraNew");
+            myDriversPage.editLastName("AbeNew");
+            myDriversPage.editPhone("2343423111");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
+            Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
+            myDriversPage.selectField("Phone");
+            System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
+            myDriversPage.editFirstName("Sera");
+            myDriversPage.editLastName("Abe");
+            Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
+            myDriversPage.editPhone("2343423424");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(!myDriversPage.getSavedData("FirstName").contains("SeraNew") && myDriversPage.getSavedData("FirstName").contains("Sera"));
+            Assert.assertTrue(!myDriversPage.getSavedData("LastName").contains("AbeNew") && myDriversPage.getSavedData("LastName").contains("Abe"));
+            myDriversPage.selectField("Phone");
+            Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
+            myDriversPage.clickSaveButton();
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
     }
 
 
     @Test
-    public void editDriverPhone() throws InterruptedException {
-        myDriversPage.selectDriver("Sera");
-        myDriversPage.selectField("Phone");
-        myDriversPage.editPhone("2343423111");
-        myDriversPage.clickSaveButton();
-        myDriversPage.selectField("Phone");
-        System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
-        Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
-        myDriversPage.editPhone("2343423424");
-        myDriversPage.clickSaveButton();
-        myDriversPage.selectField("Phone");
-        Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
-        myDriversPage.clickSaveButton();
-        signInPage.clickBackButton();
+    public void editDriverEmail() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Email");
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "You").contains("You can't edit"));
+            myDriversPage.clickDarnOkButton();
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
     }
 
+    @Test
+    public void editDriverPassword() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Password");
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Edit").contains("Edit Password"));
+            myDriversPage.typeNewPassword("111111");
+            myDriversPage.clickSaveButton();
+            signInPage.clickBackButton();
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
 
+    @Test
+    public void editDriverEquipment() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Equipment");
+            myDriversPage.selectDriverType("Reefer");
+            myDriversPage.clickContinueButton();
+            myDriversPage.selectDriverSize("53");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(myDriversPage.isEquipmentEdited());
+            myDriversPage.selectField("Equipment");
+            myDriversPage.selectDriverType("Flatbed");
+            myDriversPage.clickContinueButton();
+            myDriversPage.selectDriverSize("48");
+            myDriversPage.clickSaveButton();
+            Assert.assertTrue(myDriversPage.isEquipmentFixed());
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
 
+    @Test
+    public void editDriverPriceVisibility() throws InterruptedException {
+        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+        if (isDriversExist) {
+            myDriversPage.selectFirstDriver();
+            myDriversPage.selectField("Edit");
+            myDriversPage.selectPriceVisibilityRadio("Show");
+            myDriversPage.selectPriceVisibilityRadio("Save");
+            Thread.sleep(3000);
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
+            myDriversPage.selectField("Edit");
+            myDriversPage.selectPriceVisibilityRadio("Hide");
+            myDriversPage.selectPriceVisibilityRadio("Save");
+            Thread.sleep(3000);
+            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver won't see the price"));
+            signInPage.clickBackButton();
+        } else {
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        }
+    }
 
 }

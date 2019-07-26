@@ -25,7 +25,7 @@ public class ForgotPasswordTest extends SetProperty {
     public void forgotPassword() throws InterruptedException {
         welcomePage.clickSignInButton();
         signInPage.clickForgotButton();
-        signInPage.inputEmailForForgotPassword(getTestData("driverEmail"));
+        signInPage.inputEmailForForgotPassword(getTestData("dispatcherEmail"));
         signInPage.clickSendNewPasswordButton();
         Assert.assertTrue(welcomePage.getTitle("Email Sent").contains("Email Sent"));
         signInPage.clickEmailSentOKButton();

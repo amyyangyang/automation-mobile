@@ -6,10 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
 import java.time.Duration;
 
@@ -46,6 +43,14 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
 
+    public void sendKeyToElementWithDifferentLocators(String androidElement, String iOSElement, String keys){
+        if (attributeName.equals("text")) {
+            driver.findElement(By.xpath(androidElement)).sendKeys(keys);
+        } else {
+            driver.findElement(By.xpath(iOSElement)).sendKeys(keys);
+        }
+    }
+
     public String getText(String element, String titleText) {
         return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
     }
@@ -68,6 +73,14 @@ public abstract class PageProperty {
             clickElement(androidElement);
         } else if (attributeName.equals("name")){
             clickElement(iOSElement);
+        }
+    }
+
+    public String getElementTextWithDifferentLocator(String androidElement, String iOSElement){
+        if (attributeName.equals("text")) {
+            return driver.findElement(By.xpath(androidElement)).getText();
+        } else {
+            return driver.findElement(By.xpath(iOSElement)).getText();
         }
     }
 
@@ -141,6 +154,8 @@ public abstract class PageProperty {
             }
             return true;
         } catch (NoSuchElementException exception) {
+            return false;
+        } catch (WebDriverException exception) {
             return false;
         }
     }
