@@ -200,6 +200,9 @@ jobs:
 
   init_data:
     executor: robot_autotest_executor
+    parameters:
+      ENV:
+        type: string
     steps:
       - robot_autotest:
           ENV: "$ENV"
@@ -207,6 +210,11 @@ jobs:
 
   run_case:
     executor: execute_test_cases
+    parameters:
+      envType:
+        type: string
+      deviceType:
+        type: string
     steps:
       - run_test_cases:
           envType: "$envType"
@@ -236,31 +244,27 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - init_data:
           name: dev_init_data_android
-          environment:
-            - ENV: "test"
+          ENV: "test"
           context: next-platform-build
           requires:
             - hold_testDevUI
       - run_case:
           name: testDevAndroid
-          environment:
-            - envType: "dev"
-            - deviceType: "android"
+          envType: "dev"
+          deviceType: "android"
           context: next-platform-build
           requires:
             - dev_init_data_android
       - init_data:
           name: dev_init_data_ios
-          environment:
-           - ENV: "dev"
+          ENV: "dev"
           context: next-platform-build
           requires:
             - testDevAndroid
       - run_case:
           name: testDevIOS
-          environment:
-           - envType: "dev"
-           - deviceType: "ios"
+          envType: "dev"
+          deviceType: "ios"
           context: next-platform-build
           requires:
             - dev_init_data_ios
@@ -270,31 +274,27 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - init_data:
           name: test_init_data_android
-          environment:
-           - ENV: "test"
+          ENV: "test"
           context: next-platform-build
           requires:
             - hold_testTestUI
       - run_case:
           name: testTestAndroid
-          environment:
-           - envType: "test"
-           - deviceType: "android"
+          envType: "test"
+          deviceType: "android"
           context: next-platform-build
           requires:
             - test_init_data_android
       - init_data:
           name: test_init_data_ios
-          environment:
-           - ENV: "test"
+          ENV: "test"
           context: next-platform-build
           requires:
             - testTestAndroid
       - run_case:
           name: testTestIOS
-          environment:
-           - envType: "test"
-           - deviceType: "ios"
+          envType: "test"
+          deviceType: "ios"
           context: next-platform-build
           requires:
             - test_init_data_ios
@@ -304,17 +304,15 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - run_case:
           name: demoTestAndroid
-          environment:
-           - envType: "demo"
-           - deviceType: "android"
+          envType: "demo"
+          deviceType: "android"
           context: next-platform-build
           requires:
             - hold_testDemoUI
       - run_case:
           name: demoTestIOS
-          environment:
-           - envType: "demo"
-           - deviceType: "ios"
+          envType: "demo"
+          deviceType: "ios"
           context: next-platform-build
           requires:
             - demoTestAndroid
@@ -338,31 +336,27 @@ workflows:
                 - master
       - init_data:
           name: dev_init_data_android
-          environment:
-           - ENV: "dev"
+          ENV: "dev"
           context: next-platform-build
           requires:
             - prepare_test_cases_and_mobile_app
       - run_case:
           name: devTestAndroid
-          environment:
-           - envType: "test"
-           - deviceType: "android"
+          envType: "test"
+          deviceType: "android"
           context: next-platform-build
           requires:
             - dev_init_data_android
       - init_data:
           name: dev_init_data_ios
-          environment:
-           - ENV: "dev"
+          ENV: "dev"
           context: next-platform-build
           requires:
             - devTestAndroid
       - run_case:
           name: devTestIOS
-          environment:
-           - envType: "test"
-           - deviceType: "ios"
+          envType: "test"
+          deviceType: "ios"
           context: next-platform-build
           requires:
             - dev_init_data_ios
