@@ -354,7 +354,7 @@ workflows:
           deviceType: "ios"
           context: next-platform-build
           requires:
-            - testDemoAndroid
+            - demoTestAndroid
   app-ui-timing-test:
     triggers:
       - schedule:
@@ -391,7 +391,7 @@ workflows:
           ENV: "dev"
           context: next-platform-build
           requires:
-            - testDevAndroid
+            - devTestAndroid
       - run_case:
           name: devTestIOS
           envType: "test"
