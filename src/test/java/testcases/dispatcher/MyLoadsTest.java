@@ -30,7 +30,7 @@ public class MyLoadsTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
     }
 
-//    @Test
+    @Test
     public void MyLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         if (attributeName.equals("text")) {
