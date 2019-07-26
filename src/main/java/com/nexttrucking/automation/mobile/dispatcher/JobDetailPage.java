@@ -16,7 +16,7 @@ public class JobDetailPage extends PageProperty {
     //public String callButton = "//*[contains(@text, 'ALLOW')]";
     public String bookButton = "(//*[contains(@%s, 'Book Now')])[last()]";
     public String theLoadNumberOfJob = "(//*[contains(@%s,'This job contains')])[last()]";
-    public String isBookButton = "(//*[contains(@%s, 'Yes, Book Now')])[last()]";
+    public String isBookButton = "(//*[contains(@%s, 'Book Now')])[last()]";
     public By isNotBookButton = xpath("//*[contains(@text, '\uF406')]");
     public String isThisOK = "//*[contains(@%s, 'Is this ok?')]";
     public String booked = "(//*[contains(@%s, \"You're booked!\")])[last()]";
@@ -66,8 +66,8 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("weight", "//*[@name='Weight']/following-sibling::*[1]");
             jobDetailCard.put("distance", "//*[@name='Total Distance']/following-sibling::*[1]");
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
-            jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::[1]/child::[2]");
-            jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\")]");
+            jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
+            jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             jobDetailCard.put("driverButton","(//*[contains(@name, 'test han')])[last()]");
         }
 
