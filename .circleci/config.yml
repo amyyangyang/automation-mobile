@@ -300,7 +300,6 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
-                - NTE-10213
 
       - hold_testDevUI:
           type: approval
@@ -353,7 +352,7 @@ workflows:
       - testDemoIOS:
           context: next-platform-build
           requires:
-            - hold_testDemoUI
+            - testDemoAndroid
   app-ui-timing-test:
     triggers:
       - schedule:
