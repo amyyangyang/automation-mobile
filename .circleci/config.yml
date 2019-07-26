@@ -330,7 +330,7 @@ workflows:
           context: next-platform-build
           requires:
             - testTestAndroid
-      - run_case: testTestIOS
+      - run_case:
           name: testTestIOS
           envType: "test"
           deviceType: "ios"
