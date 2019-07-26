@@ -197,14 +197,14 @@ public class AvailableLoadsTest extends SetProperty {
                 Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("pickupTime")));
                 Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("deliveryTime")));
             }
-            jobDetailPage.swipeToUp();
-            jobDetailPage.swipeToUp();
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("equipment"))));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("packaging")));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("weight")));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("distance")));
-            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("commodity")));
-            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("specification")).toUpperCase().substring(1)));
+//            jobDetailPage.swipeToUp();
+//            jobDetailPage.swipeToUp();
+//            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("equipment"))));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("packaging")));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("weight")));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("distance")));
+//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("commodity")));
+//            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("specification")).toUpperCase().substring(1)));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         }
     }
