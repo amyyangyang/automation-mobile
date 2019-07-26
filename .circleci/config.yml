@@ -207,19 +207,19 @@ jobs:
 
   testDevAndroid:
     executor: execute_test_cases
-    deviceType: android
     steps:
       - run_test_cases:
           envType: "dev"
           appName: "$APP_NAME_DEV"
+          deviceType: "android"
 
   testDevIOS:
     executor: execute_test_cases
-    deviceType: ios
     steps:
       - run_test_cases:
           envType: "dev"
           appName: "$APP_NAME_DEV"
+          deviceType: "ios"
 
   test_init_data:
     executor: robot_autotest_executor
@@ -230,35 +230,35 @@ jobs:
 
   testTestAndroid:
     executor: execute_test_cases
-    deviceType: android
     steps:
       - run_test_cases:
           envType: "test"
           appName: "$APP_NAME_DEV"
+          deviceType: "android"
 
   testTestIOS:
     executor: execute_test_cases
-    deviceType: ios
     steps:
        - run_test_cases:
           envType: "test"
           appName: "$APP_NAME_DEV"
+          deviceType: "ios"
 
   testDemoAndroid:
     executor: execute_test_cases
-    deviceType: android
     steps:
       - run_test_cases:
           envType: "demo"
           appName: "$APP_NAME_DEV"
+          deviceType: "android"
 
   testDemoIOS:
     executor: execute_test_cases
-    deviceType: ios
     steps:
       - run_test_cases:
           envType: "demo"
           appName: "$APP_NAME_DEV"
+          deviceType: "ios"
 
 workflows:
   version: 2
