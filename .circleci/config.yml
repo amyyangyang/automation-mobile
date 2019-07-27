@@ -85,12 +85,16 @@ commands:
           environment:
             deviceTYpe: << parameters.deviceType >>
           command: |
-            if [ "${deviceType}" == "android" ];
+            if [ ${deviceType} == android ]
             then
+               echo "android"
               appcenter test run appium --app "NEXT_DEV/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
-            elif  [ "${deviceType}" == "ios" ];
+            elif [ ${deviceType} == ios ]
             then
-              appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+               echo "ios"
+               appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+            else
+               echo "没有符合的条件"
             fi
 
   robot_autotest:
