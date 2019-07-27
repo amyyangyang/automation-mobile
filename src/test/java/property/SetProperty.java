@@ -7,6 +7,7 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.SignUpPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -42,6 +43,7 @@ public abstract class SetProperty {
     public static AllowLocationPage allowLocationPage;
     public static AvailableLoadsAllPage availableLoadsAllPage;
     public static String attributeName;
+    public static PageProperty pageProperty;
 
 
     public static void setUpDriver() throws MalformedURLException {

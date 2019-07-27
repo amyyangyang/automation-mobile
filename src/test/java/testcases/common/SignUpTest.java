@@ -42,8 +42,8 @@ public class SignUpTest extends SetProperty {
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
         signUpPage.clickCloseButton();
-        //here some build should be added to delete created account from AdminPortal
-
+        Thread.sleep(3000);
+        Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
     }
 
     @Test
@@ -65,9 +65,8 @@ public class SignUpTest extends SetProperty {
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
         signUpPage.clickCloseButton();
-
-        //here some build should be added to delete created account from AdminPortal
-
+        Thread.sleep(3000);
+        Assert.assertTrue(availableLoadsAllPage.getTitle("All").contains("All"));
     }
 
     @After

@@ -8,12 +8,15 @@ import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.TestMethodOrder;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MyDriversTest extends SetProperty {
 
 
@@ -32,6 +35,7 @@ public class MyDriversTest extends SetProperty {
 
 
     @Test
+    @Order(3)
     @Tag("write")
     public void addDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
@@ -51,6 +55,7 @@ public class MyDriversTest extends SetProperty {
 
 
     @Test
+    @Order(1)
     public void checkDriverList() {
         boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
         if (isDriversExist) {
@@ -64,6 +69,7 @@ public class MyDriversTest extends SetProperty {
 
 
     @Test
+    @Order(2)
     public void editDriverInfo() throws InterruptedException {
         boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
         if (isDriversExist) {
