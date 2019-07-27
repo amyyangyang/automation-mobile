@@ -205,7 +205,7 @@ jobs:
         type: string
     steps:
       - robot_autotest:
-          ENV: "${ENV}"
+          ENV: << parameters.ENV >>
           TYPE: "InitData"
 
   run_case:
@@ -217,9 +217,9 @@ jobs:
         type: string
     steps:
       - run_test_cases:
-          envType: "${envType}"
+          envType: << parameters.envType >>
           appName: "$APP_NAME_DEV"
-          deviceType: "${deviceType}"
+          deviceType: << parameters.deviceType >>
 
 workflows:
   version: 2
