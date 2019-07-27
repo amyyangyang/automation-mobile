@@ -7,7 +7,6 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
@@ -29,13 +28,5 @@ public class AccountTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
         pageProperty.clickElementByName(myDriversPage.getAnyTitle(), "Edit");
     }
-
-
-    @Test
-    public void editAccount() {
-
-    }
-
-
 
 }
