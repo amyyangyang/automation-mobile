@@ -6,12 +6,17 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.property.Utils;
+import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
 
-public class Payments extends SetProperty {
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
+
+public class PaymentsTest extends SetProperty {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -24,8 +29,18 @@ public class Payments extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as OwnerOperator
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Pa");
-        pageProperty.clickElementByName(myDriversPage.getAnyTitle(), "Edit");
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
+    }
+
+    @Test
+    public void checkAvailableLoadPage() throws InterruptedException {
+        Assert.assertTrue(availableLoadsAllPage.getTitle("Payments").contains("Payments"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        if (isPresentLoad) {
+            Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.allNumber)));
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+        }
     }
 
 }
