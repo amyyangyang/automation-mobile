@@ -243,7 +243,6 @@ workflows:
                 - master
                 - /^release\/.*/
                 - feature/circleci
-                - NTE-10251
 
       - hold_testDevUI:
           type: approval
