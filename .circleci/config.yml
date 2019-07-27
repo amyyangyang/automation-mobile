@@ -245,27 +245,27 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - init_data:
           name: dev_init_data_android
-          ENV: "dev"
+          ENV: dev
           context: next-platform-build
           requires:
             - hold_testDevUI
       - run_case:
           name: testDevAndroid
-          envType: "dev"
-          deviceType: "android"
+          envType: dev
+          deviceType: android
           context: next-platform-build
           requires:
             - dev_init_data_android
       - init_data:
           name: dev_init_data_ios
-          ENV: "dev"
+          ENV: dev
           context: next-platform-build
           requires:
             - testDevAndroid
       - run_case:
           name: testDevIOS
-          envType: "dev"
-          deviceType: "ios"
+          envType: dev
+          deviceType: ios
           context: next-platform-build
           requires:
             - dev_init_data_ios
@@ -275,27 +275,27 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - init_data:
           name: test_init_data_android
-          ENV: "test"
+          ENV: test
           context: next-platform-build
           requires:
             - hold_testTestUI
       - run_case:
           name: testTestAndroid
-          envType: "test"
-          deviceType: "android"
+          envType: test
+          deviceType: android
           context: next-platform-build
           requires:
             - test_init_data_android
       - init_data:
           name: test_init_data_ios
-          ENV: "test"
+          ENV: test
           context: next-platform-build
           requires:
             - testTestAndroid
       - run_case:
           name: testTestIOS
-          envType: "test"
-          deviceType: "ios"
+          envType: test
+          deviceType: ios
           context: next-platform-build
           requires:
             - test_init_data_ios
@@ -305,15 +305,15 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - run_case:
           name: demoTestAndroid
-          envType: "demo"
-          deviceType: "android"
+          envType: demo
+          deviceType: android
           context: next-platform-build
           requires:
             - hold_testDemoUI
       - run_case:
           name: demoTestIOS
-          envType: "demo"
-          deviceType: "ios"
+          envType: demo
+          deviceType: ios
           context: next-platform-build
           requires:
             - demoTestAndroid
@@ -337,27 +337,27 @@ workflows:
                 - master
       - init_data:
           name: dev_init_data_android
-          ENV: "dev"
+          ENV: dev
           context: next-platform-build
           requires:
             - prepare_test_cases_and_mobile_app
       - run_case:
           name: devTestAndroid
-          envType: "test"
-          deviceType: "android"
+          envType: test
+          deviceType: android
           context: next-platform-build
           requires:
             - dev_init_data_android
       - init_data:
           name: dev_init_data_ios
-          ENV: "dev"
+          ENV: dev
           context: next-platform-build
           requires:
             - devTestAndroid
       - run_case:
           name: devTestIOS
-          envType: "test"
-          deviceType: "ios"
+          envType: test
+          deviceType: ios
           context: next-platform-build
           requires:
             - dev_init_data_ios
