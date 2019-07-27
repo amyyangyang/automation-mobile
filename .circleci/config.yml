@@ -82,6 +82,8 @@ commands:
 
       - run:
           name: test app UI
+          environment:
+            deviceTYpe: << parameters.deviceType >>
           command: |
             if [ "${deviceType}" == "android" ];
             then
