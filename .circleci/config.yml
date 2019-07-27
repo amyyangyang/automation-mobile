@@ -83,7 +83,7 @@ commands:
       - run:
           name: test app UI
           environment:
-            deviceTYpe: << parameters.deviceType >>
+            deviceType: << parameters.deviceType >>
           command: |
             if [ ${deviceType} == android ]
             then
