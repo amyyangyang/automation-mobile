@@ -244,7 +244,7 @@ workflows:
             - prepare_test_cases_and_mobile_app
       - init_data:
           name: dev_init_data_android
-          ENV: "test"
+          ENV: "dev"
           context: next-platform-build
           requires:
             - hold_testDevUI
