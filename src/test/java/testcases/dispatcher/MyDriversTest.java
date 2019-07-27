@@ -7,13 +7,15 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.jupiter.api.Tag;
+import org.junit.runners.MethodSorters;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MyDriversTest extends SetProperty {
 
 
@@ -33,7 +35,7 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     @Tag("write")
-    public void addDriver() throws InterruptedException {
+    public void signUpDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
         myDriversPage.typePassword(getTestData("driverAddPassword"));
