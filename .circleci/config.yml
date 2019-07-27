@@ -94,7 +94,7 @@ commands:
                echo "ios"
                appcenter test run appium --app "NEXT_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
             else
-               echo "没有符合的条件"
+               echo "deviceType is error"
             fi
 
   robot_autotest:
