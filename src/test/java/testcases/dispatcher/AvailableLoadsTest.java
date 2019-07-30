@@ -6,6 +6,8 @@ import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -178,6 +180,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
     }
+
     @Test
     public void checkLoadDetail() {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
@@ -209,32 +212,46 @@ public class AvailableLoadsTest extends SetProperty {
         }
     }
 
-    //@Test
+    @Test
     public void bookTenderOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
             Thread.sleep(3000);
-            Assert.assertEquals(jobDetailPage.getElementText("path", jobDetailPage.booked), "You're booked!");
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.skipButton);
-            Thread.sleep(6000);
-            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
-            //from my loads page to available page
+            if (attributeName.equals("text")) {
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
+                Thread.sleep(3000);
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.skipButton);
+                Thread.sleep(3000);
+            }else{
+                new TouchAction(driver).press(PointOption.point(229,612)).perform();
+                Thread.sleep(3000);
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                new TouchAction(driver).press(PointOption.point(95,607)).perform();
+            }
         }
     }
 
-    //@Test
+    @Test
     public void bookTenderAndAssignDriver() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
-            Thread.sleep(3000);
-            Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.assignOkButton);
+            if (attributeName.equals("text")) {
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
+                Thread.sleep(3000);
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.assignOkButton);
+                Thread.sleep(3000);
+            }else{
+                new TouchAction(driver).press(PointOption.point(229,612)).perform();
+                Thread.sleep(3000);
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                new TouchAction(driver).press(PointOption.point(270,600)).perform();
+            }
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("driverButton"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.assignButton);
             Thread.sleep(3000);
