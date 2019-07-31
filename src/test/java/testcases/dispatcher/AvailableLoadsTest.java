@@ -178,7 +178,7 @@ public class AvailableLoadsTest extends SetProperty {
         }
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
     }
-    @Test
+//    @Test
     public void checkLoadDetail() {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
