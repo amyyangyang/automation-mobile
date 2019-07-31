@@ -11,11 +11,13 @@ public class Payments extends PageProperty {
         super(driver, attributeName);
     }
 
+
+    public String noPayments = "(//*[contains(@%s,'Book a load before')])[last()]";
+
+
     public HashMap<String, String> paymentList;
-
-
     {
-        paymentList=new HashMap<>();
+        paymentList = new HashMap<>();
         if (attributeName.equals("text")) {
             paymentList.put("filterButton", "//*[contains(@text,'\uF182')]");
         } else {
