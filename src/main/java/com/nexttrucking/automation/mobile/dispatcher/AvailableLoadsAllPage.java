@@ -22,15 +22,15 @@ public class AvailableLoadsAllPage extends PageProperty {
     private String menuNameButton = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String confirmLogOutButton = "(//*[contains(@%s, 'Yes')])[last()]";
 
-    public String localButton = "//*[contains(@%s,'Local')]";
-    public String shortHaulButton = "//*[contains(@%s,'Short Haul')]";
-    public String longHaulButton = "//*[contains(@%s,'Long Haul')]";
-    public String allButton = "//*[contains(@%s,'All')]";
+    public String localButton = "LOCAL";
+    public String shortHaulButton = "SHORT_HAUL";
+    public String longHaulButton = "LONG_HAUL";
+    public String allButton = "ALL";
 
-    public String shortHaulNumber = "//*[contains(@%s, 'Short Haul')]/following-sibling::*[1]/child::*[1]";
-    public String longHaulNumber = "//*[contains(@%s, 'Long Haul')]/following-sibling::*[1]/child::*[1]";
-    public String localNumber = "//*[contains(@%s, 'Local')]/following-sibling::*[1]/child::*[1]";
-    public String allNumber = "//*[contains(@%s, 'All')]/following-sibling::*[1]/child::*[1]";
+    public String shortHaulNumber = "SHORT_HAUL_Count";
+    public String longHaulNumber = "LONG_HAUL_Count";
+    public String localNumber = "LOCAL_Count";
+    public String allNumber = "ALL_Count";
 
     public Map<String, String> buttonMap;
     public Map<String, String> availableCardMap;
