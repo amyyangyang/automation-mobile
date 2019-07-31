@@ -240,6 +240,7 @@ public class AvailableLoadsTest extends SetProperty {
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+            Thread.sleep(3000);
             if (attributeName.equals("text")) {
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
                 Thread.sleep(3000);
