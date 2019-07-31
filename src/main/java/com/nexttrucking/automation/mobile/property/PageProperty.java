@@ -55,6 +55,11 @@ public abstract class PageProperty {
         return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
     }
 
+    public String getTextByName(String titleText) {
+        String element = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+        return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
+    }
+
     public String getValue(String element, String titleText) {
         if (attributeName.equals("name")) {
             attributeValue = "value";
@@ -62,6 +67,15 @@ public abstract class PageProperty {
             attributeValue = "text";
         }
         return driver.findElement(By.xpath(String.format(element, attributeValue, titleText))).getText();
+    }
+
+    public String getValueByElement(String element) {
+        if (attributeName.equals("name")) {
+            attributeValue = "value";
+        } else {
+            attributeValue = "text";
+        }
+        return driver.findElement(By.xpath(String.format(element, attributeValue))).getText();
     }
 
     public void clickMenu(String element, String menuName) {
