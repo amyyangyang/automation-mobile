@@ -34,6 +34,12 @@ public class AvailableLoadsAllPage extends PageProperty {
 
     public Map<String, String> buttonMap;
     public Map<String, String> availableCardMap;
+
+    public String originationAddress="address_0";
+    public String destinationAddress="address_1";
+    public String pickupTime="time_0";
+    public String deliveryTime="time_1";
+
     public String longHaulMile = "//*[contains(@%s,'Loads that are 250 mi or more')]";
     public String shortHaulMile = "//*[contains(@%s,'Loads between 100 - 250 mi')]";
     public String localHaulMile = "//*[contains(@%s,'Loads that are less than 100 mi')]";
