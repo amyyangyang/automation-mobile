@@ -7,13 +7,15 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.jupiter.api.Tag;
+import org.junit.runners.MethodSorters;
 import property.SetProperty;
 import java.net.MalformedURLException;
 
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MyDriversTest extends SetProperty {
 
 
@@ -33,7 +35,7 @@ public class MyDriversTest extends SetProperty {
 
     @Test
     @Tag("write")
-    public void addDriver() throws InterruptedException {
+    public void signUpDriver() throws InterruptedException {
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
         myDriversPage.typePassword(getTestData("driverAddPassword"));
@@ -69,6 +71,8 @@ public class MyDriversTest extends SetProperty {
         if (isDriversExist) {
             myDriversPage.selectFirstDriver();
             myDriversPage.selectField("Phone");
+            String currentFirstName = myDriversPage.getCurrentName("FirstName");
+            String currentLastName = myDriversPage.getCurrentName("LastName");
             myDriversPage.editFirstName("SeraNew");
             myDriversPage.editLastName("AbeNew");
             myDriversPage.editPhone("2343423111");
@@ -77,14 +81,14 @@ public class MyDriversTest extends SetProperty {
             Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
             myDriversPage.selectField("Phone");
             System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
-            myDriversPage.editFirstName("Sera");
-            myDriversPage.editLastName("Abe");
+            myDriversPage.editFirstName(currentFirstName);
+            myDriversPage.editLastName(currentLastName);
             Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
             myDriversPage.editPhone("2343423424");
             myDriversPage.clickSaveButton();
-            Assert.assertTrue(!myDriversPage.getSavedData("FirstName").contains("SeraNew") && myDriversPage.getSavedData("FirstName").contains("Sera"));
-            Assert.assertTrue(!myDriversPage.getSavedData("LastName").contains("AbeNew") && myDriversPage.getSavedData("LastName").contains("Abe"));
             myDriversPage.selectField("Phone");
+            Assert.assertTrue(myDriversPage.getCurrentName("FirstName").contains(currentFirstName));
+            Assert.assertTrue(myDriversPage.getCurrentName("LastName").contains(currentLastName));
             Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
             myDriversPage.clickSaveButton();
             signInPage.clickBackButton();

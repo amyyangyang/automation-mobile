@@ -201,6 +201,19 @@ public class MyDriversPage extends PageProperty {
         return newString;
     }
 
+    public String getCurrentName(String dataName) {
+        String currentname = null;
+        switch (dataName) {
+            case "FirstName":
+                currentname = getElementTextWithDifferentLocator(editFirstNameInputForAndroid, editFirstNameInputForiOS);
+                break;
+            case "LastName":
+                currentname = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForiOS);
+                break;
+        }
+        return currentname;
+    }
+
     public String getSavedData(String dataName) {
         String newString = null;
         switch (dataName) {
