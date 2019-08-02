@@ -121,13 +121,17 @@ public abstract class PageProperty {
         }
     }
 
-    public String getElementText(String locator, String element, String index) {
+    public String getElementText(String locator, String element, int index) {
         if (locator.equals("id")) {
-            if (index.equals('O')) {
+            if (index == 0) {
                 return driver.findElementsByAccessibilityId(element).get(0).getText();
             } else {
-                int size = driver.findElementsByAccessibilityId(element).size();
-                return driver.findElementsByAccessibilityId(element).get(size - 1).getText();
+                if (attributeName.equals("text")) {
+                    return driver.findElementsByAccessibilityId(element).get(0).getText();
+                } else {
+                    int size = driver.findElementsByAccessibilityId(element).size();
+                    return driver.findElementsByAccessibilityId(element).get(size - 1).getText();
+                }
             }
         } else {
             return driver.findElement(By.xpath(String.format(element, attributeName))).getText();
@@ -135,7 +139,7 @@ public abstract class PageProperty {
     }
 
     public String getElementText(String locator, String element) {
-        return getElementText(locator, element, "last");
+        return getElementText(locator, element, 0);
     }
 
 
