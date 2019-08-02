@@ -22,18 +22,24 @@ public class AvailableLoadsAllPage extends PageProperty {
     private String menuNameButton = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String confirmLogOutButton = "(//*[contains(@%s, 'Yes')])[last()]";
 
-    public String localButton = "//*[contains(@%s,'Local')]";
-    public String shortHaulButton = "//*[contains(@%s,'Short Haul')]";
-    public String longHaulButton = "//*[contains(@%s,'Long Haul')]";
-    public String allButton = "//*[contains(@%s,'All')]";
+    public String localButton = "LOCAL";
+    public String shortHaulButton = "SHORT_HAUL";
+    public String longHaulButton = "LONG_HAUL";
+    public String allButton = "ALL";
 
-    public String shortHaulNumber = "//*[contains(@%s, 'Short Haul')]/following-sibling::*[1]/child::*[1]";
-    public String longHaulNumber = "//*[contains(@%s, 'Long Haul')]/following-sibling::*[1]/child::*[1]";
-    public String localNumber = "//*[contains(@%s, 'Local')]/following-sibling::*[1]/child::*[1]";
-    public String allNumber = "//*[contains(@%s, 'All')]/following-sibling::*[1]/child::*[1]";
+    public String shortHaulNumber = "SHORT_HAUL_Count";
+    public String longHaulNumber = "LONG_HAUL_Count";
+    public String localNumber = "LOCAL_Count";
+    public String allNumber = "ALL_Count";
 
     public Map<String, String> buttonMap;
     public Map<String, String> availableCardMap;
+
+    public String originationAddress="address_0";
+    public String destinationAddress="address_1";
+    public String pickupTime="time_0";
+    public String deliveryTime="time_1";
+
     public String longHaulMile = "//*[contains(@%s,'Loads that are 250 mi or more')]";
     public String shortHaulMile = "//*[contains(@%s,'Loads between 100 - 250 mi')]";
     public String localHaulMile = "//*[contains(@%s,'Loads that are less than 100 mi')]";

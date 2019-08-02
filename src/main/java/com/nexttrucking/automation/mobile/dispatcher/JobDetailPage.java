@@ -48,7 +48,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[contains(@text, 'Commodity')]/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
-            jobDetailCard.put("driverButton","//*[contains(@text, 'test han')]/following-sibling::*[1]");
+            jobDetailCard.put("driverButton","//*[contains(@text, 'App Driver')]/following-sibling::*[1]");
         } else {
 
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -60,7 +60,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("originationAddressOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]");
             jobDetailCard.put("destinationAddressOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[2]");
             jobDetailCard.put("pickupTimeOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[2]/child::*[2]/child::*[1]");
-            jobDetailCard.put("deliveryTimeOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]child::*[2]/child::*[2]/child::*[2]/child::*[2]");
+            jobDetailCard.put("deliveryTimeOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[2]/child::*[2]/child::*[2]");
             jobDetailCard.put("equipment", "//*[@name='Equipment']/following-sibling::*[1]");
             jobDetailCard.put("packaging", "//*[@name='Packaging']/following-sibling::*[1]");
             jobDetailCard.put("weight", "//*[@name='Weight']/following-sibling::*[1]");
@@ -68,7 +68,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
-            jobDetailCard.put("driverButton","(//*[contains(@name, 'test han')])[last()]");
+            jobDetailCard.put("driverButton","(//*[contains(@name, 'App Driver')])[last()]");
         }
 
     }

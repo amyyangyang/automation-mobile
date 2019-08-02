@@ -135,13 +135,27 @@ public abstract class PageProperty {
         }
     }
 
-    public String getElementText(String locator, String element) {
+    public String getElementText(String locator, String element, int index) {
         if (locator.equals("id")) {
-            return driver.findElementByAccessibilityId(element).getText();
+            if (index == 0) {
+                return driver.findElementsByAccessibilityId(element).get(0).getText();
+            } else {
+                if (attributeName.equals("text")) {
+                    return driver.findElementsByAccessibilityId(element).get(0).getText();
+                } else {
+                    int size = driver.findElementsByAccessibilityId(element).size();
+                    return driver.findElementsByAccessibilityId(element).get(size - 1).getText();
+                }
+            }
         } else {
             return driver.findElement(By.xpath(String.format(element, attributeName))).getText();
         }
     }
+
+    public String getElementText(String locator, String element) {
+        return getElementText(locator, element, 0);
+    }
+
 
     public void clickElementByLocator(String locator, String element) {
         if (locator.equals("id")) {
@@ -151,10 +165,10 @@ public abstract class PageProperty {
         }
     }
 
-    public MobileElement getElement(String locator,String element) {
-        if(locator.equals("id")) {
+    public MobileElement getElement(String locator, String element) {
+        if (locator.equals("id")) {
             return driver.findElementByAccessibilityId(element);
-        }else{
+        } else {
             return driver.findElement(By.xpath(String.format(element, attributeName)));
         }
     }
