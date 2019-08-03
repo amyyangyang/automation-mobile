@@ -26,10 +26,8 @@ public class PaymentsTest extends SetProperty {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
-        allowLocationPage = new AllowLocationPage(driver, attributeName);
-        welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        myDriversPage = new MyDriversPage(driver, attributeName);
+        paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
@@ -40,7 +38,7 @@ public class PaymentsTest extends SetProperty {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
-            Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getTextByName(paymentsPage.paymentList.get("paymentStatus"))));
+            Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus"))));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
