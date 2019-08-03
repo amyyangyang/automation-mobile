@@ -37,7 +37,7 @@ public class PaymentsTest extends SetProperty {
 
     @Test
     public void checkAvailableLoadPage() throws InterruptedException {
-        Assert.assertTrue(pageProperty.getTextByName("PaymentsPage").contains("Payments"));
+        Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
             Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getTextByName(paymentsPage.paymentList.get("paymentStatus"))));
