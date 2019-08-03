@@ -20,10 +20,16 @@ public class JobDetailPage extends PageProperty {
     public By isNotBookButton = xpath("//*[contains(@text, '\uF406')]");
     public String isThisOK = "//*[contains(@%s, 'Is this ok?')]";
     public String booked = "(//*[contains(@%s, \"You're booked!\")])[last()]";
+
+    //button for dispatcher , skip assign driver or assign driver
     public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
     public String assignOkButton = "(//*[@%s='OK'])[last()]";
     public String driverButton = "//*[contains(@%s, 'test han')]/following-sibling::*[1]";
     public String assignButton = "(//*[@%s='Assign'])[last()]";
+
+    //button for ownerOperator, only go to my loads button and go to available loads button
+    public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
+    public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
 
     public HashMap<String, String> jobDetailCard;
 
@@ -48,7 +54,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[contains(@text, 'Commodity')]/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
-            jobDetailCard.put("driverButton","//*[contains(@text, 'App Driver')]/following-sibling::*[1]");
+            jobDetailCard.put("driverButton","//*[contains(@text, ' Driver')]/following-sibling::*[1]");
         } else {
 
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -68,7 +74,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
-            jobDetailCard.put("driverButton","(//*[contains(@name, 'App Driver')])[last()]");
+            jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
         }
 
     }
