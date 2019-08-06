@@ -38,7 +38,9 @@ public class PaymentsTest extends SetProperty {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
-            Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus"))));
+            Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
+//            Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus"))));
+//            Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus")).contains(Utils.paymentsStatusList.get(0)));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
