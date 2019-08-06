@@ -29,8 +29,8 @@ public class PaymentsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-//        Thread.sleep(40000);
+//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        Thread.sleep(40000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 
