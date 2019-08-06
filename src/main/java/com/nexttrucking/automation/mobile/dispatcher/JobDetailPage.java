@@ -3,6 +3,8 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -77,6 +79,42 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
         }
 
+    }
+
+    public void bookTender() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", isBookButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(229,612)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void assignDriver() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", assignOkButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(270,600)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void skipAssignDriver() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", skipButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(95,607)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void goToMyLoadsOrAvailableLoadsPage (String element)throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path",element);
+        }else{
+            new TouchAction(driver).press(PointOption.point(270,600)).perform();
+        }
+        //Thread.sleep(3000);
     }
 
 }

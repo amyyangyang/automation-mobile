@@ -200,14 +200,6 @@ public class AvailableLoadsTest extends SetProperty {
                 Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("pickupTime")));
                 Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("deliveryTime")));
             }
-//            jobDetailPage.swipeToUp();
-//            jobDetailPage.swipeToUp();
-//            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("equipment"))));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("packaging")));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("weight")));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("distance")));
-//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("commodity")));
-//            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.jobDetailCard.get("specification")).toUpperCase().substring(1)));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         }
     }
@@ -219,27 +211,13 @@ public class AvailableLoadsTest extends SetProperty {
             availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
             Thread.sleep(3000);
-            if (attributeName.equals("text")) {
-                jobDetailPage.clickElementByLocator("path", jobDetailPage.isBookButton);
-                Thread.sleep(3000);
-                Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
-                if (isAllowToBook) {
-                    Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                    jobDetailPage.clickElementByLocator("path", jobDetailPage.goToMyLoadsButton);
-                }
-                else{
-                    jobDetailPage.clickElementByLocator("path",jobDetailPage.goToAvailableLoadsButton);
-                }
-                Thread.sleep(3000);
+            jobDetailPage.bookTender();
+            Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
+            if (isAllowToBook) {
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(229, 612)).perform();
-                Thread.sleep(3000);
-                Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
-                if (isAllowToBook) {
-                    Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                }
-                new TouchAction(driver).press(PointOption.point(229, 612)).perform();
-                Thread.sleep(3000);
+                jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
             }
             availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }
