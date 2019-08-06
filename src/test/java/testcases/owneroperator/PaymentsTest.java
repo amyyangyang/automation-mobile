@@ -29,18 +29,17 @@ public class PaymentsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        Thread.sleep(40000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 
     @Test
-    public void checkAvailableLoadPage() throws InterruptedException {
+    public void checkPaymentsListPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
             Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-//            Assert.assertThat(Utils.paymentsStatusList, hasItem(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus"))));
-//            Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentStatus")).contains(Utils.paymentsStatusList.get(0)));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }

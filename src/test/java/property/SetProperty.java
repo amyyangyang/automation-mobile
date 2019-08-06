@@ -111,7 +111,7 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
-                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.5.ipa");
+                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.7.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
                                 capabilities.setCapability("waitForQuiescence", false);
                                 capabilities.setCapability("resetOnSessionStartOnly", false);
