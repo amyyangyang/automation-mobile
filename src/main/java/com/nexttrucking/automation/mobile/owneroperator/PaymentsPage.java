@@ -12,8 +12,6 @@ public class PaymentsPage extends PageProperty {
 
     public HashMap<String, String> paymentList;
 
-
-
     public PaymentsPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
         paymentList = new HashMap<>();
@@ -27,7 +25,6 @@ public class PaymentsPage extends PageProperty {
             paymentList.put("paymentPrice", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
         }
     }
-
 
     public boolean isPaymentStatusCorrect() {
         boolean correctStatus = false;

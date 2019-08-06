@@ -1,21 +1,15 @@
 package testcases.owneroperator;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
-import com.nexttrucking.automation.mobile.aguest.WelcomePage;
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.owneroperator.PaymentsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
-import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
-
 import java.net.MalformedURLException;
 
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class PaymentsTest extends SetProperty {
 
@@ -29,8 +23,7 @@ public class PaymentsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
-//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        Thread.sleep(40000);
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 

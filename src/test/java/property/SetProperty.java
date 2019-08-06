@@ -95,11 +95,11 @@ public abstract class SetProperty {
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST-V2.0.4.apk_2.0.5.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST.apk_2.0.7.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                             break;
                                         case "demo":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO-V2.0.4.apk_2.0.5.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO.apk_2.0.7.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                             break;
                                     }
