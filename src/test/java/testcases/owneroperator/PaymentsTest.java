@@ -29,8 +29,8 @@ public class PaymentsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
-//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        Thread.sleep(40000);
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+//        Thread.sleep(40000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 
@@ -40,6 +40,9 @@ public class PaymentsTest extends SetProperty {
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
             Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
+            Assert.assertTrue(pageProperty.isTextPresent("THIS MONTH"));
+            Assert.assertTrue(pageProperty.isTextPresent("THIS YEAR"));
+            Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPrice")).contains("$"));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }

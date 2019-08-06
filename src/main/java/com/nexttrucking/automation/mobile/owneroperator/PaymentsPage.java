@@ -20,10 +20,11 @@ public class PaymentsPage extends PageProperty {
         if (attributeName.equals("text")) {
             paymentList.put("firstPayment", "//*[@content-desc='payment_view_list']/*/*/*/*/*/*[1]");
             paymentList.put("paymentStatus", "//*[@content-desc='payment_view_list']/*/*/*/*/*/*[1]");
+            paymentList.put("paymentPrice", "(//*[@content-desc='payment_view_list']/*/*/*/*/*[3])[2]");
         } else {
-//            paymentList.put("firstPayment", "//*[@name=\"Payments\"]/following-sibling::*/*/*/*/*[2]]");
             paymentList.put("firstPayment", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
             paymentList.put("paymentStatus", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
+            paymentList.put("paymentPrice", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
         }
     }
 
