@@ -60,6 +60,18 @@ public abstract class PageProperty {
         return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
     }
 
+    public boolean isTextPresent(String text) {
+        String element = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+        try {
+            driver.findElement(By.xpath(String.format(element, attributeName, text)));
+            return true;
+        } catch (NoSuchElementException exception) {
+            return false;
+        } catch (WebDriverException exception) {
+            return false;
+        }
+    }
+
     public String getValue(String element, String titleText) {
         if (attributeName.equals("name")) {
             attributeValue = "value";
