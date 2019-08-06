@@ -3,6 +3,8 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -20,10 +22,16 @@ public class JobDetailPage extends PageProperty {
     public By isNotBookButton = xpath("//*[contains(@text, '\uF406')]");
     public String isThisOK = "//*[contains(@%s, 'Is this ok?')]";
     public String booked = "(//*[contains(@%s, \"You're booked!\")])[last()]";
+
+    //button for dispatcher , skip assign driver or assign driver
     public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
     public String assignOkButton = "(//*[@%s='OK'])[last()]";
     public String driverButton = "//*[contains(@%s, 'test han')]/following-sibling::*[1]";
     public String assignButton = "(//*[@%s='Assign'])[last()]";
+
+    //button for ownerOperator, only go to my loads button and go to available loads button
+    public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
+    public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
 
     public HashMap<String, String> jobDetailCard;
 
@@ -48,7 +56,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[contains(@text, 'Commodity')]/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
-            jobDetailCard.put("driverButton","//*[contains(@text, 'App Driver')]/following-sibling::*[1]");
+            jobDetailCard.put("driverButton","//*[contains(@text, 'Assign Driver')]/parent::*[1]/following-sibling::*[1]/*/*/*/*[1]/*/*[2]");
         } else {
 
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -68,9 +76,45 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
-            jobDetailCard.put("driverButton","(//*[contains(@name, 'App Driver')])[last()]");
+            jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
         }
 
+    }
+
+    public void bookTender() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", isBookButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(229,612)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void assignDriver() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", assignOkButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(270,600)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void skipAssignDriver() throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path", skipButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(95,607)).perform();
+        }
+        Thread.sleep(3000);
+    }
+
+    public void goToMyLoadsOrAvailableLoadsPage (String element)throws InterruptedException{
+        if(attributeName.equals("text")){
+            clickElementByLocator("path",element);
+        }else{
+            new TouchAction(driver).press(PointOption.point(270,600)).perform();
+        }
+        //Thread.sleep(3000);
     }
 
 }
