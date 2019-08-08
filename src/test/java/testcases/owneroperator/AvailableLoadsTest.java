@@ -35,7 +35,7 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     @Test
-    public void checkAvailableLoadPage1() throws InterruptedException {
+    public void checkAvailableLoadPage() throws InterruptedException {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allButton, 1), "All");
         Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localButton, 1), "Local");
