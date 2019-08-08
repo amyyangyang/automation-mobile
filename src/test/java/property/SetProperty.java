@@ -85,13 +85,13 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM, MobilePlatform.ANDROID);
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "2ae7e8449805");
-                                capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
+                                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "VS990ae634218");
+                                capabilities.setCapability(MobileCapabilityType.VERSION, "6.0");
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
                                 capabilities.setCapability("waitForQuiescence", "false");
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.5.apk");
+                                            //capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.5.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
