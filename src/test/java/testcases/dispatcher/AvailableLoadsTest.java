@@ -201,28 +201,28 @@ public class AvailableLoadsTest extends SetProperty {
     }
 
     //@Test
-    public void checkLoadDetail() {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
-        if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
-            Boolean isManyLoad = jobDetailPage.isElementPresent("path", jobDetailPage.theLoadNumberOfJob);
-            if (isManyLoad) {
-            }
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.pickupTime));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.deliveryTime));
-            //jobDetailPage.swipeToUp(600);
-            //jobDetailPage.swipeToUp(600);
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.equipment)));
-            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.packaging));
-            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.weight));
-            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.distance));
-            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.commodity));
-            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.specification.toUpperCase().substring(1))));
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
-        }
-    }
+//    public void checkLoadDetail() {
+//        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+//        if (isPresentLoad) {
+//            availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
+//            Boolean isManyLoad = jobDetailPage.isElementPresent("path", jobDetailPage.theLoadNumberOfJob);
+//            if (isManyLoad) {
+//            }
+//            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
+//            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.pickupTime));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.deliveryTime));
+//            //jobDetailPage.swipeToUp(600);
+//            //jobDetailPage.swipeToUp(600);
+//            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.equipment)));
+//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.packaging));
+//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.weight));
+//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.distance));
+//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.commodity));
+//            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.specification.toUpperCase().substring(1))));
+//            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
+//        }
+//    }
 
     //@Test
     public void bookTenderOnly() throws InterruptedException {
