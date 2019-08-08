@@ -212,8 +212,8 @@ public class AvailableLoadsTest extends SetProperty {
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
             Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.pickupTime));
             Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.deliveryTime));
-            jobDetailPage.swipeToUp(600);
-            jobDetailPage.swipeToUp(600);
+            //jobDetailPage.swipeToUp(600);
+            //jobDetailPage.swipeToUp(600);
             Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.equipment)));
             //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.packaging));
             //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.weight));
