@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MyDriversTest extends SetProperty {
+public class DispatcherMyDriversTest extends SetProperty {
 
 
     @BeforeClass
@@ -30,25 +30,6 @@ public class MyDriversTest extends SetProperty {
         // SignIn as Dispatcher
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
-    }
-
-
-    @Test
-    @Tag("write")
-    public void signUpDriver() throws InterruptedException {
-        myDriversPage.clickAddDriverButton();
-        myDriversPage.typeEmail(getTestData("driverAddEmail"));
-        myDriversPage.typePassword(getTestData("driverAddPassword"));
-        myDriversPage.clickContinueButton();
-        myDriversPage.selectDriverType("Reefer");
-        myDriversPage.clickContinueButton();
-        myDriversPage.selectDriverSize("48");
-        myDriversPage.clickContinueButton();
-        myDriversPage.typeFirstName(getTestData("driveFirstName"));
-        myDriversPage.typeLastName(getTestData("driveLastName"));
-        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumber"));
-        myDriversPage.clickSignUpButton();
-        Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }
 
 

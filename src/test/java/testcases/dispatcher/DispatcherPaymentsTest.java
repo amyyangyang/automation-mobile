@@ -1,4 +1,4 @@
-package testcases.owneroperator;
+package testcases.dispatcher;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -8,10 +8,11 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
+
 import java.net.MalformedURLException;
 
 
-public class PaymentsTest extends SetProperty {
+public class DispatcherPaymentsTest extends SetProperty {
 
     public static PaymentsPage paymentsPage;
 
@@ -23,7 +24,7 @@ public class PaymentsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         paymentsPage = new PaymentsPage(driver, attributeName);
         // SignIn as OwnerOperator
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 

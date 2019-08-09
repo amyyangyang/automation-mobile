@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
-public class MyLoadsTest extends SetProperty {
+public class DispatcherMyLoadsTest extends SetProperty {
     public static MyloadsPage myloadsPage;
 
     @BeforeClass
