@@ -213,8 +213,8 @@ public class AvailableLoadsTest extends SetProperty {
         }
     }
 
-    //@Test
-    public void bookTenderOnly() throws InterruptedException {
+    @Test
+    public void bookJobOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);

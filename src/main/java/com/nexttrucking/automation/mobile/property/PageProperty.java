@@ -188,14 +188,23 @@ public abstract class PageProperty {
         }
     }
 
-    public void swipeToUp() {
+    public void swipeToUp(int length) {
         try {
             new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).
                     waitAction(WaitOptions.waitOptions(duration)).
-                    moveTo(PointOption.point(0, height / 4)).release().perform();
+                    moveTo(PointOption.point(0, length)).release().perform();
             Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public String getELementAttribute(String locator, String element, String attribute) {
+        if (locator.equals("id")) {
+            return driver.findElementByAccessibilityId(element).getAttribute(attribute);
+        } else {
+            return driver.findElementByXPath(element).getAttribute(attribute);
         }
 
     }
