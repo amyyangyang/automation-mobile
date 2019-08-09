@@ -15,6 +15,7 @@ public abstract class PageProperty {
     private int height;
     public int nanos = (int) (2 * 1000);
     public Duration duration = Duration.ofNanos(nanos);
+    String anyElement = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
 
     public PageProperty(AppiumDriver<MobileElement> driver, String attributeName) {
         this.driver = driver;
@@ -39,6 +40,10 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName, elementName))).click();
     }
 
+    public void clickAnyElementByName(String elementName){
+        driver.findElement(By.xpath(String.format(anyElement, attributeName, elementName))).click();
+    }
+
     public void sendKeyToElement(String element, String keys) {
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
@@ -58,6 +63,18 @@ public abstract class PageProperty {
     public String getTextByName(String titleText) {
         String element = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
         return driver.findElement(By.xpath(String.format(element, attributeName, titleText))).getText();
+    }
+
+    public boolean isTextPresent(String text) {
+        String element = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
+        try {
+            driver.findElement(By.xpath(String.format(element, attributeName, text)));
+            return true;
+        } catch (NoSuchElementException exception) {
+            return false;
+        } catch (WebDriverException exception) {
+            return false;
+        }
     }
 
     public String getValue(String element, String titleText) {

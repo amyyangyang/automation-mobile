@@ -1,9 +1,11 @@
 package testcases.common;
 
+import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.SignUpPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import org.junit.*;
 import org.junit.jupiter.api.Tag;
 import property.SetProperty;
@@ -20,6 +22,8 @@ public class SignUpTest extends SetProperty {
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
+        myDriversPage = new MyDriversPage(driver, attributeName);
+        signInPage = new SignInPage(driver, attributeName);
         welcomePage.getWelcomePage();
     }
 
@@ -68,6 +72,27 @@ public class SignUpTest extends SetProperty {
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
+
+    @Test
+    @Tag("write")
+    public void signUpDriver() throws InterruptedException {
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
+        myDriversPage.clickAddDriverButton();
+        myDriversPage.typeEmail(getTestData("driverAddEmail"));
+        myDriversPage.typePassword(getTestData("driverAddPassword"));
+        myDriversPage.clickContinueButton();
+        myDriversPage.selectDriverType("Reefer");
+        myDriversPage.clickContinueButton();
+        myDriversPage.selectDriverSize("48");
+        myDriversPage.clickContinueButton();
+        myDriversPage.typeFirstName(getTestData("driveFirstName"));
+        myDriversPage.typeLastName(getTestData("driveLastName"));
+        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumber"));
+        myDriversPage.clickSignUpButton();
+        Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
+    }
+
 
     @After
     public void logOut() throws InterruptedException {
