@@ -15,6 +15,7 @@ public abstract class PageProperty {
     private int height;
     public int nanos = (int) (2 * 1000);
     public Duration duration = Duration.ofNanos(nanos);
+    String anyElement = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
 
     public PageProperty(AppiumDriver<MobileElement> driver, String attributeName) {
         this.driver = driver;
@@ -37,6 +38,10 @@ public abstract class PageProperty {
 
     public void clickElementByName(String element, String elementName){
         driver.findElement(By.xpath(String.format(element, attributeName, elementName))).click();
+    }
+
+    public void clickAnyElementByName(String elementName){
+        driver.findElement(By.xpath(String.format(anyElement, attributeName, elementName))).click();
     }
 
     public void sendKeyToElement(String element, String keys) {
