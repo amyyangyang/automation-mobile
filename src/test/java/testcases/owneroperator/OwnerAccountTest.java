@@ -11,7 +11,7 @@ import property.SetProperty;
 
 import java.net.MalformedURLException;
 
-public class AccountTest extends SetProperty {
+public class OwnerAccountTest extends SetProperty {
 
 
     @BeforeClass
