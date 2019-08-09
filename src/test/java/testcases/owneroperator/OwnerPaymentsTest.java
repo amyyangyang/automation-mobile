@@ -52,7 +52,6 @@ public class OwnerPaymentsTest extends SetProperty {
             pageProperty.clickAnyElementByName("Details");
             Assert.assertTrue(pageProperty.isTextPresent("You'll Make"));
             Assert.assertTrue(pageProperty.isTextPresent("Rate Contract"));
-            Assert.assertTrue(pageProperty.isTextPresent("Proof of Delivery"));
             Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
             signInPage.clickBackButton();
         } else {
