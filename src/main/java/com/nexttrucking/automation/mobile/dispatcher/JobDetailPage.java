@@ -13,8 +13,6 @@ import static org.openqa.selenium.By.xpath;
 
 public class JobDetailPage extends PageProperty {
 
-    private AppiumDriver<MobileElement> driver;
-
     //public String callButton = "//*[contains(@text, 'ALLOW')]";
     public String bookButton = "(//*[contains(@%s, 'Book Now')])[last()]";
     public String theLoadNumberOfJob = "(//*[contains(@%s,'This job contains')])[last()]";

@@ -224,8 +224,8 @@ public class DispatcherAvailableTest extends SetProperty {
 //        }
 //    }
 
-    //@Test
-    public void bookTenderOnly() throws InterruptedException {
+    @Test
+    public void bookJobOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
@@ -237,8 +237,8 @@ public class DispatcherAvailableTest extends SetProperty {
         }
     }
 
-    //@Test
-    public void bookTenderAndAssignDriver() throws InterruptedException {
+    @Test
+    public void bookJobAndAssignDriver() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
