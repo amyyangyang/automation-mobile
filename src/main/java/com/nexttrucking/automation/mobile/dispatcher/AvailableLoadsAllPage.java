@@ -55,6 +55,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String noLoadsButton = "//*[contains(@%s,'No Loads')]";
     public String noLoad = "(//*[contains(@%s,'Please try another type of load')])[last()]";
     public String noLoadAfterFiltering = "(//*[contains(@%s,\"Your list is currently filtered so you aren't seeing all of our loads.\")])[last()]";
+    public String liveUnloadJobAddress2 = "//*[@content-desc='address_2']";
 
     public AvailableLoadsAllPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -75,7 +76,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             //availableCardMap.put("pickupTime", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[8]");
             //availableCardMap.put("deliveryTime", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
             //availableCardMap.put("payout", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
-            availableCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
+            availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
             availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
             availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
         } else {
@@ -95,7 +96,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             //availableCardMap.put("payout", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
             availableCardMap.put("numberOfLoad", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
             //availableCardMap.put("numberOfLoadTwo","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
-
+            availableCardMap.put("liveUnloadJobStatus", "//android.widget.FrameLayout[last()]/following-sibling::*[1]/*[1]");
         }
     }
 

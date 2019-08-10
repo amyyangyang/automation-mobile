@@ -214,7 +214,12 @@ public abstract class PageProperty {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+//        WebElement element = driver.findElement(By.xpath(""));
+//        JavascriptExecutor js = (JavascriptExecutor)driver;
+//        HashMap<String, String> scrollObject = new HashMap<String, String>();
+//        scrollObject.put("direction", "down");
+//        scrollObject.put("element", ((RemoteWebElement) element).getId());
+//        js.executeScript("mobile: scroll", scrollObject);
     }
 
     public String getELementAttribute(String locator, String element, String attribute) {

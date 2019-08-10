@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import com.nexttrucking.automation.mobile.property.Utils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -20,12 +21,13 @@ import java.net.MalformedURLException;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OwnerAvailableLoadsTest extends SetProperty {
+public class OwnerAvailableTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
+        pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -231,5 +233,38 @@ public class OwnerAvailableLoadsTest extends SetProperty {
             availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }
     }
+
+    @Test
+    public void checkLiveUnloadJobDetail() throws InterruptedException {
+        if (attributeName.equals("text")) {
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                Boolean isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                while (!isPresentLiveUnloadJob) {
+                    availableLoadsAllPage.swipeToUp(11);
+                    isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                }
+                pageProperty.clickElementByLocator("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress1));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress2));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime1));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime2));
+                availableLoadsAllPage.swipeToUp(10);
+                Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
+                Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
+                Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
+                Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
+                Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
+                Assert.assertTrue(pageProperty.isTextPresent("$"));
+                signInPage.clickBackButton();
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            }
+        }
+    }
+
 
 }
