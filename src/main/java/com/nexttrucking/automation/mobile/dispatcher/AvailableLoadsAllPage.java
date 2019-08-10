@@ -96,7 +96,6 @@ public class AvailableLoadsAllPage extends PageProperty {
             //availableCardMap.put("payout", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
             availableCardMap.put("numberOfLoad", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
             //availableCardMap.put("numberOfLoadTwo","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
-            availableCardMap.put("liveUnloadJobStatus", "//android.widget.FrameLayout[last()]/following-sibling::*[1]/*[1]");
         }
     }
 

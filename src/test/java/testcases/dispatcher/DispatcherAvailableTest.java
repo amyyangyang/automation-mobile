@@ -79,7 +79,7 @@ public class DispatcherAvailableTest extends SetProperty {
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
-//                availableLoadsAllPage.swipeToUp(300);
+//                availableLoadsAllPage.swipeToUp();
                 Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
                 if (isPresentJobType) {
                     Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
