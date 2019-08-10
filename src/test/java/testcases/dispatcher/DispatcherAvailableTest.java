@@ -200,29 +200,43 @@ public class DispatcherAvailableTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
     }
 
-    //@Test
-//    public void checkLoadDetail() {
-//        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
-//        if (isPresentLoad) {
-//            availableLoadsAllPage.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("jobType"));
-//            Boolean isManyLoad = jobDetailPage.isElementPresent("path", jobDetailPage.theLoadNumberOfJob);
-//            if (isManyLoad) {
-//            }
-//            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
-//            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.pickupTime));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.deliveryTime));
-//            //jobDetailPage.swipeToUp(600);
-//            //jobDetailPage.swipeToUp(600);
-//            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.equipment)));
-//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.packaging));
-//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.weight));
-//            Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.distance));
-//            //Assert.assertNotNull(jobDetailPage.getElementText("path", jobDetailPage.commodity));
-//            Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("path", jobDetailPage.specification.toUpperCase().substring(1))));
-//            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
-//        }
-//    }
+    @Test
+    public void checkLoadDetail() {
+        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        if (isPresentLoad) {
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
+            Boolean isTrips = jobDetailPage.isElementPresent("xpath", jobDetailPage.isTrips);
+            if (isTrips) {
+//                Assert.assertTrue(jobDetailPage.getElementText("id",jobDetailPage.payment).contains("$"));
+//                Assert.assertNull(jobDetailPage.getElementText("id",jobDetailPage.jobStatus));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
+                Boolean isLiveOnLoad=jobDetailPage.isElementPresent("id",jobDetailPage.liveLoadAddress);
+                if(isLiveOnLoad)
+                {
+                    Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadAddress));
+                    jobDetailPage.swipeToUp(600);
+                    Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadTime));
+                }
+            }else{
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
+            }
+            jobDetailPage.swipeToUp(600);
+            jobDetailPage.swipeToUp(600);
+            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
+            //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.packaging));
+            //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.weight));
+            //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.commodity));
+            //Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.specification.toUpperCase().substring(1))));
+            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
+        }
+    }
 
     @Test
     public void bookJobOnly() throws InterruptedException {

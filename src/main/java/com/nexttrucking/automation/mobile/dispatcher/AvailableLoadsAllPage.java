@@ -75,7 +75,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             //availableCardMap.put("pickupTime", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[8]");
             //availableCardMap.put("deliveryTime", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
             //availableCardMap.put("payout", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
-            availableCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
+            availableCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]");
             availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
             availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
         } else {
