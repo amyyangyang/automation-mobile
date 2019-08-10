@@ -255,12 +255,12 @@ public class OwnerAvailableTest extends SetProperty {
                 }
                 pageProperty.clickElementByLocator("path", availableLoadsAllPage.liveUnloadJobAddress2);
                 Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress0));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress1));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress2));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime0));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime1));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime2));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[0]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[1]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[2]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[0]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[1]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[2]));
                 availableLoadsAllPage.swipeToUp(10);
                 Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
                 Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
