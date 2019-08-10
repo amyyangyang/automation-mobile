@@ -21,6 +21,7 @@ public class JobDetailPage extends PageProperty {
     public By isNotBookButton = xpath("//*[contains(@text, '\uF406')]");
     public String isThisOK = "//*[contains(@%s, 'Is this ok?')]";
     public String booked = "(//*[contains(@%s, \"You're booked!\")])[last()]";
+    public String isTrips = "//*[contains(@%s, 'Container')]";
 
     //button for dispatcher , skip assign driver or assign driver
     public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
@@ -37,6 +38,23 @@ public class JobDetailPage extends PageProperty {
     public String liveUnloadTime0 = "time_0";
     public String liveUnloadTime1 = "time_1";
     public String liveUnloadTime2 = "time_2";
+
+    public String originationAddress="address_0";
+    public String destinationAddress="address_1";
+    public String liveLoadAddress="address_2";
+    public String liveLoadTime="time_2";
+    public String pickupTime="time_0";
+    public String deliveryTime="time_1";
+    public String jobStatus="";
+    public String payment="";
+
+    public String equipment="Equipment_value";
+    public String distance="Total Distance_key";
+    public String packaging="Packaging_value";
+    public String weight="Weight_value";
+    public String container="";
+    public String specification="";
+    public String commodity="";
 
     public HashMap<String, String> jobDetailCard;
 
