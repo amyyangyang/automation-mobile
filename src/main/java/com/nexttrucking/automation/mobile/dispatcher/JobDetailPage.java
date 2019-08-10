@@ -33,11 +33,7 @@ public class JobDetailPage extends PageProperty {
     public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
     public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
-//    public String liveUnloadAddress1 = "address_1";
-//    public String liveUnloadAddress2 = "address_2";
     public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
-//    public String liveUnloadTime1 = "time_1";
-//    public String liveUnloadTime2 = "time_2";
 
     public String originationAddress="address_0";
     public String destinationAddress="address_1";

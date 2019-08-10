@@ -250,7 +250,7 @@ public class OwnerAvailableTest extends SetProperty {
             if (isPresentLoad) {
                 Boolean isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
                 while (!isPresentLiveUnloadJob) {
-                    availableLoadsAllPage.swipeToUp(11);
+                    availableLoadsAllPage.swipeToUp(5);
                     isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
                 }
                 pageProperty.clickElementByLocator("path", availableLoadsAllPage.liveUnloadJobAddress2);
@@ -261,7 +261,7 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[0]));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[1]));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[2]));
-                availableLoadsAllPage.swipeToUp(10);
+                availableLoadsAllPage.swipeToUp(5);
                 Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
                 Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
                 Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
