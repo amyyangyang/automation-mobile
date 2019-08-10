@@ -3,9 +3,11 @@ package testcases.dispatcher;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -14,9 +16,14 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
@@ -29,6 +36,7 @@ public class DispatcherAvailableTest extends SetProperty {
         setUpDriver();
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
+        pageProperty = new PageProperty(driver, attributeName) {};
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
@@ -71,7 +79,7 @@ public class DispatcherAvailableTest extends SetProperty {
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
-                //availableLoadsAllPage.swipeToUp();
+//                availableLoadsAllPage.swipeToUp();
                 Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
                 if (isPresentJobType) {
                     Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
@@ -264,6 +272,38 @@ public class DispatcherAvailableTest extends SetProperty {
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("driverButton"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.assignButton);
             Thread.sleep(3000);
+        }
+    }
+
+    @Test
+    public void checkLiveUnloadJobDetail() throws InterruptedException {
+        if (attributeName.equals("text")) {
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                Boolean isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                while (!isPresentLiveUnloadJob) {
+                    availableLoadsAllPage.swipeToUp(5);
+                    isPresentLiveUnloadJob = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                }
+                pageProperty.clickElementByLocator("path", availableLoadsAllPage.liveUnloadJobAddress2);
+                Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[0]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[1]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[2]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[0]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[1]));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[2]));
+                availableLoadsAllPage.swipeToUp(5);
+                Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
+                Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
+                Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
+                Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
+                Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
+                Assert.assertTrue(pageProperty.isTextPresent("$"));
+                signInPage.clickBackButton();
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            }
         }
     }
 }

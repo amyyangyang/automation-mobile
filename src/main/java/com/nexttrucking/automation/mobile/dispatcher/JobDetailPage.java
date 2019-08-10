@@ -1,6 +1,7 @@
 package com.nexttrucking.automation.mobile.dispatcher;
 
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.property.Utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -31,6 +32,8 @@ public class JobDetailPage extends PageProperty {
     //button for ownerOperator, only go to my loads button and go to available loads button
     public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
+    public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
+    public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
 
     public String originationAddress="address_0";
     public String destinationAddress="address_1";
@@ -73,8 +76,8 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
             jobDetailCard.put("driverButton","//*[contains(@text, 'Assign Driver')]/parent::*[1]/following-sibling::*[1]/*/*/*/*[1]/*/*[2]");
+            jobDetailCard.put("liveUnloadJobStatus", "//android.widget.FrameLayout[last()]/following-sibling::*[1]/*[1]");
         } else {
-
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
             jobDetailCard.put("destinationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]");
             jobDetailCard.put("pickupTime", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
@@ -93,6 +96,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
+            jobDetailCard.put("liveUnloadJobStatus", "//???");
         }
 
     }
@@ -131,6 +135,17 @@ public class JobDetailPage extends PageProperty {
             new TouchAction(driver).press(PointOption.point(270,600)).perform();
         }
         //Thread.sleep(3000);
+    }
+
+    public boolean isliveUnloadJobStatusCorrect() {
+        boolean correctStatus = false;
+        String paymentStatus = getElementText("path", jobDetailCard.get("liveUnloadJobStatus"));
+        for (int i=0; i<2; i++) {
+            if (paymentStatus.contains(Utils.liveUnloadJobStatus.get(i))) {
+                correctStatus = true;
+            }
+        }
+        return correctStatus;
     }
 
 }
