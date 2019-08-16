@@ -3,6 +3,7 @@ package testcases.dispatcher;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyloadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -23,6 +24,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DispatcherAvailableTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
+    public static MyloadsPage myloadsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -32,6 +34,7 @@ public class DispatcherAvailableTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
+        myloadsPage=new MyloadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
@@ -260,10 +263,31 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(3000);
             jobDetailPage.bookTender();
             Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-            jobDetailPage.assignDriver();
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("driverButton"));
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.assignButton);
-            Thread.sleep(3000);
+            jobDetailPage.assignDriver(jobDetailPage.driverButton);
         }
     }
+
+    @Test
+    public void changeJobStatusToCompleted()throws InterruptedException{
+        //book tender
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+        welcomePage.clickSignInButton();
+        signInPage.typeEmail(getTestData("driverEmail"));
+        signInPage.typePassword(getTestData("driverPassword"));
+        signInPage.clickSignInButton();
+        Thread.sleep(10000);
+        String type = myloadsPage.getElementText("id",myloadsPage.jobNumber);
+        System.out.println(type);
+        myloadsPage.clickElementByLocator("id",myloadsPage.payment);
+        Thread.sleep(3000);
+        if(type.contains("J")){
+            myloadsPage.changeTripJobStatus(allowLocationPage);
+        } else{
+            myloadsPage.changeLegacyJobStatus(allowLocationPage);
+        }
+        availableLoadsAllPage.getTitle("My loads");
+    }
+
 }

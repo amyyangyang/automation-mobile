@@ -25,7 +25,7 @@ public class JobDetailPage extends PageProperty {
     //button for dispatcher , skip assign driver or assign driver
     public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
     public String assignOkButton = "(//*[@%s='OK'])[last()]";
-    public String driverButton = "//*[contains(@%s, 'test han')]/following-sibling::*[1]";
+    public String driverButton = "//*[contains(@%s, 'Test Test')]/following-sibling::*[1]";
     public String assignButton = "(//*[@%s='Assign'])[last()]";
 
     //button for ownerOperator, only go to my loads button and go to available loads button
@@ -106,13 +106,20 @@ public class JobDetailPage extends PageProperty {
         Thread.sleep(3000);
     }
 
-    public void assignDriver() throws InterruptedException{
+    public void assignDriver(String driverElement) throws InterruptedException{
         if(attributeName.equals("text")){
             clickElementByLocator("path", assignOkButton);
         }else{
             new TouchAction(driver).press(PointOption.point(270,600)).perform();
         }
         Thread.sleep(3000);
+        clickElementByLocator("path", driverElement);
+        clickElementByLocator("path", assignButton);
+        Thread.sleep(3000);
+    }
+
+    public void assignDriver() throws InterruptedException{
+        assignDriver(jobDetailCard.get("driverButton"));
     }
 
     public void skipAssignDriver() throws InterruptedException{
