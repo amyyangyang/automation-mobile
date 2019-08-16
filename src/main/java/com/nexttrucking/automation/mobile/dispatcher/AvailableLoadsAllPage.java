@@ -8,6 +8,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,6 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String noLoadsButton = "//*[contains(@%s,'No Loads')]";
     public String noLoad = "(//*[contains(@%s,'Please try another type of load')])[last()]";
     public String noLoadAfterFiltering = "(//*[contains(@%s,\"Your list is currently filtered so you aren't seeing all of our loads.\")])[last()]";
-    public String liveUnloadJobAddress2 = "//*[@content-desc='address_2']";
 
     public AvailableLoadsAllPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -79,6 +79,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
             availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
             availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
+            availableCardMap.put("liveUnloadJobAddress2", "//*[@content-desc='address_2']");
         } else {
             buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
             buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
@@ -94,8 +95,9 @@ public class AvailableLoadsAllPage extends PageProperty {
             //availableCardMap.put("pickupTime", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
             //availableCardMap.put("deliveryTime", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[2]");
             //availableCardMap.put("payout", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
-            availableCardMap.put("numberOfLoad", "//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
+            availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
             //availableCardMap.put("numberOfLoadTwo","//*[@name='available_view_list']/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]/child::*[2]/child::*[1]/child::*[2]");
+            availableCardMap.put("liveUnloadJobAddress2", "//*[@name='address_2']");
         }
     }
 
@@ -126,6 +128,25 @@ public class AvailableLoadsAllPage extends PageProperty {
         }
         Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);
+    }
+
+    public void findLiveUnloadJob() throws InterruptedException {
+        if (attributeName.equals("text")) {
+            Boolean isPresentLiveUnloadJob = isElementPresent("path", availableCardMap.get("liveUnloadJobAddress2"));
+            int i = 1;
+            while (!isPresentLiveUnloadJob) {
+                System.out.println("STEP: " + i);
+                swipeToUpForAndroid(5);
+                isPresentLiveUnloadJob = isElementPresent("path", availableCardMap.get("liveUnloadJobAddress2"));
+                i++;
+            }
+        } else if (attributeName.equals("name")) {
+            int location = driver.findElement(By.xpath(availableCardMap.get("liveUnloadJobAddress2"))).getLocation().y;
+            while (location > 600) {
+                swipeToUpForiOS();
+                location = driver.findElement(By.xpath(availableCardMap.get("liveUnloadJobAddress2"))).getLocation().y;
+            }
+        }
     }
 
 }

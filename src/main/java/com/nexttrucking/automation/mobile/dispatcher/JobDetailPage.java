@@ -96,7 +96,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
-            jobDetailCard.put("liveUnloadJobStatus", "//???");
+            jobDetailCard.put("liveUnloadJobStatus", "(//XCUIElementTypeStaticText)[3]");
         }
 
     }
