@@ -79,6 +79,7 @@ public class MyloadsPage extends PageProperty {
             myLoadsCardMap.put("takePhoto","(//*[@class='android.widget.ImageView'])[2]");
             myLoadsCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
         }else{
+            myLoadsCardMap = new HashMap<>();
             myLoadsCardMap.put("takePhoto","//*[@name='camera']");
             myLoadsCardMap.put("submitPOD","//*[@name='right']");
         }
@@ -125,7 +126,7 @@ public class MyloadsPage extends PageProperty {
         status.add(delivered);
         for(int step=0;step<status.size();step++) {
             clickElementByLocator("path",status.get(step));
-            Thread.sleep(3000);
+            Thread.sleep(6000);
         }
         clickElementByLocator("path",continuePOD);
         uploadPOD(allowLocationPage,true);
@@ -141,9 +142,9 @@ public class MyloadsPage extends PageProperty {
                 allowLocationPage.clickOkAllowLocationButton();}
         }
         clickElementByLocator("path",myLoadsCardMap.get("takePhoto"));
-        Thread.sleep(6000);
+        Thread.sleep(10000);
         clickElementByLocator("path",myLoadsCardMap.get("submitPOD"));
-        Thread.sleep(6000);
+        Thread.sleep(10000);
     }
 
 }

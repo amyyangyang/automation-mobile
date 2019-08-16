@@ -263,7 +263,7 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(3000);
             jobDetailPage.bookTender();
             Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-            jobDetailPage.assignDriver(jobDetailPage.driverButton);
+            jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
         }
     }
 
