@@ -48,8 +48,6 @@ public class DispatcherMyLoadsTest extends SetProperty {
             }
         }
     }
-
-
 }
 
 
