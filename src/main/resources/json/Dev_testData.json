@@ -24,6 +24,7 @@
                 "cityName": "New York",
                 "lastName": "Serg",
                 "phoneNumber": "2343423423",
+                "phoneNumberLong": "2343423423232323",
                 "passwordForGuest": "111111",
 
         "FOR": "Driver",
@@ -31,5 +32,6 @@
                 "driverAddPassword": "111111",
                 "driveFirstName": "TestFirstName",
                 "driveLastName": "TestLastName",
-                "drivePhoneNumber": "2343423424"
+                "drivePhoneNumber": "2343423424",
+                "drivePhoneNumberLong": "2343423424234234"
 }
