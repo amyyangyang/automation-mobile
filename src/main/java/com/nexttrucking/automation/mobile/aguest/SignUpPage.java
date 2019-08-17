@@ -30,6 +30,7 @@ public class SignUpPage extends PageProperty {
         super(driver, attributeName);
     }
 
+
     public WelcomePage clickBackButton() {
         clickElementWithDifferentLocator(backButton, closeButtonIOS);
         return new WelcomePage(driver, attributeName);
