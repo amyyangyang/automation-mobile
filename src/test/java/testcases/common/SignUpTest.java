@@ -76,9 +76,8 @@ public class SignUpTest extends SetProperty {
     @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException {
-//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
-        Thread.sleep(30000);
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
         myDriversPage.typePassword(getTestData("driverAddPassword"));
