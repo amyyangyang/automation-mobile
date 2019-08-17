@@ -40,7 +40,7 @@ public class SignUpTest extends SetProperty {
         signUpPage.clickSaveHomeButton();
         signUpPage.typeFirstName(getTestData("firstName"));
         signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumberLong"));
         signUpPage.clickSignUpButton();
         Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
@@ -63,7 +63,7 @@ public class SignUpTest extends SetProperty {
         signUpPage.clickSaveHomeButton();
         signUpPage.typeFirstName(getTestData("firstName"));
         signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumberLong"));
         signUpPage.clickSignUpButton();
         Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
@@ -88,7 +88,7 @@ public class SignUpTest extends SetProperty {
         myDriversPage.clickContinueButton();
         myDriversPage.typeFirstName(getTestData("driveFirstName"));
         myDriversPage.typeLastName(getTestData("driveLastName"));
-        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumber"));
+        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumberLong"));
         myDriversPage.clickSignUpButton();
         Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }

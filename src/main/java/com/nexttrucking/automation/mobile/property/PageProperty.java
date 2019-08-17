@@ -128,11 +128,11 @@ public abstract class PageProperty {
         String deleteNumbersButton = "//XCUIElementTypeKey[@name='Delete']";
         String deleteWordsButton = "//XCUIElementTypeKey[@name='delete']";
         String selectAllButton = "//*[contains(@name, 'Select All')]";
-        WebElement inputField = driver.findElement(By.xpath(String.format(element, attributeName)));
-        inputField.click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath(element)).click();
         Thread.sleep(1000);
         if (clickAmount == 2) {
-            inputField.click();
+            driver.findElement(By.xpath(element)).click();
         }
         driver.findElement(By.xpath(selectAllButton)).click();
         if (valueType.equals("number")) {
