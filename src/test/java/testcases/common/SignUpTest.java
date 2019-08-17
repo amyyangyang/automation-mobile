@@ -40,7 +40,7 @@ public class SignUpTest extends SetProperty {
         signUpPage.clickSaveHomeButton();
         signUpPage.typeFirstName(getTestData("firstName"));
         signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumberLong"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
         signUpPage.clickSignUpButton();
         Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
@@ -63,7 +63,7 @@ public class SignUpTest extends SetProperty {
         signUpPage.clickSaveHomeButton();
         signUpPage.typeFirstName(getTestData("firstName"));
         signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumberLong"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
         signUpPage.clickSignUpButton();
         Thread.sleep(5000);
         allowLocationPage.clickOkAllowLocationButton();
@@ -76,8 +76,9 @@ public class SignUpTest extends SetProperty {
     @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException {
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
+//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
+        Thread.sleep(30000);
         myDriversPage.clickAddDriverButton();
         myDriversPage.typeEmail(getTestData("driverAddEmail"));
         myDriversPage.typePassword(getTestData("driverAddPassword"));
@@ -88,7 +89,7 @@ public class SignUpTest extends SetProperty {
         myDriversPage.clickContinueButton();
         myDriversPage.typeFirstName(getTestData("driveFirstName"));
         myDriversPage.typeLastName(getTestData("driveLastName"));
-        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumberLong"));
+        signUpPage.typePhoneNumber(getTestData("drivePhoneNumber"));
         myDriversPage.clickSignUpButton();
         Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }

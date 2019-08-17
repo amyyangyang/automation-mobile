@@ -1,5 +1,6 @@
 package com.nexttrucking.automation.mobile.aguest;
 
+import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -23,11 +24,13 @@ public class SignUpPage extends PageProperty {
     private String signUpButton = "(//*[@%s='Sign Up'])[last()]";
     private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s, NY\")])[last()]";
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
+    private String editPhoneInputForiOS = "(//*[@name='createAccount_input_phone'])[last()]";
+    private String editPhoneInputForAndroid = "(//*[@text='createAccount_input_phone'])[last()]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
     }
-
+    MyDriversPage myDriversPage = new MyDriversPage(driver, attributeName);
 
     public WelcomePage clickBackButton() {
         clickElementWithDifferentLocator(backButton, closeButtonIOS);
@@ -77,6 +80,12 @@ public class SignUpPage extends PageProperty {
 
     public void typePhoneNumber(String phoneNumber) throws InterruptedException {
         driver.findElementByAccessibilityId(phoneNumberInput).sendKeys(phoneNumber);
+        if (attributeName.equals("name")) {
+            String newPhoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
+            while (!getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS).contains(newPhoneNumber)) {
+                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 1);
+            }
+        }
         Thread.sleep(3000);
     }
 
