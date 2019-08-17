@@ -1,6 +1,5 @@
 package com.nexttrucking.automation.mobile.aguest;
 
-import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -30,7 +29,6 @@ public class SignUpPage extends PageProperty {
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
     }
-    MyDriversPage myDriversPage = new MyDriversPage(driver, attributeName);
 
     public WelcomePage clickBackButton() {
         clickElementWithDifferentLocator(backButton, closeButtonIOS);
