@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
+import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -22,6 +23,7 @@ public class DispatcherMyDriversTest extends SetProperty {
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
+        pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -137,10 +139,13 @@ public class DispatcherMyDriversTest extends SetProperty {
         boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
         if (isDriversExist) {
             myDriversPage.selectFirstDriver();
+            Thread.sleep(3000);
+            pageProperty.swipeForAnyPlatform(5);
             myDriversPage.selectField("Edit");
             myDriversPage.selectPriceVisibilityRadio("Show");
             myDriversPage.selectPriceVisibilityRadio("Save");
             Thread.sleep(3000);
+            pageProperty.swipeForAnyPlatform(5);
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
             myDriversPage.selectField("Edit");
             myDriversPage.selectPriceVisibilityRadio("Hide");

@@ -88,7 +88,7 @@ public class SignUpTest extends SetProperty {
         myDriversPage.clickContinueButton();
         myDriversPage.typeFirstName(getTestData("driveFirstName"));
         myDriversPage.typeLastName(getTestData("driveLastName"));
-        myDriversPage.typePhoneNumber(getTestData("drivePhoneNumber"));
+        signUpPage.typePhoneNumber(getTestData("drivePhoneNumber"));
         myDriversPage.clickSignUpButton();
         Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }

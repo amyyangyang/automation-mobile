@@ -38,7 +38,7 @@ public class MyloadsPage extends PageProperty {
     public String readyToStart="(//*[contains(@%s, \"I'm ready to start driving\")])[last()]";
 
     //status for trips job
-    public String arrivedInOrigination="(//*[contains(@%s, \"I've Hooked\")])[last()]";
+    public String arrivedInOrigination="(//*[contains(@%s, \"I'm Hooked\")])[last()]";
     public String arrivedInDestination="(//*[contains(@%s, \"I've Dropped\")])[last()]";
     public String liveOnLoad="(//*[contains(@%s, \"I'm Unloaded\")])[last()]";
 
@@ -50,8 +50,8 @@ public class MyloadsPage extends PageProperty {
 
     //button to upload pod or not
     public String continuePOD="//*[contains(@%s, 'Continue')]";
-    public String PODFor="//*[contains(@%s, 'DROP')]";
-    public String PODForLiveOnLoad="//*[contains(@%s, 'LIVE_UNLOAD')]";
+    public String PODFor="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*";
+    public String PODForLiveOnLoad="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*";
     public String upLoadPODButton="//*[@%s='Upload POD']";
     public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
     public String backToMyLoads="//*[contains(@text, '\uF1C3')]";
@@ -78,10 +78,15 @@ public class MyloadsPage extends PageProperty {
             myLoadsCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
             myLoadsCardMap.put("takePhoto","(//*[@class='android.widget.ImageView'])[2]");
             myLoadsCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
+            myLoadsCardMap.put("PODForSecond","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*");
+            myLoadsCardMap.put("PODForFirst","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*");
+
         }else{
             myLoadsCardMap = new HashMap<>();
             myLoadsCardMap.put("takePhoto","//*[@name='camera']");
             myLoadsCardMap.put("submitPOD","//*[@name='right']");
+            myLoadsCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Which action is this POD for']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
+            myLoadsCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Which action is this POD for']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
         }
     }
 
@@ -106,13 +111,17 @@ public class MyloadsPage extends PageProperty {
         if(isLiveLoad) {
             clickElementByLocator("path",liveOnLoad);
             clickElementByLocator("path",continuePOD);
-            clickElementByLocator("path",PODForLiveOnLoad);
+            clickElementByLocator("path",myLoadsCardMap.get("PODForFirst"));
             uploadPOD(allowLocationPage,true);
         }
         clickElementByLocator("path",arrivedInDestination);
         Thread.sleep(3000);
         clickElementByLocator("path",continuePOD);
-        clickElementByLocator("path",PODFor);
+        if(isLiveLoad){
+            clickElementByLocator("path",myLoadsCardMap.get("PODForSecond"));
+        }else{
+            clickElementByLocator("path",myLoadsCardMap.get("PODForFirst"));
+        }
         uploadPOD(allowLocationPage,!isLiveLoad);
     }
 

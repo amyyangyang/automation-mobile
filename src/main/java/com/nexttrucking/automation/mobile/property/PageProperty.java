@@ -9,6 +9,8 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class PageProperty {
     private int width;
@@ -126,11 +128,11 @@ public abstract class PageProperty {
         String deleteNumbersButton = "//XCUIElementTypeKey[@name='Delete']";
         String deleteWordsButton = "//XCUIElementTypeKey[@name='delete']";
         String selectAllButton = "//*[contains(@name, 'Select All')]";
-        WebElement inputField = driver.findElement(By.xpath(String.format(element, attributeName)));
-        inputField.click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath(element)).click();
         Thread.sleep(1000);
         if (clickAmount == 2) {
-            inputField.click();
+            driver.findElement(By.xpath(element)).click();
         }
         driver.findElement(By.xpath(selectAllButton)).click();
         if (valueType.equals("number")) {
@@ -205,16 +207,38 @@ public abstract class PageProperty {
         }
     }
 
-    public void swipeToUp(int length) {
-        try {
-            new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).
-                    waitAction(WaitOptions.waitOptions(duration)).
-                    moveTo(PointOption.point(0, length)).release().perform();
-            Thread.sleep(500);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void swipeToUpForAndroid(int length) {
+        if (attributeName.equals("text")) {
+            try {
+                new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).
+                        waitAction(WaitOptions.waitOptions(duration)).
+                        moveTo(PointOption.point(0, length)).release().perform();
+                Thread.sleep(500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
 
+    public void swipeToUpForiOS() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Map<String, Object> params = new HashMap<>();
+        params.put("duration", 1.0);
+        params.put("fromX", 200);
+        params.put("fromY", 500);
+        params.put("toX", 200);
+        params.put("toY", 400);
+        js.executeScript("mobile: dragFromToForDuration", params);
+        Thread.sleep(1000);
+    }
+
+
+    public void swipeForAnyPlatform(int length) throws InterruptedException {
+        if (attributeName.equals("text")) {
+            swipeToUpForAndroid(length);
+        } else {
+            swipeToUpForiOS();
+        }
     }
 
     public String getELementAttribute(String locator, String element, String attribute) {
@@ -223,7 +247,6 @@ public abstract class PageProperty {
         } else {
             return driver.findElementByXPath(element).getAttribute(attribute);
         }
-
     }
 
 
