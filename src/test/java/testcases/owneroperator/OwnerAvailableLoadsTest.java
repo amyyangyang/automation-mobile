@@ -226,7 +226,7 @@ public class OwnerAvailableLoadsTest extends SetProperty {
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
             Thread.sleep(3000);
             jobDetailPage.bookTender();

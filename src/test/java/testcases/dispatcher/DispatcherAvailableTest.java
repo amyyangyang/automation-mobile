@@ -245,7 +245,7 @@ public class DispatcherAvailableTest extends SetProperty {
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
             Thread.sleep(3000);
             jobDetailPage.bookTender();
@@ -258,7 +258,7 @@ public class DispatcherAvailableTest extends SetProperty {
     public void bookJobAndAssignDriver() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
             Thread.sleep(3000);
             jobDetailPage.bookTender();
@@ -280,7 +280,7 @@ public class DispatcherAvailableTest extends SetProperty {
         Thread.sleep(10000);
         String type = myloadsPage.getElementText("id",myloadsPage.jobNumber);
         System.out.println(type);
-        myloadsPage.clickElementByLocator("id",myloadsPage.payment);
+        myloadsPage.clickElementByLocator("id",myloadsPage.jobNumber);
         Thread.sleep(3000);
         if(type.contains("J")){
             myloadsPage.changeTripJobStatus(allowLocationPage);
