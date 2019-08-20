@@ -49,7 +49,7 @@ public class MyloadsPage extends PageProperty {
     public String delivered="(//*[contains(@%s, \"I've Delivered\")])[last()]";
 
     //button to upload pod or not
-    public String continuePOD="//*[contains(@%s, 'Continue')]";
+    public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
     public String PODFor="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*";
     public String PODForLiveOnLoad="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*";
     public String upLoadPODButton="//*[@%s='Upload POD']";
