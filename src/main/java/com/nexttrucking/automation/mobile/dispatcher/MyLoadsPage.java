@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.openqa.selenium.By.xpath;
 
-public class MyloadsPage extends PageProperty {
+public class MyLoadsPage extends PageProperty {
 
     private AppiumDriver<MobileElement> driver;
     private String attributeName;
@@ -28,10 +28,10 @@ public class MyloadsPage extends PageProperty {
 
     public Map<String, String> myLoadsCardMap;
 
-    public MyloadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
+    public MyLoadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
+        myLoadsCardMap = new HashMap<>();
         if (attributeName.equals("text")) {
-            myLoadsCardMap = new HashMap<>();
             myLoadsCardMap.put("jobState", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
             myLoadsCardMap.put("jobNum", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[2]");
             myLoadsCardMap.put("originationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[6]");
@@ -39,7 +39,10 @@ public class MyloadsPage extends PageProperty {
             myLoadsCardMap.put("pickupTime", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[8]");
             myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
             myLoadsCardMap.put("payout", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
-            myLoadsCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
+            myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='myloads_view_list']/*/*/*");
+        } else {
+
+
         }
     }
 
