@@ -287,7 +287,7 @@ public class DispatcherAvailableTest extends SetProperty {
         } else{
             myloadsPage.changeLegacyJobStatus(allowLocationPage);
         }
-        availableLoadsAllPage.getTitle("My loads");
+        availableLoadsAllPage.getTitle("My Loads");
     }
 
     @Test

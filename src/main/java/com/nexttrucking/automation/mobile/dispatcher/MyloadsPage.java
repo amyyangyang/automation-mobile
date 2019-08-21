@@ -15,7 +15,7 @@ import static org.openqa.selenium.By.xpath;
 public class MyloadsPage extends PageProperty {
 
     private AppiumDriver<MobileElement> driver;
-    private String attributeName;
+    //private String attributeName;
 
     public By backButton = xpath("//*[contains(@text, '\uF1C3')]");
     public By assignDriverButton = xpath("//*[contains(@text, 'Assign a')]");
@@ -50,8 +50,8 @@ public class MyloadsPage extends PageProperty {
 
     //button to upload pod or not
     public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
-    public String PODFor="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*";
-    public String PODForLiveOnLoad="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*";
+    //public String PODFor="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*";
+    //public String PODForLiveOnLoad="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*";
     public String upLoadPODButton="//*[@%s='Upload POD']";
     public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
     public String backToMyLoads="//*[contains(@text, '\uF1C3')]";
@@ -85,8 +85,8 @@ public class MyloadsPage extends PageProperty {
             myLoadsCardMap = new HashMap<>();
             myLoadsCardMap.put("takePhoto","//*[@name='camera']");
             myLoadsCardMap.put("submitPOD","//*[@name='right']");
-            myLoadsCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Which action is this POD for']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
-            myLoadsCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Which action is this POD for']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
+            myLoadsCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
+            myLoadsCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
         }
     }
 
@@ -110,13 +110,16 @@ public class MyloadsPage extends PageProperty {
         Boolean isLiveLoad=isElementPresent("path",liveOnLoad);
         if(isLiveLoad) {
             clickElementByLocator("path",liveOnLoad);
+            Thread.sleep(6000);
             clickElementByLocator("path",continuePOD);
+            Thread.sleep(3000);
             clickElementByLocator("path",myLoadsCardMap.get("PODForFirst"));
             uploadPOD(allowLocationPage,true);
         }
         clickElementByLocator("path",arrivedInDestination);
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         clickElementByLocator("path",continuePOD);
+        Thread.sleep(3000);
         if(isLiveLoad){
             clickElementByLocator("path",myLoadsCardMap.get("PODForSecond"));
         }else{
