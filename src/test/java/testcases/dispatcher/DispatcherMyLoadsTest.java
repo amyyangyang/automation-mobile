@@ -46,8 +46,8 @@ public class DispatcherMyLoadsTest extends SetProperty {
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myloadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
-
     }
+
 }
 
 
