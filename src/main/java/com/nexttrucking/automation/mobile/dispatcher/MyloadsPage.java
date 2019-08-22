@@ -14,9 +14,6 @@ import static org.openqa.selenium.By.xpath;
 
 public class MyloadsPage extends PageProperty {
 
-    private AppiumDriver<MobileElement> driver;
-    //private String attributeName;
-
     public By backButton = xpath("//*[contains(@text, '\uF1C3')]");
     public By assignDriverButton = xpath("//*[contains(@text, 'Assign a')]");
     public By reassignDriverButton = xpath("//*[contains(@text, 'reassign a Driver')]");
@@ -50,8 +47,6 @@ public class MyloadsPage extends PageProperty {
 
     //button to upload pod or not
     public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
-    //public String PODFor="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*";
-    //public String PODForLiveOnLoad="//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*";
     public String upLoadPODButton="//*[@%s='Upload POD']";
     public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
     public String backToMyLoads="//*[contains(@text, '\uF1C3')]";
