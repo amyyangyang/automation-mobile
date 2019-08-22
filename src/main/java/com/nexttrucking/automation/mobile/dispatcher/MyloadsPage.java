@@ -32,31 +32,6 @@ public class MyloadsPage extends PageProperty {
     public String pickUpTime="time_0";
     public String deliveryTime="time_1";
 
-    public String readyToStart="(//*[contains(@%s, \"I'm ready to start driving\")])[last()]";
-
-    //status for trips job
-    public String arrivedInOrigination="(//*[contains(@%s, \"I'm Hooked\")])[last()]";
-    public String arrivedInDestination="(//*[contains(@%s, \"I've Dropped\")])[last()]";
-    public String liveOnLoad="(//*[contains(@%s, \"I'm Unloaded\")])[last()]";
-
-    //status for legacy job
-    public String arrived="(//*[contains(@%s, \"I've Arrived\")])[last()]";
-    public String pickUp="(//*[contains(@%s, \"I've Picked Up\")])[last()]";
-    public String readyToLeave="(//*[contains(@%s, \"I'm Leaving\")])[last()]";
-    public String delivered="(//*[contains(@%s, \"I've Delivered\")])[last()]";
-
-    //button to upload pod or not
-    public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
-    public String upLoadPODButton="//*[@%s='Upload POD']";
-    public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
-    public String backToMyLoads="//*[contains(@text, '\uF1C3')]";
-
-    //submit carrier invoice
-    public String resume="//*[contains(@%s,'Resume')]";
-    public String completeButton="//*[contains(@%s, 'Complete')]";
-    public String submitInvoice="//*[contains(@%s, 'Submit Invoice')]";
-    public String getpayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
-
     public Map<String, String> myLoadsCardMap;
 
     public MyloadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -71,17 +46,9 @@ public class MyloadsPage extends PageProperty {
             myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[13]");
             myLoadsCardMap.put("payout", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[3]");
             myLoadsCardMap.put("numberOfLoad", "//*[contains(@content-desc, 'myloads_view_list')]/child::*[1]/child::*/child::*[1]/child::*[1]/child::*[1]");
-            myLoadsCardMap.put("takePhoto","(//*[@class='android.widget.ImageView'])[2]");
-            myLoadsCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
-            myLoadsCardMap.put("PODForSecond","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*");
-            myLoadsCardMap.put("PODForFirst","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*");
 
         }else{
             myLoadsCardMap = new HashMap<>();
-            myLoadsCardMap.put("takePhoto","//*[@name='camera']");
-            myLoadsCardMap.put("submitPOD","//*[@name='right']");
-            myLoadsCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
-            myLoadsCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
         }
     }
 
@@ -95,63 +62,6 @@ public class MyloadsPage extends PageProperty {
         driver.findElement(reassignDriverButton).click();
         driver.findElement(anotherDriverButton).click();
         driver.findElement(assignButton).click();
-    }
-
-    public void changeTripJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException{
-        clickElementByLocator("path",readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path",arrivedInOrigination);
-        Thread.sleep(3000);
-        Boolean isLiveLoad=isElementPresent("path",liveOnLoad);
-        if(isLiveLoad) {
-            clickElementByLocator("path",liveOnLoad);
-            Thread.sleep(6000);
-            clickElementByLocator("path",continuePOD);
-            Thread.sleep(3000);
-            clickElementByLocator("path",myLoadsCardMap.get("PODForFirst"));
-            uploadPOD(allowLocationPage,true);
-        }
-        clickElementByLocator("path",arrivedInDestination);
-        Thread.sleep(6000);
-        clickElementByLocator("path",continuePOD);
-        Thread.sleep(3000);
-        if(isLiveLoad){
-            clickElementByLocator("path",myLoadsCardMap.get("PODForSecond"));
-        }else{
-            clickElementByLocator("path",myLoadsCardMap.get("PODForFirst"));
-        }
-        uploadPOD(allowLocationPage,!isLiveLoad);
-    }
-
-    public void changeLegacyJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
-        List<String> status=new ArrayList<String>() {};
-        status.add(readyToStart);
-        status.add(arrived);
-        status.add(pickUp);
-        status.add(readyToLeave);
-        status.add(arrived);
-        status.add(delivered);
-        for(int step=0;step<status.size();step++) {
-            clickElementByLocator("path",status.get(step));
-            Thread.sleep(6000);
-        }
-        clickElementByLocator("path",continuePOD);
-        uploadPOD(allowLocationPage,true);
-    }
-
-    public void uploadPOD(AllowLocationPage allowLocationPage,Boolean isFirst) throws InterruptedException{
-        //clickElementByLocator("path",upLoadPODButton);
-        if(isFirst){
-            allowLocationPage.clickOkAllowLocationButton();
-            if(attributeName.equals("text")){
-                allowLocationPage.clickAllowLocationButton();
-            }else{
-                allowLocationPage.clickOkAllowLocationButton();}
-        }
-        clickElementByLocator("path",myLoadsCardMap.get("takePhoto"));
-        Thread.sleep(10000);
-        clickElementByLocator("path",myLoadsCardMap.get("submitPOD"));
-        Thread.sleep(10000);
     }
 
 }

@@ -4,6 +4,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyloadsDetailPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyloadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
@@ -17,6 +18,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class DispatcherMyLoadsTest extends SetProperty {
     public static MyloadsPage myloadsPage;
+    public static MyloadsDetailPage myloadsDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -26,6 +28,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myloadsPage= new MyloadsPage(driver, attributeName);
+        myloadsDetailPage = new MyloadsDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
     }
@@ -47,6 +50,28 @@ public class DispatcherMyLoadsTest extends SetProperty {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", myloadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
             }
         }
+    }
+
+    @Test
+    public void modifyJobStatusToCompleted()throws InterruptedException{
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
+        welcomePage.clickSignInButton();
+        signInPage.typeEmail(getTestData("driverEmail"));
+        signInPage.typePassword(getTestData("driverPassword"));
+        signInPage.clickSignInButton();
+        Thread.sleep(10000);
+        String type = myloadsPage.getElementText("id",myloadsPage.jobNumber);
+        System.out.println(type);
+        myloadsPage.clickElementByLocator("id",myloadsPage.jobNumber);
+        Thread.sleep(3000);
+        if(type.contains("J")){
+            myloadsDetailPage.changeTripJobStatus(allowLocationPage);
+        } else{
+            myloadsDetailPage.changeLegacyJobStatus(allowLocationPage);
+        }
+        availableLoadsAllPage.getTitle("My Loads");
     }
 }
 

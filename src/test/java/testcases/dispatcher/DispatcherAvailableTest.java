@@ -268,29 +268,6 @@ public class DispatcherAvailableTest extends SetProperty {
     }
 
     @Test
-    public void modifyJobStatusToCompleted()throws InterruptedException{
-        //book tender
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-        availableLoadsAllPage.confirmLogout();
-        welcomePage.clickSignInButton();
-        signInPage.typeEmail(getTestData("driverEmail"));
-        signInPage.typePassword(getTestData("driverPassword"));
-        signInPage.clickSignInButton();
-        Thread.sleep(10000);
-        String type = myloadsPage.getElementText("id",myloadsPage.jobNumber);
-        System.out.println(type);
-        myloadsPage.clickElementByLocator("id",myloadsPage.jobNumber);
-        Thread.sleep(3000);
-        if(type.contains("J")){
-            myloadsPage.changeTripJobStatus(allowLocationPage);
-        } else{
-            myloadsPage.changeLegacyJobStatus(allowLocationPage);
-        }
-        availableLoadsAllPage.getTitle("My Loads");
-    }
-
-    @Test
     public void checkLiveUnloadJobDetail() throws InterruptedException {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
