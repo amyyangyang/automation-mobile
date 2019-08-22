@@ -26,8 +26,8 @@ public class DriverMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myloadsPage= new MyLoadsPage(driver, attributeName);
-//        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
-        Thread.sleep(40000);
+        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
+        Thread.sleep(10000);
     }
 
     @Test
