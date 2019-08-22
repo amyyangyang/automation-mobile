@@ -4,7 +4,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadsDetailPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
@@ -18,7 +18,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class DispatcherMyLoadsTest extends SetProperty {
     public static MyLoadsPage myLoadsPage;
-    public static MyLoadsDetailPage myLoadsDetailPage;
+    public static MyLoadDetailsPage myLoadDetailsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -28,7 +28,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myLoadsPage= new MyLoadsPage(driver, attributeName);
-        myLoadsDetailPage = new MyLoadsDetailPage(driver, attributeName);
+        myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
     }
@@ -67,9 +67,9 @@ public class DispatcherMyLoadsTest extends SetProperty {
         myLoadsPage.clickElementByLocator("id",myLoadsPage.jobNumber);
         Thread.sleep(3000);
         if(type.contains("J")){
-            myLoadsDetailPage.changeTripJobStatus(allowLocationPage);
+            myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
         } else{
-            myLoadsDetailPage.changeLegacyJobStatus(allowLocationPage);
+            myLoadDetailsPage.changeLegacyJobStatus(allowLocationPage);
         }
         availableLoadsAllPage.getTitle("My Loads");
     }
