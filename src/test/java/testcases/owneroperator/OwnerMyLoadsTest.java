@@ -1,4 +1,4 @@
-package testcases.dispatcher;
+package testcases.owneroperator;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
-public class DispatcherMyLoadsTest extends SetProperty {
+public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadsPage myloadsPage;
 
     @BeforeClass
@@ -26,7 +26,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myloadsPage= new MyLoadsPage(driver, attributeName);
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(10000);
     }

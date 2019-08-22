@@ -1,4 +1,4 @@
-package testcases.dispatcher;
+package testcases.driver;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
-public class DispatcherMyLoadsTest extends SetProperty {
+public class DriverMyLoadsTest extends SetProperty {
     public static MyLoadsPage myloadsPage;
 
     @BeforeClass
@@ -26,9 +26,8 @@ public class DispatcherMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myloadsPage= new MyLoadsPage(driver, attributeName);
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-        Thread.sleep(10000);
+//        signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
+        Thread.sleep(40000);
     }
 
     @Test
@@ -36,7 +35,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertThat(Utils.jobStateList, hasItem(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobState"))));
+            Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobState")));
             Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("jobNum")));
             Assert.assertTrue(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("payout")).contains("$"));
             Assert.assertNotNull(myloadsPage.getElementText("path", myloadsPage.myLoadsCardMap.get("originationAddress")));
