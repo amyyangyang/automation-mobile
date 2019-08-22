@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static org.openqa.selenium.By.xpath;
 
-public class MyloadsDetailPage extends PageProperty {
+public class MyLoadsDetailPage extends PageProperty {
 
     public String readyToStart="(//*[contains(@%s, \"I'm ready to start driving\")])[last()]";
 
@@ -41,7 +41,7 @@ public class MyloadsDetailPage extends PageProperty {
 
     public Map<String, String> myLoadsDetailCardMap;
 
-    public MyloadsDetailPage(AppiumDriver<MobileElement> driver, String attributeName) {
+    public MyLoadsDetailPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
         if (attributeName.equals("text")) {
             myLoadsDetailCardMap = new HashMap<>();

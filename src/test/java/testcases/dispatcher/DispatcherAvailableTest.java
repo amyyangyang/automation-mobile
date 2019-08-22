@@ -4,7 +4,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
-import com.nexttrucking.automation.mobile.dispatcher.MyloadsPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DispatcherAvailableTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
-    public static MyloadsPage myloadsPage;
+    public static MyLoadsPage   myLoadsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -33,7 +33,7 @@ public class DispatcherAvailableTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
-        myloadsPage=new MyloadsPage(driver,attributeName);
+        myLoadsPage=new MyLoadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 

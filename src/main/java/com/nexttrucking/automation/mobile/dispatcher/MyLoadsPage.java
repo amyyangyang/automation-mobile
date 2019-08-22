@@ -12,7 +12,7 @@ import java.util.*;
 
 import static org.openqa.selenium.By.xpath;
 
-public class MyloadsPage extends PageProperty {
+public class MyLoadsPage extends PageProperty {
 
     public By backButton = xpath("//*[contains(@text, '\uF1C3')]");
     public By assignDriverButton = xpath("//*[contains(@text, 'Assign a')]");
@@ -34,7 +34,7 @@ public class MyloadsPage extends PageProperty {
 
     public Map<String, String> myLoadsCardMap;
 
-    public MyloadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
+    public MyLoadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
         if (attributeName.equals("text")) {
             myLoadsCardMap = new HashMap<>();
