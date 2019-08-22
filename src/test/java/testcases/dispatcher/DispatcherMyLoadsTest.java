@@ -26,13 +26,15 @@ public class DispatcherMyLoadsTest extends SetProperty {
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         myloadsPage= new MyLoadsPage(driver, attributeName);
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        Thread.sleep(30000);
+
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(10000);
     }
 
     @Test
-    public void MyLoadPage() {
+    public void myLoadPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
