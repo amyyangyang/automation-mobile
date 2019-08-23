@@ -38,7 +38,6 @@ public class OwnerMyLoadsTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myloadsPage.jobState)));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payment).contains("$"));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress));

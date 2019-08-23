@@ -38,7 +38,6 @@ public class DriverMyLoadsTest extends SetProperty {
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobState));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber));
-            Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payment).contains("$"));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickUpTime));
