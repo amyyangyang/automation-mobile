@@ -39,8 +39,6 @@ public class MyLoadsPage extends PageProperty {
 
 
 
-
-
     public Map<String, String> myLoadsCardMap;
 
     public MyLoadsPage(AppiumDriver<MobileElement> driver, String attributeName) {

@@ -38,13 +38,13 @@ public class OwnerMyLoadsTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myloadsPage.jobState, 0)));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber, 0));
+            Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myloadsPage.jobState)));
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payment).contains("$"));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress), 0);
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress), 0);
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickUpTime), 0);
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.deliveryTime), 0);
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickUpTime));
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.deliveryTime));
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myloadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
