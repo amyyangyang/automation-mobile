@@ -4,8 +4,9 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
+import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,6 +24,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
+        pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -31,24 +33,23 @@ public class DispatcherMyLoadsTest extends SetProperty {
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
+        Thread.sleep(10000);
     }
 
-//    @Test
-    public void MyLoadPage() {
+    @Test
+    public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
-        if (attributeName.equals("text")) {
-            boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
-            if (isPresentLoad) {
-                Assert.assertThat(Utils.jobStateList, hasItem(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("jobState"))));
-                Assert.assertNotNull(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("jobNum")));
-                Assert.assertTrue(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("payout")).contains("$"));
-                Assert.assertNotNull(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("originationAddress")));
-                Assert.assertNotNull(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("destinationAddress")));
-                Assert.assertNotNull(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("pickupTime")));
-                Assert.assertNotNull(myLoadsPage.getElementText("path", myLoadsPage.myLoadsCardMap.get("deliveryTime")));
-            } else {
-                Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
-            }
+        boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
+        if (isPresentLoad) {
+            Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myLoadsPage.jobState)));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
+            Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.destinationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 
