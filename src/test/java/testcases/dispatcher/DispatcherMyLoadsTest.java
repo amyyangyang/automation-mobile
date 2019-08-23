@@ -41,7 +41,6 @@ public class DispatcherMyLoadsTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myLoadsPage.jobState)));
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress));
