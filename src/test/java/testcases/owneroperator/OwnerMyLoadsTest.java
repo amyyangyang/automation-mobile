@@ -4,6 +4,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import com.nexttrucking.automation.mobile.property.Utils;
@@ -17,7 +18,8 @@ import java.net.MalformedURLException;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class OwnerMyLoadsTest extends SetProperty {
-    public static MyLoadsPage myloadsPage;
+    public static MyLoadDetailsPage myLoadDetailsPage;
+    public static MyLoadsPage myLoadsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -27,7 +29,8 @@ public class OwnerMyLoadsTest extends SetProperty {
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        myloadsPage= new MyLoadsPage(driver, attributeName);
+        myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
+        myLoadsPage= new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(10000);
@@ -36,17 +39,27 @@ public class OwnerMyLoadsTest extends SetProperty {
     @Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
-        boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber));
-            Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payment).contains("$"));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickUpTime));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.deliveryTime));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
+            Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.destinationAddress));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myloadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
+    }
+
+    @Test
+    public void modifyJobStatusToCompleted()throws InterruptedException{
+        availableLoadsAllPage.findLiveUnloadJob();
+        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        Thread.sleep(3000);
+        myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
+        myLoadDetailsPage.submitInvoice();
+        availableLoadsAllPage.getTitle("My Loads");
     }
 
 }
