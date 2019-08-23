@@ -60,7 +60,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeNme.equals("text")) {
             jobDetailCard.put("originationAddress", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[4]");
             jobDetailCard.put("destinationAddress", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[9]");
-            jobDetailCard.put("pickupTime", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[6]");
+            jobDetailCard.put("pickUpTime", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[6]");
             jobDetailCard.put("deliveryTime", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[11]");
             jobDetailCard.put("loadOfTwo", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[3]/child::*[1]");
             jobDetailCard.put("payoutOfTwo", "//*[@class='android.widget.ScrollView']/child::*[1]/child::*[3]/child::*[2]");
@@ -81,7 +81,7 @@ public class JobDetailPage extends PageProperty {
         } else {
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
             jobDetailCard.put("destinationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[2]");
-            jobDetailCard.put("pickupTime", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
+            jobDetailCard.put("pickUpTime", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[1]");
             jobDetailCard.put("deliveryTime", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[2]/child::*[2]/child::*[2]");
             jobDetailCard.put("loadOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]");
             jobDetailCard.put("payoutOfTwo", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[2]");

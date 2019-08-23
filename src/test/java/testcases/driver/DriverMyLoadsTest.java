@@ -6,7 +6,6 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
-import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,11 +37,11 @@ public class DriverMyLoadsTest extends SetProperty {
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobState, 0));
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNum, 0));
-            Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payout).contains("$"));
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber, 0));
+            Assert.assertTrue(pageProperty.getElementText("id", myloadsPage.payment).contains("$"));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress), 0);
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress), 0);
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickupTime), 0);
+            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.pickUpTime), 0);
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.deliveryTime), 0);
         }
     }

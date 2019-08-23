@@ -42,11 +42,11 @@ public class DispatcherMyLoadsTest extends SetProperty {
         boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
             Assert.assertThat(Utils.jobStateList, hasItem(pageProperty.getElementText("id", myLoadsPage.jobState, 0)));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNum, 0));
-            Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payout).contains("$"));
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber, 0));
+            Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress), 0);
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.destinationAddress), 0);
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickupTime), 0);
+            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime), 0);
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime), 0);
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
