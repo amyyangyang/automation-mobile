@@ -3,6 +3,8 @@ package com.nexttrucking.automation.mobile.dispatcher;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -29,14 +31,15 @@ public class MyLoadDetailsPage extends PageProperty {
 
     //button to upload pod or not
     public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
-    public String upLoadPODButton="//*[@%s='Upload POD']";
     public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
-    public String backToMyLoads="//*[contains(@text, '\uF1C3')]";
+    public String upLoadPODButton="//*[@%s='Upload POD']";
 
     //submit carrier invoice
     public String resume="//*[contains(@%s,'Resume')]";
-    public String completeButton="//*[contains(@%s, 'Complete')]";
-    public String submitInvoice="//*[contains(@%s, 'Submit Invoice')]";
+    public String completeInvoiceButton="(//*[contains(@%s, 'Complete Invoice')])[last()]";
+    public String submitInvoice="(//*[@%s='Submit Invoice'])[last()]";
+    public String skipInvoice="(//*[@%s='Skip invoice for now'])[last()]";
+    public String goToMyLoadsButton="(//*[contains(@%s,'Go back to My Loads')])[last()]";
     public String getpayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
 
     public Map<String, String> myLoadsDetailCardMap;
@@ -47,15 +50,18 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","(//*[@class='android.widget.ImageView'])[2]");
             myLoadsDetailCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
-            myLoadsDetailCardMap.put("PODForSecond","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[2]/*/*");
-            myLoadsDetailCardMap.put("PODForFirst","//*[contains(@text, 'Which action is this POD for')]/parent::*/following-sibling::*/*/*[1]/*/*");
-
+            myLoadsDetailCardMap.put("PODForSecond","//*[contains(@text, 'Upload POD')]/parent::*/following-sibling::*/*/*[2]/*/*");
+            myLoadsDetailCardMap.put("PODForFirst","//*[contains(@text, 'Upload POD')]/parent::*/following-sibling::*/*/*[1]/*/*");
+            myLoadsDetailCardMap.put("closeSubmitPage","//*[contains(@text, '\uF406')]");
+            myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
             myLoadsDetailCardMap.put("submitPOD","//*[@name='right']");
-            myLoadsDetailCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
-            myLoadsDetailCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Which action is this POD for?']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
+            myLoadsDetailCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Upload POD']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
+            myLoadsDetailCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Upload POD']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
+            myLoadsDetailCardMap.put("closeSubmitPage","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
+            myLoadsDetailCardMap.put("backToMyLoads","//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
         }
     }
 
@@ -116,4 +122,25 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(10000);
     }
 
+    public void skipSubmitInvoice(){
+        clickElementByLocator("path",myLoadsDetailCardMap.get("closeSubmitPage"));
+        if(attributeName.equals("text")){
+            clickElementByLocator("path",skipInvoice);
+        }else{
+            new TouchAction(driver).press(PointOption.point(171,610)).perform();
+        }
+        clickElementByLocator("path",myLoadsDetailCardMap.get("backToMyLoads"));
+    }
+
+    public void submitInvoice()throws InterruptedException{
+        //clickElementByLocator("path",completeInvoiceButton);
+        clickElementByLocator("path",submitInvoice);
+        Thread.sleep(6000);
+        if(attributeName.equals("text")) {
+            clickElementByLocator("path",goToMyLoadsButton);
+        }else{
+            new TouchAction(driver).press(PointOption.point(183,634)).perform();
+        }
+        Thread.sleep(3000);
+    }
 }
