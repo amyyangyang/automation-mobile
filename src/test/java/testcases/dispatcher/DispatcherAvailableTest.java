@@ -255,15 +255,17 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
-        if (isPresentLoad) {
-            availableLoadsAllPage.findLiveUnloadJob();
-            pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-            Thread.sleep(3000);
-            jobDetailPage.bookTender();
-            Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-            jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+        for(int i=0;i<2;i++) {
+            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                availableLoadsAllPage.findLiveUnloadJob();
+                pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                Thread.sleep(3000);
+                jobDetailPage.bookTender();
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+            }
         }
     }
 
