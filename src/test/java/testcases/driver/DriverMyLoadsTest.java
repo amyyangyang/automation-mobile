@@ -36,7 +36,6 @@ public class DriverMyLoadsTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myloadsPage.isElementPresent("path", myloadsPage.myLoadsCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobState));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.jobNumber));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.originationAddress));
             Assert.assertNotNull(pageProperty.getElementText("id", myloadsPage.destinationAddress));
