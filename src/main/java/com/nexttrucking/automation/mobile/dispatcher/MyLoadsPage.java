@@ -25,6 +25,16 @@ public class MyLoadsPage extends PageProperty {
     public By addDriverButton = xpath("//*[contains(@text, 'Add a Driver')]");
     public By addButton = xpath("//*[contains(@text, 'Add')]");
     public String noLoadOnMyLoads = "//*[contains(@%s, 'Go claim')]";
+    public String originationAddress = "address_0";
+    public String destinationAddress = "address_1";
+    public String liveLoadAddress = "address_2";
+    public String liveLoadTime = "time_2";
+    public String pickupTime = "time_0";
+    public String deliveryTime = "time_1";
+    public String payout="priceText";
+    public String jobNum="jobNumText";
+    public String jobState="jobStatusText";
+
 
     public Map<String, String> myLoadsCardMap;
 
@@ -32,22 +42,22 @@ public class MyLoadsPage extends PageProperty {
         super(driver, attributeName);
         myLoadsCardMap = new HashMap<>();
         if (attributeName.equals("text")) {
-            myLoadsCardMap.put("jobState", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[1]/*[1]");
-            myLoadsCardMap.put("jobNum", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[2]");
-            myLoadsCardMap.put("originationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[6]");
-            myLoadsCardMap.put("destinationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[11]");
-            myLoadsCardMap.put("pickupTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[8]");
-            myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[13]");
-            myLoadsCardMap.put("payout", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[3]");
+//            myLoadsCardMap.put("jobState", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[1]/*[1]");
+//            myLoadsCardMap.put("jobNum", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[2]");
+//            myLoadsCardMap.put("originationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[6]");
+//            myLoadsCardMap.put("destinationAddress", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[11]");
+//            myLoadsCardMap.put("pickupTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[8]");
+//            myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[13]");
+//            myLoadsCardMap.put("payout", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[3]");
             myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='myloads_view_list']/*/*/*");
         } else {
-            myLoadsCardMap.put("jobState", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobStatusText']");
-            myLoadsCardMap.put("jobNum", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobNumText']");
-            myLoadsCardMap.put("originationAddress", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='address_0']");
-            myLoadsCardMap.put("destinationAddress", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='address_1']");
-            myLoadsCardMap.put("pickupTime", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='time_0']");
-            myLoadsCardMap.put("deliveryTime", "///XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='time_1']");
-            myLoadsCardMap.put("payout", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='priceText']");
+//            myLoadsCardMap.put("jobState", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobStatusText']");
+//            myLoadsCardMap.put("jobNum", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobNumText']");
+//            myLoadsCardMap.put("originationAddress", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='address_0']");
+//            myLoadsCardMap.put("destinationAddress", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='address_1']");
+//            myLoadsCardMap.put("pickupTime", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='time_0']");
+//            myLoadsCardMap.put("deliveryTime", "///XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='time_1']");
+//            myLoadsCardMap.put("payout", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='priceText']");
             myLoadsCardMap.put("numberOfLoad", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]");
         }
     }
