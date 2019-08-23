@@ -26,7 +26,7 @@ public class JobDetailPage extends PageProperty {
     //button for dispatcher , skip assign driver or assign driver
     public String skipButton = "(//*[contains(@%s,'Skip')])[last()]";
     public String assignOkButton = "(//*[@%s='OK'])[last()]";
-    public String driverButton = "//*[contains(@%s, 'test han')]/following-sibling::*[1]";
+    public String driverButton = "//*[contains(@%s, 'Test Test')]/following-sibling::*[1]";
     public String assignButton = "(//*[@%s='Assign'])[last()]";
 
     //button for ownerOperator, only go to my loads button and go to available loads button
@@ -76,6 +76,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
             jobDetailCard.put("driverButton","//*[contains(@text, 'Assign Driver')]/parent::*[1]/following-sibling::*[1]/*/*/*/*[1]/*/*[2]");
+            jobDetailCard.put("driver","//*[contains(@text, 'Test Test')]/following-sibling::*[1]");
             jobDetailCard.put("liveUnloadJobStatus", "//android.widget.FrameLayout[last()]/following-sibling::*[1]/*[1]");
         } else {
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -97,6 +98,7 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
             jobDetailCard.put("liveUnloadJobStatus", "(//XCUIElementTypeStaticText)[3]");
+            jobDetailCard.put("driver","(//*[contains(@name, 'Test Test')])[last()]");
         }
 
     }
@@ -110,13 +112,20 @@ public class JobDetailPage extends PageProperty {
         Thread.sleep(3000);
     }
 
-    public void assignDriver() throws InterruptedException{
+    public void assignDriver(String driverElement) throws InterruptedException{
         if(attributeName.equals("text")){
             clickElementByLocator("path", assignOkButton);
         }else{
             new TouchAction(driver).press(PointOption.point(270,600)).perform();
         }
         Thread.sleep(3000);
+        clickElementByLocator("path", driverElement);
+        clickElementByLocator("path", assignButton);
+        Thread.sleep(3000);
+    }
+
+    public void assignDriver() throws InterruptedException{
+        assignDriver(jobDetailCard.get("driverButton"));
     }
 
     public void skipAssignDriver() throws InterruptedException{

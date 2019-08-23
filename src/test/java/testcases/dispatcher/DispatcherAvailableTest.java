@@ -4,6 +4,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.JobDetailPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
@@ -21,6 +22,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DispatcherAvailableTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
+    public static MyLoadsPage   myLoadsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
@@ -28,10 +30,10 @@ public class DispatcherAvailableTest extends SetProperty {
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
-        pageProperty = new PageProperty(driver, attributeName) {};
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
+        myLoadsPage=new MyLoadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
@@ -242,7 +244,7 @@ public class DispatcherAvailableTest extends SetProperty {
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
         if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
             Thread.sleep(3000);
             jobDetailPage.bookTender();
@@ -253,17 +255,17 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
-        if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.jobType);
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-            Thread.sleep(3000);
-            jobDetailPage.bookTender();
-            Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-            jobDetailPage.assignDriver();
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("driverButton"));
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.assignButton);
-            Thread.sleep(3000);
+        for(int i=0;i<2;i++) {
+            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                availableLoadsAllPage.findLiveUnloadJob();
+                pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                Thread.sleep(3000);
+                jobDetailPage.bookTender();
+                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+            }
         }
     }
 
@@ -292,4 +294,5 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
+
 }
