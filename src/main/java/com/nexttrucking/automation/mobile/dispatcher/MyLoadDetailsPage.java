@@ -31,8 +31,7 @@ public class MyLoadDetailsPage extends PageProperty {
 
     //button to upload pod or not
     public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
-    public String notContinueUploadPOD="//*[contains(@%s, 'Not Now')]";
-    public String upLoadPODButton="//*[@%s='Upload POD']";
+    public String upLoadPODButton="(//*[@%s='Upload POD'])[last()]";
 
     //submit carrier invoice
     public String resume="//*[contains(@%s,'Resume')]";
@@ -50,18 +49,20 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","(//*[@class='android.widget.ImageView'])[2]");
             myLoadsDetailCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
-            myLoadsDetailCardMap.put("PODForSecond","//*[contains(@text, 'Upload POD')]/parent::*/following-sibling::*/*/*[2]/*/*");
-            myLoadsDetailCardMap.put("PODForFirst","//*[contains(@text, 'Upload POD')]/parent::*/following-sibling::*/*/*[1]/*/*");
+            myLoadsDetailCardMap.put("PODForSecond","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]");
+            myLoadsDetailCardMap.put("PODForFirst","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]");
             myLoadsDetailCardMap.put("closeSubmitPage","//*[contains(@text, '\uF406')]");
             myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
+            myLoadsDetailCardMap.put("notContinueUploadPOD","//*[contains(@text, '\uF406')]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
             myLoadsDetailCardMap.put("submitPOD","//*[@name='right']");
-            myLoadsDetailCardMap.put("PODForSecond","//XCUIElementTypeStaticText[@name='Upload POD']/parent::*/parent::*/following-sibling::*/*/*/*[2]");
-            myLoadsDetailCardMap.put("PODForFirst","//XCUIElementTypeStaticText[@name='Upload POD']/parent::*/parent::*/following-sibling::*/*/*/*[1]");
+            myLoadsDetailCardMap.put("PODForSecond","//XCUIElementTypeScrollView/*/*[2]");
+            myLoadsDetailCardMap.put("PODForFirst","//XCUIElementTypeScrollView/*/*[1]");
             myLoadsDetailCardMap.put("closeSubmitPage","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
             myLoadsDetailCardMap.put("backToMyLoads","//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
+            myLoadsDetailCardMap.put("notContinueUploadPOD","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
         }
     }
 
@@ -143,4 +144,31 @@ public class MyLoadDetailsPage extends PageProperty {
         }
         Thread.sleep(3000);
     }
+
+    public void changeTripJobStatusAtLastToUploadPOD(AllowLocationPage allowLocationPage) throws InterruptedException{
+        clickElementByLocator("path",readyToStart);
+        Thread.sleep(3000);
+        clickElementByLocator("path",arrivedInOrigination);
+        Thread.sleep(6000);
+        Boolean isLiveLoad=isElementPresent("path",liveOnLoad);
+        if(isLiveLoad) {
+            clickElementByLocator("path",liveOnLoad);
+            Thread.sleep(6000);
+            clickElementByLocator("path",myLoadsDetailCardMap.get("notContinueUploadPOD"));
+            Thread.sleep(3000);
+        }
+        clickElementByLocator("path",arrivedInDestination);
+        Thread.sleep(6000);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("notContinueUploadPOD"));
+        Thread.sleep(3000);
+        clickElementByLocator("path",upLoadPODButton);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("PODForFirst"));
+        uploadPOD(allowLocationPage,true);
+        if(isLiveLoad){
+            clickElementByLocator("path",myLoadsDetailCardMap.get("PODForSecond"));
+            uploadPOD(allowLocationPage,false);
+        }
+        Thread.sleep(3000);
+    }
+
 }

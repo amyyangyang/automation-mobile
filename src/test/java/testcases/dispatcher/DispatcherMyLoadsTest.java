@@ -73,6 +73,20 @@ public class DispatcherMyLoadsTest extends SetProperty {
         }
         availableLoadsAllPage.getTitle("My Loads");
     }
+
+    @Test
+    public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
+        String type = myLoadsPage.getElementText("id",myLoadsPage.jobNumber);
+        System.out.println(type);
+        myLoadsPage.clickElementByLocator("id",myLoadsPage.jobNumber);
+        Thread.sleep(3000);
+        if(type.contains("J")){
+            myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
+        } else{
+            myLoadDetailsPage.changeLegacyJobStatus(allowLocationPage);
+        }
+        availableLoadsAllPage.getTitle("My Loads");
+    }
 }
 
 

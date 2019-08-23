@@ -62,6 +62,16 @@ public class OwnerMyLoadsTest extends SetProperty {
         availableLoadsAllPage.getTitle("My Loads");
     }
 
+    @Test
+    public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
+        availableLoadsAllPage.findLiveUnloadJob();
+        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        Thread.sleep(3000);
+        myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
+        myLoadDetailsPage.submitInvoice();
+        availableLoadsAllPage.getTitle("My Loads");
+    }
+
 }
 
 
