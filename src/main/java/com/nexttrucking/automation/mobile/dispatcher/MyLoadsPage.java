@@ -27,9 +27,9 @@ public class MyLoadsPage extends PageProperty {
     public By addDriverButton = xpath("//*[contains(@text, 'Add a Driver')]");
     public By addButton = xpath("//*[contains(@text, 'Add')]");
     public String noLoadOnMyLoads = "//*[contains(@%s, 'Go claim')]";
-    public String jobState="jobStatusText";
-    public String jobNumber ="jobNumText";
-    public String payment ="priceText";
+    public String jobState = "jobStatusText";
+    public String jobNumber = "jobNumText";
+    public String payment = "priceText";
     public String originationAddress = "address_0";
     public String destinationAddress = "address_1";
     public String liveLoadAddress = "address_2";
