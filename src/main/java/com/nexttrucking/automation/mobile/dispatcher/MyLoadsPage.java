@@ -33,6 +33,7 @@ public class MyLoadsPage extends PageProperty {
     public String deliveryTime = "time_1";
     public String payout="priceText";
     public String jobNum="jobNumText";
+    public String jobNumber="jobNumText";
     public String jobState="jobStatusText";
 
 
