@@ -225,20 +225,23 @@ public class OwnerAvailableTest extends SetProperty {
 
     @Test
     public void bookJobOnly() throws InterruptedException {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
-        if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
-            jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-            Thread.sleep(3000);
-            jobDetailPage.bookTender();
-            Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
-            if (isAllowToBook) {
-                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
-            } else {
-                jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+        for(int i=0;i<2;i++) {
+            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            if (isPresentLoad) {
+                availableLoadsAllPage.findLiveUnloadJob();
+                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
+                jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                Thread.sleep(3000);
+                jobDetailPage.bookTender();
+                Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
+                if (isAllowToBook) {
+                    Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
+                } else {
+                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+                }
+                availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
             }
-            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }
     }
 
