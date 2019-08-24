@@ -255,7 +255,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        for(int i=0;i<2;i++) {
+        for(int i=0;i<3;i++) {
             Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
             if (isPresentLoad) {
                 availableLoadsAllPage.findLiveUnloadJob();

@@ -34,12 +34,16 @@ public class MyLoadDetailsPage extends PageProperty {
     public String upLoadPODButton="(//*[@%s='Upload POD'])[last()]";
 
     //submit carrier invoice
-    public String resume="//*[contains(@%s,'Resume')]";
+    public String resume="(//*[@%s='Resume'])[last()]";
     public String completeInvoiceButton="(//*[contains(@%s, 'Complete Invoice')])[last()]";
     public String submitInvoice="(//*[@%s='Submit Invoice'])[last()]";
     public String skipInvoice="(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go back to My Loads')])[last()]";
-    public String getpayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
+    public String getPayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
+
+    //tab
+    public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
+    public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
 
     public Map<String, String> myLoadsDetailCardMap;
 
@@ -140,7 +144,7 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")) {
             clickElementByLocator("path",goToMyLoadsButton);
         }else{
-            new TouchAction(driver).press(PointOption.point(183,634)).perform();
+            new TouchAction(driver).press(PointOption.point(183,590)).perform();
         }
         Thread.sleep(3000);
     }
@@ -169,6 +173,34 @@ public class MyLoadDetailsPage extends PageProperty {
             uploadPOD(allowLocationPage,false);
         }
         Thread.sleep(3000);
+    }
+
+    public void completeJobAfterCheckPreOperation(AllowLocationPage allowLocationPage)throws InterruptedException{
+        clickElementByLocator("path",upLoadPODButton);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("PODForFirst"));
+        uploadPOD(allowLocationPage,true);
+        clickElementByLocator("path",arrivedInDestination);
+        Thread.sleep(6000);
+        clickElementByLocator("path",continuePOD);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("PODForSecond"));
+        uploadPOD(allowLocationPage,false);
+
+    }
+    public void checkPreOperation()throws InterruptedException{
+        clickElementByLocator("path",readyToStart);
+        Thread.sleep(3000);
+        clickElementByLocator("path",arrivedInOrigination);
+        Thread.sleep(3000);
+        clickElementByLocator("path",liveOnLoad);
+        Thread.sleep(3000);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("notContinueUploadPOD"));
+        Thread.sleep(3000);
+        if(attributeName.equals("text")){
+            clickElementByLocator("path",liveUnload);
+        }else{
+            clickElementByLocator("path",liveUnLoadByLabel);
+        }
+        Thread.sleep(6000);
     }
 
 }

@@ -72,6 +72,18 @@ public class OwnerMyLoadsTest extends SetProperty {
         availableLoadsAllPage.getTitle("My Loads");
     }
 
+    @Test
+    public void checkPreOperation()throws InterruptedException{
+        availableLoadsAllPage.findLiveUnloadJob();
+        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        Thread.sleep(3000);
+        myLoadDetailsPage.checkPreOperation();
+        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
+        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
+        myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
+        myLoadDetailsPage.submitInvoice();
+    }
+
 }
 
 
