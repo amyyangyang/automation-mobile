@@ -2,7 +2,7 @@ package testcases.dispatcher;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.owneroperator.PaymentsPage;
+import com.nexttrucking.automation.mobile.dispatcher.PaymentsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
