@@ -1,4 +1,4 @@
-package com.nexttrucking.automation.mobile.owneroperator;
+package com.nexttrucking.automation.mobile.dispatcher;
 
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import com.nexttrucking.automation.mobile.property.Utils;

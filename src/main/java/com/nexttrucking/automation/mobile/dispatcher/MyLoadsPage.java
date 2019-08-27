@@ -15,9 +15,6 @@ import static org.openqa.selenium.By.xpath;
 
 public class MyLoadsPage extends PageProperty {
 
-    private AppiumDriver<MobileElement> driver;
-    private String attributeName;
-
     public By backButton = xpath("//*[contains(@text, '\uF1C3')]");
     public By assignDriverButton = xpath("//*[contains(@text, 'Assign a')]");
     public By reassignDriverButton = xpath("//*[contains(@text, 'reassign a Driver')]");
@@ -52,7 +49,8 @@ public class MyLoadsPage extends PageProperty {
 //            myLoadsCardMap.put("pickUpTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[8]");
 //            myLoadsCardMap.put("deliveryTime", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[13]");
 //            myLoadsCardMap.put("payment", "//*[contains(@content-desc, 'myloads_view_list')]/*[1]/*/*[1]/*[3]");
-            myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='myloads_view_list']/*/*/*");
+            myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='address_0']");
+            myLoadsCardMap.put("liveUnloadJobButton", "//*[@content-desc='address_2']/following-sibling::*/following-sibling::*/following-sibling::*[@content-desc='buttonView']");
         } else {
 //            myLoadsCardMap.put("jobState", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobStatusText']");
 //            myLoadsCardMap.put("jobNumber", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]//*[@name='jobNumText']");
@@ -76,5 +74,26 @@ public class MyLoadsPage extends PageProperty {
         driver.findElement(anotherDriverButton).click();
         driver.findElement(assignButton).click();
     }
+
+    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
+        if (attributeName.equals("text")) {
+            swipeToUpForAndroid(300);
+            Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
+            Boolean isLiveUnloadJobStarted = isElementPresent("path", myLoadsCardMap.get("liveUnloadJobButton"));
+            while (!isPresentLiveUnloadJob && !isLiveUnloadJobStarted) {
+                swipeToUpForAndroid(3);
+                isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
+            }
+            clickElementByLocator("id", liveLoadAddress);
+            Thread.sleep(10000);
+        } else if (attributeName.equals("name")) {
+            int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+            while (location > 600) {
+                swipeToUpForiOS();
+                location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+            }
+        }
+    }
+
 
 }

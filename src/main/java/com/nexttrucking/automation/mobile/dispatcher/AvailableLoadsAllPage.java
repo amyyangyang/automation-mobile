@@ -131,19 +131,19 @@ public class AvailableLoadsAllPage extends PageProperty {
 
     public void findLiveUnloadJob() throws InterruptedException {
         if (attributeName.equals("text")) {
-            Boolean isPresentLiveUnloadJob = isElementPresent("path", availableCardMap.get("liveUnloadJobAddress2"));
+            Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
             int i = 1;
             while (!isPresentLiveUnloadJob) {
                 System.out.println("STEP: " + i);
                 swipeToUpForAndroid(5);
-                isPresentLiveUnloadJob = isElementPresent("path", availableCardMap.get("liveUnloadJobAddress2"));
+                isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
                 i++;
             }
         } else if (attributeName.equals("name")) {
-            int location = driver.findElement(By.xpath(availableCardMap.get("liveUnloadJobAddress2"))).getLocation().y;
+            int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
             while (location > 600) {
                 swipeToUpForiOS();
-                location = driver.findElement(By.xpath(availableCardMap.get("liveUnloadJobAddress2"))).getLocation().y;
+                location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
             }
         }
     }

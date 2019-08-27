@@ -33,13 +33,13 @@ public class OwnerMyLoadsTest extends SetProperty {
         myLoadsPage= new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-        Thread.sleep(10000);
+        Thread.sleep(20000);
     }
 
     @Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
-        boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
@@ -82,6 +82,12 @@ public class OwnerMyLoadsTest extends SetProperty {
         Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
         myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
         myLoadDetailsPage.submitInvoice();
+    }
+
+    @Test
+    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
+        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+        signInPage.clickBackButton();
     }
 
 }
