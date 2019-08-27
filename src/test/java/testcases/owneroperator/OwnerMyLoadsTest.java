@@ -39,7 +39,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     @Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
-        boolean isPresentLoad = myLoadsPage.isElementPresent("path", myLoadsPage.myLoadsCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
@@ -87,6 +87,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     @Test
     public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
         myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+        signInPage.clickBackButton();
     }
 
 }

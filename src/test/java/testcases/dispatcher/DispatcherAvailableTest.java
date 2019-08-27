@@ -44,7 +44,7 @@ public class DispatcherAvailableTest extends SetProperty {
         Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localButton, 1), "Local");
         Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulButton, 1), "Short Haul");
         Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
@@ -69,7 +69,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void checkSecondLoadOfAll() {
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
@@ -97,7 +97,7 @@ public class DispatcherAvailableTest extends SetProperty {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
             Thread.sleep(3000);
         }
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentJobType) {
@@ -124,7 +124,7 @@ public class DispatcherAvailableTest extends SetProperty {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.shortHaulButton);
             Thread.sleep(3000);
         }
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentJobType) {
@@ -151,7 +151,7 @@ public class DispatcherAvailableTest extends SetProperty {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
             Thread.sleep(3000);
         }
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
             if (isPresentJobType) {
@@ -204,7 +204,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void checkLoadDetail() {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             Boolean isTrips = jobDetailPage.isElementPresent("xpath", jobDetailPage.isTrips);
@@ -242,7 +242,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobOnly() throws InterruptedException {
-        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
             jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
@@ -256,7 +256,7 @@ public class DispatcherAvailableTest extends SetProperty {
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
         for(int i=0;i<3;i++) {
-            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLoad) {
                 availableLoadsAllPage.findLiveUnloadJob();
                 pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
@@ -271,7 +271,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void checkLiveUnloadJobDetail() throws InterruptedException {
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.availableCardMap.get("numberOfLoad"));
+        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.findLiveUnloadJob();
             pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
