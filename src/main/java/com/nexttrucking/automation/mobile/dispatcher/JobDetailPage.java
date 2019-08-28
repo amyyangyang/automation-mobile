@@ -146,6 +146,11 @@ public class JobDetailPage extends PageProperty {
         //Thread.sleep(3000);
     }
 
+    public Boolean checkBookJobOrAssignDriverForErrors() throws InterruptedException {
+        Boolean isPresent = isElementPresent("path", goToAvailableLoadsButton);
+        return isPresent;
+    }
+
     public boolean isliveUnloadJobStatusCorrect() {
         boolean correctStatus = false;
         String paymentStatus = getElementText("path", jobDetailCard.get("liveUnloadJobStatus"));
