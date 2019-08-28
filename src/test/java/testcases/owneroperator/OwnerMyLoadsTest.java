@@ -84,7 +84,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         myLoadDetailsPage.submitInvoice();
     }
 
-//    @Test
+    @Test
     public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
         myLoadsPage.findAndClickNotStartedLiveUnloadJob();
         signInPage.clickBackButton();

@@ -96,7 +96,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <LOCATION_NAME>server</LOCATION_NAME>
+                        <LOCATION_NAME>local</LOCATION_NAME>
                     </systemPropertyVariables>
                     <properties>
                         <maven.test.failure.ignore>true</maven.test.failure.ignore>
