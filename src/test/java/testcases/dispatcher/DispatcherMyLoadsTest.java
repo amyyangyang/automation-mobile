@@ -24,12 +24,13 @@ public class DispatcherMyLoadsTest extends SetProperty {
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
-        pageProperty = new PageProperty(driver, attributeName) {};
+        pageProperty = new PageProperty(driver, attributeName) {
+        };
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        myLoadsPage= new MyLoadsPage(driver, attributeName);
+        myLoadsPage = new MyLoadsPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
@@ -51,52 +52,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
-
-    @Test
-    public void modifyJobStatusToCompleted()throws InterruptedException{
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-        availableLoadsAllPage.confirmLogout();
-        welcomePage.clickSignInButton();
-        signInPage.typeEmail(getTestData("driverEmail"));
-        signInPage.typePassword(getTestData("driverPassword"));
-        signInPage.clickSignInButton();
-        Thread.sleep(10000);
-        String type = myLoadsPage.getElementText("id",myLoadsPage.jobNumber);
-        System.out.println(type);
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.jobNumber);
-        Thread.sleep(3000);
-        if(type.contains("J")){
-            myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
-        } else{
-            myLoadDetailsPage.changeLegacyJobStatus(allowLocationPage);
-        }
-        availableLoadsAllPage.getTitle("My Loads");
-    }
-
-    @Test
-    public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
-        String type = myLoadsPage.getElementText("id",myLoadsPage.jobNumber);
-        System.out.println(type);
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.jobNumber);
-        Thread.sleep(3000);
-        if(type.contains("J")){
-            myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
-        } else{
-            myLoadDetailsPage.changeLegacyJobStatus(allowLocationPage);
-        }
-        availableLoadsAllPage.getTitle("My Loads");
-    }
-
-    @Test
-    public void checkPreOperation()throws InterruptedException{
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
-        Thread.sleep(3000);
-        myLoadDetailsPage.checkPreOperation();
-        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
-        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
-        myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
-    }
 }
+
 
 

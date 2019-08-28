@@ -224,25 +224,29 @@ public class OwnerAvailableTest extends SetProperty {
     }
 
     @Test
-    public void bookJobOnly() throws InterruptedException {
-        for(int i=0;i<3;i++) {
-            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-            if (isPresentLoad) {
-                availableLoadsAllPage.findLiveUnloadJob();
-                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                Thread.sleep(3000);
-                jobDetailPage.bookTender();
-                Boolean isAllowToBook = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
-                if (isAllowToBook) {
-                    Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
-                } else {
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+    public void bookLiveUnLoadJobOnly() throws InterruptedException {
+        Boolean isPresentException=true;
+        do {
+            for (int i = 0; i < 3; i++) {
+                Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
+                if (isPresentLoad) {
+                    availableLoadsAllPage.findLiveUnloadJob();
+                    availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
+                    jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                    Thread.sleep(3000);
+                    jobDetailPage.bookTender();
+                    isPresentException = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
+                    if (isPresentException) {
+                        Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                        jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
+                    } else {
+                        jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+                        continue;
+                    }
+                    availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
                 }
-                availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
             }
-        }
+        }while(!isPresentException);
     }
 
     @Test
