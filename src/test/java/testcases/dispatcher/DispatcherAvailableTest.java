@@ -219,7 +219,7 @@ public class DispatcherAvailableTest extends SetProperty {
                 if(isLiveOnLoad)
                 {
                     Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadAddress));
-                    jobDetailPage.swipeToUpForAndroid(600);
+                    jobDetailPage.swipeToUpForAndroid();
                     Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadTime));
                 }
             }else{
@@ -228,8 +228,8 @@ public class DispatcherAvailableTest extends SetProperty {
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
             }
-            jobDetailPage.swipeToUpForAndroid(600);
-            jobDetailPage.swipeToUpForAndroid(600);
+            jobDetailPage.swipeToUpForAndroid();
+            jobDetailPage.swipeToUpForAndroid();
             Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
             //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.packaging));
@@ -282,7 +282,7 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[0]));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[1]));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[2]));
-            pageProperty.swipeForAnyPlatform(5);
+            pageProperty.swipeForAnyPlatform();
             Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
             Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
             Assert.assertTrue(pageProperty.isTextPresent("Specifications"));

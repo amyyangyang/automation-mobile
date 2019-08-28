@@ -130,20 +130,21 @@ public class AvailableLoadsAllPage extends PageProperty {
     }
 
     public void findLiveUnloadJob() throws InterruptedException {
+        int i = 1;
         if (attributeName.equals("text")) {
             Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
-            int i = 1;
-            while (!isPresentLiveUnloadJob) {
+            while (!isPresentLiveUnloadJob && i < 10) {
                 System.out.println("STEP: " + i);
-                swipeToUpForAndroid(5);
+                swipeToUpForAndroid();
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
                 i++;
             }
         } else if (attributeName.equals("name")) {
             int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-            while (location > 600) {
+            while (location > 600 && i < 10) {
                 swipeToUpForiOS();
                 location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+                i++;
             }
         }
     }

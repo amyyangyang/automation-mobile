@@ -140,12 +140,12 @@ public class DispatcherMyDriversTest extends SetProperty {
         if (isDriversExist) {
             myDriversPage.selectFirstDriver();
             Thread.sleep(3000);
-            pageProperty.swipeForAnyPlatform(5);
+            pageProperty.swipeForAnyPlatform();
             myDriversPage.selectField("Edit");
             myDriversPage.selectPriceVisibilityRadio("Show");
             myDriversPage.selectPriceVisibilityRadio("Save");
             Thread.sleep(3000);
-            pageProperty.swipeForAnyPlatform(5);
+            pageProperty.swipeForAnyPlatform();
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
             myDriversPage.selectField("Edit");
             myDriversPage.selectPriceVisibilityRadio("Hide");
