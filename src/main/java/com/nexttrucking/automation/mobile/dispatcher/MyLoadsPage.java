@@ -77,11 +77,10 @@ public class MyLoadsPage extends PageProperty {
 
     public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
         if (attributeName.equals("text")) {
-            swipeToUpForAndroid(300);
             Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
             Boolean isLiveUnloadJobStarted = isElementPresent("path", myLoadsCardMap.get("liveUnloadJobButton"));
-            while (!isPresentLiveUnloadJob && !isLiveUnloadJobStarted) {
-                swipeToUpForAndroid(3);
+            while (!isPresentLiveUnloadJob & isLiveUnloadJobStarted) {
+                swipeToUpForAndroid();
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
             }
             clickElementByLocator("id", liveLoadAddress);

@@ -207,13 +207,13 @@ public abstract class PageProperty {
         }
     }
 
-    public void swipeToUpForAndroid(int length) {
+    public void swipeToUpForAndroid() {
         if (attributeName.equals("text")) {
             try {
                 new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).
                         waitAction(WaitOptions.waitOptions(duration)).
-                        moveTo(PointOption.point(0, length)).release().perform();
-                Thread.sleep(500);
+                        moveTo(PointOption.point(width / 2, height * 1 / 4)).release().perform();
+                Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -233,9 +233,9 @@ public abstract class PageProperty {
     }
 
 
-    public void swipeForAnyPlatform(int length) throws InterruptedException {
+    public void swipeForAnyPlatform() throws InterruptedException {
         if (attributeName.equals("text")) {
-            swipeToUpForAndroid(length);
+            swipeToUpForAndroid();
         } else {
             swipeToUpForiOS();
         }
