@@ -54,34 +54,44 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void modifyJobStatusToCompleted()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
-        Thread.sleep(3000);
-        myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
-        myLoadDetailsPage.submitInvoice();
-        availableLoadsAllPage.getTitle("My Loads");
+        Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            Thread.sleep(3000);
+            myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
+            myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.getTitle("My Loads");
+        }
     }
 
     @Test
     public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
-        Thread.sleep(3000);
-        myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
-        myLoadDetailsPage.submitInvoice();
-        availableLoadsAllPage.getTitle("My Loads");
+        Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            Thread.sleep(3000);
+            myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
+            myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.getTitle("My Loads");
+        }
     }
 
     @Test
     public void checkPreOperation()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
-        Thread.sleep(3000);
-        myLoadDetailsPage.checkPreOperation();
-        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
-        Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
-        myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
-        myLoadDetailsPage.submitInvoice();
+        Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            Thread.sleep(3000);
+            myLoadDetailsPage.checkPreOperation();
+            Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
+            Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
+            myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
+            myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.getTitle("My Loads");
+        }
     }
 
 //    @Test
