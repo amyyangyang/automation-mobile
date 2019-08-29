@@ -31,9 +31,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         myLoadsPage= new MyLoadsPage(driver, attributeName);
-//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-        Thread.sleep(30000);
-
+        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(20000);
     }
