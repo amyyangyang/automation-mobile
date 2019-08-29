@@ -61,6 +61,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
             myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         }
     }
@@ -74,6 +75,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
             myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         }
     }
@@ -90,6 +92,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
             myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
             myLoadDetailsPage.submitInvoice();
+            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         }
     }
