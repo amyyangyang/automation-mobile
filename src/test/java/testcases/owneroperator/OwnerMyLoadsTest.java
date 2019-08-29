@@ -31,7 +31,9 @@ public class OwnerMyLoadsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         myLoadsPage= new MyLoadsPage(driver, attributeName);
-        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+//        signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        Thread.sleep(30000);
+
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(20000);
     }
@@ -54,8 +56,7 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void modifyJobStatusToCompleted()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
         Thread.sleep(3000);
         myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
         myLoadDetailsPage.submitInvoice();
@@ -64,8 +65,7 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
         Thread.sleep(3000);
         myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
         myLoadDetailsPage.submitInvoice();
@@ -74,20 +74,13 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void checkPreOperation()throws InterruptedException{
-        availableLoadsAllPage.findLiveUnloadJob();
-        myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
         Thread.sleep(3000);
         myLoadDetailsPage.checkPreOperation();
         Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
         Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
         myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
         myLoadDetailsPage.submitInvoice();
-    }
-
-    @Test
-    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-        signInPage.clickBackButton();
     }
 
 }
