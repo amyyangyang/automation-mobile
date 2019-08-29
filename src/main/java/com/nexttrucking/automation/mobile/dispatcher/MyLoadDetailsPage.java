@@ -16,18 +16,18 @@ import static org.openqa.selenium.By.xpath;
 
 public class MyLoadDetailsPage extends PageProperty {
 
-    public String readyToStart="(//*[contains(@%s, \"I'm ready to start driving\")])[last()]";
+    public String readyToStart="(//*[contains(@%s, \"I'm Ready to Start Driving\")])[last()]";
 
     //status for trips job
-    public String arrivedInOrigination="(//*[contains(@%s, \"I'm Hooked\")])[last()]";
-    public String arrivedInDestination="(//*[contains(@%s, \"I've Dropped\")])[last()]";
-    public String liveOnLoad="(//*[contains(@%s, \"I'm Unloaded\")])[last()]";
+    public String arrivedInOrigination="(//*[contains(@%s, \"Hook Completed\")])[last()]";
+    public String arrivedInDestination="(//*[contains(@%s, \"Drop Completed\")])[last()]";
+    public String liveOnLoad="(//*[contains(@%s, \"Live Unload Completed\")])[last()]";
 
     //status for legacy job
     public String arrived="(//*[contains(@%s, \"I've Arrived\")])[last()]";
-    public String pickUp="(//*[contains(@%s, \"I've Picked Up\")])[last()]";
+    public String pickUp="(//*[contains(@%s, \"Pickup Completed\")])[last()]";
     public String readyToLeave="(//*[contains(@%s, \"I'm Leaving\")])[last()]";
-    public String delivered="(//*[contains(@%s, \"I've Delivered\")])[last()]";
+    public String delivered="(//*[contains(@%s, \"Delivery Completed\")])[last()]";
 
     //button to upload pod or not
     public String continuePOD="(//*[contains(@%s, 'Continue')])[last()]";
@@ -144,6 +144,11 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")) {
             clickElementByLocator("path",goToMyLoadsButton);
         }else{
+            new TouchAction(driver).press(PointOption.point(183,617)).perform();
+            new TouchAction(driver).press(PointOption.point(183,570)).perform();
+            new TouchAction(driver).press(PointOption.point(183,550)).perform();
+            new TouchAction(driver).press(PointOption.point(183,600)).perform();
+            new TouchAction(driver).press(PointOption.point(183,610)).perform();
             new TouchAction(driver).press(PointOption.point(183,590)).perform();
         }
         Thread.sleep(3000);
