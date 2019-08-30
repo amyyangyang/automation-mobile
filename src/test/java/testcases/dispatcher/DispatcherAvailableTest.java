@@ -49,10 +49,6 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
-            Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-            if (isPresentJobType) {
-                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            }
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
@@ -74,10 +70,6 @@ public class DispatcherAvailableTest extends SetProperty {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
 //                availableLoadsAllPage.swipeToUpForAndroid();
-                Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-                if (isPresentJobType) {
-                    Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-                }
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
                 Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
@@ -99,10 +91,6 @@ public class DispatcherAvailableTest extends SetProperty {
         }
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
-            Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-            if (isPresentJobType) {
-                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            }
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
@@ -126,10 +114,6 @@ public class DispatcherAvailableTest extends SetProperty {
         }
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
-            Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-            if (isPresentJobType) {
-                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            }
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
@@ -153,10 +137,6 @@ public class DispatcherAvailableTest extends SetProperty {
         }
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
-            Boolean isPresentJobType = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.jobType);
-            if (isPresentJobType) {
-                Assert.assertThat(Utils.jobTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.jobType)));
-            }
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
