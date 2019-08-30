@@ -62,6 +62,8 @@ public class OwnerMyLoadsTest extends SetProperty {
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 
@@ -75,6 +77,8 @@ public class OwnerMyLoadsTest extends SetProperty {
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 
@@ -91,6 +95,8 @@ public class OwnerMyLoadsTest extends SetProperty {
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 

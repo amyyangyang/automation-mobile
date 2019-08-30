@@ -99,7 +99,7 @@ public class MyLoadsPage extends PageProperty {
             }
             driver.findElementByAccessibilityId(jobID).click();
         }
-        Thread.sleep(10000);
+        Thread.sleep(5000);
     }
 
 

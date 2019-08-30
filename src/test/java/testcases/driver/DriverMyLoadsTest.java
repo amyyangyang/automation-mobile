@@ -51,7 +51,8 @@ public class DriverMyLoadsTest extends SetProperty {
     public void modifyLiveUnLoadJobStatusToCompleted()throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
         if (isPresentJob) {
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id", myLoadsPage.jobNumber);
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
             availableLoadsAllPage.getTitle("My Loads");
@@ -62,7 +63,8 @@ public class DriverMyLoadsTest extends SetProperty {
     public void modifyLiveUnLoadJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
         boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob) {
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id", myLoadsPage.liveLoadAddress);
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
             availableLoadsAllPage.getTitle("My Loads");
@@ -73,7 +75,8 @@ public class DriverMyLoadsTest extends SetProperty {
     public void checkLiveUnLoadJobPreOperation()throws InterruptedException{
         boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            availableLoadsAllPage.findLiveUnloadJob();
+            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
             Thread.sleep(3000);
             myLoadDetailsPage.checkPreOperation();
             Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
