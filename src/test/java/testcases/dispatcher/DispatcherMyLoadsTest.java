@@ -34,7 +34,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-        Thread.sleep(10000);
+        Thread.sleep(20000);
     }
 
     @Test

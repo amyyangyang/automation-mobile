@@ -133,7 +133,7 @@ public class AvailableLoadsAllPage extends PageProperty {
         int i = 1;
         if (attributeName.equals("text")) {
             Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
-            while (!isPresentLiveUnloadJob && i < 10) {
+            while (!isPresentLiveUnloadJob && i < 16) {
                 System.out.println("STEP: " + i);
                 swipeToUpForAndroid();
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
@@ -141,7 +141,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             }
         } else if (attributeName.equals("name")) {
             int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-            while (location > 600 && i < 10) {
+            while (location > 600 && i < 16) {
                 swipeToUpForiOS();
                 location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
                 i++;

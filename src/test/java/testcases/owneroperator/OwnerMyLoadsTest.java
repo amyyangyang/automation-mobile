@@ -56,13 +56,14 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompleted()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob){
-            availableLoadsAllPage.findLiveUnloadJob();
-            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 
@@ -70,13 +71,14 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob){
-            availableLoadsAllPage.findLiveUnloadJob();
-            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             Thread.sleep(3000);
             myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
     }
 
@@ -84,8 +86,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void checkPreOperation()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob){
-            availableLoadsAllPage.findLiveUnloadJob();
-            myLoadsPage.clickElementByLocator("id",myLoadsPage.liveLoadAddress);
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             Thread.sleep(3000);
             myLoadDetailsPage.checkPreOperation();
             Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
@@ -94,13 +95,9 @@ public class OwnerMyLoadsTest extends SetProperty {
             myLoadDetailsPage.submitInvoice();
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
         }
-    }
-
-//    @Test
-    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-        signInPage.clickBackButton();
     }
 
 }

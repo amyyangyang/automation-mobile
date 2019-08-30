@@ -270,7 +270,7 @@ public class DispatcherAvailableTest extends SetProperty {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.findLiveUnloadJob();
-            pageProperty.clickElementByLocator("path", availableLoadsAllPage.availableCardMap.get("liveUnloadJobAddress2"));
+            pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
             Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[0]));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[1]));
