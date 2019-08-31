@@ -210,7 +210,7 @@ public class DispatcherAvailableTest extends SetProperty {
             }
             jobDetailPage.swipeToUpForAndroid();
             jobDetailPage.swipeToUpForAndroid();
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
+            Assert.assertThat(Utils.equipmentTypeListOnDetail, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
             //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.packaging));
             //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.weight));
