@@ -197,7 +197,7 @@ public class OwnerAvailableTest extends SetProperty {
             }
             jobDetailPage.swipeToUpForAndroid();
             jobDetailPage.swipeToUpForAndroid();
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
+            Assert.assertThat(Utils.equipmentTypeListOnDetail, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         }
