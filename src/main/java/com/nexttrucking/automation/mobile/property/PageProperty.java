@@ -227,7 +227,7 @@ public abstract class PageProperty {
         params.put("fromX", 200);
         params.put("fromY", 500);
         params.put("toX", 200);
-        params.put("toY", 400);
+        params.put("toY", 300);
         js.executeScript("mobile: dragFromToForDuration", params);
         Thread.sleep(1000);
     }
