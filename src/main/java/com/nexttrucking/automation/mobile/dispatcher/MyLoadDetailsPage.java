@@ -5,14 +5,12 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.openqa.selenium.By.xpath;
 
 public class MyLoadDetailsPage extends PageProperty {
 
@@ -44,6 +42,10 @@ public class MyLoadDetailsPage extends PageProperty {
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
+
+    //undo button
+    public String UndoButton="(//*[contains(@%s, 'Undo')])[last()]";
+
 
     public Map<String, String> myLoadsDetailCardMap;
 
@@ -208,4 +210,30 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(6000);
     }
 
+    public void checkUndoOperationInProgressUploadPOD(AllowLocationPage allowLocationPage)throws InterruptedException{
+        Assert.assertEquals(getElementText("path", readyToStart),"I'm Ready to Start Driving");
+        clickElementByLocator("path",readyToStart);
+        Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
+        clickElementByLocator("path",UndoButton);
+        Assert.assertEquals(getElementText("path", readyToStart),"I'm Ready to Start Driving");
+        clickElementByLocator("path",readyToStart);
+        Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
+        clickElementByLocator("path",arrivedInOrigination);
+        Assert.assertEquals(getElementText("path", liveOnLoad),"Live Unload Completed");
+        clickElementByLocator("path",UndoButton);
+        Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
+        clickElementByLocator("path",arrivedInOrigination);
+        Assert.assertEquals(getElementText("path", liveOnLoad),"Live Unload Completed");
+        clickElementByLocator("path",liveOnLoad);
+        //upload first instruction POD
+        clickElementByLocator("path",continuePOD);
+        clickElementByLocator("path",myLoadsDetailCardMap.get("PODForFirst"));
+        uploadPOD(allowLocationPage,true);
+        Assert.assertEquals(getElementText("path", arrivedInDestination),"Drop Completed");
+        clickElementByLocator("path",arrivedInDestination);
+        //upload second instruction POD
+        clickElementByLocator("path",continuePOD);
+        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForSecond"));
+        uploadPOD(allowLocationPage,false);
+    }
 }
