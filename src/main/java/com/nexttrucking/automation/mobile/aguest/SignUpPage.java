@@ -59,7 +59,7 @@ public class SignUpPage extends PageProperty {
 
     public void chooseCity(String city) throws InterruptedException {
         sendKeyToElement(typeCityInput, city);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         clickMenu(selectCityCheckbox, city);
         Thread.sleep(2000);
     }

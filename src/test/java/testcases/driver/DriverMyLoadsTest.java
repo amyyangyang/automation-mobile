@@ -34,7 +34,7 @@ public class DriverMyLoadsTest extends SetProperty {
         Thread.sleep(10000);
     }
 
-    //@Test
+    @Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
