@@ -67,6 +67,7 @@ public abstract class SetProperty {
                             case "ios":
                                 attributeName = "name";
                                 capabilities.setCapability("waitForQuiescence", "false");
+                                capabilities.setCapability("launchTimeout", "60000");
                                 driver = Factory.createIOSDriver(url, capabilities);
                                 break;
                         }
