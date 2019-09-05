@@ -134,10 +134,13 @@ public abstract class PageProperty {
         if (clickAmount == 2) {
             driver.findElement(By.xpath(element)).click();
         }
+        int loopIteration = 1;
         boolean selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
-        while (!selectAllButtonIsPresent) {
+        while (!selectAllButtonIsPresent && loopIteration < 5) {
             driver.findElement(By.xpath(element)).click();
             selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
+            System.out.println("LOOP ITERATION AMOUNT IS: " + loopIteration);
+            loopIteration++;
         }
         driver.findElement(By.xpath(selectAllButton)).click();
         if (valueType.equals("number")) {
