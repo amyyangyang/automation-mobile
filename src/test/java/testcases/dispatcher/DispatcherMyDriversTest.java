@@ -30,7 +30,8 @@ public class DispatcherMyDriversTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         myDriversPage = new MyDriversPage(driver, attributeName);
         // SignIn as Dispatcher
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        Thread.sleep(30000);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
     }
 

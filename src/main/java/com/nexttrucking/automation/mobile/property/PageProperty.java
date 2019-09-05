@@ -134,6 +134,11 @@ public abstract class PageProperty {
         if (clickAmount == 2) {
             driver.findElement(By.xpath(element)).click();
         }
+        boolean selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
+        while (!selectAllButtonIsPresent) {
+            driver.findElement(By.xpath(element)).click();
+            selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
+        }
         driver.findElement(By.xpath(selectAllButton)).click();
         if (valueType.equals("number")) {
             driver.findElement(By.xpath(deleteNumbersButton)).click();

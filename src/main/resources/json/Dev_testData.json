@@ -1,7 +1,7 @@
 {"SIGNIN": "SIGNUP",
 
         "FOR": "SignInAsDispatcher",
-                "dispatcherEmail": "seraabel2017+fleettest@gmail.com",
+                "dispatcherEmail": "seraabel2017+fleet@gmail.com",
                 "dispatcherPassword": "111111",
 
         "FOR": "SignInAsOwnerOperator",
