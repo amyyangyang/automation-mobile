@@ -43,7 +43,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
 
-    //undo button
+    //undoButton
     public String UndoButton="(//*[contains(@%s, 'Undo')])[last()]";
 
 
@@ -212,17 +212,13 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void checkUndoOperationInProgressUploadPOD(AllowLocationPage allowLocationPage)throws InterruptedException{
         clickElementByLocator("path",readyToStart);
-        Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
         clickElementByLocator("path",UndoButton);
         Assert.assertEquals(getElementText("path", readyToStart),"I'm Ready to Start Driving");
         clickElementByLocator("path",readyToStart);
-        Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
         clickElementByLocator("path",arrivedInOrigination);
-        Assert.assertEquals(getElementText("path", liveOnLoad),"Live Unload Completed");
         clickElementByLocator("path",UndoButton);
         Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
         clickElementByLocator("path",arrivedInOrigination);
-        Assert.assertEquals(getElementText("path", liveOnLoad),"Live Unload Completed");
         clickElementByLocator("path",liveOnLoad);
         //upload first instruction POD
         clickElementByLocator("path",continuePOD);
