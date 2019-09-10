@@ -40,6 +40,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String skipInvoice="(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go back to My Loads')])[last()]";
     public String getPayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
+    public String editPODButton = "(//*[contains(@%s,'Edit POD')])";
 
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
@@ -55,6 +56,12 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("submitPOD","(//*[@class='android.widget.ImageView'])[3]");
             myLoadsDetailCardMap.put("PODForSecond","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]");
             myLoadsDetailCardMap.put("PODForFirst","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]");
+            myLoadsDetailCardMap.put("firstInstructionAction","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]/*/*/*[1]");
+            myLoadsDetailCardMap.put("secondInstructionAction","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]/*/*/*[1]");
+            myLoadsDetailCardMap.put("firstInstructionAddress","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]/*/*/*[3]");
+            myLoadsDetailCardMap.put("secondInstructionAddress","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]/*/*/*[3]");
+            myLoadsDetailCardMap.put("firstInstructionBlueIcon","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]/*/*/*[2]");
+            myLoadsDetailCardMap.put("secondInstructionBlueIcon","//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]/*/*/*[2]");
             myLoadsDetailCardMap.put("closeSubmitPage","//*[contains(@text, '\uF406')]");
             myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//*[contains(@text, '\uF406')]");
