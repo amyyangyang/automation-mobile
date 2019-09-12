@@ -218,12 +218,13 @@ public class OwnerAvailableTest extends SetProperty {
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         }
     }
-
     @Test
     public void bookLiveUnLoadJobOnly() throws InterruptedException {
-        Boolean isPresentException=true;
-        do {
-            for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
+            Boolean isPresentException=true;
+            int loop=0;
+            do {
+                ++loop;
                 Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
                     availableLoadsAllPage.findLiveUnloadJob();
@@ -241,8 +242,8 @@ public class OwnerAvailableTest extends SetProperty {
                     }
                     availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
                 }
-            }
-        }while(!isPresentException);
+            }while((!isPresentException)&&(loop<3));
+        }
     }
 
     @Test

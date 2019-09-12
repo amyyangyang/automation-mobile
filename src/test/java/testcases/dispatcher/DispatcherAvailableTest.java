@@ -253,9 +253,11 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        Boolean isPresentException = false;
-        do {
-            for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
+            Boolean isPresentException = false;
+            int loop=0;
+            do {
+                ++loop;
                 Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
                     availableLoadsAllPage.findLiveUnloadJob();
@@ -269,10 +271,10 @@ public class DispatcherAvailableTest extends SetProperty {
                         continue;
                     }
                     Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                    jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+                    isPresentException=jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
                 }
-            }
-        } while (isPresentException);
+            } while ((isPresentException)&&(loop<3));
+        }
     }
 
     @Test
