@@ -112,25 +112,31 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void editFirstName(String newFirstName) throws InterruptedException {
-        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", 1);
+        String currentFirstName = getCurrentName("FirstName");
+        int clickDeleteAmount = currentFirstName.length();
+        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
         while (!getWrittenData("FirstName").contains(newFirstName)) {
-            editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", 1);
+            editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
         }
     }
 
     public void editLastName(String newLastName) throws InterruptedException {
-        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", 2);
+        String currentFirstName = getCurrentName("LastName");
+        int clickDeleteAmount = currentFirstName.length();
+        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
         while (!getWrittenData("LastName").contains(newLastName)) {
-            editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", 1);
+            editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
         }
     }
 
     public void editPhone(String newPhone) throws InterruptedException {
         int round = 2;
-        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", 2);
+        String currentFirstName = getCurrentName("Phone");
+        int clickDeleteAmount = currentFirstName.length();
+        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
         String newPhoneNumber = newPhone.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
         while (!getWrittenData("Phone").contains(newPhoneNumber)) {
-            editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", 1);
+            editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
             System.out.println("ROUND NUMBER IS: " + round);
             round++;
         }
@@ -209,6 +215,9 @@ public class MyDriversPage extends PageProperty {
                 break;
             case "LastName":
                 currentname = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForiOS);
+                break;
+            case "Phone":
+                currentname = getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS);
                 break;
         }
         return currentname;

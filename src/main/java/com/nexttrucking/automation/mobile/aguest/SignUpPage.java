@@ -82,7 +82,7 @@ public class SignUpPage extends PageProperty {
         if (attributeName.equals("name")) {
             String newPhoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
             while (!getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS).contains(newPhoneNumber)) {
-                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 1);
+                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 12);
             }
         }
         Thread.sleep(3000);
