@@ -32,7 +32,7 @@ public class JobDetailPage extends PageProperty {
     //button for ownerOperator, only go to my loads button and go to available loads button
     public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
-    public String somethingIsWrong = "(//*[contains(@%s,'Something's wrong')])[last()]";
+    public String somethingIsWrong = "(//*[contains(@%s,\"Something's wrong\")])[last()]";
     public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
     public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
 

@@ -76,7 +76,7 @@ public class OwnerAvailableTest extends SetProperty {
     }
 
     @Test
-    public void checkFirstLoadOfLocal() {
+    public void checkFirstLoadOfLocal()throws InterruptedException {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
@@ -84,6 +84,7 @@ public class OwnerAvailableTest extends SetProperty {
             if (isPresentMessage) {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
+                Thread.sleep(3000);
             }
             boolean isPresentLocalLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLocalLoad) {
@@ -111,6 +112,7 @@ public class OwnerAvailableTest extends SetProperty {
             if (isPresentMessage) {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.shortHaulButton);
+                Thread.sleep(3000);
             }
             boolean isPresentShortHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentShortHaulLoad) {
@@ -130,7 +132,7 @@ public class OwnerAvailableTest extends SetProperty {
     }
 
     @Test
-    public void checkFirstLoadOfLongHaul() {
+    public void checkFirstLoadOfLongHaul() throws InterruptedException{
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
@@ -138,6 +140,7 @@ public class OwnerAvailableTest extends SetProperty {
             if (isPresentMessage) {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
+                Thread.sleep(3000);
             }
             boolean isPresentLongHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLongHaulLoad) {
