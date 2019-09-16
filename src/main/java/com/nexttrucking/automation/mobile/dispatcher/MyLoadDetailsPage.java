@@ -40,7 +40,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String skipInvoice="(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go back to My Loads')])[last()]";
     public String getPayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
-    public String editPODButton = "(//*[contains(@%s,'Edit POD')])";
+    public String editPODButton = "(//*[contains(@%s,'Edit POD')])[last()]";
 
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
@@ -71,10 +71,10 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("submitPOD","//*[@name='right']");
             myLoadsDetailCardMap.put("PODForSecond","//XCUIElementTypeScrollView/*/*[2]");
             myLoadsDetailCardMap.put("PODForFirst","//XCUIElementTypeScrollView/*/*[1]");
-            myLoadsDetailCardMap.put("firstInstructionAction","(//XCUIElementTypeStaticText[@name=‘action’])[1]");
-            myLoadsDetailCardMap.put("firstInstructionAddress","(//XCUIElementTypeStaticText[@name=‘address’])[1]");
-            myLoadsDetailCardMap.put("secondInstructionAction","(//XCUIElementTypeStaticText[@name=‘action’])[2]");
-            myLoadsDetailCardMap.put("secondInstructionAddress","(//XCUIElementTypeStaticText[@name=‘address’])[2]");
+            myLoadsDetailCardMap.put("firstInstructionAction","(//XCUIElementTypeStaticText[@name='action'])[1]");
+            myLoadsDetailCardMap.put("firstInstructionAddress","(//XCUIElementTypeStaticText[@name='address'])[1]");
+            myLoadsDetailCardMap.put("secondInstructionAction","(//XCUIElementTypeStaticText[@name='action'])[2]");
+            myLoadsDetailCardMap.put("secondInstructionAddress","(//XCUIElementTypeStaticText[@name='address'])[2]");
             myLoadsDetailCardMap.put("firstInstructionBlueIcon","(//XCUIElementTypeStaticText[@name=\"\uF14A\"])[1]");
             myLoadsDetailCardMap.put("secondInstructionBlueIcon","(//XCUIElementTypeStaticText[@name=\"\uF14A\"])[2]");
             myLoadsDetailCardMap.put("closeSubmitPage","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
