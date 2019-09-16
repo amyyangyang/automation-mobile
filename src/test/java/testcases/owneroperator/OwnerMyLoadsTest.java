@@ -100,7 +100,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    //@Test
+    @Test
     public void checkInvoiceEditPODPage()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
         if(isPresentJob){
