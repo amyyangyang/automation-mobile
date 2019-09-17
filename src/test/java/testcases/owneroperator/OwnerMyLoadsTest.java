@@ -100,11 +100,6 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-//    @Test
-    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-        signInPage.clickBackButton();
-    }
 
     @Test
     public void undoOperationInProgressUploadPOD()throws InterruptedException{
@@ -113,9 +108,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             Thread.sleep(3000);
             myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
-            myLoadDetailsPage.submitInvoice();
-            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-            availableLoadsAllPage.getTitle("My Loads");
+           Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.invoiceTitle),"Invoice");
         }
     }
 }

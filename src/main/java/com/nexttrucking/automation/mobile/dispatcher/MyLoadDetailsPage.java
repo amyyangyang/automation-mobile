@@ -38,13 +38,14 @@ public class MyLoadDetailsPage extends PageProperty {
     public String skipInvoice="(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go back to My Loads')])[last()]";
     public String getPayment="//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
+    public String invoiceTitle = "(//*[@%s='Invoice'])[last()]";
 
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
 
     //undoButton
-    public String UndoButton="(//*[contains(@%s, 'Undo')])[last()]";
+    public String undoButton="(//*[contains(@%s, 'Undo')])[last()]";
 
 
     public Map<String, String> myLoadsDetailCardMap;
@@ -212,11 +213,11 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void checkUndoOperationInProgressUploadPOD(AllowLocationPage allowLocationPage)throws InterruptedException{
         clickElementByLocator("path",readyToStart);
-        clickElementByLocator("path",UndoButton);
+        clickElementByLocator("path",undoButton);
         Assert.assertEquals(getElementText("path", readyToStart),"I'm Ready to Start Driving");
         clickElementByLocator("path",readyToStart);
         clickElementByLocator("path",arrivedInOrigination);
-        clickElementByLocator("path",UndoButton);
+        clickElementByLocator("path",undoButton);
         Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
         clickElementByLocator("path",arrivedInOrigination);
         clickElementByLocator("path",liveOnLoad);
