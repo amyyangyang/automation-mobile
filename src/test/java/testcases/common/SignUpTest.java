@@ -29,7 +29,7 @@ public class SignUpTest extends SetProperty {
         myDriversPage = new MyDriversPage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
-//        welcomePage.getWelcomePage();
+        welcomePage.getWelcomePage();
     }
 
     @Test
