@@ -49,7 +49,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
 }
