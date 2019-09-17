@@ -1,15 +1,15 @@
 {"SIGNIN": "SIGNUP",
 
         "FOR": "SignInAsDispatcher",
-                "dispatcherEmail": "seraabel2017+fleet@gmail.com",
+                "dispatcherEmail": "seraabel2017+fleettest@gmail.com",
                 "dispatcherPassword": "111111",
 
         "FOR": "SignInAsOwnerOperator",
-                "ownerOperatorEmail": "seraabel2017+trucker@gmail.com",
+                "ownerOperatorEmail": "seraabel2017+truckertest@gmail.com",
                 "ownerOperatorPassword": "111111",
 
         "FOR": "SignInAsDriver",
-                "driverEmail": "seraabel2017+driver@gmail.com",
+                "driverEmail": "seraabel2017+drivertest@gmail.com",
                 "driverPassword": "111111",
 
 
