@@ -152,9 +152,7 @@ public abstract class SetProperty {
     public static String getTestData(String parameterName) throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document;
-        JSONObject jsonObject;
-        JSONParser parser = new JSONParser();
+        Document document = null;
         String parameterValue = null;
         try {
             String profile = System.getProperty("LOCATION_NAME");
@@ -165,22 +163,17 @@ public abstract class SetProperty {
                         prop.load(input);
                         switch (prop.getProperty("env.name")) {
                             case "dev":
-                                document = builder.parse(new File("src//main//resources//json//Dev_testData.xml"));
-                                document.getDocumentElement().normalize();
-                                parameterValue = document.getElementsByTagName(parameterName).item(0).getTextContent();
+                                document = builder.parse(new File("test-classes//xml//Dev_testData.xml"));
                                 break;
                             case "test":
-                                obj = parser.parse(new FileReader("test-classes//json//Test_testData.json"));
-                                jsonObject = (JSONObject) obj;
-                                parameterValue = (String) jsonObject.get(parameterName);
+                                document = builder.parse(new File("test-classes//xml//Test_testData.xml"));
                                 break;
                             case "demo":
-                                obj = parser.parse(new FileReader("test-classes//json//Demo_testData.json"));
-                                jsonObject = (JSONObject) obj;
-                                parameterValue = (String) jsonObject.get(parameterName);
+                                document = builder.parse(new File("test-classes//xml//Demo_testData.xml"));
                                 break;
                         }
-
+                        document.getDocumentElement().normalize();
+                        parameterValue = document.getElementsByTagName(parameterName).item(0).getTextContent();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -191,17 +184,17 @@ public abstract class SetProperty {
                         prop.load(input);
                         switch (prop.getProperty("env.name")) {
                             case "dev":
-                                obj = parser.parse(new FileReader("src//main//resources//json//Dev_testData.json"));
+                                document = builder.parse(new File("src//main//resources//xml//Dev_testData.xml"));
                                 break;
                             case "test":
-                                obj = parser.parse(new FileReader("src//main//resources//json//Test_testData.json"));
+                                document = builder.parse(new File("src//main//resources//xml//Test_testData.xml"));
                                 break;
                             case "demo":
-                                obj = parser.parse(new FileReader("src//main//resources//json//Demo_testData.json"));
+                                document = builder.parse(new File("src//main//resources//xml//Demo_testData.xml"));
                                 break;
                         }
-                        jsonObject = (JSONObject) obj;
-                        parameterValue = (String) jsonObject.get(parameterName);
+                        document.getDocumentElement().normalize();
+                        parameterValue = document.getElementsByTagName(parameterName).item(0).getTextContent();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
