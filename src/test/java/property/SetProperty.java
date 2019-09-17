@@ -28,6 +28,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.*;
+import java.io.*;
 
 
 public abstract class SetProperty {
@@ -133,7 +138,22 @@ public abstract class SetProperty {
 //        jse = (JavascriptExecutor)driver;
     }
 
-    public static String getTestData(String parameterName) {
+    public static String getTestDataXML(String parameterName) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new File("src//main//resources//json//Dev_testData.xml"));
+        document.getDocumentElement().normalize();
+        System.out.println(document.getElementsByTagName(parameterName).item(0).getTextContent());
+        Element root = document.getDocumentElement();
+        return "f";
+    }
+
+
+    public static String getTestData(String parameterName) throws ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document;
+        JSONObject jsonObject;
         JSONParser parser = new JSONParser();
         String parameterValue = null;
         try {
@@ -145,17 +165,22 @@ public abstract class SetProperty {
                         prop.load(input);
                         switch (prop.getProperty("env.name")) {
                             case "dev":
-                                obj = parser.parse(new FileReader("test-classes//json//Dev_testData.json"));
+                                document = builder.parse(new File("src//main//resources//json//Dev_testData.xml"));
+                                document.getDocumentElement().normalize();
+                                parameterValue = document.getElementsByTagName(parameterName).item(0).getTextContent();
                                 break;
                             case "test":
                                 obj = parser.parse(new FileReader("test-classes//json//Test_testData.json"));
+                                jsonObject = (JSONObject) obj;
+                                parameterValue = (String) jsonObject.get(parameterName);
                                 break;
                             case "demo":
                                 obj = parser.parse(new FileReader("test-classes//json//Demo_testData.json"));
+                                jsonObject = (JSONObject) obj;
+                                parameterValue = (String) jsonObject.get(parameterName);
                                 break;
                         }
-                        JSONObject jsonObject = (JSONObject) obj;
-                        parameterValue = (String) jsonObject.get(parameterName);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -175,7 +200,7 @@ public abstract class SetProperty {
                                 obj = parser.parse(new FileReader("src//main//resources//json//Demo_testData.json"));
                                 break;
                         }
-                        JSONObject jsonObject = (JSONObject) obj;
+                        jsonObject = (JSONObject) obj;
                         parameterValue = (String) jsonObject.get(parameterName);
                     } catch (Exception e) {
                         e.printStackTrace();

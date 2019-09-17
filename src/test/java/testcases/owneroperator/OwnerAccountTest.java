@@ -9,13 +9,14 @@ import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.BeforeClass;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 public class OwnerAccountTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);

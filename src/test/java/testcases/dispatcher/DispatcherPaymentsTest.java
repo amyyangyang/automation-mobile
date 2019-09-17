@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 
@@ -17,7 +18,7 @@ public class DispatcherPaymentsTest extends SetProperty {
     public static PaymentsPage paymentsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);

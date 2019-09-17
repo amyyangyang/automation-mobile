@@ -15,6 +15,7 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -24,7 +25,7 @@ public class OwnerAvailableTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -33,6 +34,7 @@ public class OwnerAvailableTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+//    Thread.sleep(50000);
     }
 
     @Test

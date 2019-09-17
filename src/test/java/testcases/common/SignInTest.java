@@ -6,6 +6,8 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import org.junit.*;
 import property.SetProperty;
+
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 
@@ -23,7 +25,7 @@ public class SignInTest extends SetProperty {
 
 
     @Test
-    public void signInAsDispatcher() throws InterruptedException {
+    public void signInAsDispatcher() throws InterruptedException, ParserConfigurationException {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
@@ -32,7 +34,7 @@ public class SignInTest extends SetProperty {
 
 
     @Test
-    public void signInAsDriver() throws InterruptedException {
+    public void signInAsDriver() throws InterruptedException, ParserConfigurationException {
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
@@ -41,7 +43,7 @@ public class SignInTest extends SetProperty {
 
 
     @Test
-    public void signInAsOwnerOperator() throws InterruptedException {
+    public void signInAsOwnerOperator() throws InterruptedException, ParserConfigurationException {
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         Thread.sleep(3000);
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));

@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -25,7 +26,7 @@ public class DispatcherAvailableTest extends SetProperty {
     public static MyLoadsPage   myLoadsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -35,6 +36,8 @@ public class DispatcherAvailableTest extends SetProperty {
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage=new MyLoadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        Thread.sleep(30000);
+
     }
 
     @Test

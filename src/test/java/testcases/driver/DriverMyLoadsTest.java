@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -21,7 +22,7 @@ public class DriverMyLoadsTest extends SetProperty {
     public static MyLoadDetailsPage myLoadDetailsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);

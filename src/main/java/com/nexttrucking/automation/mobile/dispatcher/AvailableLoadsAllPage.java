@@ -142,7 +142,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             }
         } else if (attributeName.equals("name")) {
             int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-            while (location > 600 && i < 16) {
+            while (location > 660 && i < 16) {
                 swipeToUpForiOS();
                 location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
                 i++;

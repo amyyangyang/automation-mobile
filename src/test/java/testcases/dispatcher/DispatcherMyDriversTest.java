@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Tag;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
+
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 
@@ -21,7 +23,7 @@ public class DispatcherMyDriversTest extends SetProperty {
 
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);

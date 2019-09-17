@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -22,7 +23,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadsPage myLoadsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -32,6 +33,8 @@ public class OwnerMyLoadsTest extends SetProperty {
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         myLoadsPage= new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+//        Thread.sleep(40000);
+
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(20000);
     }
