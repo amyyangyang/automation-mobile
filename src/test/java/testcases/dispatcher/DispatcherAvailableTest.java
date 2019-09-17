@@ -14,7 +14,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
@@ -36,8 +35,6 @@ public class DispatcherAvailableTest extends SetProperty {
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage=new MyLoadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-//        Thread.sleep(30000);
-
     }
 
     @Test

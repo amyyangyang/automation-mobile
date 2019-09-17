@@ -138,17 +138,6 @@ public abstract class SetProperty {
 //        jse = (JavascriptExecutor)driver;
     }
 
-    public static String getTestDataXML(String parameterName) throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("src//main//resources//json//Dev_testData.xml"));
-        document.getDocumentElement().normalize();
-        System.out.println(document.getElementsByTagName(parameterName).item(0).getTextContent());
-        Element root = document.getDocumentElement();
-        return "f";
-    }
-
-
     public static String getTestData(String parameterName) throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();

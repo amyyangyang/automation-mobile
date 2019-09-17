@@ -7,16 +7,13 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
-import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class DispatcherMyLoadsTest extends SetProperty {
     public static MyLoadsPage myLoadsPage;

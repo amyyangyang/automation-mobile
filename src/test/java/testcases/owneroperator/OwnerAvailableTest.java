@@ -12,9 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.By;
 import property.SetProperty;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
@@ -34,7 +32,6 @@ public class OwnerAvailableTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
-//    Thread.sleep(50000);
     }
 
     @Test

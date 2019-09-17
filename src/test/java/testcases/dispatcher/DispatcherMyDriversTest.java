@@ -10,10 +10,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.jupiter.api.Tag;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 

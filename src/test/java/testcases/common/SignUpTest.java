@@ -6,13 +6,11 @@ import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import javax.xml.parsers.ParserConfigurationException;
 import org.junit.*;
 import org.junit.jupiter.api.Tag;
 import property.SetProperty;
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 
@@ -22,13 +20,13 @@ public class SignUpTest extends SetProperty {
     public static void setUp() throws MalformedURLException, InterruptedException {
         setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
+        allowLocationPage = new AllowLocationPage(driver, attributeName);
         pageProperty = new PageProperty(driver, attributeName) {};
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         myDriversPage = new MyDriversPage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
-        allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage.getWelcomePage();
     }
 

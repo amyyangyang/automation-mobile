@@ -8,7 +8,6 @@ import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.BeforeClass;
 import property.SetProperty;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
