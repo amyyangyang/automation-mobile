@@ -127,26 +127,28 @@ public abstract class PageProperty {
     public void deleteValueForiOS(String element, String valueType, int clickAmount) throws InterruptedException {
         String deleteNumbersButton = "//XCUIElementTypeKey[@name='Delete']";
         String deleteWordsButton = "//XCUIElementTypeKey[@name='delete']";
-        String selectAllButton = "//*[contains(@name, 'Select All')]";
-        Thread.sleep(2000);
+//        String selectAllButton = "//*[contains(@name, 'Select All')]";
+//        Thread.sleep(2000);
         driver.findElement(By.xpath(element)).click();
-        Thread.sleep(1000);
-        if (clickAmount == 2) {
-            driver.findElement(By.xpath(element)).click();
-        }
-        int loopIteration = 1;
-        boolean selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
-        while (!selectAllButtonIsPresent && loopIteration < 5) {
-            driver.findElement(By.xpath(element)).click();
-            selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
-            System.out.println("LOOP ITERATION AMOUNT IS: " + loopIteration);
-            loopIteration++;
-        }
-        driver.findElement(By.xpath(selectAllButton)).click();
-        if (valueType.equals("number")) {
-            driver.findElement(By.xpath(deleteNumbersButton)).click();
-        } else {
-            driver.findElement(By.xpath(deleteWordsButton)).click();
+//        Thread.sleep(1000);
+//        if (clickAmount == 2) {
+//            driver.findElement(By.xpath(element)).click();
+//        }
+//        int loopIteration = 1;
+//        boolean selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
+//        while (!selectAllButtonIsPresent && loopIteration < 5) {
+//            driver.findElement(By.xpath(element)).click();
+//            selectAllButtonIsPresent = isElementPresent("path", selectAllButton);
+//            System.out.println("LOOP ITERATION AMOUNT IS: " + loopIteration);
+//            loopIteration++;
+//        }
+//        driver.findElement(By.xpath(selectAllButton)).click();
+        for (int i=0; i<clickAmount; i++) {
+            if (valueType.equals("number")) {
+                driver.findElement(By.xpath(deleteNumbersButton)).click();
+            } else {
+                driver.findElement(By.xpath(deleteWordsButton)).click();
+            }
         }
     }
 
