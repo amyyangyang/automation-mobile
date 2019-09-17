@@ -115,6 +115,8 @@ public class OwnerMyLoadsTest extends SetProperty {
             Assert.assertEquals(pageProperty.getElementText("path",myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAction")),"Drop");
             Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionBlueIcon")));
             Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAddress")));
+            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+            myLoadDetailsPage.submitInvoice();
         }
     }
 
