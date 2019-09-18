@@ -117,8 +117,9 @@ public class DispatcherAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
+            Thread.sleep(5000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
-            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -129,7 +130,7 @@ public class DispatcherAvailableTest extends SetProperty {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             boolean isPresentLongHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLongHaulLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
@@ -141,8 +142,9 @@ public class DispatcherAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
+            Thread.sleep(5000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
-            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
