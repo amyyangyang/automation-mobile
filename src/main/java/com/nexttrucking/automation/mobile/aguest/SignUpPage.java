@@ -59,7 +59,7 @@ public class SignUpPage extends PageProperty {
 
     public void chooseCity(String city) throws InterruptedException {
         sendKeyToElement(typeCityInput, city);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         clickMenu(selectCityCheckbox, city);
         Thread.sleep(2000);
     }
@@ -82,7 +82,7 @@ public class SignUpPage extends PageProperty {
         if (attributeName.equals("name")) {
             String newPhoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
             while (!getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS).contains(newPhoneNumber)) {
-                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 1);
+                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 10);
             }
         }
         Thread.sleep(3000);
