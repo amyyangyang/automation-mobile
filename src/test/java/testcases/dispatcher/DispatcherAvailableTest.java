@@ -34,8 +34,7 @@ public class DispatcherAvailableTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage=new MyLoadsPage(driver,attributeName);
-//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        Thread.sleep(30000);
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
     }
 
     @Test
