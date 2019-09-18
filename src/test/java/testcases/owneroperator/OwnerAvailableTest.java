@@ -124,7 +124,7 @@ public class OwnerAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -152,7 +152,7 @@ public class OwnerAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
