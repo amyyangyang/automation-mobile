@@ -100,6 +100,18 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
+
+    @Test
+    public void undoOperationInProgressUploadPOD()throws InterruptedException{
+        Boolean isPresentJob = myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            Thread.sleep(3000);
+            myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
+           Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.invoiceTitle),"Invoice");
+        }
+    }
+
     @Test
     public void checkInvoiceEditPODPage()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);

@@ -81,6 +81,18 @@ public class DriverMyLoadsTest extends SetProperty {
             myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
         }
     }
+
+    @Test
+    public void undoOperationInProgressUploadPOD()throws InterruptedException{
+        Boolean isPresentJob = myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            Thread.sleep(3000);
+            myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
+            availableLoadsAllPage.getTitle("My Loads");
+        }
+    }
+
 }
 
 
