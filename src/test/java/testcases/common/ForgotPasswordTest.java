@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
-
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 
@@ -22,7 +22,7 @@ public class ForgotPasswordTest extends SetProperty {
     }
 
     @Test
-    public void forgotPassword() throws InterruptedException {
+    public void forgotPassword() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignInButton();
         signInPage.clickForgotButton();
         signInPage.inputEmailForForgotPassword(getTestData("dispatcherEmail"));

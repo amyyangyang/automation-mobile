@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 public class AllowLocationPage extends PageProperty {
 
 
-    private String okAllowLocationButton = "(//*[@%s='OK'])[last()]";
+    public String okAllowLocationButton = "(//*[@%s='OK'])[last()]";
     private String allowLocationButtonAndroid = "(//*[@class='android.widget.Button'])[2]";
     private String allowLocationButtonIOS12 = "//*[@%s='Always Allow']";
     private String allowLocationButtonIOS10 = "//*[@%s='Allow']";

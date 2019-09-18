@@ -3,6 +3,8 @@ package com.nexttrucking.automation.mobile.aguest;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 
 
 public class SignUpPage extends PageProperty {
@@ -25,6 +27,8 @@ public class SignUpPage extends PageProperty {
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
     private String editPhoneInputForiOS = "(//*[@name='createAccount_input_phone'])[last()]";
     private String editPhoneInputForAndroid = "(//*[@text='createAccount_input_phone'])[last()]";
+    public String roleTitle = "(//*[contains(@%s, 'Which one are you?')])[last()]";
+    public String equipmentTitle = "(//*[contains(@%s, 'Which do you have?')])[last()]";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -97,4 +101,13 @@ public class SignUpPage extends PageProperty {
         clickElementWithDifferentLocator(closeButton, closeButtonIOS);
     }
 
+    public void clickSignInButton() {
+        if (attributeName.equals("name")) {
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point(100, 600)).perform();
+        } else {
+            clickAnyElementByName("Sign In");
+        }
+
+    }
 }

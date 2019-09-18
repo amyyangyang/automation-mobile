@@ -1,0 +1,37 @@
+<dev>
+    <signin id="SignInAsDispatcher">
+        <dispatcherEmail>seraabel2017+fleettest@gmail.com</dispatcherEmail>
+        <dispatcherPassword>111111</dispatcherPassword>
+    </signin>
+    <signin id="SignInAsOwnerOperator">
+        <ownerOperatorEmail>seraabel2017+truckertest@gmail.com</ownerOperatorEmail>
+        <ownerOperatorPassword>111111</ownerOperatorPassword>
+    </signin>
+    <signin id="SignInAsDriver">
+        <driverEmail>seraabel2017+drivertest@gmail.com</driverEmail>
+        <driverPassword>111111</driverPassword>
+    </signin>
+
+    <signup id="Gest">
+        <companyName>NEXT</companyName>
+        <emailForGuest>neeck@gmail.com</emailForGuest>
+        <emailForGuestOO>seraabel2017+oo@gmail.com</emailForGuestOO>
+        <emailForGuestDispatcher>seraabel2017+dispatcher@gmail.com</emailForGuestDispatcher>
+        <firstName>Nik</firstName>
+        <cityName>New York</cityName>
+        <lastName>Serg</lastName>
+        <phoneNumber>2343423423</phoneNumber>
+        <phoneNumberLong>2343423423232323</phoneNumberLong>
+        <passwordForGuest>111111</passwordForGuest>
+    </signup>
+    <signup id="Driver">
+        <driverAddEmail>seraabel2017+d@gmail.com</driverAddEmail>
+        <driverAddPassword>111111</driverAddPassword>
+        <driveFirstName>TestFirstName</driveFirstName>
+        <driveLastName>TestLastName</driveLastName>
+        <drivePhoneNumber>2343423424</drivePhoneNumber>
+        <drivePhoneNumberLong>2343423424234234</drivePhoneNumberLong>
+    </signup>
+</dev>
+
+

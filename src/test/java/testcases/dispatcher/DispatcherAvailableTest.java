@@ -14,7 +14,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
-
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -25,7 +25,7 @@ public class DispatcherAvailableTest extends SetProperty {
     public static MyLoadsPage   myLoadsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -127,7 +127,7 @@ public class DispatcherAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -155,7 +155,7 @@ public class DispatcherAvailableTest extends SetProperty {
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }

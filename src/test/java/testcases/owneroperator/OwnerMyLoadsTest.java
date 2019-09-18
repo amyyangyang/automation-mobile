@@ -7,22 +7,20 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
-import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
-
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadDetailsPage myLoadDetailsPage;
     public static MyLoadsPage myLoadsPage;
 
     @BeforeClass
-    public static void setUp() throws MalformedURLException, InterruptedException {
+    public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
         pageProperty = new PageProperty(driver, attributeName) {};
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -48,7 +46,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
 
@@ -63,7 +61,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
 
@@ -78,7 +76,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
 
@@ -96,7 +94,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
             availableLoadsAllPage.getTitle("My Loads");
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "Go claim some loads in the \"Available Loads\" section and get loaded.");
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
 
