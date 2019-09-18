@@ -34,7 +34,8 @@ public class DispatcherAvailableTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage=new MyLoadsPage(driver,attributeName);
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+//        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        Thread.sleep(30000);
     }
 
     @Test
@@ -193,7 +194,7 @@ public class DispatcherAvailableTest extends SetProperty {
         }
 
     @Test
-    public void checkLoadDetail() {
+    public void checkLoadDetail() throws InterruptedException {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
@@ -209,7 +210,7 @@ public class DispatcherAvailableTest extends SetProperty {
                 if(isLiveOnLoad)
                 {
                     Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadAddress));
-                    jobDetailPage.swipeToUpForAndroid();
+                    jobDetailPage.swipeForAnyPlatform();
                     Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadTime));
                 }
             }else{
@@ -218,8 +219,8 @@ public class DispatcherAvailableTest extends SetProperty {
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
             }
-            jobDetailPage.swipeToUpForAndroid();
-            jobDetailPage.swipeToUpForAndroid();
+            jobDetailPage.swipeForAnyPlatform();
+            jobDetailPage.swipeForAnyPlatform();
             Assert.assertThat(Utils.equipmentTypeListOnDetail, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
             //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.packaging));
@@ -253,7 +254,7 @@ public class DispatcherAvailableTest extends SetProperty {
 
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             Boolean isPresentException = false;
             int loop=0;
             do {
