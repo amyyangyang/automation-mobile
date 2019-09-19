@@ -179,9 +179,9 @@ public class DispatcherAvailableTest extends SetProperty {
                 availableLoadsAllPage.clickElement(availableLoadsAllPage.buttonMap.get("backButton"));
             }
             Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
-            }else {
-                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-            }
+        }else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+        }
         }
 
     @Test
@@ -291,7 +291,7 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertTrue(pageProperty.isTextPresent("$"));
             signInPage.clickBackButton();
         } else {
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
 
