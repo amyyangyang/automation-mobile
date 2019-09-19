@@ -1,14 +1,14 @@
 <dev>
     <signin id="SignInAsDispatcher">
-        <dispatcherEmail>seraabel2017+fleet@gmail.com</dispatcherEmail>
+        <dispatcherEmail>seraabel2017+fleettest@gmail.com</dispatcherEmail>
         <dispatcherPassword>111111</dispatcherPassword>
     </signin>
     <signin id="SignInAsOwnerOperator">
-        <ownerOperatorEmail>seraabel2017+trucker@gmail.com</ownerOperatorEmail>
+        <ownerOperatorEmail>seraabel2017+truckertest@gmail.com</ownerOperatorEmail>
         <ownerOperatorPassword>111111</ownerOperatorPassword>
     </signin>
     <signin id="SignInAsDriver">
-        <driverEmail>seraabel2017+driver@gmail.com</driverEmail>
+        <driverEmail>seraabel2017+drivertest@gmail.com</driverEmail>
         <driverPassword>111111</driverPassword>
     </signin>
 
