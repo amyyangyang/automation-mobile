@@ -65,38 +65,41 @@ public class MyLoadsPage extends PageProperty {
     }
 
     public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        int iterationNumber = 1;
-        int liveUnloadJobNumber = 0;
         boolean isLiveUnloadJobStarted = true;
         if (attributeName.equals("text")) {
+            int iterationNumber = 1;
+            String jobID = null;
             boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
             while ((!isPresentLiveUnloadJob || isLiveUnloadJobStarted)  && iterationNumber < 16) {
+                System.out.println("SWIPE STEP: " + iterationNumber);
                 swipeToUpForAndroid();
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
                 if (isPresentLiveUnloadJob) {
-                    String jobID = driver.findElementByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).getAttribute("content-desc");
-                    System.out.println(jobID);
+                    jobID = driver.findElementByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).getAttribute("content-desc");
                     isLiveUnloadJobStarted = isElementPresent("path", String.format(myLoadsCardMap.get("liveUnloadJobButton"), jobID));
-                    System.out.println(isLiveUnloadJobStarted);
+                    System.out.println(!isLiveUnloadJobStarted);
                 }
                 iterationNumber++;
             }
-            clickElementByLocator("id", liveLoadAddress);
+            System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
+            driver.findElementByAccessibilityId(jobID).click();
         } else if (attributeName.equals("name")) {
+            int iterationNumber = 1;
+            int liveUnloadJobNumber = 0;
             String jobID = null;
             while (isLiveUnloadJobStarted) {
                 jobID = driver.findElementsByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).get(liveUnloadJobNumber).getAttribute("name");
                 isLiveUnloadJobStarted = isElementPresent("path", String.format(myLoadsCardMap.get("liveUnloadJobButton"), jobID));
                 liveUnloadJobNumber++;
             }
-            System.out.println(jobID);
-            System.out.println(isLiveUnloadJobStarted);
             int location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             while (location > 660 && iterationNumber < 16) {
+                System.out.println("SWIPE STEP: " + iterationNumber);
                 swipeToUpForiOS();
                 iterationNumber++;
                 location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             }
+            System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
             driver.findElementByAccessibilityId(jobID).click();
         }
         Thread.sleep(5000);
