@@ -79,12 +79,7 @@ public class OwnerAvailableTest extends SetProperty {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-            boolean isPresentMessage = availableLoadsAllPage.isElementPresent("path", availableLoadsAllPage.localHaulMile);
-            if (isPresentMessage) {
-                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
-                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-                Thread.sleep(3000);
-            }
+            Thread.sleep(10000);
             boolean isPresentLocalLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLocalLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
@@ -97,6 +92,7 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            Thread.sleep(10000);
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -120,8 +116,9 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            Thread.sleep(10000);
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -132,7 +129,7 @@ public class OwnerAvailableTest extends SetProperty {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             boolean isPresentLongHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLongHaulLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
@@ -145,8 +142,9 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            Thread.sleep(10000);
         }else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
