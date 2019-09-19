@@ -229,10 +229,12 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void checkUndoOperationInProgressUploadPOD(AllowLocationPage allowLocationPage)throws InterruptedException{
         clickElementByLocator("path",readyToStart);
+        Thread.sleep(3000);
         clickElementByLocator("path",undoButton);
         Assert.assertEquals(getElementText("path", readyToStart),"I'm Ready to Start Driving");
         clickElementByLocator("path",readyToStart);
         clickElementByLocator("path",arrivedInOrigination);
+        Thread.sleep(3000);
         clickElementByLocator("path",undoButton);
         Assert.assertEquals(getElementText("path", arrivedInOrigination),"Hook Completed");
         clickElementByLocator("path",arrivedInOrigination);
