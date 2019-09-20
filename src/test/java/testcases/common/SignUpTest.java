@@ -30,7 +30,7 @@ public class SignUpTest extends SetProperty {
         welcomePage.getWelcomePage();
     }
 
-    @Test
+//    @Test
     @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
@@ -63,7 +63,7 @@ public class SignUpTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
-    @Test
+//    @Test
     @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
@@ -96,7 +96,7 @@ public class SignUpTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
-    @Test
+//    @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
