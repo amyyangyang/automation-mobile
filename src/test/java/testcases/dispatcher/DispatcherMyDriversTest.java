@@ -50,33 +50,35 @@ public class DispatcherMyDriversTest extends SetProperty {
 
     @Test
     public void editDriverInfo() throws InterruptedException {
-        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
-        if (isDriversExist) {
-            myDriversPage.selectFirstDriver();
-            myDriversPage.selectField("Phone");
-            String currentFirstName = myDriversPage.getCurrentName("FirstName");
-            String currentLastName = myDriversPage.getCurrentName("LastName");
-            myDriversPage.editFirstName("SeraNew");
-            myDriversPage.editLastName("AbeNew");
-            myDriversPage.editPhone("2343423111");
-            myDriversPage.clickSaveButton();
-            Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
-            Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
-            myDriversPage.selectField("Phone");
-            System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
-            myDriversPage.editFirstName(currentFirstName);
-            myDriversPage.editLastName(currentLastName);
-            Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
-            myDriversPage.editPhone("2343423424");
-            myDriversPage.clickSaveButton();
-            myDriversPage.selectField("Phone");
-            Assert.assertTrue(myDriversPage.getCurrentName("FirstName").contains(currentFirstName));
-            Assert.assertTrue(myDriversPage.getCurrentName("LastName").contains(currentLastName));
-            Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
-            myDriversPage.clickSaveButton();
-            signInPage.clickBackButton();
-        } else {
-            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        if (attributeName.equals("text")) {
+            boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+            if (isDriversExist) {
+                myDriversPage.selectFirstDriver();
+                myDriversPage.selectField("Phone");
+                String currentFirstName = myDriversPage.getCurrentName("FirstName");
+                String currentLastName = myDriversPage.getCurrentName("LastName");
+                myDriversPage.editFirstName("SeraNew");
+                myDriversPage.editLastName("AbeNew");
+                myDriversPage.editPhone("2343423111");
+                myDriversPage.clickSaveButton();
+                Assert.assertTrue(myDriversPage.getSavedData("FirstName").contains("SeraNew"));
+                Assert.assertTrue(myDriversPage.getSavedData("LastName").contains("AbeNew"));
+                myDriversPage.selectField("Phone");
+                System.out.println("PHONE: " + myDriversPage.getSavedData("Phone"));
+                myDriversPage.editFirstName(currentFirstName);
+                myDriversPage.editLastName(currentLastName);
+                Assert.assertTrue(myDriversPage.getSavedData("Phone").contains("234-342-3111"));
+                myDriversPage.editPhone("2343423424");
+                myDriversPage.clickSaveButton();
+                myDriversPage.selectField("Phone");
+                Assert.assertTrue(myDriversPage.getCurrentName("FirstName").contains(currentFirstName));
+                Assert.assertTrue(myDriversPage.getCurrentName("LastName").contains(currentLastName));
+                Assert.assertTrue(!myDriversPage.getSavedData("Phone").contains("234-342-3111") && myDriversPage.getSavedData("Phone").contains("234-342-3424"));
+                myDriversPage.clickSaveButton();
+                signInPage.clickBackButton();
+            } else {
+                Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+            }
         }
     }
 
