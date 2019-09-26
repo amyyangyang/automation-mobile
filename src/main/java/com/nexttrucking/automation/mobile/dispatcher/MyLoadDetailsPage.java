@@ -47,6 +47,16 @@ public class MyLoadDetailsPage extends PageProperty {
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
+    public String summaryTab ="(//*[@%s='Summary'])[last()]";
+    public String locationPanel="(//*[contains(@%s,'Locations')])[last()]";
+    public String detailPanel = "(//*[contains(@%s,'Details for')])[last()]";
+    public String hookTab = "(//*[@%s='1. Hook'])[last()]";
+    public String liveUnloadPanel = "(//*[@%s='2. Live Unload'])[last()]";
+    public String dropTab ="(//*[@%s='3. Drop'])[last()]";
+    public String containerStatus = "(//*[contains(@%s,'Container')])[last()]";
+    public String originalAddress = "address_0";
+    public String secondAddress = "address_1";
+    public String thirdAddress = "address_2";
 
     //undoButton
     public String undoButton="(//*[contains(@%s, 'Undo')])[last()]";
@@ -71,6 +81,13 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("closeSubmitPage","//*[contains(@text, '\uF406')]");
             myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//*[contains(@text, '\uF406')]");
+            myLoadsDetailCardMap.put("locationArrow","//*[contains(@text, '\uF3D0')]");
+            myLoadsDetailCardMap.put("youWillMake","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[1]");
+            myLoadsDetailCardMap.put("youWillMakeValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[2]");
+            myLoadsDetailCardMap.put("rateContract","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[1]");
+            myLoadsDetailCardMap.put("rateContractValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[2]");
+            myLoadsDetailCardMap.put("equipment","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[1]");
+            myLoadsDetailCardMap.put("equipmentValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[2]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
