@@ -22,8 +22,8 @@ public class MyLoadsPage extends PageProperty {
     public By anotherDriverButton = xpath("//*[contains(@text, 'driver1 Ui')]/following-sibling::*[1]");
     public By assignButton = xpath("(//*[contains(@text, 'Assign')])[last()]");
     public By addDriverButton = xpath("//*[contains(@text, 'Add a Driver')]");
-    public By addButton = xpath("//*[contains(@text, 'Add')]");
-    public String noLoadOnMyLoads = "//*[contains(@%s, 'You don')]";
+    public By addButton = xpath("(//*[contains(@text, 'Add')])[last()]");
+    public String noLoadOnMyLoads = "(//*[contains(@%s, 'You don')])[last()]";
     public String jobState = "jobStatusText";
     public String jobNumber = "jobNumText";
     public String payment = "priceText";
