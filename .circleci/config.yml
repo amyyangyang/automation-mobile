@@ -312,12 +312,16 @@ workflows:
           context: next-platform-build
           requires:
             - dev_init_data_android
+      - hold_Android:
+          type: approval
+          requires:
+            - testDevAndroid
       - init_data:
           name: dev_init_data_ios
           ENV: dev
           context: next-platform-build
           requires:
-            - testDevAndroid
+            - hold_Android
       - run_case:
           name: testDevIOS
           envType: dev
@@ -355,24 +359,6 @@ workflows:
           context: next-platform-build
           requires:
             - test_init_data_ios
-      - hold_testDemoUI:
-          type: approval
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - run_case:
-          name: demoTestAndroid
-          envType: demo
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - hold_testDemoUI
-      - run_case:
-          name: demoTestIOS
-          envType: demo
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - demoTestAndroid
   app-ui-timing-test:
     triggers:
       - schedule:
