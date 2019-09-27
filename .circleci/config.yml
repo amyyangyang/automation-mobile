@@ -229,6 +229,62 @@ jobs:
 
 workflows:
   version: 2
+  app-onlineVersion:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+    jobs:
+      - build
+
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+
+      - hold_testDevUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - init_data:
+          name: dev_init_data_android
+          ENV: dev
+          context: next-platform-build
+          requires:
+            - hold_testDevUI
+      - run_case:
+          name: testDevAndroid
+          envType: dev
+          deviceType: android
+          context: next-platform-build
+          requires:
+            - dev_init_data_android
+      - hold_testTestUI:
+          type: approval
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - init_data:
+          name: test_init_data_android
+          ENV: test
+          context: next-platform-build
+          requires:
+            - hold_testTestUI
+      - run_case:
+          name: testTestAndroid
+          envType: test
+          deviceType: android
+          context: next-platform-build
+          requires:
+            - test_init_data_android
   app-ui-test:
     jobs:
       - build
