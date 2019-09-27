@@ -224,7 +224,7 @@ jobs:
     steps:
       - run_test_cases:
           envType: << parameters.envType >>
-          appName: "$APP_ONLINE_VERSION"
+          appName: "$APP_NAME_DEV"
           deviceType: << parameters.deviceType >>
 
 workflows:
