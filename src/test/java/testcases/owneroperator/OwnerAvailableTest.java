@@ -71,6 +71,8 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
             }
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
 
@@ -210,6 +212,8 @@ public class OwnerAvailableTest extends SetProperty {
             Assert.assertThat(Utils.equipmentTypeListOnDetail, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
     @Test
@@ -235,6 +239,8 @@ public class OwnerAvailableTest extends SetProperty {
                         continue;
                     }
                     availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
+                } else {
+                    Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
                 }
             }while((!isPresentException)&&(loop<3));
         }

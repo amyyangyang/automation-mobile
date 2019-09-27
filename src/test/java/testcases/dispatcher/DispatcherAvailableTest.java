@@ -74,6 +74,8 @@ public class DispatcherAvailableTest extends SetProperty {
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
                 Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
             }
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
 
@@ -179,7 +181,7 @@ public class DispatcherAvailableTest extends SetProperty {
                 availableLoadsAllPage.clickElement(availableLoadsAllPage.buttonMap.get("backButton"));
             }
             Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
-        }else {
+        } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
         }
@@ -219,6 +221,8 @@ public class DispatcherAvailableTest extends SetProperty {
             //Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.commodity));
             //Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.specification.toUpperCase().substring(1))));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
+        } else {
+            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
         }
     }
 
@@ -239,6 +243,8 @@ public class DispatcherAvailableTest extends SetProperty {
                 }
                 Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                 jobDetailPage.skipAssignDriver();
+            } else {
+                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
         } while (isPresentException);
     }
@@ -264,6 +270,8 @@ public class DispatcherAvailableTest extends SetProperty {
                     }
                     Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                     isPresentException=jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+                } else {
+                    Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
                 }
             } while ((isPresentException)&&(loop<3));
         }
