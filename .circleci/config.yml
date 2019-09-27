@@ -255,8 +255,7 @@ workflows:
           name: dev_init_data_android
           ENV: dev
           context: next-platform-build
-          requires:
-            - hold_testDevUI
+
       - run_case:
           name: testDevAndroid
           envType: dev
