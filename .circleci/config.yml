@@ -261,7 +261,7 @@ workflows:
           context: next-platform-build
           requires:
             - dev_init_data_android
-      - hold_Android:
+      - hold_testDeviOS:
           type: approval
           requires:
             - testDevAndroid
@@ -270,7 +270,7 @@ workflows:
           ENV: dev
           context: next-platform-build
           requires:
-            - hold_Android
+            - hold_testDeviOS
       - run_case:
           name: testDevIOS
           envType: dev
