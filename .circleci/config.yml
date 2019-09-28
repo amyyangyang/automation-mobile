@@ -255,6 +255,8 @@ workflows:
           name: dev_init_data_android
           ENV: dev
           context: next-platform-build
+          requires:
+            - prepare_test_cases_and_mobile_app
 
       - run_case:
           name: testDevAndroid
