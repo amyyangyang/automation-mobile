@@ -47,12 +47,8 @@ public class MyLoadDetailsPage extends PageProperty {
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
-    public String summaryTab ="(//*[@%s='Summary'])[last()]";
     public String locationPanel="(//*[contains(@%s,'Locations')])[last()]";
     public String detailPanel = "(//*[contains(@%s,'Details for')])[last()]";
-    public String hookTab = "(//*[@%s='1. Hook'])[last()]";
-    public String liveUnloadPanel = "(//*[@%s='2. Live Unload'])[last()]";
-    public String dropTab ="(//*[@%s='3. Drop'])[last()]";
     public String containerStatus = "(//*[contains(@%s,'Container')])[last()]";
     public String originalAddress = "address_0";
     public String secondAddress = "address_1";
@@ -82,6 +78,10 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//*[contains(@text, '\uF406')]");
             myLoadsDetailCardMap.put("locationArrow","//*[contains(@text, '\uF3D0')]");
+            myLoadsDetailCardMap.put("summaryTab","//*[@text='Summary']");
+            myLoadsDetailCardMap.put("hookTab","//*[@text='1. Hook']");
+            myLoadsDetailCardMap.put("liveUnloadPanel","//*[@text='2. Live Unload']");
+            myLoadsDetailCardMap.put("dropTab","//*[@text='3. Drop']");
             myLoadsDetailCardMap.put("youWillMake","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[1]");
             myLoadsDetailCardMap.put("youWillMakeValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[2]");
             myLoadsDetailCardMap.put("rateContract","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[1]");
@@ -103,6 +103,17 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("closeSubmitPage","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
             myLoadsDetailCardMap.put("backToMyLoads","//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
+            myLoadsDetailCardMap.put("summaryTab","//XCUIElementTypeStaticText[@name=\"0\"]");
+            myLoadsDetailCardMap.put("hookTab","(//XCUIElementTypeStaticText[@name=\"1\"])[1]");
+            myLoadsDetailCardMap.put("liveUnloadPanel","(//XCUIElementTypeStaticText[@name=\"2\"])[1]");
+            myLoadsDetailCardMap.put("dropTab","(//XCUIElementTypeStaticText[@name=\"3\"])[1]");
+            myLoadsDetailCardMap.put("youWillMake","(//XCUIElementTypeStaticText[@name=\"left_view\"])[1]");
+            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[1]");
+            myLoadsDetailCardMap.put("rateContract","(//XCUIElementTypeStaticText[@name=\"left_view\"])[2]");
+            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@name=\"right_text\"]");
+            myLoadsDetailCardMap.put("equipment","(//XCUIElementTypeStaticText[@name=\"left_view\"])[3]");
+            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[2]");
+
         }
     }
 

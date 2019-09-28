@@ -138,10 +138,10 @@ public class OwnerMyLoadsTest extends SetProperty {
         if(isPresentJob){
             myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             Thread.sleep(3000);
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.summaryTab), "Summary");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.hookTab), "1. Hook");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.liveUnloadPanel), "2. Live Unload");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.dropTab), "3. Drop");
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("summaryTab")), "Summary");
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("hookTab")), "1. Hook");
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("liveUnloadPanel")), "2. Live Unload");
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("dropTab")), "3. Drop");
             Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.locationPanel), containsString("Locations"));
             Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detailPanel), containsString("Details for Job"));
 
