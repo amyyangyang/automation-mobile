@@ -124,7 +124,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             clickElement(confirmLogOutButton);
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(270, 750)).perform();
+            touchAction.tap(PointOption.point(270, 600)).perform();
         }
         Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);
@@ -141,12 +141,15 @@ public class AvailableLoadsAllPage extends PageProperty {
                 i++;
             }
         } else if (attributeName.equals("name")) {
-            int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-            while (location > 800 && i < 16) {
-                System.out.println("SWIPE STEP: " + i);
-                swipeToUpForiOS();
-                location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-                i++;
+            Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
+            if (isPresentLiveUnloadJob) {
+                int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+                while (location > 800 && i < 16) {
+                    System.out.println("SWIPE STEP: " + i);
+                    swipeToUpForiOS();
+                    location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+                    i++;
+                }
             }
         }
     }
