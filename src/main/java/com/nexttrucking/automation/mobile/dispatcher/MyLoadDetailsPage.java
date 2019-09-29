@@ -151,7 +151,7 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")){
             clickElementByLocator("path",skipInvoice);
         }else{
-            new TouchAction(driver).press(PointOption.point(171,610)).perform();
+            new TouchAction(driver).press(PointOption.point(171,750)).perform();
         }
         clickElementByLocator("path",myLoadsDetailCardMap.get("backToMyLoads"));
     }
@@ -163,12 +163,9 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")) {
             clickElementByLocator("path",goToMyLoadsButton);
         }else{
-            new TouchAction(driver).press(PointOption.point(183,617)).perform();
-            new TouchAction(driver).press(PointOption.point(183,570)).perform();
-            new TouchAction(driver).press(PointOption.point(183,550)).perform();
-            new TouchAction(driver).press(PointOption.point(183,600)).perform();
-            new TouchAction(driver).press(PointOption.point(183,610)).perform();
-            new TouchAction(driver).press(PointOption.point(183,590)).perform();
+            new TouchAction(driver).press(PointOption.point(183,766)).perform();
+            new TouchAction(driver).press(PointOption.point(150,760)).perform();
+            new TouchAction(driver).press(PointOption.point(180,765)).perform();
         }
         Thread.sleep(3000);
     }
