@@ -98,13 +98,13 @@ public class DispatcherMyDriversTest extends SetProperty {
     }
 
     @Test
-    public void editDriverPassword() throws InterruptedException {
+    public void editDriverPassword() throws InterruptedException, ParserConfigurationException {
         boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
         if (isDriversExist) {
             myDriversPage.selectFirstDriver();
             myDriversPage.selectField("Password");
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Edit").contains("Edit Password"));
-            myDriversPage.typeNewPassword("111111");
+            myDriversPage.typeNewPassword(getTestData("driverAddPassword"));
             myDriversPage.clickSaveButton();
             signInPage.clickBackButton();
             Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
