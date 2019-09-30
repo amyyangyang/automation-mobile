@@ -159,6 +159,7 @@ public class OwnerMyLoadsTest extends SetProperty {
             Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
             Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
             Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")),"Power Only");
+            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
         }
     }
 
