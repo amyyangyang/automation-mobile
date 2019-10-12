@@ -45,16 +45,16 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allButton, 1), "All");
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localButton, 1), "Local");
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulButton, 1), "Short Haul");
-            Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
+            //Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
             Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,1));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,0));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,1));
         } else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -69,13 +69,13 @@ public class DispatcherAvailableTest extends SetProperty {
 //                availableLoadsAllPage.swipeToUpForAndroid();
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
                 Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,1));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,1));
             }
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
     }
 
@@ -89,10 +89,10 @@ public class DispatcherAvailableTest extends SetProperty {
             if (isPresentLocalTypeLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
                 Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,1));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,1));
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
@@ -113,10 +113,10 @@ public class DispatcherAvailableTest extends SetProperty {
             if (isPresentShortHaulTypeLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
                 Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,1));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,1));
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
@@ -139,10 +139,10 @@ public class DispatcherAvailableTest extends SetProperty {
             if (isPresentLongHaulLoad) {
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
                 Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.originationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.destinationAddress));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,1));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime,1));
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
@@ -182,9 +182,9 @@ public class DispatcherAvailableTest extends SetProperty {
             }
             Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
-        }
+    }
 
     @Test
     public void checkLoadDetail() throws InterruptedException {
@@ -195,22 +195,22 @@ public class DispatcherAvailableTest extends SetProperty {
             if (isTrips) {
 //                Assert.assertTrue(jobDetailPage.getElementText("id",jobDetailPage.payment).contains("$"));
 //                Assert.assertNull(jobDetailPage.getElementText("id",jobDetailPage.jobStatus));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", jobDetailPage.getTextInAddress,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", jobDetailPage.getTextInAddress,1));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", jobDetailPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", jobDetailPage.getTextInTime,1));
                 Boolean isLiveOnLoad=jobDetailPage.isElementPresent("id",jobDetailPage.liveLoadAddress);
                 if(isLiveOnLoad)
                 {
-                    Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadAddress));
+                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", jobDetailPage.getTextInAddress,2));
                     jobDetailPage.swipeForAnyPlatform();
-                    Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.liveLoadTime));
+                    Assert.assertNotNull(jobDetailPage.getElementText("id",jobDetailPage.getTextInAddress,2));
                 }
             }else{
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.originationAddress));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.destinationAddress));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.pickupTime));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.deliveryTime));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,1));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,1));
             }
             jobDetailPage.swipeForAnyPlatform();
             jobDetailPage.swipeForAnyPlatform();
@@ -222,11 +222,11 @@ public class DispatcherAvailableTest extends SetProperty {
             //Assert.assertThat(Utils.jobTypeList, hasItem(jobDetailPage.getElementText("id", jobDetailPage.specification.toUpperCase().substring(1))));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
     }
 
-    @Test
+    //@Test
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentException = false;
         do {
@@ -244,12 +244,12 @@ public class DispatcherAvailableTest extends SetProperty {
                 Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                 jobDetailPage.skipAssignDriver();
             } else {
-                Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
             }
         } while (isPresentException);
     }
 
-    @Test
+    //@Test
     public void bookJobAndAssignDriver() throws InterruptedException {
         for (int i = 0; i < 4; i++) {
             Boolean isPresentException = false;
@@ -271,7 +271,7 @@ public class DispatcherAvailableTest extends SetProperty {
                     Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                     isPresentException=jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
                 } else {
-                    Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
                 }
             } while ((isPresentException)&&(loop<3));
         }
@@ -284,12 +284,12 @@ public class DispatcherAvailableTest extends SetProperty {
             availableLoadsAllPage.findLiveUnloadJob();
             pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
             Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[0]));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[1]));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadAddress[2]));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[0]));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[1]));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.liveUnloadTime[2]));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,0));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,1));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,2));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,0));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,1));
+            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,2));
             pageProperty.swipeForAnyPlatform();
             Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
             Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
@@ -299,7 +299,7 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertTrue(pageProperty.isTextPresent("$"));
             signInPage.clickBackButton();
         } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
+            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
     }
 
