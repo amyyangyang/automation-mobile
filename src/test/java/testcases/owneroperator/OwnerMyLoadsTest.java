@@ -56,12 +56,14 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompleted()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
-            myLoadDetailsPage.submitInvoice();
-            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-            availableLoadsAllPage.getTitle("My Loads");
+            Boolean isPresent=myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if(isPresent) {
+                Thread.sleep(3000);
+                myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
+                myLoadDetailsPage.submitInvoice();
+                availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
+                availableLoadsAllPage.getTitle("My Loads");
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -71,12 +73,14 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
-            myLoadDetailsPage.submitInvoice();
-            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-            availableLoadsAllPage.getTitle("My Loads");
+            Boolean isPresent=myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if(isPresent) {
+                Thread.sleep(3000);
+                myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
+                myLoadDetailsPage.submitInvoice();
+                availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
+                availableLoadsAllPage.getTitle("My Loads");
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -86,15 +90,17 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void checkPreOperation()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            myLoadDetailsPage.checkPreOperation();
-            Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.resume));
-            Assert.assertTrue(myLoadDetailsPage.isElementPresent("path",myLoadDetailsPage.upLoadPODButton));
-            myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
-            myLoadDetailsPage.submitInvoice();
-            availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-            availableLoadsAllPage.getTitle("My Loads");
+            Boolean isPresent=myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if(isPresent) {
+                Thread.sleep(3000);
+                myLoadDetailsPage.checkPreOperation();
+                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.resume));
+                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.upLoadPODButton));
+                myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
+                myLoadDetailsPage.submitInvoice();
+                availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
+                availableLoadsAllPage.getTitle("My Loads");
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -105,11 +111,13 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void undoOperationInProgressUploadPOD()throws InterruptedException{
         Boolean isPresentJob = myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
-           Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.invoiceTitle),"Invoice");
-            myLoadDetailsPage.submitInvoice();
+            Boolean isPresent=myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if(isPresent) {
+                Thread.sleep(3000);
+                myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.invoiceTitle), "Invoice");
+                myLoadDetailsPage.submitInvoice();
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -119,19 +127,21 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void checkInvoiceEditPODPage()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.editPODButton),"Edit POD");
-            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.editPODButton);
-            Assert.assertEquals(pageProperty.getElementText("path",myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAction")),"Live Unload");
-            Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionBlueIcon")));
-            Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAddress")));
-            Assert.assertEquals(pageProperty.getElementText("path",myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAction")),"Drop");
-            Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionBlueIcon")));
-            Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAddress")));
-            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
-            myLoadDetailsPage.submitInvoice();
+            Boolean isPresent=myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if(isPresent) {
+                Thread.sleep(3000);
+                myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.editPODButton), "Edit POD");
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.editPODButton);
+                Assert.assertEquals(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAction")), "Live Unload");
+                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionBlueIcon")));
+                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAddress")));
+                Assert.assertEquals(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAction")), "Drop");
+                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionBlueIcon")));
+                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAddress")));
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+                myLoadDetailsPage.submitInvoice();
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -140,31 +150,33 @@ public class OwnerMyLoadsTest extends SetProperty {
     @Test
     public void checkMyLoadDetail()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
-        if(isPresentJob){
-            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            Thread.sleep(3000);
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("summaryTab")), "Summary");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("hookTab")), "1. Hook");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("liveUnloadPanel")), "2. Live Unload");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("dropTab")), "3. Drop");
-            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.locationPanel), containsString("Locations"));
-            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detailPanel), containsString("Details for Job"));
+        if(isPresentJob) {
+            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            if (isPresent) {
+                Thread.sleep(3000);
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("summaryTab")), "Summary");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("hookTab")), "1. Hook");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("liveUnloadPanel")), "2. Live Unload");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("dropTab")), "3. Drop");
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.locationPanel), containsString("Locations"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.detailPanel), containsString("Details for Job"));
 
-            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.locationPanel);
-            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.originalAddress));
-            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.secondAddress));
-            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.thirdAddress));
-            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.containerStatus), containsString("Container"));
-            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.locationPanel);
+                myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.locationPanel);
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.originalAddress));
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.secondAddress));
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.thirdAddress));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.containerStatus), containsString("Container"));
+                myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.locationPanel);
 
-            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.detailPanel);
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMake")), "You'll Make");
-            Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMakeValue")));
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContract")), "Rate Contract");
-            Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
-            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")),"Power Only");
-            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+                myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.detailPanel);
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMake")), "You'll Make");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMakeValue")));
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContract")), "Rate Contract");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")), "Power Only");
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+            }
         }
     }
 
