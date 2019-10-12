@@ -14,6 +14,8 @@ import property.SetProperty;
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 
 public class DispatcherMyLoadsTest extends SetProperty {
     public static MyLoadsPage myLoadsPage;
@@ -50,6 +52,34 @@ public class DispatcherMyLoadsTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
     }
+
+    @Test
+    public void checkMyLoadDetail()throws InterruptedException{
+        Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.jobNumber);
+        if(isPresentJob){
+            myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            Thread.sleep(3000);
+            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.locationPanel), containsString("Locations"));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detailPanel), containsString("Details for Job"));
+
+            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.locationPanel);
+            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.originalAddress));
+            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.secondAddress));
+            Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.thirdAddress));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.containerStatus), containsString("Container"));
+            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.locationPanel);
+
+            myLoadsPage. clickElementByLocator("path", myLoadDetailsPage.detailPanel);
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMake")), "You'll Make");
+            Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMakeValue")));
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContract")), "Rate Contract");
+            Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
+            Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")),"Power Only");
+            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+        }
+    }
+
 }
 
 

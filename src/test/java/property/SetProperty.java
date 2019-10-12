@@ -52,7 +52,7 @@ public abstract class SetProperty {
 
 
     public static void setUpDriver() throws MalformedURLException {
-        URL url = new URL("http://127.0.0.1:4723/wd/hub");
+        URL url = new URL("http://localhost:4723/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         try {
             String profile = System.getProperty("LOCATION_NAME");
@@ -71,6 +71,9 @@ public abstract class SetProperty {
                                 break;
                             case "ios":
                                 attributeName = "name";
+                                capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ios");
+                                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+                                capabilities.setCapability("bundleId","com.nexttrucking.trucker.dev");
                                 capabilities.setCapability("waitForQuiescence", "false");
                                 capabilities.setCapability("launchTimeout", "60000");
                                 driver = Factory.createIOSDriver(url, capabilities);

@@ -34,8 +34,6 @@ public class MyLoadsPage extends PageProperty {
     public String pickUpTime = "time_0";
     public String deliveryTime = "time_1";
 
-
-
     public Map<String, String> myLoadsCardMap;
 
     public MyLoadsPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -64,13 +62,13 @@ public class MyLoadsPage extends PageProperty {
         driver.findElement(assignButton).click();
     }
 
-    public void findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        boolean isLiveUnloadJobStarted = true;
+    public boolean findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
+        boolean isLiveUnloadJobStarted = false;
         if (attributeName.equals("text")) {
             int iterationNumber = 1;
             String jobID = null;
             boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
-            while ((!isPresentLiveUnloadJob || isLiveUnloadJobStarted)  && iterationNumber < 16) {
+            while ((!isPresentLiveUnloadJob || isLiveUnloadJobStarted) && iterationNumber < 16) {
                 System.out.println("SWIPE STEP: " + iterationNumber);
                 swipeToUpForAndroid();
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
@@ -81,7 +79,12 @@ public class MyLoadsPage extends PageProperty {
                 iterationNumber++;
             }
             System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
-            driver.findElementByAccessibilityId(jobID).click();
+            if (isLiveUnloadJobStarted) {
+                driver.findElementByAccessibilityId(jobID).click();
+                Thread.sleep(5000);
+                return true;
+            }
+            return false;
         } else if (attributeName.equals("name")) {
             int iterationNumber = 1;
             int liveUnloadJobNumber = 0;
@@ -99,10 +102,13 @@ public class MyLoadsPage extends PageProperty {
                 location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             }
             System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
-            driver.findElementByAccessibilityId(jobID).click();
+            if (isLiveUnloadJobStarted) {
+                driver.findElementByAccessibilityId(jobID).click();
+                //Thread.sleep(5000);
+                return true;
+            }
+            return false;
         }
-        Thread.sleep(5000);
+        return false;
     }
-
-
 }

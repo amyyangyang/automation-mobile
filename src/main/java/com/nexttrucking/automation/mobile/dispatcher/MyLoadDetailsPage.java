@@ -47,6 +47,12 @@ public class MyLoadDetailsPage extends PageProperty {
     //tab
     public String liveUnload="(//*[contains(@text,'Live Unload')])[last()]";
     public String liveUnLoadByLabel="(//*[contains(@label,'Live Unload')])[last()]";
+    public String locationPanel="(//*[contains(@%s,'Locations')])[last()]";
+    public String detailPanel = "(//*[contains(@%s,'Details for')])[last()]";
+    public String containerStatus = "(//*[contains(@%s,'Container')])[last()]";
+    public String originalAddress = "address_0";
+    public String secondAddress = "address_1";
+    public String thirdAddress = "address_2";
 
     //undoButton
     public String undoButton="(//*[contains(@%s, 'Undo')])[last()]";
@@ -71,6 +77,17 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("closeSubmitPage","//*[contains(@text, '\uF406')]");
             myLoadsDetailCardMap.put("backToMyLoads","//*[contains(@text, '\uF3CF')]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//*[contains(@text, '\uF406')]");
+            myLoadsDetailCardMap.put("locationArrow","//*[contains(@text, '\uF3D0')]");
+            myLoadsDetailCardMap.put("summaryTab","//*[@text='Summary']");
+            myLoadsDetailCardMap.put("hookTab","//*[@text='1. Hook']");
+            myLoadsDetailCardMap.put("liveUnloadPanel","//*[@text='2. Live Unload']");
+            myLoadsDetailCardMap.put("dropTab","//*[@text='3. Drop']");
+            myLoadsDetailCardMap.put("youWillMake","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[1]");
+            myLoadsDetailCardMap.put("youWillMakeValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[2]");
+            myLoadsDetailCardMap.put("rateContract","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[1]");
+            myLoadsDetailCardMap.put("rateContractValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[2]");
+            myLoadsDetailCardMap.put("equipment","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[1]");
+            myLoadsDetailCardMap.put("equipmentValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[2]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
@@ -86,6 +103,17 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("closeSubmitPage","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
             myLoadsDetailCardMap.put("backToMyLoads","//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
             myLoadsDetailCardMap.put("notContinueUploadPOD","//XCUIElementTypeStaticText[@name=\"\uF406\"]");
+            myLoadsDetailCardMap.put("summaryTab","//XCUIElementTypeStaticText[@name=\"0\"]");
+            myLoadsDetailCardMap.put("hookTab","(//XCUIElementTypeStaticText[@name=\"1\"])[1]");
+            myLoadsDetailCardMap.put("liveUnloadPanel","(//XCUIElementTypeStaticText[@name=\"2\"])[1]");
+            myLoadsDetailCardMap.put("dropTab","(//XCUIElementTypeStaticText[@name=\"3\"])[1]");
+            myLoadsDetailCardMap.put("youWillMake","(//XCUIElementTypeStaticText[@name=\"left_view\"])[1]");
+            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[1]");
+            myLoadsDetailCardMap.put("rateContract","(//XCUIElementTypeStaticText[@name=\"left_view\"])[2]");
+            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@name=\"right_text\"]");
+            myLoadsDetailCardMap.put("equipment","(//XCUIElementTypeStaticText[@name=\"left_view\"])[3]");
+            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[2]");
+
         }
     }
 
@@ -151,7 +179,7 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")){
             clickElementByLocator("path",skipInvoice);
         }else{
-            new TouchAction(driver).press(PointOption.point(171,610)).perform();
+            new TouchAction(driver).press(PointOption.point(171,750)).perform();
         }
         clickElementByLocator("path",myLoadsDetailCardMap.get("backToMyLoads"));
     }
@@ -163,12 +191,9 @@ public class MyLoadDetailsPage extends PageProperty {
         if(attributeName.equals("text")) {
             clickElementByLocator("path",goToMyLoadsButton);
         }else{
-            new TouchAction(driver).press(PointOption.point(183,617)).perform();
-            new TouchAction(driver).press(PointOption.point(183,570)).perform();
-            new TouchAction(driver).press(PointOption.point(183,550)).perform();
-            new TouchAction(driver).press(PointOption.point(183,600)).perform();
-            new TouchAction(driver).press(PointOption.point(183,610)).perform();
-            new TouchAction(driver).press(PointOption.point(183,590)).perform();
+            new TouchAction(driver).press(PointOption.point(183,766)).perform();
+            new TouchAction(driver).press(PointOption.point(150,760)).perform();
+            new TouchAction(driver).press(PointOption.point(180,765)).perform();
         }
         Thread.sleep(3000);
     }
