@@ -44,6 +44,8 @@ public class JobDetailPage extends PageProperty {
     public String deliveryTime="time_1";
     public String jobStatus="";
     public String payment="";
+    public String getTextInAddress="textGroupValue_1";
+    public String getTextInTime="textGroupValue_0";
 
     public String equipment="Equipment_value";
     public String distance="Total Distance_key";
