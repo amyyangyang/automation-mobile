@@ -42,6 +42,8 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String liveLoadTime = "time_2";
     public String pickupTime = "time_0";
     public String deliveryTime = "time_1";
+    public String getTextInAddress="textGroupValue_1";
+    public String getTextInTime="textGroupValue_0";
 
     public String jobType="jobType";
     public String equipmentType="equipmentView";
@@ -141,12 +143,15 @@ public class AvailableLoadsAllPage extends PageProperty {
                 i++;
             }
         } else if (attributeName.equals("name")) {
-            int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-            while (location > 660 && i < 16) {
-                System.out.println("SWIPE STEP: " + i);
-                swipeToUpForiOS();
-                location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
-                i++;
+            Boolean isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
+            if (isPresentLiveUnloadJob) {
+                int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+                while (location > 800 && i < 16) {
+                    System.out.println("SWIPE STEP: " + i);
+                    swipeToUpForiOS();
+                    location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
+                    i++;
+                }
             }
         }
     }

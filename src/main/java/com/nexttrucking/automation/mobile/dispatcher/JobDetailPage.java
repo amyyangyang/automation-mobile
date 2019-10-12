@@ -44,6 +44,8 @@ public class JobDetailPage extends PageProperty {
     public String deliveryTime="time_1";
     public String jobStatus="";
     public String payment="";
+    public String getTextInAddress="textGroupValue_1";
+    public String getTextInTime="textGroupValue_0";
 
     public String equipment="Equipment_value";
     public String distance="Total Distance_key";
@@ -108,7 +110,7 @@ public class JobDetailPage extends PageProperty {
         if(attributeName.equals("text")){
             clickElementByLocator("path", isBookButton);
         }else{
-            new TouchAction(driver).press(PointOption.point(229,612)).perform();
+            new TouchAction(driver).press(PointOption.point(229,750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -117,14 +119,14 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", assignOkButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(270, 600)).perform();
+            new TouchAction(driver).press(PointOption.point(270, 750)).perform();
         }
         Boolean isPresentException = isElementPresent("path", somethingIsWrong);
         if (isPresentException) {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", assignOkButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(270, 600)).perform();
+                new TouchAction(driver).press(PointOption.point(270, 750)).perform();
             }
             return true;
         }
@@ -143,7 +145,7 @@ public class JobDetailPage extends PageProperty {
         if(attributeName.equals("text")){
             clickElementByLocator("path", skipButton);
         }else{
-            new TouchAction(driver).press(PointOption.point(95,607)).perform();
+            new TouchAction(driver).press(PointOption.point(95,750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -152,7 +154,7 @@ public class JobDetailPage extends PageProperty {
         if(attributeName.equals("text")){
             clickElementByLocator("path",element);
         }else{
-            new TouchAction(driver).press(PointOption.point(270,600)).perform();
+            new TouchAction(driver).press(PointOption.point(270,750)).perform();
         }
         //Thread.sleep(3000);
     }
