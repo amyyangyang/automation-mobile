@@ -39,10 +39,16 @@ public class DriverMyLoadsTest extends SetProperty {
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.destinationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInAddress,0));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInAddress,1));
+            boolean isLegacy=availableLoadsAllPage.isElementPresent("id",myLoadsPage.pickUpTime);
+            if(isLegacy){
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.pickUpTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.deliveryTime));
+            }else{
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInTime,1));
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
