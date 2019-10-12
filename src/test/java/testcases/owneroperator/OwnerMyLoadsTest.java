@@ -43,10 +43,16 @@ public class OwnerMyLoadsTest extends SetProperty {
         if (isPresentLoad) {
             Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.jobNumber));
             Assert.assertTrue(pageProperty.getElementText("id", myLoadsPage.payment).contains("$"));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.originationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.destinationAddress));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.pickUpTime));
-            Assert.assertNotNull(pageProperty.getElementText("id", myLoadsPage.deliveryTime));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInAddress,0));
+            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInAddress,1));
+            boolean isLegacy=availableLoadsAllPage.isElementPresent("id",myLoadsPage.pickUpTime);
+            if(isLegacy){
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.pickUpTime));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.deliveryTime));
+            }else{
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInTime,0));
+                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", myLoadsPage.getTextInTime,1));
+            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -162,9 +168,9 @@ public class OwnerMyLoadsTest extends SetProperty {
                 Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.detailPanel), containsString("Details for Job"));
 
                 myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.locationPanel);
-                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.originalAddress));
-                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.secondAddress));
-                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.thirdAddress));
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.getTextInAddress,0));
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.getTextInAddress,1));
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.getTextInAddress,2));
                 Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.containerStatus), containsString("Container"));
                 myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.locationPanel);
 
