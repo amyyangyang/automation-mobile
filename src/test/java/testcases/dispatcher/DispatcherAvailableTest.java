@@ -262,7 +262,7 @@ public class DispatcherAvailableTest extends SetProperty {
         }
     }
 
-    //@Test
+    @Test
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentException = false;
         do {
@@ -285,7 +285,7 @@ public class DispatcherAvailableTest extends SetProperty {
         } while (isPresentException);
     }
 
-    //@Test
+    @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
         for (int i = 0; i < 4; i++) {
             Boolean isPresentException = false;
@@ -295,17 +295,20 @@ public class DispatcherAvailableTest extends SetProperty {
                 Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
                     availableLoadsAllPage.findLiveUnloadJob();
-                    pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                    jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                    Thread.sleep(3000);
-                    jobDetailPage.bookTender();
-                    isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
-                    if (isPresentException) {
-                        jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                        continue;
+                    boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
+                    if (isLiveUnloadPresent) {
+                        pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
+                        jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                        Thread.sleep(3000);
+                        jobDetailPage.bookTender();
+                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                        if (isPresentException) {
+                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+                            continue;
+                        }
+                        Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
+                        isPresentException = jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
                     }
-                    Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                    isPresentException=jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
                 } else {
                     Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
                 }
@@ -318,22 +321,25 @@ public class DispatcherAvailableTest extends SetProperty {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.findLiveUnloadJob();
-            pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-            Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,0));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,1));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,2));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,0));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,1));
-            Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,2));
-            pageProperty.swipeForAnyPlatform();
-            Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
-            Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
-            Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
-            Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
-            Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
-            Assert.assertTrue(pageProperty.isTextPresent("$"));
-            signInPage.clickBackButton();
+            boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
+            if (isLiveUnloadPresent) {
+                pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
+                Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,1));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime,2));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,0));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,1));
+                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress,2));
+                pageProperty.swipeForAnyPlatform();
+                Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
+                Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
+                Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
+                Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
+                Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
+                Assert.assertTrue(pageProperty.isTextPresent("$"));
+                signInPage.clickBackButton();
+            }
         } else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
