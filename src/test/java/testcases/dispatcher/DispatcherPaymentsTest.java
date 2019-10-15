@@ -33,9 +33,13 @@ public class DispatcherPaymentsTest extends SetProperty {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
         if (isPresentPayments) {
+            int num=driver.findElementsByXPath(paymentsPage.paymentList.get("paymentNumber")).size();
+            String status=paymentsPage.getElementText("path",paymentsPage.paymentList.get("paymentStatus"));
+            if((num!=1)||(!(status.equals("CANCELED")))) {
+                Assert.assertTrue(pageProperty.isTextPresent("THIS MONTH"));
+                Assert.assertTrue(pageProperty.isTextPresent("THIS YEAR"));
+            }
             Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-            Assert.assertTrue(pageProperty.isTextPresent("THIS MONTH"));
-            Assert.assertTrue(pageProperty.isTextPresent("THIS YEAR"));
             Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPrice")).contains("$"));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");

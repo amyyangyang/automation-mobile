@@ -121,6 +121,10 @@ public class JobDetailPage extends PageProperty {
         } else {
             new TouchAction(driver).press(PointOption.point(270, 750)).perform();
         }
+        Thread.sleep(3000);
+        clickElementByLocator("path", driverElement);
+        clickElementByLocator("path", assignButton);
+        Thread.sleep(3000);
         Boolean isPresentException = isElementPresent("path", somethingIsWrong);
         if (isPresentException) {
             if (attributeName.equals("text")) {
@@ -130,10 +134,6 @@ public class JobDetailPage extends PageProperty {
             }
             return true;
         }
-        Thread.sleep(3000);
-        clickElementByLocator("path", driverElement);
-        clickElementByLocator("path", assignButton);
-        Thread.sleep(3000);
         return false;
     }
 
