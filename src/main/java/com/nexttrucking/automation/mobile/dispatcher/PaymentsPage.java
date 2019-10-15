@@ -19,7 +19,8 @@ public class PaymentsPage extends PageProperty {
             paymentList.put("firstPayment", "//*[@content-desc='payment_view_list']/*/*/*/*/*/*[1]");
             paymentList.put("paymentStatus", "//*[@content-desc='payment_view_list']/*/*/*/*/*/*[1]");
             paymentList.put("paymentPrice", "(//*[@content-desc='payment_view_list']/*/*/*/*/*[3])[2]");
-            paymentList.put("paymentNumber","*[@content-desc='payment_view_list']/*/*/*/*/*");
+            paymentList.put("paymentPriceSpecial", "(//*[@content-desc='payment_view_list']/*/*/*/*/*[3])[1]");
+            paymentList.put("paymentNumber","//*[@content-desc='payment_view_list']/*/*/*");
         } else {
             paymentList.put("firstPayment", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
             paymentList.put("paymentStatus", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
