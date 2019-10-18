@@ -92,7 +92,7 @@ commands:
             elif [ ${deviceType} == ios ]
             then
                echo "ios"
-               appcenter test run appium --app "NEXTTruckingMobile_DEV/NEXTTrucking-iOS" --devices 63a899df --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+               appcenter test run appium --app "NEXTTruckingMobile_DEV/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
             else
                echo "deviceType is error"
             fi
@@ -232,7 +232,7 @@ workflows:
   app-onlineVersion:
     triggers:
       - schedule:
-          cron: "0 19,0 * * *"
+          cron: "0 19,2,7 * * *"
           filters:
             branches:
               only:
