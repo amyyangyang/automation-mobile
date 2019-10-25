@@ -224,7 +224,7 @@ jobs:
     steps:
       - run_test_cases:
           envType: << parameters.envType >>
-          appName: "$APP_NAME_DEV"
+          appName: "$APP_ONLINE_VERSION"
           deviceType: << parameters.deviceType >>
 
 workflows:
@@ -232,7 +232,7 @@ workflows:
   app-onlineVersion:
     triggers:
       - schedule:
-          cron: "0 19,0 * * *"
+          cron: "0 19,2,7 * * *"
           filters:
             branches:
               only:
@@ -314,10 +314,6 @@ workflows:
           context: next-platform-build
           requires:
             - dev_init_data_android
-      - hold_testDeviOS:
-          type: approval
-          requires:
-            - testDevAndroid
       - init_data:
           name: dev_init_data_ios
           ENV: dev
