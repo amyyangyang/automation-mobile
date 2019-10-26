@@ -65,7 +65,7 @@ public class MyLoadsPage extends PageProperty {
     }
 
     public boolean findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
-        boolean isLiveUnloadJobStarted = false;
+        boolean isLiveUnloadJobStarted = true;
         if (attributeName.equals("text")) {
             int iterationNumber = 1;
             String jobID = null;
@@ -81,7 +81,7 @@ public class MyLoadsPage extends PageProperty {
                 iterationNumber++;
             }
             System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
-            if (isLiveUnloadJobStarted) {
+            if (!isLiveUnloadJobStarted) {
                 driver.findElementByAccessibilityId(jobID).click();
                 Thread.sleep(5000);
                 return true;
@@ -104,7 +104,7 @@ public class MyLoadsPage extends PageProperty {
                 location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             }
             System.out.println("NOT STARTED LiveUnload JOB ID: " + jobID);
-            if (isLiveUnloadJobStarted) {
+            if (!isLiveUnloadJobStarted) {
                 driver.findElementByAccessibilityId(jobID).click();
                 //Thread.sleep(5000);
                 return true;
