@@ -9,14 +9,16 @@ import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import property.SetProperty;
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.CoreMatchers.containsString;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadDetailsPage myLoadDetailsPage;
     public static MyLoadsPage myLoadsPage;
