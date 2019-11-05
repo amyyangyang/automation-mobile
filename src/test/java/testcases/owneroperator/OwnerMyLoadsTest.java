@@ -181,7 +181,6 @@ public class OwnerMyLoadsTest extends SetProperty {
                 Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
                 Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
                 Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")), "Power Only");
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
 
                 String[] actionNames = {"hookTab", "liveUnloadPanel", "dropTab"};
                 for (String name : actionNames) {
@@ -190,6 +189,7 @@ public class OwnerMyLoadsTest extends SetProperty {
                     Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("masterBillOfLadingText")),"Master Bill of Lading");
                     Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("masterBillOfLadingValue")));
                 }
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
 
             }
         }
