@@ -271,6 +271,11 @@ public class DispatcherAvailableTest extends SetProperty {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                 Thread.sleep(3000);
+                isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                if (isPresentException) {
+                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+                    continue;
+                }
                 jobDetailPage.bookTender();
                 isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
                 if (isPresentException) {
@@ -300,6 +305,11 @@ public class DispatcherAvailableTest extends SetProperty {
                         pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         Thread.sleep(3000);
+                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                        if (isPresentException) {
+                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
+                            continue;
+                        }
                         jobDetailPage.bookTender();
                         isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
                         if (isPresentException) {
