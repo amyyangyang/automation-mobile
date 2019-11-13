@@ -51,9 +51,9 @@ Note: Do not forget set up environment variables if required.
       appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-iOS" --devices 827284fc --app-path "/Users/nexttrucking/NEXT DEV-2.0.11.ipa"  --test-series "master" --locale "en_US" --build-dir target/upload
 
     for Android run from Wimdows
-      appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-Android" --devices 7807b566 --app-path "D:\app\NEXT DEV.apk_2.0.11.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-Android" --devices 7807b566 --app-path "D:\app\NEXT DEV-2.0.11.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
     for Android run from Mac
-      appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-Android" --devices 7807b566 --app-path "/Users/nexttrucking/NEXT DEV.apk_2.0.11.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
+      appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-Android" --devices 7807b566 --app-path "/Users/nexttrucking/NEXT DEV-2.0.11.apk"  --test-series "master" --locale "en_US" --build-dir target/upload
 
 
 Depend on value of PLATFORM_NAME variable we can choose platform (android or ios) where is we want to run our Java project (default: -DPLATFORM_NAME=android).
