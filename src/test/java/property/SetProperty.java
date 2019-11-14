@@ -100,15 +100,15 @@ public abstract class SetProperty {
                                 capabilities.setCapability("waitForQuiescence", "false");
                                     switch (prop.getProperty("env.name")) {
                                         case "dev":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.10.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.11.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
                                             break;
                                         case "test":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST.apk_2.0.10.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST.apk_2.0.11.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
                                             break;
                                         case "demo":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO.apk_2.0.10.apk");
+                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO.apk_2.0.11.apk");
                                             capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
                                             break;
                                     }
@@ -120,7 +120,7 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Test's iPhone");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.3.1");
-                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV.ipa_2.0.10.ipa");
+                                capabilities.setCapability(MobileCapabilityType.APP, "/Users/nexttrucking/NEXT DEV-2.0.11.ipa");
                                 capabilities.setCapability(MobileCapabilityType.UDID, "a9669b67640c7a45ba5025c4ac4cc4d8c4daa85a");
                                 capabilities.setCapability("waitForQuiescence", false);
                                 capabilities.setCapability("resetOnSessionStartOnly", false);

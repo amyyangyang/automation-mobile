@@ -90,6 +90,8 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("rateContractValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[2]");
             myLoadsDetailCardMap.put("equipment","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[1]");
             myLoadsDetailCardMap.put("equipmentValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[2]");
+            myLoadsDetailCardMap.put("masterBillOfLadingText","//*[@text='Master Bill of Lading']");
+            myLoadsDetailCardMap.put("masterBillOfLadingValue","//*[@text='Master Bill of Lading']/following-sibling::*[1]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
@@ -115,6 +117,8 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@name=\"right_text\"]");
             myLoadsDetailCardMap.put("equipment","(//XCUIElementTypeStaticText[@name=\"left_view\"])[3]");
             myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[2]");
+            myLoadsDetailCardMap.put("masterBillOfLadingText","//XCUIElementTypeStaticText[@name='Master Bill of Lading']");
+            myLoadsDetailCardMap.put("masterBillOfLadingValue","(//XCUIElementTypeStaticText[@name='Master Bill of Lading'])[1]");
 
         }
     }
