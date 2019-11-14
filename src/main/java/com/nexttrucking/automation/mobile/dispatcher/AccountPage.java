@@ -38,16 +38,16 @@ public class AccountPage extends PageProperty {
             accountCardMap.put("bankAccountValue","(//*[@text='Bank Account'])/following-sibling::*[1]");
         }else {
             accountCardMap = new HashMap<>();
-            accountCardMap.put("nameValue","(//XCUIElementTypeStaticText[@name='Name'])[1]");
-            accountCardMap.put("phoneNumberValue","(//XCUIElementTypeStaticText[@name='Phone Number'])[1]");
-            accountCardMap.put("emailValue","(//XCUIElementTypeStaticText[@name='Email'])[1]");
-            accountCardMap.put("homeBaseValue","(//XCUIElementTypeStaticText[@name='Home Base'])[1]");
-            accountCardMap.put("passwordValue","(//XCUIElementTypeStaticText[@name='password'])[1]");
-            accountCardMap.put("languageValue","(//XCUIElementTypeStaticText[@name='Language'])[1]");
-            accountCardMap.put("carrierInfoValue","(//XCUIElementTypeStaticText[@name='Carrier Info'])[1]");
-            accountCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name='Equipment'])[1]");
-            accountCardMap.put("carrierDocsValue","(//XCUIElementTypeStaticText[@name='Carrier Docs'])[1]");
-            accountCardMap.put("bankAccountValue","(//XCUIElementTypeStaticText[@name='Bank Account'])[1]");
+            accountCardMap.put("nameValue","(//XCUIElementTypeStaticText[@name='Name'])/../*[2]");
+            accountCardMap.put("phoneNumberValue","(//XCUIElementTypeStaticText[@name='Phone Number'])/../*[2]");
+            accountCardMap.put("emailValue","(//XCUIElementTypeStaticText[@name='Email'])/../*[2]");
+            accountCardMap.put("homeBaseValue","(//XCUIElementTypeStaticText[@name='Home Base'])/../*[2]");
+            accountCardMap.put("passwordValue","(//XCUIElementTypeStaticText[@name='password'])/../*[2]");
+            accountCardMap.put("languageValue","(//XCUIElementTypeStaticText[@name='Language'])/../*[2]");
+            accountCardMap.put("carrierInfoValue","(//XCUIElementTypeStaticText[@name='Carrier Info'])/../*[2]");
+            accountCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name='Equipment'])/../*[2]");
+            accountCardMap.put("carrierDocsValue","(//XCUIElementTypeStaticText[@name='Carrier Docs'])/../*[2]");
+            accountCardMap.put("bankAccountValue","(//XCUIElementTypeStaticText[@name='Bank Account'])/../*[2]");
         }
     }
 
