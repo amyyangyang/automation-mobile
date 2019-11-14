@@ -118,20 +118,20 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("hookTab","(//XCUIElementTypeStaticText[@name=\"1\"])[1]");
             myLoadsDetailCardMap.put("liveUnloadPanel","(//XCUIElementTypeStaticText[@name=\"2\"])[1]");
             myLoadsDetailCardMap.put("dropTab","(//XCUIElementTypeStaticText[@name=\"3\"])[1]");
-            myLoadsDetailCardMap.put("youWillMakeText","(//XCUIElementTypeStaticText[@name=\"You'll Make\"])[1]");
-            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@name=\"You'll Make\"])[1]");
-            myLoadsDetailCardMap.put("rateContractText","(//XCUIElementTypeStaticText[@name=\"Rate Contract\"])");
-            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@name=\"Rate Contract\"][1]");
-            myLoadsDetailCardMap.put("equipmentText","(//XCUIElementTypeStaticText[@name=\"Equipment\"])");
-            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name=\"Equipment\"])[1]");
+            myLoadsDetailCardMap.put("youWillMakeText","(//XCUIElementTypeStaticText[@value=\"You'll Make\"])");
+            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@value=\"You'll Make\"])/../*[2]");
+            myLoadsDetailCardMap.put("rateContractText","(//XCUIElementTypeStaticText[@value=\"Rate Contract\"])");
+            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@value=\"Rate Contract\"]/../*[2]");
+            myLoadsDetailCardMap.put("equipmentText","(//XCUIElementTypeStaticText[@value=\"Equipment\"])");
+            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@value=\"Equipment\"])/../*[2]");
             myLoadsDetailCardMap.put("masterBillOfLadingText","//XCUIElementTypeStaticText[@name='Master Bill of Lading']");
-            myLoadsDetailCardMap.put("masterBillOfLadingValue","(//XCUIElementTypeStaticText[@name='Master Bill of Lading'])[1]");
-            myLoadsDetailCardMap.put("commodityText","//XCUIElementTypeStaticText[@name='Commodity']");
-            myLoadsDetailCardMap.put("commodityValue","(//XCUIElementTypeStaticText[@name='Commodity'])[1]");
-            myLoadsDetailCardMap.put("GoodsValueText","//XCUIElementTypeStaticText[@name='Goods Value']");
-            myLoadsDetailCardMap.put("GoodsValueValue","(//XCUIElementTypeStaticText[@name='Goods Value'])[1]");
-            myLoadsDetailCardMap.put("containerNumberText","//XCUIElementTypeStaticText[@name='Container Number']");
-            myLoadsDetailCardMap.put("containerNumberValue","(//XCUIElementTypeStaticText[@name='Container Number'])[1]");
+            myLoadsDetailCardMap.put("masterBillOfLadingValue","(//XCUIElementTypeStaticText[@name=‘Master Bill of Lading’])/../*[2]");
+            myLoadsDetailCardMap.put("commodityText","//XCUIElementTypeStaticText[@value='Commodity']");
+            myLoadsDetailCardMap.put("commodityValue","(//XCUIElementTypeStaticText[@value='Commodity'])/../*[2]");
+            myLoadsDetailCardMap.put("GoodsValueText","//XCUIElementTypeStaticText[@value='Goods Value']");
+            myLoadsDetailCardMap.put("GoodsValueValue","(//XCUIElementTypeStaticText[@value='Goods Value'])/../*[2]");
+            myLoadsDetailCardMap.put("containerNumberText","//XCUIElementTypeStaticText[@value='Container Number']");
+            myLoadsDetailCardMap.put("containerNumberValue","(//XCUIElementTypeStaticText[@value='Container Number'])/../*[2]");
         }
     }
 
