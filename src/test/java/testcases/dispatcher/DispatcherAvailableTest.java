@@ -293,6 +293,10 @@ public class DispatcherAvailableTest extends SetProperty {
     @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
         for (int i = 0; i < 4; i++) {
+            Boolean isPresentLoadNow = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
+            if(!isPresentLoadNow){
+                break;
+            }
             Boolean isPresentException = false;
             int loop=0;
             do {

@@ -53,7 +53,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String originalAddress = "address_0";
     public String secondAddress = "address_1";
     public String thirdAddress = "address_2";
-    public String getTextInAddress="textGroupValue_1";
+    public String getTextInAddress="textGroupValue_0";
     public String getTextInTime="textGroupValue_0";
 
     //undoButton
