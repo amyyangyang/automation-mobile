@@ -47,8 +47,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulButton, 1), "Short Haul");
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
-            Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
-            Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
+            Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
+            Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
@@ -271,15 +271,13 @@ public class DispatcherAvailableTest extends SetProperty {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                 Thread.sleep(3000);
-                isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                isPresentException = jobDetailPage.checkBookJobForErrors();
                 if (isPresentException) {
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
                     continue;
                 }
                 jobDetailPage.bookTender();
-                isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                isPresentException = jobDetailPage.checkBookJobForErrors();
                 if (isPresentException) {
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
                     continue;
                 }
                 Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
@@ -309,15 +307,13 @@ public class DispatcherAvailableTest extends SetProperty {
                         pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         Thread.sleep(3000);
-                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
                             continue;
                         }
                         jobDetailPage.bookTender();
-                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
                             continue;
                         }
                         Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
