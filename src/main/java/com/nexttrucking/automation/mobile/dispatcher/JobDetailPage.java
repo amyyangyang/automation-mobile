@@ -33,7 +33,7 @@ public class JobDetailPage extends PageProperty {
     public String refreshButton="(//*[contains(@%s,\"Refresh Now\")])[last()]";
     public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
-    public String somethingIsWrong = "(//*[contains(@%s,\"thing's\")])[last()]";
+    public String somethingIsWrong = "(//*[contains(@%s,\"thing\")])[last()]";
     public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
     public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
 
@@ -175,7 +175,7 @@ public class JobDetailPage extends PageProperty {
                 clickElementByLocator("path",jobDetailCard.get("backButton"));
             }
         }
-        return isPresentAvailableLoadButton||isPresentSomethingError;
+        return  isPresentAvailableLoadButton||isPresentSomethingError;
     }
 
     public boolean isliveUnloadJobStatusCorrect() {

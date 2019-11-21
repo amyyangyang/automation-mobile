@@ -42,7 +42,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String liveLoadTime = "time_2";
     public String pickupTime = "time_0";
     public String deliveryTime = "time_1";
-    public String getTextInAddress="textGroupValue_1";
+    public String getTextInAddress="textGroupValue_0";
     public String getTextInTime="textGroupValue_0";
 
     public String jobType="jobType";

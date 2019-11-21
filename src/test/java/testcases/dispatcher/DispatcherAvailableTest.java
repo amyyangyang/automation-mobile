@@ -318,6 +318,9 @@ public class DispatcherAvailableTest extends SetProperty {
                         }
                         Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                         isPresentException = jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+                        if(isPresentException){
+                            availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
+                        }
                     }
                 } else {
                     Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
