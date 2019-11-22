@@ -55,6 +55,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String thirdAddress = "address_2";
     public String getTextInAddress="textGroupValue_0";
     public String getTextInTime="textGroupValue_0";
+    public String addressText = "textGroupValue_0";
 
     //undoButton
     public String undoButton="(//*[contains(@%s, 'Undo')])[last()]";
@@ -84,12 +85,20 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("hookTab","//*[@text='1. Hook']");
             myLoadsDetailCardMap.put("liveUnloadPanel","//*[@text='2. Live Unload']");
             myLoadsDetailCardMap.put("dropTab","//*[@text='3. Drop']");
-            myLoadsDetailCardMap.put("youWillMake","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[1]");
-            myLoadsDetailCardMap.put("youWillMakeValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[1]/*[2]");
-            myLoadsDetailCardMap.put("rateContract","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[1]");
-            myLoadsDetailCardMap.put("rateContractValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[2]/*[2]");
-            myLoadsDetailCardMap.put("equipment","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[1]");
-            myLoadsDetailCardMap.put("equipmentValue","//*[contains(@text, 'Details for Job')]/parent::*/parent::*/following-sibling::*/*/*/*[3]/*[2]");
+            myLoadsDetailCardMap.put("youWillMakeText","//*[@text=\"You'll Make\"]");
+            myLoadsDetailCardMap.put("youWillMakeValue","//*[@text=\"You'll Make\"]/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("rateContractText","//*[@text='Rate Contract']");
+            myLoadsDetailCardMap.put("rateContractValue","//*[@text='Rate Contract']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("masterBillOfLadingText","//*[@text='Master Bill of Lading']");
+            myLoadsDetailCardMap.put("masterBillOfLadingValue","//*[@text='Master Bill of Lading']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("commodityText","//*[@text='Commodity']");
+            myLoadsDetailCardMap.put("commodityValue","//*[@text='Commodity']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("GoodsValueText","//*[@text='Goods Value']");
+            myLoadsDetailCardMap.put("GoodsValueValue","//*[@text='Goods Value']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("equipmentText","//*[@text='Equipment']");
+            myLoadsDetailCardMap.put("equipmentValue","//*[@text='Equipment']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("containerNumberText","//*[@text='Container Number']");
+            myLoadsDetailCardMap.put("containerNumberValue","//*[@text='Container Number']/following-sibling::*[1]");
         }else{
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto","//*[@name='camera']");
@@ -109,13 +118,20 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("hookTab","(//XCUIElementTypeStaticText[@name=\"1\"])[1]");
             myLoadsDetailCardMap.put("liveUnloadPanel","(//XCUIElementTypeStaticText[@name=\"2\"])[1]");
             myLoadsDetailCardMap.put("dropTab","(//XCUIElementTypeStaticText[@name=\"3\"])[1]");
-            myLoadsDetailCardMap.put("youWillMake","(//XCUIElementTypeStaticText[@name=\"left_view\"])[1]");
-            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[1]");
-            myLoadsDetailCardMap.put("rateContract","(//XCUIElementTypeStaticText[@name=\"left_view\"])[2]");
-            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@name=\"right_text\"]");
-            myLoadsDetailCardMap.put("equipment","(//XCUIElementTypeStaticText[@name=\"left_view\"])[3]");
-            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name=\"right_view\"])[2]");
-
+            myLoadsDetailCardMap.put("youWillMakeText","(//XCUIElementTypeStaticText[@value=\"You'll Make\"])");
+            myLoadsDetailCardMap.put("youWillMakeValue","(//XCUIElementTypeStaticText[@value=\"You'll Make\"])/../*[2]");
+            myLoadsDetailCardMap.put("rateContractText","(//XCUIElementTypeStaticText[@value=\"Rate Contract\"])");
+            myLoadsDetailCardMap.put("rateContractValue","//XCUIElementTypeStaticText[@value=\"Rate Contract\"]/../*[2]");
+            myLoadsDetailCardMap.put("equipmentText","(//XCUIElementTypeStaticText[@value=\"Equipment\"])");
+            myLoadsDetailCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@value=\"Equipment\"])/../*[2]");
+            myLoadsDetailCardMap.put("masterBillOfLadingText","//XCUIElementTypeStaticText[@name='Master Bill of Lading']");
+            myLoadsDetailCardMap.put("masterBillOfLadingValue","(//XCUIElementTypeStaticText[@name=‘Master Bill of Lading’])/../*[2]");
+            myLoadsDetailCardMap.put("commodityText","//XCUIElementTypeStaticText[@value='Commodity']");
+            myLoadsDetailCardMap.put("commodityValue","(//XCUIElementTypeStaticText[@value='Commodity'])/../*[2]");
+            myLoadsDetailCardMap.put("GoodsValueText","//XCUIElementTypeStaticText[@value='Goods Value']");
+            myLoadsDetailCardMap.put("GoodsValueValue","(//XCUIElementTypeStaticText[@value='Goods Value'])/../*[2]");
+            myLoadsDetailCardMap.put("containerNumberText","//XCUIElementTypeStaticText[@value='Container Number']");
+            myLoadsDetailCardMap.put("containerNumberValue","(//XCUIElementTypeStaticText[@value='Container Number'])/../*[2]");
         }
     }
 

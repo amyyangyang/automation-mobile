@@ -6,6 +6,7 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
+import com.nexttrucking.automation.mobile.dispatcher.PaymentDetailPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,6 +23,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadDetailsPage myLoadDetailsPage;
     public static MyLoadsPage myLoadsPage;
+    public static PaymentDetailPage paymentDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
@@ -33,6 +35,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         signInPage = new SignInPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         myLoadsPage= new MyLoadsPage(driver, attributeName);
+        paymentDetailPage = new PaymentDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(20000);
@@ -174,16 +177,35 @@ public class OwnerMyLoadsTest extends SetProperty {
                 Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.getTextInAddress,1));
                 Assert.assertNotNull(myLoadDetailsPage.getElementText("id", myLoadDetailsPage.getTextInAddress,2));
                 Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.containerStatus), containsString("Container"));
+                boolean isTerminalJob = paymentDetailPage.isTerminalJob(myLoadDetailsPage.addressText);
                 myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.locationPanel);
 
                 myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.detailPanel);
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMake")), "You'll Make");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMakeText")), "You'll Make");
                 Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("youWillMakeValue")));
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContract")), "Rate Contract");
-                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("rateContractValue")));
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipment")), "Equipment");
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")), "Power Only");
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("GoodsValueText")), "Goods Value");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("GoodsValueValue")));
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentText")), "Equipment");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("equipmentValue")));
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("containerNumberText")), "Container Number");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("containerNumberValue")));
+                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("commodityText")), "Commodity");
+                Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("commodityValue")));
+                if (isTerminalJob) {
+                    Assert.assertFalse(pageProperty.isTextPresent("Rate Contract"));
+                } else {
+                    Assert.assertTrue(pageProperty.isTextPresent("Rate Contract"));
+                }
+
+                String[] actionNames = {"hookTab", "liveUnloadPanel", "dropTab"};
+                for (String name : actionNames) {
+                    myLoadsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get(name));
+                    myLoadDetailsPage.swipeToUpForAndroid();
+                    Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("masterBillOfLadingText")),"Master Bill of Lading");
+                    Assert.assertNotNull(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("masterBillOfLadingValue")));
+                }
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
+
             }
         }
     }
