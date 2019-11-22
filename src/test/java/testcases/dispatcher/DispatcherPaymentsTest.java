@@ -33,7 +33,7 @@ public class DispatcherPaymentsTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 
-    @Test
+    //@Test
     public void checkPaymentsListPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
