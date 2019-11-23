@@ -80,7 +80,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void modifyJobStatusToCompletedAtLastToUploadPOD()throws InterruptedException{
         Boolean isPresentJob=myLoadsPage.isElementPresent("id",myLoadsPage.originationAddress);
         if(isPresentJob){
