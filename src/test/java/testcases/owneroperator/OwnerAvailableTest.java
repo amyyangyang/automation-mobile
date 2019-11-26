@@ -253,38 +253,6 @@ public class OwnerAvailableTest extends SetProperty {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
     }
-    @Test
-    public void bookLiveUnLoadJobOnly() throws InterruptedException {
-        for (int i = 0; i < 5; i++) {
-            Boolean isPresentException=true;
-            int loop=0;
-            do {
-                ++loop;
-                Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-                if (isPresentLoad) {
-                    availableLoadsAllPage.findLiveUnloadJob();
-                    boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
-                    if(isLiveUnloadPresent) {
-                        availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                        jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                        Thread.sleep(3000);
-                        jobDetailPage.bookTender();
-                        isPresentException = availableLoadsAllPage.isElementPresent("path", jobDetailPage.goToMyLoadsButton);
-                        if (isPresentException) {
-                            Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
-                        } else {
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                            continue;
-                        }
-                        availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
-                    }
-                } else {
-                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-                }
-            }while((!isPresentException)&&(loop<3));
-        }
-    }
 
     @Test
     public void checkLiveUnloadJobDetail() throws InterruptedException {
