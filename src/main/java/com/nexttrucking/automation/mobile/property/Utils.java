@@ -2,6 +2,7 @@ package com.nexttrucking.automation.mobile.property;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
@@ -17,5 +18,16 @@ public class Utils {
     public static boolean isInteger(String number) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(number).matches();
+    }
+
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(52);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 }
