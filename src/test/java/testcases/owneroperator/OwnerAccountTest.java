@@ -73,4 +73,23 @@ public class OwnerAccountTest extends SetProperty {
         }
     }
 
+    @Test
+    public void checkAccountPage() throws InterruptedException{
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle),"Account");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn),"Edit Profile");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn),"Load Preferences");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn),"Logout");
+    }
+
+    @Test
+    public void loadPreferenceModal() {
+        accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
+        if (accountPage.isElementPresent("path", accountPage.preferenceModalTitle)) {
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalTitle), "Don't waste time looking for loads");
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalBodyText), "Let us know what you like and we’ll text you loads that match your preferences");
+            accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+            Assert.assertFalse(accountPage.isElementPresent("path", accountPage.preferenceModalTitle));
+        }
+    }
+
 }

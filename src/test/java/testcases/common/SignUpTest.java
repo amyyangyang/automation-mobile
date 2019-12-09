@@ -8,7 +8,6 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import javax.xml.parsers.ParserConfigurationException;
-
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.*;
 import org.junit.jupiter.api.Tag;
@@ -101,7 +100,7 @@ public class SignUpTest extends SetProperty {
     @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
-        String driverEmail = "seraabel2017+newd"+ Utils.getRandomString(2)+"@gmail.com";
+        String driverEmail = "seraabel2017+newd"+Utils.getRandomString(2)+"@gmail.com";
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
         myDriversPage.clickAddDriverButton();
@@ -124,7 +123,6 @@ public class SignUpTest extends SetProperty {
         }
         Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }
-
 
     @After
     public void logOut() throws InterruptedException {
