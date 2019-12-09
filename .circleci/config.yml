@@ -357,47 +357,47 @@ workflows:
           context: next-platform-build
           requires:
             - test_init_data_ios
-  app-ui-timing-test:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build
-      - prepare_test_cases_and_mobile_app:
-          context: next-platform-build
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-      - init_data:
-          name: dev_init_data_android
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - run_case:
-          name: devTestAndroid
-          envType: test
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - dev_init_data_android
-      - init_data:
-          name: dev_init_data_ios
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - devTestAndroid
-      - run_case:
-          name: devTestIOS
-          envType: test
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - dev_init_data_ios
+#  app-ui-timing-test:
+#    triggers:
+#      - schedule:
+#          cron: "0 8 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
+#    jobs:
+#      - build
+#      - prepare_test_cases_and_mobile_app:
+#          context: next-platform-build
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only:
+#                - master
+#      - init_data:
+#          name: dev_init_data_android
+#          ENV: dev
+#          context: next-platform-build
+#          requires:
+#            - prepare_test_cases_and_mobile_app
+#      - run_case:
+#          name: devTestAndroid
+#          envType: test
+#          deviceType: android
+#          context: next-platform-build
+#          requires:
+#            - dev_init_data_android
+#      - init_data:
+#          name: dev_init_data_ios
+#          ENV: dev
+#          context: next-platform-build
+#          requires:
+#            - devTestAndroid
+#      - run_case:
+#          name: devTestIOS
+#          envType: test
+#          deviceType: ios
+#          context: next-platform-build
+#          requires:
+#            - dev_init_data_ios
