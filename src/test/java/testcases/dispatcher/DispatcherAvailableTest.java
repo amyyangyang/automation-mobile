@@ -47,8 +47,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulButton, 1), "Short Haul");
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
-            Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
-            Assert.assertNotNull(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
+            Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
+            Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
             Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
             Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
             Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress,0));
@@ -259,70 +259,6 @@ public class DispatcherAvailableTest extends SetProperty {
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         } else {
                 Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-        }
-    }
-
-    @Test
-    public void bookJobOnly() throws InterruptedException {
-        Boolean isPresentException = false;
-        do {
-            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-            if (isPresentLoad) {
-                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
-                jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                Thread.sleep(3000);
-                isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
-                if (isPresentException) {
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                    continue;
-                }
-                jobDetailPage.bookTender();
-                isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
-                if (isPresentException) {
-                    jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                    continue;
-                }
-                Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                jobDetailPage.skipAssignDriver();
-            } else {
-                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-            }
-        } while (isPresentException);
-    }
-
-    @Test
-    public void bookJobAndAssignDriver() throws InterruptedException {
-        for (int i = 0; i < 4; i++) {
-            Boolean isPresentException = false;
-            int loop=0;
-            do {
-                ++loop;
-                Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-                if (isPresentLoad) {
-                    availableLoadsAllPage.findLiveUnloadJob();
-                    boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
-                    if (isLiveUnloadPresent) {
-                        pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                        jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                        Thread.sleep(3000);
-                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
-                        if (isPresentException) {
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                            continue;
-                        }
-                        jobDetailPage.bookTender();
-                        isPresentException = jobDetailPage.checkBookJobOrAssignDriverForErrors();
-                        if (isPresentException) {
-                            jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToAvailableLoadsButton);
-                            continue;
-                        }
-                        Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
-                        isPresentException = jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
-                    }
-                } else {
-                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-                }
-            } while ((isPresentException)&&(loop<3));
         }
     }
 

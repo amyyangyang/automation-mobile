@@ -30,9 +30,10 @@ public class JobDetailPage extends PageProperty {
     public String assignButton = "(//*[@%s='Assign'])[last()]";
 
     //button for ownerOperator, only go to my loads button and go to available loads button
+    public String refreshButton="(//*[contains(@%s,\"Refresh Now\")])[last()]";
     public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
     public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
-    public String somethingIsWrong = "(//*[contains(@%s,\"Something's wrong\")])[last()]";
+    public String somethingIsWrong = "(//*[contains(@%s,\"thing\")])[last()]";
     public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
     public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
 
@@ -159,9 +160,22 @@ public class JobDetailPage extends PageProperty {
         //Thread.sleep(3000);
     }
 
-    public Boolean checkBookJobOrAssignDriverForErrors() throws InterruptedException {
-        Boolean isPresent = isElementPresent("path", goToAvailableLoadsButton);
-        return isPresent;
+    public Boolean checkBookJobForErrors() throws InterruptedException {
+        Boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
+        if(isPresentAvailableLoadButton){
+            clickElementByLocator("path",goToAvailableLoadsButton);
+        }
+        Boolean isPresentSomethingError=isElementPresent("path",somethingIsWrong);
+        if(isPresentSomethingError){
+            Boolean isPresentOKButton=isElementPresent("path",assignOkButton);
+            if(isPresentOKButton){
+                clickElementByLocator("path",assignOkButton);
+            }else{
+                clickElementByLocator("path",refreshButton);
+                clickElementByLocator("path",jobDetailCard.get("backButton"));
+            }
+        }
+        return  isPresentAvailableLoadButton||isPresentSomethingError;
     }
 
     public boolean isliveUnloadJobStatusCorrect() {

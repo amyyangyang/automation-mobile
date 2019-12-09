@@ -88,11 +88,11 @@ commands:
             if [ ${deviceType} == android ]
             then
                echo "android"
-               appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+               appcenter test run appium --app "NextTrucking-Dev-11/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
             elif [ ${deviceType} == ios ]
             then
                echo "ios"
-               appcenter test run appium --app "NextTrucking-Dev/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+               appcenter test run appium --app "NextTrucking-Dev-11/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
             else
                echo "deviceType is error"
             fi
@@ -224,11 +224,64 @@ jobs:
     steps:
       - run_test_cases:
           envType: << parameters.envType >>
-          appName: "$APP_NAME_DEV"
+          appName: "$APP_ONLINE_VERSION"
           deviceType: << parameters.deviceType >>
 
 workflows:
   version: 2
+  app-onlineVersion:
+    triggers:
+      - schedule:
+          cron: "0 19,2,7 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+    jobs:
+      - build
+
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+
+      - init_data:
+          name: dev_init_data_android
+          ENV: dev
+          context: next-platform-build
+          requires:
+            - prepare_test_cases_and_mobile_app
+
+      - run_case:
+          name: testDevAndroid
+          envType: dev
+          deviceType: android
+          context: next-platform-build
+          requires:
+            - dev_init_data_android
+#      - hold_testTestUI:
+#          type: approval
+#          requires:
+#            - prepare_test_cases_and_mobile_app
+#      - init_data:
+#          name: test_init_data_android
+#          ENV: test
+#          context: next-platform-build
+#          requires:
+#            - hold_testTestUI
+#      - run_case:
+#          name: testTestAndroid
+#          envType: test
+#          deviceType: android
+#          context: next-platform-build
+#          requires:
+#            - test_init_data_android
   app-ui-test:
     jobs:
       - build
@@ -261,16 +314,12 @@ workflows:
           context: next-platform-build
           requires:
             - dev_init_data_android
-      - hold_testDeviOS:
-          type: approval
-          requires:
-            - testDevAndroid
       - init_data:
           name: dev_init_data_ios
           ENV: dev
           context: next-platform-build
           requires:
-            - hold_testDeviOS
+            - testDevAndroid
       - run_case:
           name: testDevIOS
           envType: dev
@@ -308,47 +357,47 @@ workflows:
           context: next-platform-build
           requires:
             - test_init_data_ios
-#  app-ui-timing-test:
-#    triggers:
-#      - schedule:
-#          cron: "0 8 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - build
-#      - prepare_test_cases_and_mobile_app:
-#          context: next-platform-build
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              only:
-#                - master
-#      - init_data:
-#          name: dev_init_data_android
-#          ENV: dev
-#          context: next-platform-build
-#          requires:
-#            - prepare_test_cases_and_mobile_app
-#      - run_case:
-#          name: devTestAndroid
-#          envType: test
-#          deviceType: android
-#          context: next-platform-build
-#          requires:
-#            - dev_init_data_android
-#      - init_data:
-#          name: dev_init_data_ios
-#          ENV: dev
-#          context: next-platform-build
-#          requires:
-#            - devTestAndroid
-#      - run_case:
-#          name: devTestIOS
-#          envType: test
-#          deviceType: ios
-#          context: next-platform-build
-#          requires:
-#            - dev_init_data_ios
+  app-ui-timing-test:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - init_data:
+          name: dev_init_data_android
+          ENV: dev
+          context: next-platform-build
+          requires:
+            - prepare_test_cases_and_mobile_app
+      - run_case:
+          name: devTestAndroid
+          envType: test
+          deviceType: android
+          context: next-platform-build
+          requires:
+            - dev_init_data_android
+      - init_data:
+          name: dev_init_data_ios
+          ENV: dev
+          context: next-platform-build
+          requires:
+            - devTestAndroid
+      - run_case:
+          name: devTestIOS
+          envType: test
+          deviceType: ios
+          context: next-platform-build
+          requires:
+            - dev_init_data_ios
