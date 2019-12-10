@@ -59,9 +59,9 @@ public class SignUpTest extends SetProperty {
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
             signUpPage.clickCloseButton();
+            Thread.sleep(3000);
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
         }
-        Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
     @Test
@@ -92,9 +92,9 @@ public class SignUpTest extends SetProperty {
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
             signUpPage.clickCloseButton();
+            Thread.sleep(3000);
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
         }
-        Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
     //@Test
