@@ -23,9 +23,10 @@ public class AccountPage extends PageProperty {
     public String loadPreferenceBtn = "(//*[@%s='Load Preferences'])[last()]";
     public String LogoutBtn = "(//*[@%s='Logout'])[last()]";
     public String accountPageTitle = "(//*[@%s='Account'])[last()]";
-    public String preferenceModalTitle = "(//*[contains(@%s,'Don't waste time')])[last()]";
+    public String preferenceModalTitle = "(//*[contains(@%s,\"Don't waste time\")])[last()]";
     public String preferenceModalBodyText = "(//*[contains(@%s,'Let us know what you like')])[last()]";
-    public String preferenceModalButton = "(//*[contains(@%s,'Let's do it')])[last()]";
+    public String preferenceModalButton = "(//*[contains(@%s,\"Let's do it\")])[last()]";
+    public String backBtn = "//*[@%s='\uF3CF']";
 
     public Map<String, String> accountCardMap;
     public AccountPage(AppiumDriver<MobileElement> driver, String attributeName) {
