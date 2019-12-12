@@ -69,7 +69,7 @@ public class OwnerBookTenderTest extends SetProperty {
                         availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
                     }
                 } else {
-                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }
             }while((isPresentException)&&(loop<3));
         }

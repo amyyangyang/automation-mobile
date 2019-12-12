@@ -60,7 +60,7 @@ public class DispatcherBookTenderTest extends SetProperty {
                 Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                 jobDetailPage.skipAssignDriver();
             } else {
-                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
             }
         } while (isPresentException);
     }
@@ -100,7 +100,7 @@ public class DispatcherBookTenderTest extends SetProperty {
                         }
                     }
                 } else {
-                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }
             } while ((isPresentException)&&(loop<3));
         }
