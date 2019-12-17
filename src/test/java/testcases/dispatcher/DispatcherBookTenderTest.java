@@ -36,10 +36,10 @@ public class DispatcherBookTenderTest extends SetProperty {
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage=new MyLoadsPage(driver,attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.clickElementByLocator("path",availableLoadsAllPage.longHaulButton);
+        availableLoadsAllPage.clickElementByLocator("id",availableLoadsAllPage.longHaulButton);
     }
 
-    //@Test
+    @Test
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentException = false;
         do {
@@ -48,19 +48,19 @@ public class DispatcherBookTenderTest extends SetProperty {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                 Thread.sleep(3000);
-                isPresentException = jobDetailPage.checkBookJobForErrors();
+                isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
                 if (isPresentException) {
                     continue;
                 }
                 jobDetailPage.bookTender();
-                isPresentException = jobDetailPage.checkBookJobForErrors();
+                isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
                 if (isPresentException) {
                     continue;
                 }
                 Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                 jobDetailPage.skipAssignDriver();
             } else {
-                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+                Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
             }
         } while (isPresentException);
     }
@@ -84,12 +84,12 @@ public class DispatcherBookTenderTest extends SetProperty {
                         pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         Thread.sleep(3000);
-                        isPresentException = jobDetailPage.checkBookJobForErrors();
+                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
                         if (isPresentException) {
                             continue;
                         }
                         jobDetailPage.bookTender();
-                        isPresentException = jobDetailPage.checkBookJobForErrors();
+                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
                         if (isPresentException) {
                             continue;
                         }
@@ -100,7 +100,7 @@ public class DispatcherBookTenderTest extends SetProperty {
                         }
                     }
                 } else {
-                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
+                    Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }
             } while ((isPresentException)&&(loop<3));
         }

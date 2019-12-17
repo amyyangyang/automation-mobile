@@ -160,22 +160,20 @@ public class JobDetailPage extends PageProperty {
         //Thread.sleep(3000);
     }
 
-    public Boolean checkBookJobForErrors() throws InterruptedException {
+    public Boolean checkBookJobForErrors(JobDetailPage jobDetailPage) throws InterruptedException {
         Boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
         if(isPresentAvailableLoadButton){
             clickElementByLocator("path",goToAvailableLoadsButton);
         }
-        Boolean isPresentSomethingError=isElementPresent("path",somethingIsWrong);
-        if(isPresentSomethingError){
-            Boolean isPresentOKButton=isElementPresent("path",assignOkButton);
-            if(isPresentOKButton){
-                clickElementByLocator("path",assignOkButton);
-            }else{
-                clickElementByLocator("path",refreshButton);
-                clickElementByLocator("path",jobDetailCard.get("backButton"));
-            }
+        Boolean isPresentRefreshNowButton=isElementPresent("path",refreshButton);
+        if(isPresentRefreshNowButton){
+             clickElementByLocator("path",refreshButton);
+             clickElementByLocator("path",jobDetailPage.bookButton);
+             if(isElementPresent("path",bookButton)){
+                 clickElementByLocator("path",jobDetailPage.bookButton);
+             }
         }
-        return  isPresentAvailableLoadButton||isPresentSomethingError;
+        return  isPresentAvailableLoadButton;
     }
 
     public boolean isliveUnloadJobStatusCorrect() {

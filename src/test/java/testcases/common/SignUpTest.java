@@ -97,7 +97,7 @@ public class SignUpTest extends SetProperty {
         }
     }
 
-    //@Test
+    @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
         String driverEmail = "seraabel2017+newd"+Utils.getRandomString(2)+"@gmail.com";
