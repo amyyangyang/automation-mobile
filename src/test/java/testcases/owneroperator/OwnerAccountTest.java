@@ -97,4 +97,27 @@ public class OwnerAccountTest extends SetProperty {
        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
+    @Test
+    public void checkLoadPreferenceFields() throws InterruptedException {
+        accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
+        Thread.sleep(3000);
+        boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
+        if (showModal) {
+            accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+            Thread.sleep(3000);
+        }
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadCostTitle), "Minimum Load Cost");
+        Assert.assertNotNull(accountPage.accountCardMap.get("loadCostValue"));
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.distanceFromTitle), "Maximum distance from you");
+        Assert.assertNotNull(accountPage.accountCardMap.get("distanceFromValue"));
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadDistanceTitle), "Load Distance");
+        Assert.assertNotNull(accountPage.accountCardMap.get("loadDistanceValue"));
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.desiredDestinationTitle), "Desired Destinations");
+        Assert.assertNotNull(accountPage.accountCardMap.get("desiredDestinationValue"));
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.commoditiesTitle), "Commodities to avoid");
+        Assert.assertNotNull(accountPage.accountCardMap.get("commoditiesValue"));
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.maxWeightTitle), "Max Weight");
+        Assert.assertNotNull(accountPage.accountCardMap.get("maxWeightValue"));
+    }
+
 }
