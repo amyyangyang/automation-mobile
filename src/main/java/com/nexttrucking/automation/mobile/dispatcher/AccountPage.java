@@ -27,6 +27,12 @@ public class AccountPage extends PageProperty {
     public String preferenceModalBodyText = "(//*[contains(@%s,'Let us know what you like')])[last()]";
     public String preferenceModalButton = "(//*[contains(@%s,\"Let's do it\")])[last()]";
     public String backBtn = "//*[@%s='\uF3CF']";
+    public String loadCostTitle = "(//*[@%s='Minimum Load Cost'])[last()]";
+    public String distanceFromTitle = "(//*[@%s='Maximum distance from you'])[last()]";
+    public String loadDistanceTitle = "(//*[@%s='Load Distance'])[last()]";
+    public String desiredDestinationTitle = "(//*[@%s='Desired Destinations'])[last()]";
+    public String commoditiesTitle = "(//*[@%s='Commodities to avoid'])[last()]";
+    public String maxWeightTitle = "(//*[@%s='Max Weight'])[last()]";
 
     public Map<String, String> accountCardMap;
     public AccountPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -43,6 +49,12 @@ public class AccountPage extends PageProperty {
             accountCardMap.put("equipmentValue","(//*[@text='Equipment'])/following-sibling::*[1]");
             accountCardMap.put("carrierDocsValue","(//*[@text='Carrier Docs'])/following-sibling::*[1]");
             accountCardMap.put("bankAccountValue","(//*[@text='Bank Account'])/following-sibling::*[1]");
+            accountCardMap.put("loadCostValue","(//*[@text='Minimum Load Cost'])/following-sibling::*[3]");
+            accountCardMap.put("distanceFromValue","(//*[@text='Maximum distance from you'])/following-sibling::*[2]");
+            accountCardMap.put("loadDistanceValue","(//*[@text='Load Distance'])/following-sibling::*[1]");
+            accountCardMap.put("desiredDestinationValue","(//*[@text='Desired Destinations'])/following-sibling::*[1]");
+            accountCardMap.put("commoditiesValue","(//*[@text='Commodities to avoid'])/following-sibling::*[1]");
+            accountCardMap.put("maxWeightValue","(//*[@text='Max Weight'])/following-sibling::*[2]");
         }else {
             accountCardMap = new HashMap<>();
             accountCardMap.put("nameValue","(//XCUIElementTypeStaticText[@name='Name'])/../*[2]");
@@ -55,6 +67,12 @@ public class AccountPage extends PageProperty {
             accountCardMap.put("equipmentValue","(//XCUIElementTypeStaticText[@name='Equipment'])/../*[2]");
             accountCardMap.put("carrierDocsValue","(//XCUIElementTypeStaticText[@name='Carrier Docs'])/../*[2]");
             accountCardMap.put("bankAccountValue","(//XCUIElementTypeStaticText[@name='Bank Account'])/../*[2]");
+            accountCardMap.put("loadCostValue","(//XCUIElementTypeStaticText[@name='Minimum Load Cost'])/../*[4]");
+            accountCardMap.put("distanceFromValue","(//XCUIElementTypeStaticText[@name='Maximum distance from you'])/../*[3]");
+            accountCardMap.put("loadDistanceValue","(//XCUIElementTypeStaticText[@name='Load Distance'])/../*[2]");
+            accountCardMap.put("desiredDestinationValue","(//XCUIElementTypeStaticText[@name='Desired Destinations'])/../*[2]");
+            accountCardMap.put("commoditiesValue","(//XCUIElementTypeStaticText[@name='Commodities to avoid'])/../*[2]");
+            accountCardMap.put("maxWeightValue","(//XCUIElementTypeStaticText[@name='Max Weight'])/../*[3]");
         }
     }
 
