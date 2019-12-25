@@ -10,7 +10,7 @@ import static java.util.Arrays.asList;
 public class Utils {
     public static List<String> equipmentTypeListOnDetail = new ArrayList<String>(asList("Dry Van","Power Only", "Reefer", "Box Truck"));
     public static List<String> jobTypeList = new ArrayList<String>(asList("DROP & HOOK", "ROUNDTRIP", "MULTISTOP", "TEAM", "YARD TO YARD"));
-    public static List<String> equipmentTypeList = new ArrayList<String>(asList("ROUNDTRIP  |  DRY VAN","DROP & HOOK  |  POWER ONLY","ROUNDTRIP  |  POWER ONLY","MULTI-STOP  |  POWER ONLY","DROP & HOOK  |  DRY VAN","MULTI-STOP  |  DRY VAN","DRY VAN","POWER ONLY", "REEFER", "BOX TRUCK","LOADSPEC_PORT | POWER ONLY", "MULTI-STOP  |  POWER ONLY","DRAYAGE  |  POWER ONLY"));
+    public static List<String> equipmentTypeList = new ArrayList<String>(asList("ROUNDTRIP  |  DRY VAN","DROP & HOOK  |  POWER ONLY","ROUNDTRIP  |  POWER ONLY","MULTI-STOP  |  POWER ONLY","DROP & HOOK  |  DRY VAN","MULTI-STOP  |  DRY VAN","DRY VAN","POWER ONLY", "REEFER", "BOX TRUCK","LOADSPEC.PORT | POWER ONLY", "MULTI-STOP  |  POWER ONLY","DRAYAGE  |  POWER ONLY"));
     public static List<String> jobStateList=new ArrayList<>(asList("ON WAY TO PICK UP","MISSING INVOICE","LOADED AT PICK UP","ARRIVED AT DROP OFF","ON WAY TO DROP OFF","MISSING POD","NO DRIVER ASSIGNED"));
     public static List<String> paymentsStatusList = new ArrayList<String>(asList("CANCELED", "VERIFYING", "PAYMENT SENT"));
     public static List<String> liveUnloadJobStatus = new ArrayList<String>(asList("Loaded Container", "Empty Container"));
