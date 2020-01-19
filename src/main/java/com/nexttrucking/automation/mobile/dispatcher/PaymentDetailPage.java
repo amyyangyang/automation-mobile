@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
 public class PaymentDetailPage extends PageProperty {
 
     public String addressText = "textGroupValue_0";
-    public String locationPanel="(//*[contains(@%s,'Locations')])[last()]";
+    public String locationPanel = "(//*[contains(@%s,'Locations')])[last()]";
 
     public PaymentDetailPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
     }
 
-    public boolean isTerminalJob(String instructionAddress) throws InterruptedException{
+    public boolean isTerminalJob(String instructionAddress) throws InterruptedException {
         String pattern = ".*Terminal.*";
         boolean isTerminalJob = false;
         List<MobileElement> AddressElementsArray = driver.findElementsByAccessibilityId(instructionAddress);

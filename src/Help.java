@@ -26,7 +26,6 @@ public class Help {
 //    mvn test -Dtest=!com.mycompany.app.Legacy*
 
 
-
 //            adb shell
 //            dumpsys window windows | grep -E 'mCurrentFocus'
 

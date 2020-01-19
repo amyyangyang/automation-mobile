@@ -20,6 +20,7 @@ import org.junit.rules.TestWatcher;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
+
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -73,7 +75,7 @@ public abstract class SetProperty {
                                 attributeName = "name";
                                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ios");
                                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                                capabilities.setCapability("bundleId","com.nexttrucking.trucker.dev");
+                                capabilities.setCapability("bundleId", "com.nexttrucking.trucker.dev");
                                 capabilities.setCapability("waitForQuiescence", "false");
                                 capabilities.setCapability("launchTimeout", "60000");
                                 driver = Factory.createIOSDriver(url, capabilities);
@@ -98,20 +100,20 @@ public abstract class SetProperty {
                                 capabilities.setCapability(MobileCapabilityType.VERSION, "8.1.0");
                                 capabilities.setCapability("appActivity", "com.nextnative.MainActivity");
                                 capabilities.setCapability("waitForQuiescence", "false");
-                                    switch (prop.getProperty("env.name")) {
-                                        case "dev":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.11.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
-                                            break;
-                                        case "test":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT TEST.apk_2.0.11.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
-                                            break;
-                                        case "demo":
-                                            capabilities.setCapability("app", "D:\\app\\NEXT DEMO.apk_2.0.11.apk");
-                                            capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
-                                            break;
-                                    }
+                                switch (prop.getProperty("env.name")) {
+                                    case "dev":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEV.apk_2.0.11.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.dev");
+                                        break;
+                                    case "test":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT TEST.apk_2.0.11.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.testing");
+                                        break;
+                                    case "demo":
+                                        capabilities.setCapability("app", "D:\\app\\NEXT DEMO.apk_2.0.11.apk");
+                                        capabilities.setCapability("appPackage", "com.nexttrucking.trucker.im");
+                                        break;
+                                }
                                 driver = Factory.createAndroidDriver(url, capabilities);
                                 break;
                             case "ios":
@@ -198,7 +200,7 @@ public abstract class SetProperty {
         return parameterValue;
     }
 
-//    @Rule
+    //    @Rule
     public RetryRule retryRule = new RetryRule(2);
 
     @Rule

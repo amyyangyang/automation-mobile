@@ -6,6 +6,7 @@ import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
 import org.junit.*;
 import property.SetProperty;
+
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 

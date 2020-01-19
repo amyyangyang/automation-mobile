@@ -42,44 +42,41 @@ public class MyDriversPage extends PageProperty {
     private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
 
 
-
-    public MyDriversPage(AppiumDriver< MobileElement > driver, String attributeName) {
+    public MyDriversPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
     }
 
 
-
-    public void clickAddDriverButton(){
-       clickElement(addDriverButton);
+    public void clickAddDriverButton() {
+        clickElement(addDriverButton);
     }
 
-    public void typeEmail(String email){
+    public void typeEmail(String email) {
         sendKeyToElement(emailInput, email);
     }
 
-    public void typePassword(String password){
+    public void typePassword(String password) {
         sendKeyToElement(passwordInput, password);
     }
 
-    public void clickContinueButton(){
+    public void clickContinueButton() {
         clickElement(continueButton);
     }
 
-    public void selectDriverType(String driverType){
+    public void selectDriverType(String driverType) {
         selectRadioButton(radioButtonElement, driverType);
     }
 
 
-
-    public void selectDriverSize(String driverSize){
+    public void selectDriverSize(String driverSize) {
         selectRadioButton(radioButtonElement, driverSize);
     }
 
-    public void typeFirstName(String firstName){
+    public void typeFirstName(String firstName) {
         driver.findElementByAccessibilityId(firstNameInput).sendKeys(firstName);
     }
 
-    public void typeLastName(String lastName){
+    public void typeLastName(String lastName) {
         driver.findElementByAccessibilityId(lastNameInput).sendKeys(lastName);
     }
 
@@ -93,11 +90,11 @@ public class MyDriversPage extends PageProperty {
         Thread.sleep(5000);
     }
 
-    public String getFirstDriverName(String driverFirstName){
+    public String getFirstDriverName(String driverFirstName) {
         return getText(firstDriver, driverFirstName);
     }
 
-    public void selectFirstDriver(){
+    public void selectFirstDriver() {
         clickElementWithDifferentLocator(selectedDriverForAndroid, selectedDriverForiOS);
     }
 
@@ -249,18 +246,18 @@ public class MyDriversPage extends PageProperty {
         sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForiOS, keys);
     }
 
-    public boolean isEquipmentEdited(){
+    public boolean isEquipmentEdited() {
         if (attributeName.equals("text")) {
             return isElementPresent("path", editedEquipmentForAndroid);
-        } else  {
+        } else {
             return isElementPresent("path", editedEquipmentForiOS);
         }
     }
 
-    public boolean isEquipmentFixed(){
+    public boolean isEquipmentFixed() {
         if (attributeName.equals("text")) {
             return isElementPresent("path", fixedEquipmentForAndroid);
-        } else  {
+        } else {
             return isElementPresent("path", fixedEquipmentForiOS);
         }
     }

@@ -5,7 +5,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 
 
-
 public class WelcomePage extends PageProperty {
 
 
@@ -20,7 +19,6 @@ public class WelcomePage extends PageProperty {
     private String allowButton = "//*[@%s='Allow']";
 
 
-
     public void clickAllowNotificationsButton() throws InterruptedException {
         if (attributeName.equals("name") && isElementPresent("path", allowButton)) {
             clickElement(allowButton);
@@ -32,7 +30,7 @@ public class WelcomePage extends PageProperty {
     }
 
     public void clickSaveButton() {
-        if (isElementPresent("path", saveButton)){
+        if (isElementPresent("path", saveButton)) {
             clickElement(saveButton);
         }
     }
