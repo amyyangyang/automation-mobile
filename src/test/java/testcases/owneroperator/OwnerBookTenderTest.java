@@ -36,7 +36,7 @@ public class OwnerBookTenderTest extends SetProperty {
         availableLoadsAllPage.clickElementByLocator("id",availableLoadsAllPage.longHaulButton);
     }
 
-    //@Test
+    @Test
     public void bookLiveUnLoadJobOnly() throws InterruptedException {
         for (int i = 0; i < 5; i++) {
             Boolean isPresentLoadNow = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
