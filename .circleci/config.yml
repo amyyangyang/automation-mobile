@@ -39,7 +39,7 @@ commands:
           name: pull mobile app from s3
           command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
 
-  package_test_case :
+  package_test_case:
     description: "mvn package for multi-env and different devices"
     parameters:
       envType:
@@ -88,11 +88,11 @@ commands:
             if [ ${deviceType} == android ]
             then
                echo "android"
-               appcenter test run appium --app "NextTrucking-Dev-11/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+               appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
             elif [ ${deviceType} == ios ]
             then
                echo "ios"
-               appcenter test run appium --app "NextTrucking-Dev-11/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+               appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
             else
                echo "deviceType is error"
             fi
@@ -143,27 +143,27 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - package_test_case :
+      - package_test_case:
           envType: "dev"
           deviceType: "android"
 
-      - package_test_case :
+      - package_test_case:
           envType: "dev"
           deviceType: "ios"
 
-      - package_test_case :
+      - package_test_case:
           envType: "test"
           deviceType: "android"
 
-      - package_test_case :
+      - package_test_case:
           envType: "test"
           deviceType: "ios"
 
-      - package_test_case :
+      - package_test_case:
           envType: "demo"
           deviceType: "android"
 
-      - package_test_case :
+      - package_test_case:
           envType: "demo"
           deviceType: "ios"
 

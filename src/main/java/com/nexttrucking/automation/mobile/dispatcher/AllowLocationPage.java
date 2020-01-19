@@ -13,6 +13,7 @@ public class AllowLocationPage extends PageProperty {
     private String allowLocationButtonAndroid = "(//*[@class='android.widget.Button'])[2]";
     private String allowLocationButtonIOS12 = "//*[@%s='Always Allow']";
     private String allowLocationButtonIOS10 = "//*[@%s='Allow']";
+    public String skipButton = "(//*[@%s='Skip'])[last()]";
 
     public AllowLocationPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -39,5 +40,11 @@ public class AllowLocationPage extends PageProperty {
         }
     }
 
+    public void clickSkipButton() throws InterruptedException {
+        if (sizeOfElements(skipButton) > 0) {
+            clickElement(skipButton);
+            Thread.sleep(3000);
+        }
+    }
 }
 

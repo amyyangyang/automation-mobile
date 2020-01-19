@@ -71,15 +71,15 @@ public class OwnerAccountTest extends SetProperty {
             Assert.assertEquals(accountPage.getElementText("path", name.titleText), name.title);
             Assert.assertNotNull(accountPage.accountCardMap.get(name.titleValue));
         }
-       accountPage.clickElementByLocator("path", accountPage.backBtn);
+        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
     @Test
-    public void checkAccountPage() throws InterruptedException{
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle),"Account");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn),"Edit Profile");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn),"Load Preferences");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn),"Logout");
+    public void checkAccountPage() throws InterruptedException {
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle), "Account");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn), "Edit Profile");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn), "Load Preferences");
+        Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn), "Logout");
     }
 
     @Test
@@ -94,7 +94,7 @@ public class OwnerAccountTest extends SetProperty {
             Thread.sleep(3000);
             Assert.assertFalse(accountPage.isElementPresent("path", accountPage.preferenceModalBodyText));
         }
-       accountPage.clickElementByLocator("path", accountPage.backBtn);
+        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
     @Test

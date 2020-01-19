@@ -54,7 +54,7 @@ public class DispatcherPaymentsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
@@ -64,6 +64,7 @@ public class DispatcherPaymentsTest extends SetProperty {
             Assert.assertTrue(pageProperty.isTextPresent("Details for"));
 
             paymentDetailPage.clickElementByLocator("path", paymentDetailPage.locationPanel);
+            Thread.sleep(3000);
             boolean isTerminalJob = paymentDetailPage.isTerminalJob(paymentDetailPage.addressText);
             paymentDetailPage.clickElementByLocator("path", paymentDetailPage.locationPanel);
 

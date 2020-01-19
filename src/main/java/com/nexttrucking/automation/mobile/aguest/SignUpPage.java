@@ -40,11 +40,11 @@ public class SignUpPage extends PageProperty {
         return new WelcomePage(driver, attributeName);
     }
 
-    public void typeEmail(String email){
+    public void typeEmail(String email) {
         sendKeyToElement(emailInput, email);
     }
 
-    public void typePassword(String password){
+    public void typePassword(String password) {
         sendKeyToElement(passwordInput, password);
     }
 
@@ -53,8 +53,8 @@ public class SignUpPage extends PageProperty {
         return this;
     }
 
-    public void chooseUserRole(String role){
-        if (role.equals("OwnerOperator")){
+    public void chooseUserRole(String role) {
+        if (role.equals("OwnerOperator")) {
             clickElement(ownerCheckbox);
         } else if (role.equals("Dispatcher")) {
             clickElement(dispatcherCheckbox);
@@ -73,11 +73,11 @@ public class SignUpPage extends PageProperty {
         return this;
     }
 
-    public void typeFirstName(String firstName){
+    public void typeFirstName(String firstName) {
         driver.findElementByAccessibilityId(firstNameInput).sendKeys(firstName);
     }
 
-    public void typeLastName(String lastName){
+    public void typeLastName(String lastName) {
         driver.findElementByAccessibilityId(lastNameInput).sendKeys(lastName);
     }
 
@@ -97,7 +97,7 @@ public class SignUpPage extends PageProperty {
         Thread.sleep(5000);
     }
 
-    public void clickCloseButton(){
+    public void clickCloseButton() {
         clickElementWithDifferentLocator(closeButton, closeButtonIOS);
     }
 

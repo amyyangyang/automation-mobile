@@ -43,6 +43,7 @@ public class SignInPage extends PageProperty {
         Thread.sleep(10000);
         allowLocationPage.clickOkAllowLocationButton();
         allowLocationPage.clickAllowLocationButton();
+        allowLocationPage.clickSkipButton();
     }
 
     public WelcomePage clickBackButton() {
@@ -50,11 +51,11 @@ public class SignInPage extends PageProperty {
         return new WelcomePage(driver, attributeName);
     }
 
-    public void typeEmail(String email){
+    public void typeEmail(String email) {
         sendKeyToElement(emailInput, email);
     }
 
-    public void typePassword(String password){
+    public void typePassword(String password) {
         sendKeyToElement(passwordInput, password);
     }
 
@@ -63,15 +64,15 @@ public class SignInPage extends PageProperty {
         return new AllowLocationPage(driver, attributeName);
     }
 
-    public void clickForgotButton(){
+    public void clickForgotButton() {
         clickElement(forgotPasswordButton);
     }
 
-    public void inputEmailForForgotPassword(String email){
+    public void inputEmailForForgotPassword(String email) {
         sendKeyToElement(forgotPasswordEmail, email);
     }
 
-    public void clickSendNewPasswordButton(){
+    public void clickSendNewPasswordButton() {
         clickElement(sendNewPasswordButton);
     }
 

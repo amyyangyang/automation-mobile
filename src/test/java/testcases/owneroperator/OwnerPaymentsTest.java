@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import property.SetProperty;
+
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
@@ -53,7 +54,7 @@ public class OwnerPaymentsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));

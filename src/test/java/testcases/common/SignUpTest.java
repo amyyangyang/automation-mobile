@@ -7,11 +7,14 @@ import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.*;
 import org.junit.jupiter.api.Tag;
 import property.SetProperty;
+
 import java.net.MalformedURLException;
 
 
@@ -22,7 +25,8 @@ public class SignUpTest extends SetProperty {
         setUpDriver();
         welcomePage = new WelcomePage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
-        pageProperty = new PageProperty(driver, attributeName) {};
+        pageProperty = new PageProperty(driver, attributeName) {
+        };
         signUpPage = new SignUpPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
@@ -59,9 +63,9 @@ public class SignUpTest extends SetProperty {
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
             signUpPage.clickCloseButton();
+            Thread.sleep(3000);
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
         }
-        Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
     @Test
@@ -92,15 +96,15 @@ public class SignUpTest extends SetProperty {
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
             signUpPage.clickCloseButton();
+            Thread.sleep(3000);
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
         }
-        Thread.sleep(3000);
-        Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
     }
 
     @Test
     @Tag("write")
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
-        String driverEmail = "seraabel2017+newd"+Utils.getRandomString(2)+"@gmail.com";
+        String driverEmail = "seraabel2017+newd" + Utils.getRandomString(2) + "@gmail.com";
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Drivers");
         myDriversPage.clickAddDriverButton();

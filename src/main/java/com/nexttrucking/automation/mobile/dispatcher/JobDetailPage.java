@@ -30,31 +30,31 @@ public class JobDetailPage extends PageProperty {
     public String assignButton = "(//*[@%s='Assign'])[last()]";
 
     //button for ownerOperator, only go to my loads button and go to available loads button
-    public String refreshButton="(//*[contains(@%s,\"Refresh Now\")])[last()]";
-    public String goToAvailableLoadsButton="(//*[contains(@%s,'Go to Available Loads')])[last()]";
-    public String goToMyLoadsButton="(//*[contains(@%s,'Go to My Loads')])[last()]";
+    public String refreshButton = "(//*[contains(@%s,\"Refresh Now\")])[last()]";
+    public String goToAvailableLoadsButton = "(//*[contains(@%s,'Go to Available Loads')])[last()]";
+    public String goToMyLoadsButton = "(//*[contains(@%s,'Go to My Loads')])[last()]";
     public String somethingIsWrong = "(//*[contains(@%s,\"thing\")])[last()]";
     public String[] liveUnloadAddress = {"address_0", "address_1", "address_2"};
     public String[] liveUnloadTime = {"time_0", "time_1", "time_2"};
 
-    public String originationAddress="address_0";
-    public String destinationAddress="address_1";
-    public String liveLoadAddress="address_2";
-    public String liveLoadTime="time_2";
-    public String pickupTime="time_0";
-    public String deliveryTime="time_1";
-    public String jobStatus="";
-    public String payment="";
-    public String getTextInAddress="textGroupValue_1";
-    public String getTextInTime="textGroupValue_0";
+    public String originationAddress = "address_0";
+    public String destinationAddress = "address_1";
+    public String liveLoadAddress = "address_2";
+    public String liveLoadTime = "time_2";
+    public String pickupTime = "time_0";
+    public String deliveryTime = "time_1";
+    public String jobStatus = "";
+    public String payment = "";
+    public String getTextInAddress = "textGroupValue_1";
+    public String getTextInTime = "textGroupValue_0";
 
-    public String equipment="Equipment_value";
-    public String distance="Total Distance_key";
-    public String packaging="Packaging_value";
-    public String weight="Weight_value";
-    public String container="";
-    public String specification="";
-    public String commodity="";
+    public String equipment = "Equipment_value";
+    public String distance = "Total Distance_key";
+    public String packaging = "Packaging_value";
+    public String weight = "Weight_value";
+    public String container = "";
+    public String specification = "";
+    public String commodity = "";
 
     public HashMap<String, String> jobDetailCard;
 
@@ -79,8 +79,8 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[contains(@text, 'Commodity')]/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[contains(@text, 'Specification')]/following-sibling::*[3]");
             jobDetailCard.put("backButton", "//*[contains(@text, '\uF3CF')]");
-            jobDetailCard.put("driverButton","//*[contains(@text, 'Assign Driver')]/parent::*[1]/following-sibling::*[1]/*/*/*/*[1]/*/*[2]");
-            jobDetailCard.put("driver","//*[contains(@text, 'Test Test')]/following-sibling::*[1]");
+            jobDetailCard.put("driverButton", "//*[contains(@text, 'Assign Driver')]/parent::*[1]/following-sibling::*[1]/*/*/*/*[1]/*/*[2]");
+            jobDetailCard.put("driver", "//*[contains(@text, 'Test Test')]/following-sibling::*[1]");
             jobDetailCard.put("liveUnloadJobStatus", "//android.widget.FrameLayout[last()]/following-sibling::*[1]/*[1]");
         } else {
             jobDetailCard.put("originationAddress", "//XCUIElementTypeScrollView/child::*[1]/child::*[2]/child::*[1]/child::*[1]/child::*[1]/child::*[2]/child::*[1]");
@@ -100,18 +100,18 @@ public class JobDetailPage extends PageProperty {
             jobDetailCard.put("commodity", "//*[@name='Commodity']/following-sibling::*[1]");
             jobDetailCard.put("specification", "//*[@name='Specifications']/parent::*[1]/following-sibling::*[1]/child::*[1]/child::*[2]");
             jobDetailCard.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF3CF\"]");
-            jobDetailCard.put("driverButton","//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
+            jobDetailCard.put("driverButton", "//*[@name='Assign Driver']/following-sibling::*/*/*/*/*/*[1]");
             jobDetailCard.put("liveUnloadJobStatus", "(//XCUIElementTypeStaticText)[3]");
-            jobDetailCard.put("driver","(//*[contains(@name, 'Test Test')])[last()]");
+            jobDetailCard.put("driver", "(//*[contains(@name, 'Test Test')])[last()]");
         }
 
     }
 
-    public void bookTender() throws InterruptedException{
-        if(attributeName.equals("text")){
+    public void bookTender() throws InterruptedException {
+        if (attributeName.equals("text")) {
             clickElementByLocator("path", isBookButton);
-        }else{
-            new TouchAction(driver).press(PointOption.point(229,750)).perform();
+        } else {
+            new TouchAction(driver).press(PointOption.point(229, 750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -138,50 +138,48 @@ public class JobDetailPage extends PageProperty {
         return false;
     }
 
-    public void assignDriver() throws InterruptedException{
+    public void assignDriver() throws InterruptedException {
         assignDriver(jobDetailCard.get("driverButton"));
     }
 
-    public void skipAssignDriver() throws InterruptedException{
-        if(attributeName.equals("text")){
+    public void skipAssignDriver() throws InterruptedException {
+        if (attributeName.equals("text")) {
             clickElementByLocator("path", skipButton);
-        }else{
-            new TouchAction(driver).press(PointOption.point(95,750)).perform();
+        } else {
+            new TouchAction(driver).press(PointOption.point(95, 750)).perform();
         }
         Thread.sleep(3000);
     }
 
-    public void goToMyLoadsOrAvailableLoadsPage (String element)throws InterruptedException{
-        if(attributeName.equals("text")){
-            clickElementByLocator("path",element);
-        }else{
-            new TouchAction(driver).press(PointOption.point(270,750)).perform();
+    public void goToMyLoadsOrAvailableLoadsPage(String element) throws InterruptedException {
+        if (attributeName.equals("text")) {
+            clickElementByLocator("path", element);
+        } else {
+            new TouchAction(driver).press(PointOption.point(270, 750)).perform();
         }
         //Thread.sleep(3000);
     }
 
-    public Boolean checkBookJobForErrors() throws InterruptedException {
+    public Boolean checkBookJobForErrors(JobDetailPage jobDetailPage) throws InterruptedException {
         Boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
-        if(isPresentAvailableLoadButton){
-            clickElementByLocator("path",goToAvailableLoadsButton);
+        if (isPresentAvailableLoadButton) {
+            clickElementByLocator("path", goToAvailableLoadsButton);
         }
-        Boolean isPresentSomethingError=isElementPresent("path",somethingIsWrong);
-        if(isPresentSomethingError){
-            Boolean isPresentOKButton=isElementPresent("path",assignOkButton);
-            if(isPresentOKButton){
-                clickElementByLocator("path",assignOkButton);
-            }else{
-                clickElementByLocator("path",refreshButton);
-                clickElementByLocator("path",jobDetailCard.get("backButton"));
+        Boolean isPresentRefreshNowButton = isElementPresent("path", refreshButton);
+        if (isPresentRefreshNowButton) {
+            clickElementByLocator("path", refreshButton);
+            clickElementByLocator("path", jobDetailPage.bookButton);
+            if (isElementPresent("path", bookButton)) {
+                clickElementByLocator("path", jobDetailPage.bookButton);
             }
         }
-        return  isPresentAvailableLoadButton||isPresentSomethingError;
+        return isPresentAvailableLoadButton;
     }
 
     public boolean isliveUnloadJobStatusCorrect() {
         boolean correctStatus = false;
         String paymentStatus = getElementText("path", jobDetailCard.get("liveUnloadJobStatus"));
-        for (int i=0; i<2; i++) {
+        for (int i = 0; i < 2; i++) {
             if (paymentStatus.contains(Utils.liveUnloadJobStatus.get(i))) {
                 correctStatus = true;
             }
