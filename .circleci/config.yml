@@ -117,8 +117,7 @@ jobs:
     working_directory: ~/repo
     steps:
     - checkout
-    - # Download and cache dependencies
-      restore_cache:
+    - restore_cache: # Download and cache dependencies
         keys:
         - v1-dependencies-{{ checksum "pom.xml" }}
         # fallback to using the latest cache if no exact match is found
