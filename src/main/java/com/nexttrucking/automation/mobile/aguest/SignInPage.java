@@ -34,7 +34,6 @@ public class SignInPage extends PageProperty {
         SignInPage signInPage = new SignInPage(driver, attributeName);
         Thread.sleep(5000);
         welcomePage.clickAllowNotificationsButton();
-        welcomePage.clickSaveButton();
         welcomePage.clickSignInButton();
         //LogIn as Dispatcher
         signInPage.typeEmail(Email);

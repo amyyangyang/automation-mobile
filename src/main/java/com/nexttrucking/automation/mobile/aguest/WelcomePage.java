@@ -31,12 +31,6 @@ public class WelcomePage extends PageProperty {
         return getText(title, titleText);
     }
 
-    public void clickSaveButton() {
-        if (isElementPresent("path", saveButton)){
-            clickElement(saveButton);
-        }
-    }
-
     public SignInPage clickSignInButton() {
         clickElement(signInButton);
         return new SignInPage(driver, attributeName);
