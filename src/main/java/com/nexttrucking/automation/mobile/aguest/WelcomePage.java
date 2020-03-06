@@ -19,8 +19,6 @@ public class WelcomePage extends PageProperty {
     private String title = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String allowButton = "//*[@%s='Allow']";
 
-
-
     public void clickAllowNotificationsButton() throws InterruptedException {
         if (attributeName.equals("name") && isElementPresent("path", allowButton)) {
             clickElement(allowButton);
