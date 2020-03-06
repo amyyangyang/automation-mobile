@@ -27,6 +27,12 @@ public class WelcomePage extends PageProperty {
         }
     }
 
+    public void clickSaveButton() {
+        if (isElementPresent("path", saveButton)){
+            clickElement(saveButton);
+        }
+    }
+
     public String getTitle(String titleText) {
         return getText(title, titleText);
     }
