@@ -27,12 +27,6 @@ public class WelcomePage extends PageProperty {
         }
     }
 
-    public void clickSaveButton() {
-        if (isElementPresent("path", saveButton)){
-            clickElement(saveButton);
-        }
-    }
-
     public String getTitle(String titleText) {
         return getText(title, titleText);
     }
@@ -50,7 +44,6 @@ public class WelcomePage extends PageProperty {
     public void getWelcomePage() throws InterruptedException {
         clickAllowNotificationsButton();
         Thread.sleep(3000);
-        clickSaveButton();
         Thread.sleep(3000);
     }
 
