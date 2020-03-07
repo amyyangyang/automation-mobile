@@ -4,16 +4,14 @@
 #
 
 version: 2.1
-
 executors:
   execute_test_cases:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:lts
+    - image: circleci/node:lts
   robot_autotest_executor:
     machine: true
     working_directory: ~/robot
-
 commands:
   push_test_case_package:
     description: "sync application or msv package files to aws s3"
@@ -23,10 +21,9 @@ commands:
       to:
         type: string
     steps:
-      - run:
-          name: push test case package to s3
-          command: "aws s3 sync << parameters.from >> << parameters.to >> --delete"
-
+    - run:
+        name: push test case package to s3
+        command: "aws s3 sync << parameters.from >> << parameters.to >> --delete"
   pull_mobile_app_from_s3:
     description: "pull application or msv package files to local docker"
     parameters:
@@ -35,11 +32,10 @@ commands:
       to:
         type: string
     steps:
-      - run:
-          name: pull mobile app from s3
-          command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
-
-  package_test_case :
+    - run:
+        name: pull mobile app from s3
+        command: "aws s3 cp << parameters.from >> << parameters.to >> --recursive"
+  package_test_case:
     description: "mvn package for multi-env and different devices"
     parameters:
       envType:
@@ -47,18 +43,16 @@ commands:
       deviceType:
         type: string
     steps:
-      - run:
-          name: << parameters.envType >> | << parameters.deviceType >> === mvn package
-          command: |
-            mvn clean -DPLATFORM_NAME=<< parameters.deviceType >> -DENV_NAME=<< parameters.envType >> -DskipTests -P prepare-for-upload package
-
-      - run:
-          name: << parameters.envType >> | << parameters.deviceType >> === backup package
-          command: |
-            mkdir -p artifactWorkspace
-            mv target/upload artifactWorkspace/upload-<<parameters.envType>>-<< parameters.deviceType >>
-            ls artifactWorkspace/
-
+    - run:
+        name: << parameters.envType >> | << parameters.deviceType >> === mvn package
+        command: |
+          mvn clean -DPLATFORM_NAME=<< parameters.deviceType >> -DENV_NAME=<< parameters.envType >> -DskipTests -P prepare-for-upload package
+    - run:
+        name: << parameters.envType >> | << parameters.deviceType >> === backup package
+        command: |
+          mkdir -p artifactWorkspace
+          mv target/upload artifactWorkspace/upload-<<parameters.envType>>-<< parameters.deviceType >>
+          ls artifactWorkspace/
   run_test_cases:
     description: "run the test case on the AppCenter platform"
     parameters:
@@ -69,34 +63,31 @@ commands:
       deviceType:
         type: string
     steps:
-      - attach_workspace:
-          at: ~/repo/
-      - run:
-          name: install app center cli
-          command: sudo npm install -g appcenter-cli
-
-      - run:
-          name: list artifactWorkspace
-          command: |
-            ls artifactWorkspace
-
-      - run:
-          name: test app UI
-          environment:
-            deviceType: << parameters.deviceType >>
-          command: |
-            if [ ${deviceType} == android ]
-            then
-               echo "android"
-               appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
-            elif [ ${deviceType} == ios ]
-            then
-               echo "ios"
-               appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
-            else
-               echo "deviceType is error"
-            fi
-
+    - attach_workspace:
+        at: ~/repo/
+    - run:
+        name: install app center cli
+        command: sudo npm install -g appcenter-cli
+    - run:
+        name: list artifactWorkspace
+        command: |
+          ls artifactWorkspace
+    - run:
+        name: test app UI
+        environment:
+          deviceType: << parameters.deviceType >>
+        command: |
+          if [ ${deviceType} == android ]
+          then
+             echo "android"
+             appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-Android" --devices decd45e5 --app-path "artifactWorkspace/<<parameters.appName>>.apk" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-android
+          elif [ ${deviceType} == ios ]
+          then
+             echo "ios"
+             appcenter test run appium --app "nexttrucking-mobile/NEXTTrucking-iOS" --devices 827284fc --app-path "artifactWorkspace//<<parameters.appName>>.ipa" --test-series "master" --locale "en_US" --build-dir artifactWorkspace/upload-<<parameters.envType>>-ios
+          else
+             echo "deviceType is error"
+          fi
   robot_autotest:
     description: "Robot auto test, UI testing or build test data"
     parameters:
@@ -108,112 +99,91 @@ commands:
         type: string
         default: ""
     steps:
-      - run:
-          name: Start << parameters.ENV >> << parameters.TYPE >>
-          environment:
-            ENV: << parameters.ENV >>
-            TYPE: << parameters.TYPE >>
-            EXCLUDE: << parameters.EXCLUDE >>
-          command: |
-            $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-            docker pull $DOCKER_REPO_URL/robot-autotest
-            echo "Robot autotest running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
-            docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
-
+    - run:
+        name: Start << parameters.ENV >> << parameters.TYPE >>
+        environment:
+          ENV: << parameters.ENV >>
+          TYPE: << parameters.TYPE >>
+          EXCLUDE: << parameters.EXCLUDE >>
+        command: |
+          $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+          docker pull $DOCKER_REPO_URL/robot-autotest
+          echo "Robot autotest running, env: ${ENV}, type: ${TYPE}, exclude: ${EXCLUDE}"
+          docker run -e ENV=${ENV} -e TYPE=${TYPE} -e EXCLUDE=${EXCLUDE} $DOCKER_REPO_URL/robot-autotest
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+    - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
-
     steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      - package_test_case :
-          envType: "dev"
-          deviceType: "android"
-
-      - package_test_case :
-          envType: "dev"
-          deviceType: "ios"
-
-      - package_test_case :
-          envType: "test"
-          deviceType: "android"
-
-      - package_test_case :
-          envType: "test"
-          deviceType: "ios"
-
-      - package_test_case :
-          envType: "demo"
-          deviceType: "android"
-
-      - package_test_case :
-          envType: "demo"
-          deviceType: "ios"
-
-      - persist_to_workspace:
-          # Save the files in persist_to_workspace
-          root: ~/repo
-          paths:
-            - artifactWorkspace
-
+    - checkout
+    - restore_cache: # Download and cache dependencies
+        keys:
+        - v1-dependencies-{{ checksum "pom.xml" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
+    - run: mvn dependency:go-offline
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "pom.xml" }}
+    - package_test_case:
+        envType: "dev"
+        deviceType: "android"
+    - package_test_case:
+        envType: "dev"
+        deviceType: "ios"
+    - package_test_case:
+        envType: "test"
+        deviceType: "android"
+    - package_test_case:
+        envType: "test"
+        deviceType: "ios"
+    - package_test_case:
+        envType: "demo"
+        deviceType: "android"
+    - package_test_case:
+        envType: "demo"
+        deviceType: "ios"
+    - persist_to_workspace:
+        # Save the files in persist_to_workspace
+        root: ~/repo
+        paths:
+        - artifactWorkspace
   prepare_test_cases_and_mobile_app:
     docker:
-      - image: circleci/python:2.7-jessie
+    - image: circleci/python:2.7-jessie
     working_directory: ~/repo
     steps:
-      - attach_workspace:
-          at: ~/repo/
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-
-      - push_test_case_package:
-          from: "artifactWorkspace"
-          to: "s3://next-app-ui-test/test-package"
-
-      - pull_mobile_app_from_s3:
-          from: "s3://next-app-ui-test/app-package"
-          to: "artifactWorkspace"
-
-      - run:
-          name: list artifactWorkspace
-          command: |
-            ls artifactWorkspace
-
-      - persist_to_workspace:
-          # Save the files in persist_to_workspace
-          root: ~/repo
-          paths:
-            - artifactWorkspace
-
+    - attach_workspace:
+        at: ~/repo/
+    - run:
+        name: Install awscli
+        command: sudo pip install awscli
+    - push_test_case_package:
+        from: "artifactWorkspace"
+        to: "s3://next-app-ui-test/test-package"
+    - pull_mobile_app_from_s3:
+        from: "s3://next-app-ui-test/app-package"
+        to: "artifactWorkspace"
+    - run:
+        name: list artifactWorkspace
+        command: |
+          ls artifactWorkspace
+    - persist_to_workspace:
+        # Save the files in persist_to_workspace
+        root: ~/repo
+        paths:
+        - artifactWorkspace
   init_data:
     executor: robot_autotest_executor
     parameters:
       ENV:
         type: string
     steps:
-      - robot_autotest:
-          ENV: << parameters.ENV >>
-          TYPE: "InitData"
-
+    - robot_autotest:
+        ENV: << parameters.ENV >>
+        TYPE: "InitData"
   run_case:
     executor: execute_test_cases
     parameters:
@@ -222,182 +192,126 @@ jobs:
       deviceType:
         type: string
     steps:
-      - run_test_cases:
-          envType: << parameters.envType >>
-          appName: "$APP_ONLINE_VERSION"
-          deviceType: << parameters.deviceType >>
-
+    - run_test_cases:
+        envType: << parameters.envType >>
+        appName: "$APP_ONLINE_VERSION"
+        deviceType: << parameters.deviceType >>
 workflows:
   version: 2
-  app-onlineVersion:
-    triggers:
-      - schedule:
-          cron: "0 19,2,7 * * *"
-          filters:
-            branches:
-              only:
-                - master
-                - onlineVersion
-    jobs:
-      - build
-
-      - prepare_test_cases_and_mobile_app:
-          context: next-platform-build
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - onlineVersion
-
-      - init_data:
-          name: dev_init_data_android
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - prepare_test_cases_and_mobile_app
-
-      - run_case:
-          name: testDevAndroid
-          envType: dev
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - dev_init_data_android
-#      - hold_testTestUI:
-#          type: approval
-#          requires:
-#            - prepare_test_cases_and_mobile_app
-#      - init_data:
-#          name: test_init_data_android
-#          ENV: test
-#          context: next-platform-build
-#          requires:
-#            - hold_testTestUI
-#      - run_case:
-#          name: testTestAndroid
-#          envType: test
-#          deviceType: android
-#          context: next-platform-build
-#          requires:
-#            - test_init_data_android
   app-ui-test:
     jobs:
-      - build
-
-      - prepare_test_cases_and_mobile_app:
-          context: next-platform-build
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - /^release\/.*/
-                - feature/circleci
-
-      - hold_testDevUI:
-          type: approval
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - init_data:
-          name: dev_init_data_android
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - hold_testDevUI
-      - run_case:
-          name: testDevAndroid
-          envType: dev
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - dev_init_data_android
-      - init_data:
-          name: dev_init_data_ios
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - testDevAndroid
-      - run_case:
-          name: testDevIOS
-          envType: dev
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - dev_init_data_ios
-      - hold_testTestUI:
-          type: approval
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - init_data:
-          name: test_init_data_android
-          ENV: test
-          context: next-platform-build
-          requires:
-            - hold_testTestUI
-      - run_case:
-          name: testTestAndroid
-          envType: test
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - test_init_data_android
-      - init_data:
-          name: test_init_data_ios
-          ENV: test
-          context: next-platform-build
-          requires:
-            - testTestAndroid
-      - run_case:
-          name: testTestIOS
-          envType: test
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - test_init_data_ios
-#  app-ui-timing-test:
-#    triggers:
-#      - schedule:
-#          cron: "0 8 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - build
-#      - prepare_test_cases_and_mobile_app:
-#          context: next-platform-build
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              only:
-#                - master
-#      - init_data:
-#          name: dev_init_data_android
-#          ENV: dev
-#          context: next-platform-build
-#          requires:
-#            - prepare_test_cases_and_mobile_app
-#      - run_case:
-#          name: devTestAndroid
-#          envType: test
-#          deviceType: android
-#          context: next-platform-build
-#          requires:
-#            - dev_init_data_android
-#      - init_data:
-#          name: dev_init_data_ios
-#          ENV: dev
-#          context: next-platform-build
-#          requires:
-#            - devTestAndroid
-#      - run_case:
-#          name: devTestIOS
-#          envType: test
-#          deviceType: ios
-#          context: next-platform-build
-#          requires:
-#            - dev_init_data_ios
+    - build
+    - prepare_test_cases_and_mobile_app:
+        context: next-platform-build
+        requires:
+        - build
+        filters:
+          branches:
+            only:
+            - master
+            - /^release\/.*/
+            - feature/circleci
+    - hold_testDevUI:
+        type: approval
+        requires:
+        - prepare_test_cases_and_mobile_app
+    - init_data:
+        name: dev_init_data_android
+        ENV: dev
+        context: next-platform-build
+        requires:
+        - hold_testDevUI
+    - run_case:
+        name: testDevAndroid
+        envType: dev
+        deviceType: android
+        context: next-platform-build
+        requires:
+        - dev_init_data_android
+    - init_data:
+        name: dev_init_data_ios
+        ENV: dev
+        context: next-platform-build
+        requires:
+        - testDevAndroid
+    - run_case:
+        name: testDevIOS
+        envType: dev
+        deviceType: ios
+        context: next-platform-build
+        requires:
+        - dev_init_data_ios
+    - hold_testTestUI:
+        type: approval
+        requires:
+        - prepare_test_cases_and_mobile_app
+    - init_data:
+        name: test_init_data_android
+        ENV: test
+        context: next-platform-build
+        requires:
+        - hold_testTestUI
+    - run_case:
+        name: testTestAndroid
+        envType: test
+        deviceType: android
+        context: next-platform-build
+        requires:
+        - test_init_data_android
+    - init_data:
+        name: test_init_data_ios
+        ENV: test
+        context: next-platform-build
+        requires:
+        - testTestAndroid
+    - run_case:
+        name: testTestIOS
+        envType: test
+        deviceType: ios
+        context: next-platform-build
+        requires:
+        - test_init_data_ios
+        #  app-ui-timing-test:
+        #    triggers:
+        #      - schedule:
+        #          cron: "0 8 * * *"
+        #          filters:
+        #            branches:
+        #              only:
+        #                - master
+        #    jobs:
+        #      - build
+        #      - prepare_test_cases_and_mobile_app:
+        #          context: next-platform-build
+        #          requires:
+        #            - build
+        #          filters:
+        #            branches:
+        #              only:
+        #                - master
+        #      - init_data:
+        #          name: dev_init_data_android
+        #          ENV: dev
+        #          context: next-platform-build
+        #          requires:
+        #            - prepare_test_cases_and_mobile_app
+        #      - run_case:
+        #          name: devTestAndroid
+        #          envType: test
+        #          deviceType: android
+        #          context: next-platform-build
+        #          requires:
+        #            - dev_init_data_android
+        #      - init_data:
+        #          name: dev_init_data_ios
+        #          ENV: dev
+        #          context: next-platform-build
+        #          requires:
+        #            - devTestAndroid
+        #      - run_case:
+        #          name: devTestIOS
+        #          envType: test
+        #          deviceType: ios
+        #          context: next-platform-build
+        #          requires:
+        #            - dev_init_data_ios

@@ -20,7 +20,7 @@ public class PaymentsPage extends PageProperty {
             paymentList.put("paymentStatus", "//*[@content-desc='payment_view_list']/*/*/*/*/*/*[1]");
             paymentList.put("paymentPrice", "(//*[@content-desc='payment_view_list']/*/*/*/*/*[3])[2]");
             paymentList.put("paymentPriceSpecial", "(//*[@content-desc='payment_view_list']/*/*/*/*/*[3])[1]");
-            paymentList.put("paymentNumber","//*[@content-desc='payment_view_list']/*/*/*");
+            paymentList.put("paymentNumber", "//*[@content-desc='payment_view_list']/*/*/*");
         } else {
             paymentList.put("firstPayment", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
             paymentList.put("paymentStatus", "//*[@name='Payments']/following-sibling::*/*/*/*/*[2]/*");
@@ -31,7 +31,7 @@ public class PaymentsPage extends PageProperty {
     public boolean isPaymentStatusCorrect() {
         boolean correctStatus = false;
         String paymentStatus = getElementText("path", paymentList.get("paymentStatus"));
-        for (int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             if (paymentStatus.contains(Utils.paymentsStatusList.get(i))) {
                 correctStatus = true;
             }

@@ -5,7 +5,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 
 
-
 public class WelcomePage extends PageProperty {
 
 
@@ -41,7 +40,6 @@ public class WelcomePage extends PageProperty {
 
     public void getWelcomePage() throws InterruptedException {
         clickAllowNotificationsButton();
-        Thread.sleep(3000);
         Thread.sleep(3000);
     }
 

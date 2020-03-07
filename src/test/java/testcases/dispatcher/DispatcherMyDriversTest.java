@@ -12,6 +12,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import property.SetProperty;
+
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
@@ -23,7 +24,8 @@ public class DispatcherMyDriversTest extends SetProperty {
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
-        pageProperty = new PageProperty(driver, attributeName) {};
+        pageProperty = new PageProperty(driver, attributeName) {
+        };
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
@@ -43,7 +45,7 @@ public class DispatcherMyDriversTest extends SetProperty {
             Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("earned"));
             Assert.assertTrue(myDriversPage.getDriverEarnedInfo().contains("$"));
         } else {
-        Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
         }
     }
 

@@ -23,20 +23,21 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DispatcherBookTenderTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
-    public static MyLoadsPage   myLoadsPage;
+    public static MyLoadsPage myLoadsPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
         setUpDriver();
-        pageProperty = new PageProperty(driver, attributeName) {};
+        pageProperty = new PageProperty(driver, attributeName) {
+        };
         availableLoadsAllPage = new AvailableLoadsAllPage(driver, attributeName);
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
         jobDetailPage = new JobDetailPage(driver, attributeName);
-        myLoadsPage=new MyLoadsPage(driver,attributeName);
+        myLoadsPage = new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.clickElementByLocator("id",availableLoadsAllPage.longHaulButton);
+        availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
     }
 
     @Test
@@ -69,11 +70,11 @@ public class DispatcherBookTenderTest extends SetProperty {
     public void bookJobAndAssignDriver() throws InterruptedException {
         for (int i = 0; i < 4; i++) {
             Boolean isPresentLoadNow = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-            if(!isPresentLoadNow){
+            if (!isPresentLoadNow) {
                 break;
             }
             Boolean isPresentException = false;
-            int loop=0;
+            int loop = 0;
             do {
                 ++loop;
                 Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
@@ -95,14 +96,14 @@ public class DispatcherBookTenderTest extends SetProperty {
                         }
                         Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                         isPresentException = jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
-                        if(isPresentException){
+                        if (isPresentException) {
                             availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
                         }
                     }
                 } else {
                     Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }
-            } while ((isPresentException)&&(loop<3));
+            } while ((isPresentException) && (loop < 3));
         }
     }
 }

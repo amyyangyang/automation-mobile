@@ -8,6 +8,7 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
+
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +39,11 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName))).click();
     }
 
-    public void clickElementByName(String element, String elementName){
+    public void clickElementByName(String element, String elementName) {
         driver.findElement(By.xpath(String.format(element, attributeName, elementName))).click();
     }
 
-    public void clickAnyElementByName(String elementName){
+    public void clickAnyElementByName(String elementName) {
         driver.findElement(By.xpath(String.format(anyElement, attributeName, elementName))).click();
     }
 
@@ -50,7 +51,7 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
 
-    public void sendKeyToElementWithDifferentLocators(String androidElement, String iOSElement, String keys){
+    public void sendKeyToElementWithDifferentLocators(String androidElement, String iOSElement, String keys) {
         if (attributeName.equals("text")) {
             driver.findElement(By.xpath(androidElement)).sendKeys(keys);
         } else {
@@ -101,15 +102,15 @@ public abstract class PageProperty {
         driver.findElement(By.xpath(String.format(element, attributeName, menuName))).click();
     }
 
-    public void clickElementWithDifferentLocator(String androidElement, String iOSElement){
+    public void clickElementWithDifferentLocator(String androidElement, String iOSElement) {
         if (attributeName.equals("text")) {
             clickElement(androidElement);
-        } else if (attributeName.equals("name")){
+        } else if (attributeName.equals("name")) {
             clickElement(iOSElement);
         }
     }
 
-    public String getElementTextWithDifferentLocator(String androidElement, String iOSElement){
+    public String getElementTextWithDifferentLocator(String androidElement, String iOSElement) {
         if (attributeName.equals("text")) {
             return driver.findElement(By.xpath(androidElement)).getText();
         } else {
@@ -117,9 +118,10 @@ public abstract class PageProperty {
         }
     }
 
-    public void selectRadioButton(String element, String radioButtonName){
+    public void selectRadioButton(String element, String radioButtonName) {
         driver.findElement(By.xpath(String.format(element, attributeName, radioButtonName))).click();
     }
+
     public void deleteValueForAndroid(String element) throws InterruptedException {
         driver.findElement(By.xpath(String.format(element, attributeName))).clear();
     }
@@ -143,7 +145,7 @@ public abstract class PageProperty {
 //            loopIteration++;
 //        }
 //        driver.findElement(By.xpath(selectAllButton)).click();
-        for (int i=0; i<clickAmount; i++) {
+        for (int i = 0; i < clickAmount; i++) {
             if (valueType.equals("number")) {
                 driver.findElement(By.xpath(deleteNumbersButton)).click();
             } else {
