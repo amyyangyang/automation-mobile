@@ -18,7 +18,6 @@ public class WelcomePage extends PageProperty {
     private String title = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String allowButton = "//*[@%s='Allow']";
 
-
     public void clickAllowNotificationsButton() throws InterruptedException {
         if (attributeName.equals("name") && isElementPresent("path", allowButton)) {
             clickElement(allowButton);
@@ -27,12 +26,6 @@ public class WelcomePage extends PageProperty {
 
     public String getTitle(String titleText) {
         return getText(title, titleText);
-    }
-
-    public void clickSaveButton() {
-        if (isElementPresent("path", saveButton)) {
-            clickElement(saveButton);
-        }
     }
 
     public SignInPage clickSignInButton() {
@@ -47,8 +40,6 @@ public class WelcomePage extends PageProperty {
 
     public void getWelcomePage() throws InterruptedException {
         clickAllowNotificationsButton();
-        Thread.sleep(3000);
-        clickSaveButton();
         Thread.sleep(3000);
     }
 
