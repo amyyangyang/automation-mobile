@@ -27,16 +27,18 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String shortHaulButton = "SHORT_HAUL";
     public String longHaulButton = "LONG_HAUL";
     public String allButton = "ALL";
+    public String portButton="PORT";
 
     public String shortHaulNumber = "SHORT_HAUL_Count";
     public String longHaulNumber = "LONG_HAUL_Count";
     public String localNumber = "LOCAL_Count";
     public String allNumber = "ALL_Count";
+    public String portNumber= "PORT_Count";
 
     public Map<String, String> buttonMap;
     public Map<String, String> availableCardMap;
 
-    public String originationAddress = "address_0";
+    public String originationAddress = "textGroupValue_1";
     public String destinationAddress = "address_1";
     public String liveLoadAddress = "address_2";
     public String liveLoadTime = "time_2";
