@@ -122,9 +122,9 @@ public class SignUpTest extends SetProperty {
         } else {
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
-            myDriversPage.selectDriverType("Reefer");
+            myDriversPage.selectDriverType("Power Only");
             myDriversPage.clickContinueButton();
-            myDriversPage.selectDriverSize("48");
+            myDriversPage.selectDriverSize("3");
             signUpPage.submitInformation();
             Thread.sleep(5000);
             Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)),Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText)) ;
@@ -147,9 +147,9 @@ public class SignUpTest extends SetProperty {
             pageProperty.clickAnyElementByName("OK");
             signUpPage.clickCloseButton();
         } else {
-            myDriversPage.selectDriverType("Reefer");
+            myDriversPage.selectDriverType("Power Only");
             myDriversPage.clickContinueButton();
-            myDriversPage.selectDriverSize("48");
+            myDriversPage.selectDriverSize("3");
             myDriversPage.clickContinueButton();
             myDriversPage.typeFirstName(getTestData("driveFirstName"));
             myDriversPage.typeLastName(getTestData("driveLastName"));
