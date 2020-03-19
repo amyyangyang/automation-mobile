@@ -3,6 +3,7 @@ package com.nexttrucking.automation.mobile.property;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
@@ -29,5 +30,12 @@ public class Utils {
             sb.append(str.charAt(number));
         }
         return sb.toString();
+    }
+
+    public static String removeSpace(String str){
+        Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+        Matcher m = p.matcher(str);
+        String strWithOutSpace = m.replaceAll("");
+        return strWithOutSpace;
     }
 }

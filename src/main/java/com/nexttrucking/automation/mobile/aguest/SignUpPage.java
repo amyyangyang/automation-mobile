@@ -25,15 +25,24 @@ public class SignUpPage extends PageProperty {
     private String signUpButton = "(//*[@%s='Sign Up'])[last()]";
     private String selectCityCheckbox = "(//*[contains(@%1$s, \"%2$s, NY\")])[last()]";
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
-    private String editPhoneInputForiOS = "(//*[@name='createAccount_input_phone'])[last()]";
+    private String editPhoneInputForIOS = "(//*[@name='createAccount_input_phone'])[last()]";
     private String editPhoneInputForAndroid = "(//*[@text='createAccount_input_phone'])[last()]";
-    public String roleTitle = "(//*[contains(@%s, 'Which one are you?')])[last()]";
-    public String equipmentTitle = "(//*[contains(@%s, 'Which do you have?')])[last()]";
+    public String pageTitle = "(//*[contains(@%s, \"You’re already registered\")])[last()]";
+    public String equipmentTitle = "(//*[contains(@%s, 'What do you have?')])[last()]";
+    private String usDocketInput = "selectCarrier_input_docket";
+    private String companyNameInput = "selectCarrier_input_company";
+    private String firstModal = "(//*[contains(@text, 'Which modes do you do?')]/parent::*/following-sibling::*)[2]/child::*/child::*";
+    private String submitInformationButton = "(//*[contains(@%s, 'Submit Information')])[last()]";
+    public String promptMessage = "(//*[contains(@%s, 'Just so you')])[last()]";
+    private String showWhatButton = "(//*[contains(@%s, 'Show')])[last()]";
+    public String messageAfterSigningUp = "(//*[contains(@%s, \"We're working hard\")])[last()]";
+    public String followingMessageAfterSigningUp = "(//*[contains(@%s, 'As soon as ')])[last()]";
+    public String messageAfterSigningUpText = "We're working hard to expand the first trucker-centric marketplace, but aren't prepared to service your preferences just yet.";
+    public String followingMessageAfterSigningUpText = "As soon as we're ready to get your wheels turning, we'll be in touch.";
 
     public SignUpPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
     }
-
 
     public WelcomePage clickBackButton() {
         clickElementWithDifferentLocator(backButton, closeButtonIOS);
@@ -85,8 +94,8 @@ public class SignUpPage extends PageProperty {
         driver.findElementByAccessibilityId(phoneNumberInput).sendKeys(phoneNumber);
         if (attributeName.equals("name")) {
             String newPhoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
-            while (!getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS).contains(newPhoneNumber)) {
-                editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, phoneNumber, "number", 10);
+            while (!getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForIOS).contains(newPhoneNumber)) {
+                editInputValue(editPhoneInputForIOS, editPhoneInputForAndroid, phoneNumber, "number", 10);
             }
         }
         Thread.sleep(3000);
@@ -108,6 +117,26 @@ public class SignUpPage extends PageProperty {
         } else {
             clickAnyElementByName("Sign In");
         }
+    }
 
+    public void typeCompanyInformation(String usDocket, String companyName) {
+        driver.findElementByAccessibilityId(usDocketInput).sendKeys(usDocket);
+        driver.findElementByAccessibilityId(companyNameInput).sendKeys(companyName);
+    }
+
+    public void chooseMode(String mode) {
+        clickElement(firstModal);
+    }
+
+    public void submitInformation() {
+        clickElement(submitInformationButton);
+    }
+
+    public void hideKeyboard() {
+        driver.hideKeyboard();
+    }
+
+    public void clickAlert() {
+        clickElement(showWhatButton);
     }
 }
