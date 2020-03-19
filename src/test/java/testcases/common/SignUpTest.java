@@ -39,32 +39,45 @@ public class SignUpTest extends SetProperty {
     @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
+        signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseUserRole("Dispatcher");
+        signUpPage.clickContinueButton();
+        signUpPage.typeFirstName(getTestData("firstName"));
+        signUpPage.typeLastName(getTestData("lastName"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseCity(getTestData("cityName"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseMode(getTestData("mode"));
+        signUpPage.clickContinueButton();
         signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
         signUpPage.typePassword(getTestData("passwordForGuest"));
-        signUpPage.clickContinueButton();
-        boolean isRoleTitlePresent = signUpPage.isElementPresent("path", signUpPage.roleTitle);
-        if (!isRoleTitlePresent) {
+        signUpPage.hideKeyboard();
+        signUpPage.clickSignUpButton();
+        Thread.sleep(5000);
+        boolean isPageTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
+        if (isPageTitlePresent) {
             signUpPage.clickSignInButton();
             signUpPage.typePassword(getTestData("passwordForGuest"));
             signInPage.clickSignInButton();
             Thread.sleep(5000);
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
-        } else {
-            signUpPage.chooseUserRole("Dispatcher");
-            signUpPage.clickContinueButton();
-            signUpPage.chooseCity(getTestData("cityName"));
-            signUpPage.clickSaveHomeButton();
-            signUpPage.typeFirstName(getTestData("firstName"));
-            signUpPage.typeLastName(getTestData("lastName"));
-            signUpPage.typePhoneNumber(getTestData("phoneNumber"));
-            signUpPage.clickSignUpButton();
-            Thread.sleep(5000);
-            allowLocationPage.clickOkAllowLocationButton();
-            allowLocationPage.clickAllowLocationButton();
-            signUpPage.clickCloseButton();
             Thread.sleep(3000);
-            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
+            boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
+            if (isAlertPresent) {
+                signUpPage.clickAlert();
+            }
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
+        } else {
+            allowLocationPage.clickOkAllowLocationButton();
+            Thread.sleep(3000);
+            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp), signUpPage.followingMessageAfterSigningUpText);
+            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp), signUpPage.messageAfterSigningUpText);
         }
     }
 
@@ -72,32 +85,50 @@ public class SignUpTest extends SetProperty {
     @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
+        signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseUserRole("OwnerOperator");
+        signUpPage.clickContinueButton();
+        signUpPage.typeFirstName(getTestData("firstName"));
+        signUpPage.typeLastName(getTestData("lastName"));
+        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseCity(getTestData("cityName"));
+        signUpPage.hideKeyboard();
+        signUpPage.clickContinueButton();
+        signUpPage.chooseMode(getTestData("mode"));
+        signUpPage.clickContinueButton();
         signUpPage.typeEmail(getTestData("emailForGuestOO"));
         signUpPage.typePassword(getTestData("passwordForGuest"));
-        signUpPage.clickContinueButton();
-        boolean isRoleTitlePresent = signUpPage.isElementPresent("path", signUpPage.roleTitle);
-        if (!isRoleTitlePresent) {
+        signUpPage.hideKeyboard();
+        signUpPage.clickSignUpButton();
+        Thread.sleep(5000);
+        boolean isRoleTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
+        if (isRoleTitlePresent) {
             signUpPage.clickSignInButton();
             signUpPage.typePassword(getTestData("passwordForGuest"));
             signInPage.clickSignInButton();
             Thread.sleep(5000);
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
+            Thread.sleep(3000);
+            boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
+            if (isAlertPresent) {
+                signUpPage.clickAlert();
+            }
+            Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         } else {
-            signUpPage.chooseUserRole("OwnerOperator");
-            signUpPage.clickContinueButton();
-            signUpPage.chooseCity(getTestData("cityName"));
-            signUpPage.clickSaveHomeButton();
-            signUpPage.typeFirstName(getTestData("firstName"));
-            signUpPage.typeLastName(getTestData("lastName"));
-            signUpPage.typePhoneNumber(getTestData("phoneNumber"));
-            signUpPage.clickSignUpButton();
-            Thread.sleep(5000);
             allowLocationPage.clickOkAllowLocationButton();
             allowLocationPage.clickAllowLocationButton();
-            signUpPage.clickCloseButton();
-            Thread.sleep(3000);
-            Assert.assertTrue(availableLoadsAllPage.getTitle("Add").contains("Add"));
+            myDriversPage.selectDriverType("Reefer");
+            myDriversPage.clickContinueButton();
+            myDriversPage.selectDriverSize("48");
+            signUpPage.submitInformation();
+            Thread.sleep(5000);
+            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp), signUpPage.messageAfterSigningUpText);
+            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp), signUpPage.followingMessageAfterSigningUpText);
         }
     }
 
@@ -112,7 +143,7 @@ public class SignUpTest extends SetProperty {
         myDriversPage.typePassword(getTestData("driverAddPassword"));
         myDriversPage.clickContinueButton();
         boolean isSignInButtonPresent = signUpPage.isElementPresent("path", signUpPage.equipmentTitle);
-        if (isSignInButtonPresent) {
+        if (!isSignInButtonPresent) {
             pageProperty.clickAnyElementByName("OK");
             signUpPage.clickCloseButton();
         } else {
