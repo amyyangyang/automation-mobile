@@ -76,8 +76,8 @@ public class SignUpTest extends SetProperty {
         } else {
             allowLocationPage.clickOkAllowLocationButton();
             Thread.sleep(3000);
-            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp), signUpPage.followingMessageAfterSigningUpText);
-            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp), signUpPage.messageAfterSigningUpText);
+            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)),Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText)) ;
+            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
         }
     }
 
@@ -127,8 +127,8 @@ public class SignUpTest extends SetProperty {
             myDriversPage.selectDriverSize("48");
             signUpPage.submitInformation();
             Thread.sleep(5000);
-            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp), signUpPage.messageAfterSigningUpText);
-            Assert.assertEquals(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp), signUpPage.followingMessageAfterSigningUpText);
+            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)),Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText)) ;
+            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
         }
     }
 
@@ -155,8 +155,8 @@ public class SignUpTest extends SetProperty {
             myDriversPage.typeLastName(getTestData("driveLastName"));
             signUpPage.typePhoneNumber(getTestData("drivePhoneNumber"));
             myDriversPage.clickSignUpButton();
+            Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
         }
-        Assert.assertTrue(myDriversPage.getFirstDriverName("TestFirst").contains("Test"));
     }
 
     @After
