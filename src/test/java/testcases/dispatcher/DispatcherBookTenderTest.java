@@ -37,14 +37,15 @@ public class DispatcherBookTenderTest extends SetProperty {
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
+        availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.portButton);
+        Thread.sleep(3000);
     }
 
     @Test
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentException = false;
         do {
-            Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
+            boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLoad) {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
@@ -66,18 +67,13 @@ public class DispatcherBookTenderTest extends SetProperty {
         } while (isPresentException);
     }
 
-    //@Test
+    @Test
     public void bookJobAndAssignDriver() throws InterruptedException {
-        for (int i = 0; i < 4; i++) {
-            Boolean isPresentLoadNow = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-            if (!isPresentLoadNow) {
-                break;
-            }
-            Boolean isPresentException = false;
+            boolean isPresentException = false;
             int loop = 0;
             do {
                 ++loop;
-                Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
+                boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
                     availableLoadsAllPage.findLiveUnloadJob();
                     boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
@@ -105,5 +101,4 @@ public class DispatcherBookTenderTest extends SetProperty {
                 }
             } while ((isPresentException) && (loop < 3));
         }
-    }
 }
