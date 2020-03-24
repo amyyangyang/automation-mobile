@@ -2,11 +2,7 @@ package testcases.owneroperator;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
-import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
-import com.nexttrucking.automation.mobile.dispatcher.PaymentDetailPage;
+import com.nexttrucking.automation.mobile.dispatcher.*;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,6 +21,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     public static MyLoadDetailsPage myLoadDetailsPage;
     public static MyLoadsPage myLoadsPage;
     public static PaymentDetailPage paymentDetailPage;
+    public static JobDetailPage jobDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
@@ -39,6 +36,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         paymentDetailPage = new PaymentDetailPage(driver, attributeName);
         signInPage.signIn(getTestData("ownerOperatorEmail"), getTestData("ownerOperatorPassword"));
+        availableLoadsAllPage.bookTenderForOwnerOperator(1,jobDetailPage);
         availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
         Thread.sleep(20000);
     }
@@ -99,7 +97,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkPreOperation() throws InterruptedException {
         Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
@@ -120,7 +118,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     }
 
 
-    @Test
+    //@Test
     public void undoOperationInProgressUploadPOD() throws InterruptedException {
         Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
@@ -136,7 +134,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkInvoiceEditPODPage() throws InterruptedException {
         Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {

@@ -160,7 +160,7 @@ public class JobDetailPage extends PageProperty {
         //Thread.sleep(3000);
     }
 
-    public boolean checkBookJobForErrors(JobDetailPage jobDetailPage) throws InterruptedException {
+    public boolean checkBookJobForErrors() throws InterruptedException {
         boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
         if (isPresentAvailableLoadButton) {
             clickElementByLocator("path", goToAvailableLoadsButton);

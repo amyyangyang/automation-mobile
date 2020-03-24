@@ -50,12 +50,12 @@ public class DispatcherBookTenderTest extends SetProperty {
                 availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                 Thread.sleep(3000);
-                isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                isPresentException = jobDetailPage.checkBookJobForErrors();
                 if (isPresentException) {
                     continue;
                 }
                 jobDetailPage.bookTender();
-                isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                isPresentException = jobDetailPage.checkBookJobForErrors();
                 if (isPresentException) {
                     continue;
                 }
@@ -81,12 +81,12 @@ public class DispatcherBookTenderTest extends SetProperty {
                         pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         Thread.sleep(3000);
-                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
                             continue;
                         }
                         jobDetailPage.bookTender();
-                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
                             continue;
                         }
