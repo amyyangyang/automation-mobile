@@ -7,6 +7,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -143,5 +144,62 @@ public class AvailableLoadsAllPage extends PageProperty {
         }
     }
 
+    public void bookTenderForFleet(int times,JobDetailPage jobDetailPage) throws InterruptedException {
+        for(int loop=0;loop<times;++loop){
+            Boolean isPresentException = false;
+            do {
+                boolean isPresentLoad = isElementPresent("id", originationAddress);
+                if (isPresentLoad) {
+                    clickElementByLocator("id", equipmentType);
+                    jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                    Thread.sleep(3000);
+                    isPresentException = jobDetailPage.checkBookJobForErrors();
+                    if (isPresentException) {
+                        continue;
+                    }
+                    jobDetailPage.bookTender();
+                    isPresentException = jobDetailPage.checkBookJobForErrors();
+                    if (isPresentException) {
+                        continue;
+                    }
+                    isPresentException = jobDetailPage.assignDriver(jobDetailPage.jobDetailCard.get("driver"));
+                    if (isPresentException) {
+                        clickMenuButtonFirstLevel("Available Loads");
+                    }
+                }
+            } while (isPresentException);
+        }
+    }
+
+    public void bookTenderForOwnerOperator(int times,JobDetailPage jobDetailPage) throws InterruptedException {
+        for(int step=0;step<times;step++){
+            boolean isPresentException = false;
+            int loop = 0;
+            do {
+                ++loop;
+                boolean isPresentLoad = isElementPresent("id", originationAddress);
+                if (isPresentLoad) {
+                    findLiveUnloadJob();
+                    boolean isLiveUnloadPresent = isElementPresent("id", liveLoadAddress);
+                    if (isLiveUnloadPresent) {
+                        clickElementByLocator("id", originationAddress);
+                        jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
+                        if (isPresentException) {
+                            continue;
+                        }
+                        Thread.sleep(3000);
+                        jobDetailPage.bookTender();
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
+                        if (isPresentException) {
+                            continue;
+                        }
+                        jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
+                        clickMenuButtonFirstLevel("Available Loads");
+                    }
+                }
+            } while ((isPresentException) && (loop < 3));
+        }
+    }
 }
 

@@ -51,13 +51,13 @@ public class OwnerBookTenderTest extends SetProperty {
                     if (isLiveUnloadPresent) {
                         availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.originationAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
-                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
                             continue;
                         }
                         Thread.sleep(3000);
                         jobDetailPage.bookTender();
-                        isPresentException = jobDetailPage.checkBookJobForErrors(jobDetailPage);
+                        isPresentException = jobDetailPage.checkBookJobForErrors();
                         if (isPresentException) {
                             continue;
                         }

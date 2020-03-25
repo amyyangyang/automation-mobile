@@ -2,11 +2,7 @@ package testcases.driver;
 
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
-import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
-import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadDetailsPage;
-import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
-import com.nexttrucking.automation.mobile.dispatcher.PaymentDetailPage;
+import com.nexttrucking.automation.mobile.dispatcher.*;
 import com.nexttrucking.automation.mobile.property.PageProperty;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,6 +19,7 @@ public class DriverMyLoadsTest extends SetProperty {
     public static MyLoadsPage myLoadsPage;
     public static MyLoadDetailsPage myLoadDetailsPage;
     public static PaymentDetailPage paymentDetailPage;
+    public static JobDetailPage jobDetailPage;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException, InterruptedException, ParserConfigurationException {
@@ -33,9 +30,15 @@ public class DriverMyLoadsTest extends SetProperty {
         allowLocationPage = new AllowLocationPage(driver, attributeName);
         welcomePage = new WelcomePage(driver, attributeName);
         signInPage = new SignInPage(driver, attributeName);
+        jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         paymentDetailPage = new PaymentDetailPage(driver, attributeName);
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        availableLoadsAllPage.bookTenderForFleet(1,jobDetailPage);
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(15000);
     }
@@ -62,7 +65,7 @@ public class DriverMyLoadsTest extends SetProperty {
     }
 
     @Test
-    public void modifyLiveUnLoadJobStatusToCompleted() throws InterruptedException {
+    public void modifyJobStatusToCompleted() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
             Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
@@ -76,7 +79,7 @@ public class DriverMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void modifyLiveUnLoadJobStatusToCompletedAtLastToUploadPOD() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
@@ -91,7 +94,7 @@ public class DriverMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkLiveUnLoadJobPreOperation() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
@@ -108,7 +111,7 @@ public class DriverMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void undoOperationInProgressUploadPOD() throws InterruptedException {
         Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
