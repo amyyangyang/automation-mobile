@@ -27,13 +27,13 @@ public class MyLoadsPage extends PageProperty {
     public String jobState = "jobStatusText";
     public String jobNumber = "jobNumText";
     public String payment = "priceText";
-    public String originationAddress = "address_0";
-    public String destinationAddress = "address_1";
-    public String liveLoadAddress = "address_2";
-    public String liveLoadTime = "time_2";
-    public String pickUpTime = "time_0";
-    public String deliveryTime = "time_1";
-    public String getTextInAddress = "textGroupValue_0";
+    public String originationAddress = "addressGroup_0";
+    public String destinationAddress = "addressGroup_0";
+    public String liveLoadAddress = "timeGroup_2";
+    public String liveLoadTime = "timeGroup_2";
+    public String pickUpTime = "timeGroup_0";
+    public String deliveryTime = "timeGroup_1";
+    public String getTextInAddress = "textGroupValue_1";
     public String getTextInTime = "textGroupValue_0";
 
     public Map<String, String> myLoadsCardMap;
@@ -43,11 +43,11 @@ public class MyLoadsPage extends PageProperty {
         myLoadsCardMap = new HashMap<>();
         if (attributeName.equals("text")) {
             myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='address_0']");
-            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@content-desc='address_2']/..");
+            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@content-desc='timeGroup_2']/..");
             myLoadsCardMap.put("liveUnloadJobButton", "//*[@content-desc=\"%s\"]/*[@content-desc='buttonView']");
         } else {
             myLoadsCardMap.put("numberOfLoad", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]");
-            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@name='address_2']/../../../../../..");
+            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@name='timeGroup_2']/../../../../../..");
             myLoadsCardMap.put("liveUnloadJobButton", "//*[@name=\"%s\"]//*[@name='buttonView']");
         }
     }
