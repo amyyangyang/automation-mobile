@@ -103,7 +103,7 @@ public class DriverMyLoadsTest extends SetProperty {
                 Thread.sleep(3000);
                 myLoadDetailsPage.checkPreOperation();
                 Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.resume));
-                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.upLoadPODButton));
+                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.upLoadDocumentsButton));
                 myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
             }
         } else {
