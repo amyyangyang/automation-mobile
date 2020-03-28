@@ -318,9 +318,10 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public String getTypeOfTripsJob() {
         int count = driver.findElementsByAccessibilityId(originalAddress).size();
-        StringBuilder addressList = null;
+        String addressList = new String();
         for (int i = 0; i < count; i++) {
-            addressList.append(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
+            System.out.print(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
+            addressList+=(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
         }
         if (addressList.toString().contains("Hook") && addressList.toString().contains("Drop")) {
             return "hookAndDrop";
@@ -335,7 +336,7 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void addChassisNumber(String chassisNumber) throws InterruptedException {
         clickElement(addChassisNumberButton);
-        driver.findElementByXPath(chassisNumberInput).sendKeys(chassisNumber);
+        driver.findElementByXPath(String.format(chassisNumberInput,attributeName)).sendKeys(chassisNumber);
         clickElement(nextButton);
         Thread.sleep(3000);
         clickElement(chassisSizeRadio);
@@ -344,7 +345,7 @@ public class MyLoadDetailsPage extends PageProperty {
             clickElementByLocator("path", confirmChassisSizeButton);
         }
         clickElement(addButton);
-        Thread.sleep(3000);
+        Thread.sleep(6000);
     }
 
     public String generateChassisNumber() {
@@ -398,7 +399,7 @@ public class MyLoadDetailsPage extends PageProperty {
         clickElementByLocator("path", readyToStart);
         Thread.sleep(3000);
         clickElementByLocator("path", chassisHooked);
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         String chassisNumber = generateChassisNumber();
         addChassisNumber(chassisNumber);
         clickElementByLocator("path", containerMounted);
@@ -444,6 +445,23 @@ public class MyLoadDetailsPage extends PageProperty {
         clickElementByLocator("path", continueButton);
         clickElementByLocator("path", chassisDropped);
         Thread.sleep(3000);
+    }
+
+    public void changeJobStatus(AllowLocationPage allowLocationPage)throws InterruptedException{
+        String jobType=getTypeOfTripsJob();
+        switch(jobType){
+            case "hookAndDrop" :
+                changeHookDropJobToCompleted(allowLocationPage);
+                break;
+            case "hookAndMount" :
+                changeHookMountJobToCompleted(allowLocationPage);
+                break; //可选
+            case "hookAndDismount ":
+                changeHookDisMountJobToCompleted(allowLocationPage);
+                break;
+            default :
+                changeHookLiveUnloadJobToCompleted(allowLocationPage);
+        }
     }
 
 }
