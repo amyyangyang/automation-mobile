@@ -148,33 +148,6 @@ public class MyLoadDetailsPage extends PageProperty {
         }
     }
 
-    public void changeTripJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
-        clickElementByLocator("path", readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
-        Thread.sleep(3000);
-        Boolean isLiveLoad = isElementPresent("path", liveUnloadCompletedButton);
-        if (isLiveLoad) {
-            clickElementByLocator("path", liveUnloadCompletedButton);
-            Thread.sleep(6000);
-            clickElementByLocator("path", continueButton);
-            Thread.sleep(3000);
-            clickElementByLocator("path", myLoadsDetailCardMap.get("PODForFirst"));
-            uploadPOD(allowLocationPage, true, 0);
-        }
-        clickElementByLocator("path", arrivedInDestination);
-        Thread.sleep(6000);
-        clickElementByLocator("path", continueButton);
-        Thread.sleep(3000);
-        if (isLiveLoad) {
-            clickElementByLocator("path", myLoadsDetailCardMap.get("PODForSecond"));
-        } else {
-            clickElementByLocator("path", myLoadsDetailCardMap.get("PODForFirst"));
-        }
-        uploadPOD(allowLocationPage, !isLiveLoad, 1);
-    }
-
-
     public void changeLegacyJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
         List<String> status = new ArrayList<String>() {
         };
@@ -235,85 +208,6 @@ public class MyLoadDetailsPage extends PageProperty {
             new TouchAction(driver).press(PointOption.point(180, 765)).perform();
         }
         Thread.sleep(3000);
-    }
-
-    public void changeTripJobStatusAtLastToUploadPOD(AllowLocationPage allowLocationPage) throws InterruptedException {
-        clickElementByLocator("path", readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
-        Thread.sleep(6000);
-        Boolean isLiveLoad = isElementPresent("path", liveUnloadCompletedButton);
-        if (isLiveLoad) {
-            clickElementByLocator("path", liveUnloadCompletedButton);
-            Thread.sleep(6000);
-            clickElementByLocator("path", myLoadsDetailCardMap.get("notContinueUploadPOD"));
-            Thread.sleep(3000);
-        }
-        clickElementByLocator("path", arrivedInDestination);
-        Thread.sleep(6000);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("notContinueUploadPOD"));
-        Thread.sleep(3000);
-        clickElementByLocator("path", upLoadDocumentsButton);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForFirst"));
-        uploadPOD(allowLocationPage, true, 0);
-        if (isLiveLoad) {
-            clickElementByLocator("path", myLoadsDetailCardMap.get("PODForSecond"));
-            uploadPOD(allowLocationPage, false, 1);
-        }
-        Thread.sleep(3000);
-    }
-
-    public void completeJobAfterCheckPreOperation(AllowLocationPage allowLocationPage) throws InterruptedException {
-        clickElementByLocator("path", upLoadDocumentsButton);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForFirst"));
-        uploadPOD(allowLocationPage, true, 0);
-        clickElementByLocator("path", arrivedInDestination);
-        Thread.sleep(6000);
-        clickElementByLocator("path", continueButton);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForSecond"));
-        uploadPOD(allowLocationPage, false, 1);
-
-    }
-
-    public void checkPreOperation() throws InterruptedException {
-        clickElementByLocator("path", readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
-        Thread.sleep(3000);
-        clickElementByLocator("path", liveUnloadCompletedButton);
-        Thread.sleep(3000);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("notContinueUploadPOD"));
-        Thread.sleep(3000);
-        if (attributeName.equals("text")) {
-            clickElementByLocator("path", liveUnload);
-        } else {
-            clickElementByLocator("path", liveUnLoadByLabel);
-        }
-        Thread.sleep(6000);
-    }
-
-    public void checkUndoOperationInProgressUploadPOD(AllowLocationPage allowLocationPage) throws InterruptedException {
-        clickElementByLocator("path", readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path", undoButton);
-        Assert.assertEquals(getElementText("path", readyToStart), "I'm Ready to Start Driving");
-        clickElementByLocator("path", readyToStart);
-        clickElementByLocator("path", arrivedInOrigination);
-        Thread.sleep(3000);
-        clickElementByLocator("path", undoButton);
-        Assert.assertEquals(getElementText("path", arrivedInOrigination), "Hook Completed");
-        clickElementByLocator("path", arrivedInOrigination);
-        clickElementByLocator("path", liveUnloadCompletedButton);
-        //upload first instruction POD
-        clickElementByLocator("path", continueButton);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForFirst"));
-        uploadPOD(allowLocationPage, true, 0);
-        Assert.assertEquals(getElementText("path", arrivedInDestination), "Drop Completed");
-        clickElementByLocator("path", arrivedInDestination);
-        //upload second instruction POD
-        clickElementByLocator("path", continueButton);
-        clickElementByLocator("path", myLoadsDetailCardMap.get("PODForSecond"));
-        uploadPOD(allowLocationPage, false, 1);
     }
 
     public String getTypeOfTripsJob() {
