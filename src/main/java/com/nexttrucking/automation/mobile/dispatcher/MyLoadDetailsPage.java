@@ -193,6 +193,7 @@ public class MyLoadDetailsPage extends PageProperty {
     }
 
     public void uploadPOD(AllowLocationPage allowLocationPage, Boolean isFirst, int index) throws InterruptedException {
+        driver.findElements(By.xpath(String.format(addButton, attributeName))).get(index).click();
         if (isFirst) {
             allowLocationPage.clickOkAllowLocationButton();
             if (attributeName.equals("text")) {
@@ -201,7 +202,6 @@ public class MyLoadDetailsPage extends PageProperty {
                 allowLocationPage.clickOkAllowLocationButton();
             }
         }
-        driver.findElements(By.xpath(String.format(addButton, attributeName))).get(index).click();
         clickElementByLocator("path", myLoadsDetailCardMap.get("takePhoto"));
         Thread.sleep(10000);
         clickElementByLocator("path", myLoadsDetailCardMap.get("submitPOD"));
@@ -378,17 +378,18 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(6000);
         clickElementByLocator("path", upLoadDocumentsButton);
         uploadPOD(allowLocationPage, true, 0);
+        clickElementByLocator("path", continueButton);
         boolean isPresentDroppedButton = isElementPresent("path", arrivedInDestination);
         if (isPresentDroppedButton) {
             clickElementByLocator("path", arrivedInDestination);
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
-            uploadPOD(allowLocationPage, false, 1);
+            uploadPOD(allowLocationPage, false, 0);
         } else {
             clickElementByLocator("path", containerDismounted);
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
-            uploadPOD(allowLocationPage, false, 1);
+            uploadPOD(allowLocationPage, false, 0);
             clickElementByLocator("path", continueButton);
             clickElementByLocator("path", chassisDropped);
             Thread.sleep(3000);
@@ -420,16 +421,16 @@ public class MyLoadDetailsPage extends PageProperty {
             if (isDropButton) {
                 clickElementByLocator("path", arrivedInDestination);
                 clickElementByLocator("path", upLoadDocumentsButton);
-                uploadPOD(allowLocationPage, false, 1);
+                uploadPOD(allowLocationPage, false, 0);
             } else {
                 clickElement(containerDismounted);
                 clickElementByLocator("path", upLoadDocumentsButton);
-                uploadPOD(allowLocationPage, false, 1);
+                uploadPOD(allowLocationPage, false, 0);
                 clickElementByLocator("path", chassisDropped);
                 Thread.sleep(3000);
             }
-            clickElementByLocator("path", continueButton);
         }
+        clickElementByLocator("path", continueButton);
     }
 
     public void changeHookDisMountJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
