@@ -455,7 +455,7 @@ public class MyLoadDetailsPage extends PageProperty {
                 break;
             case "hookAndMount" :
                 changeHookMountJobToCompleted(allowLocationPage);
-                break; //可选
+                break;
             case "hookAndDismount ":
                 changeHookDisMountJobToCompleted(allowLocationPage);
                 break;
