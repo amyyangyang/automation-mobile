@@ -18,17 +18,33 @@ public class MyLoadDetailsPage extends PageProperty {
     public String readyToStart = "(//*[contains(@%s, \"I'm Ready to Start Driving\")])[last()]";
 
     //status for trips job
-    public String arrivedInOrigination = "(//*[contains(@%s, \"Hook Completed\")])[last()]";
-    public String arrivedInDestination = "(//*[contains(@%s, \"Drop Completed\")])[last()]";
+    public String hookCompletedButton = "(//*[contains(@%s, \"Hook Completed\")])[last()]";
+    public String dropCompletedButton = "(//*[contains(@%s, \"Drop Completed\")])[last()]";
     public String liveUnloadCompletedButton = "(//*[contains(@%s, \"Live Unload Completed\")])[last()]";
+    public String chassisHookedButton = "//*[contains(@%s, 'Chassis Hooked')]";
+    public String containerMountedButton = "//*[contains(@%s, 'Container Mounted')]";
+    public String containerDismountedButton = "//*[contains(@%s, 'Container Dismounted')]";
+    public String chassisDroppedButton = "//*[contains(@%s, 'Chassis Dropped')]";
 
     //status for legacy job
-    public String arrived = "(//*[contains(@%s, \"I've Arrived\")])[last()]";
-    public String pickUp = "(//*[contains(@%s, \"Pickup Completed\")])[last()]";
-    public String readyToLeave = "(//*[contains(@%s, \"I'm Leaving\")])[last()]";
-    public String delivered = "(//*[contains(@%s, \"Delivery Completed\")])[last()]";
+    public String arrivedButton = "(//*[contains(@%s, \"I've Arrived\")])[last()]";
+    public String pickUpCompletedButton = "(//*[contains(@%s, \"Pickup Completed\")])[last()]";
+    public String readyToLeaveButton = "(//*[contains(@%s, \"I'm Leaving\")])[last()]";
+    public String deliveryCompletedButton = "(//*[contains(@%s, \"Delivery Completed\")])[last()]";
 
-    //button to upload pod or not
+    //confirm buttons
+    public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
+    public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
+    public String confirmChassisSizeButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
+
+    //add chassis
+    public String addButton = "//*[contains(@%s, 'Add')]";
+    public String nextButton = "//*[@%s='Next']";
+    public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
+    public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
+    public String chassisSizeRadio = "(//*[contains(@%s,'20 ft')]/following-sibling::*)[1]";
+
+    //buttons to upload pod or not
     public String continueButton = "(//*[contains(@%s, 'Continue')])[last()]";
     public String upLoadDocumentsButton = "(//*[@%s='Upload Documents'])[last()]";
 
@@ -36,8 +52,8 @@ public class MyLoadDetailsPage extends PageProperty {
     public String resume = "(//*[@%s='Resume'])[last()]";
     public String reviewInvoiceButton = "//*[contains(@%s, 'Review Invoice')]";
     public String completeInvoiceButton = "(//*[contains(@%s, 'Complete Invoice')])[last()]";
-    public String submitInvoice = "(//*[@%s='Submit Invoice'])[last()]";
-    public String skipInvoice = "(//*[@%s='Skip invoice for now'])[last()]";
+    public String submitInvoiceButton = "(//*[@%s='Submit Invoice'])[last()]";
+    public String skipInvoiceButton = "(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton = "(//*[contains(@%s,'Go back to My Loads')])[last()]";
     public String getPayment = "//*[contains(@%s, 'Payment will arrive in 3-5 days')]";
     public String editPODButton = "(//*[contains(@%s,'Edit POD')])[last()]";
@@ -56,24 +72,6 @@ public class MyLoadDetailsPage extends PageProperty {
     public String getTextInTime = "textGroupValue_0";
     public String addressText = "textGroupValue_0";
 
-    //button
-    public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
-    public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
-    public String confirmChassisSizeButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
-
-    //status button
-    public String chassisHooked = "//*[contains(@%s, 'Chassis Hooked')]";
-    public String containerMounted = "//*[contains(@%s, 'Container Mounted')]";
-    public String containerDismounted = "//*[contains(@%s, 'Container Dismounted')]";
-    public String chassisDropped = "//*[contains(@%s, 'Chassis Dropped')]";
-
-    //add chassis
-    public String addButton = "//*[contains(@%s, 'Add')]";
-    public String nextButton = "//*[@%s='Next']";
-    public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
-    public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
-    public String chassisSizeRadio = "(//*[contains(@%s,'20 ft')]/following-sibling::*)[1]";
-
     public Map<String, String> myLoadsDetailCardMap;
 
     public MyLoadDetailsPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -82,8 +80,6 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto", "(//*[@class='android.widget.ImageView'])[2]");
             myLoadsDetailCardMap.put("submitPOD", "(//*[@class='android.widget.ImageView'])[3]");
-            myLoadsDetailCardMap.put("PODForSecond", "//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]");
-            myLoadsDetailCardMap.put("PODForFirst", "//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]");
             myLoadsDetailCardMap.put("firstInstructionAction", "//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]/*/*/*[1]");
             myLoadsDetailCardMap.put("secondInstructionAction", "//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[2]/*/*/*[1]");
             myLoadsDetailCardMap.put("firstInstructionAddress", "//*[contains(@text, 'Upload POD')]/parent::*/parent::*/following-sibling::*/*/*/*/*[1]/*/*/*[3]");
@@ -116,8 +112,6 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto", "//*[@name='camera']");
             myLoadsDetailCardMap.put("submitPOD", "//*[@name='right']");
-            myLoadsDetailCardMap.put("PODForSecond", "//XCUIElementTypeScrollView/*/*[2]");
-            myLoadsDetailCardMap.put("PODForFirst", "//XCUIElementTypeScrollView/*/*[1]");
             myLoadsDetailCardMap.put("firstInstructionAction", "(//XCUIElementTypeStaticText[@name='action'])[1]");
             myLoadsDetailCardMap.put("firstInstructionAddress", "(//XCUIElementTypeStaticText[@name='address'])[1]");
             myLoadsDetailCardMap.put("secondInstructionAction", "(//XCUIElementTypeStaticText[@name='action'])[2]");
@@ -148,15 +142,15 @@ public class MyLoadDetailsPage extends PageProperty {
         }
     }
 
-    public void changeLegacyJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
+    public void changeLegacyJobStatusToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
         List<String> status = new ArrayList<String>() {
         };
         status.add(readyToStart);
-        status.add(arrived);
-        status.add(pickUp);
-        status.add(readyToLeave);
-        status.add(arrived);
-        status.add(delivered);
+        status.add(arrivedButton);
+        status.add(pickUpCompletedButton);
+        status.add(readyToLeaveButton);
+        status.add(arrivedButton);
+        status.add(deliveryCompletedButton);
         for (int step = 0; step < status.size(); step++) {
             clickElementByLocator("path", status.get(step));
             Thread.sleep(6000);
@@ -184,7 +178,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public void skipSubmitInvoice() {
         clickElementByLocator("path", myLoadsDetailCardMap.get("closeSubmitPage"));
         if (attributeName.equals("text")) {
-            clickElementByLocator("path", skipInvoice);
+            clickElementByLocator("path", skipInvoiceButton);
         } else {
             new TouchAction(driver).press(PointOption.point(171, 750)).perform();
         }
@@ -198,7 +192,7 @@ public class MyLoadDetailsPage extends PageProperty {
         } else {
             clickElementByLocator("path", completeInvoiceButton);
         }
-        clickElementByLocator("path", submitInvoice);
+        clickElementByLocator("path", submitInvoiceButton);
         Thread.sleep(6000);
         if (attributeName.equals("text")) {
             clickElementByLocator("path", goToMyLoadsButton);
@@ -215,7 +209,7 @@ public class MyLoadDetailsPage extends PageProperty {
         String addressList = new String();
         for (int i = 0; i < count; i++) {
             System.out.print(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
-            addressList+=(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
+            addressList += (driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
         }
         if (addressList.contains("Hook") && addressList.contains("Drop")) {
             return "hookAndDrop";
@@ -230,7 +224,7 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void addChassisNumber(String chassisNumber) throws InterruptedException {
         clickElement(addChassisNumberButton);
-        driver.findElementByXPath(String.format(chassisNumberInput,attributeName)).sendKeys(chassisNumber);
+        driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
         clickElement(nextButton);
         Thread.sleep(3000);
         clickElement(chassisSizeRadio);
@@ -252,13 +246,13 @@ public class MyLoadDetailsPage extends PageProperty {
     public void changeHookDropJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
         clickElementByLocator("path", readyToStart);
         Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
+        clickElementByLocator("path", hookCompletedButton);
         Thread.sleep(3000);
         boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeButton);
         if (isPresentConfirmSizeButton) {
             clickElementByLocator("path", confirmChassisSizeButton);
         }
-        clickElementByLocator("path", arrivedInDestination);
+        clickElementByLocator("path", dropCompletedButton);
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
         uploadPOD(allowLocationPage, true, 0);
@@ -268,7 +262,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public void changeHookLiveUnloadJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
         clickElementByLocator("path", readyToStart);
         Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
+        clickElementByLocator("path", hookCompletedButton);
         Thread.sleep(3000);
         String chassisNumber = generateChassisNumber();
         addChassisNumber(chassisNumber);
@@ -277,20 +271,20 @@ public class MyLoadDetailsPage extends PageProperty {
         clickElementByLocator("path", upLoadDocumentsButton);
         uploadPOD(allowLocationPage, true, 0);
         clickElementByLocator("path", continueButton);
-        boolean isPresentDroppedButton = isElementPresent("path", arrivedInDestination);
+        boolean isPresentDroppedButton = isElementPresent("path", dropCompletedButton);
         if (isPresentDroppedButton) {
-            clickElementByLocator("path", arrivedInDestination);
+            clickElementByLocator("path", dropCompletedButton);
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, false, 0);
             clickElementByLocator("path", continueButton);
         } else {
-            clickElementByLocator("path", containerDismounted);
+            clickElementByLocator("path", containerDismountedButton);
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, false, 0);
             clickElementByLocator("path", continueButton);
-            clickElementByLocator("path", chassisDropped);
+            clickElementByLocator("path", chassisDroppedButton);
             Thread.sleep(3000);
         }
     }
@@ -298,15 +292,15 @@ public class MyLoadDetailsPage extends PageProperty {
     public void changeHookMountJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
         clickElementByLocator("path", readyToStart);
         Thread.sleep(3000);
-        clickElementByLocator("path", chassisHooked);
+        clickElementByLocator("path", chassisHookedButton);
         Thread.sleep(6000);
         String chassisNumber = generateChassisNumber();
         addChassisNumber(chassisNumber);
-        clickElementByLocator("path", containerMounted);
+        clickElementByLocator("path", containerMountedButton);
         Thread.sleep(3000);
         boolean isLiveUnloadJob = isElementPresent("path", liveUnloadCompletedButton);
         if (!isLiveUnloadJob) {
-            clickElementByLocator("path", arrivedInDestination);
+            clickElementByLocator("path", hookCompletedButton);
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, true, 0);
@@ -317,55 +311,54 @@ public class MyLoadDetailsPage extends PageProperty {
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, true, 0);
             clickElementByLocator("path", continueButton);
-            boolean isDropButton = isElementPresent("path", arrivedInDestination);
+            boolean isDropButton = isElementPresent("path", dropCompletedButton);
             if (isDropButton) {
-                clickElementByLocator("path", arrivedInDestination);
+                clickElementByLocator("path", dropCompletedButton);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadPOD(allowLocationPage, false, 0);
                 clickElementByLocator("path", continueButton);
             } else {
-                clickElement(containerDismounted);
+                clickElement(containerDismountedButton);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadPOD(allowLocationPage, false, 0);
                 clickElementByLocator("path", continueButton);
-                clickElementByLocator("path", chassisDropped);
+                clickElementByLocator("path", chassisDroppedButton);
                 Thread.sleep(3000);
             }
         }
-
     }
 
     public void changeHookDisMountJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
         clickElementByLocator("path", readyToStart);
         Thread.sleep(3000);
-        clickElementByLocator("path", arrivedInOrigination);
+        clickElementByLocator("path", hookCompletedButton);
         Thread.sleep(3000);
-        boolean isPresentConfirmButton=isElementPresent("path",confirmButton);
-        if(isPresentConfirmButton){
+        boolean isPresentConfirmButton = isElementPresent("path", confirmButton);
+        if (isPresentConfirmButton) {
             clickElementByLocator("path", confirmButton);
         }
-        clickElementByLocator("path", containerDismounted);
+        clickElementByLocator("path", containerDismountedButton);
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
         uploadPOD(allowLocationPage, true, 0);
         clickElementByLocator("path", continueButton);
-        clickElementByLocator("path", chassisDropped);
+        clickElementByLocator("path", chassisDroppedButton);
         Thread.sleep(3000);
     }
 
-    public void changeJobStatus(AllowLocationPage allowLocationPage)throws InterruptedException{
-        String jobType=getTypeOfTripsJob();
-        switch(jobType){
-            case "hookAndDrop" :
+    public void changeJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
+        String jobType = getTypeOfTripsJob();
+        switch (jobType) {
+            case "hookAndDrop":
                 changeHookDropJobToCompleted(allowLocationPage);
                 break;
-            case "hookAndMount" :
+            case "hookAndMount":
                 changeHookMountJobToCompleted(allowLocationPage);
                 break;
             case "hookAndDismount ":
                 changeHookDisMountJobToCompleted(allowLocationPage);
                 break;
-            default :
+            default:
                 changeHookLiveUnloadJobToCompleted(allowLocationPage);
         }
     }
