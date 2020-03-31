@@ -42,7 +42,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         Thread.sleep(20000);
     }
 
-    @Test
+    //@Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
@@ -66,12 +66,12 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void modifyJobStatusToCompleted() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
             if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
+                Thread.sleep(6000);
+                myLoadDetailsPage.changeJobStatus(allowLocationPage);
                 myLoadDetailsPage.submitInvoice();
                 availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
                 availableLoadsAllPage.getTitle("My Loads");
@@ -83,9 +83,9 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     //@Test
     public void modifyJobStatusToCompletedAtLastToUploadPOD() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             if (isPresent) {
                 Thread.sleep(3000);
                 myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
@@ -100,9 +100,9 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     //@Test
     public void checkPreOperation() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             if (isPresent) {
                 Thread.sleep(3000);
                 myLoadDetailsPage.checkPreOperation();
@@ -121,9 +121,9 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     //@Test
     public void undoOperationInProgressUploadPOD() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             if (isPresent) {
                 Thread.sleep(3000);
                 myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
@@ -137,9 +137,9 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     //@Test
     public void checkInvoiceEditPODPage() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             if (isPresent) {
                 Thread.sleep(3000);
                 myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
@@ -159,11 +159,11 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkMyLoadDetail() throws InterruptedException {
-        Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
+        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
         if (isPresentJob) {
-            Boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
+            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
             if (isPresent) {
                 Thread.sleep(3000);
                 Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("summaryTab")), "Summary");
