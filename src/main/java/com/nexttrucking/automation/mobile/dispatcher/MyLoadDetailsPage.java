@@ -58,8 +58,8 @@ public class MyLoadDetailsPage extends PageProperty {
 
     //button
     public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
-    public String confirmButton = "//*[contains(@%s, 'Yes,I Confirm')]";
-    public String confirmChassisSizeButton = "//*[contains(@%s, 'Yes,I'm Sure')]";
+    public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
+    public String confirmChassisSizeButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
 
     //status button
     public String chassisHooked = "//*[contains(@%s, 'Chassis Hooked')]";
@@ -323,11 +323,11 @@ public class MyLoadDetailsPage extends PageProperty {
             System.out.print(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
             addressList+=(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
         }
-        if (addressList.toString().contains("Hook") && addressList.toString().contains("Drop")) {
+        if (addressList.contains("Hook") && addressList.contains("Drop")) {
             return "hookAndDrop";
-        } else if (addressList.toString().contains("Hook") && addressList.toString().contains("Mount")) {
+        } else if (addressList.contains("Hook") && addressList.contains("Mount")) {
             return "hookAndMount";
-        } else if (addressList.toString().contains("Hook") && addressList.toString().contains("Dismount")) {
+        } else if (addressList.contains("Hook") && addressList.contains("Dismount")) {
             return "HookAndDismount";
         } else {
             return "HookAndLiveUnload";
@@ -360,6 +360,10 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(3000);
         clickElementByLocator("path", arrivedInOrigination);
         Thread.sleep(3000);
+        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeButton);
+        if (isPresentConfirmSizeButton) {
+            clickElementByLocator("path", confirmChassisSizeButton);
+        }
         clickElementByLocator("path", arrivedInDestination);
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
@@ -385,6 +389,7 @@ public class MyLoadDetailsPage extends PageProperty {
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, false, 0);
+            clickElementByLocator("path", continueButton);
         } else {
             clickElementByLocator("path", containerDismounted);
             Thread.sleep(3000);
@@ -411,6 +416,7 @@ public class MyLoadDetailsPage extends PageProperty {
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadPOD(allowLocationPage, true, 0);
+            clickElementByLocator("path", continueButton);
         } else {
             clickElementByLocator("path", liveUnloadCompletedButton);
             Thread.sleep(3000);
@@ -422,15 +428,17 @@ public class MyLoadDetailsPage extends PageProperty {
                 clickElementByLocator("path", arrivedInDestination);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadPOD(allowLocationPage, false, 0);
+                clickElementByLocator("path", continueButton);
             } else {
                 clickElement(containerDismounted);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadPOD(allowLocationPage, false, 0);
+                clickElementByLocator("path", continueButton);
                 clickElementByLocator("path", chassisDropped);
                 Thread.sleep(3000);
             }
         }
-        clickElementByLocator("path", continueButton);
+
     }
 
     public void changeHookDisMountJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
@@ -438,7 +446,10 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(3000);
         clickElementByLocator("path", arrivedInOrigination);
         Thread.sleep(3000);
-        clickElementByLocator("path", confirmButton);
+        boolean isPresentConfirmButton=isElementPresent("path",confirmButton);
+        if(isPresentConfirmButton){
+            clickElementByLocator("path", confirmButton);
+        }
         clickElementByLocator("path", containerDismounted);
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
