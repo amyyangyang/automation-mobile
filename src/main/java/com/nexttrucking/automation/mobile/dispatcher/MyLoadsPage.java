@@ -43,7 +43,7 @@ public class MyLoadsPage extends PageProperty {
         myLoadsCardMap = new HashMap<>();
         if (attributeName.equals("text")) {
             myLoadsCardMap.put("numberOfLoad", "//*[@content-desc='address_0']");
-            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@content-desc='timeGroup_2']/..");
+            myLoadsCardMap.put("getLiveUnloadJobID", "//*[@content-desc='timeGroup_0']/..");
             myLoadsCardMap.put("liveUnloadJobButton", "//*[@content-desc=\"%s\"]/*[@content-desc='buttonView']");
         } else {
             myLoadsCardMap.put("numberOfLoad", "//XCUIElementTypeScrollView/*[1]/*[1]/*[1]");
@@ -62,6 +62,30 @@ public class MyLoadsPage extends PageProperty {
         driver.findElement(reassignDriverButton).click();
         driver.findElement(anotherDriverButton).click();
         driver.findElement(assignButton).click();
+    }
+
+    public boolean findAndClickNotStartedJob() throws InterruptedException {
+        boolean isJobStarted = true;
+        int iterationNumber = 1;
+        String jobID = null;
+        boolean isPresentJob = isElementPresent("id", originationAddress);
+        while ((isPresentJob && isJobStarted) && iterationNumber < 16) {
+            System.out.println("SWIPE STEP: " + iterationNumber);
+            swipeToUpForAndroid();
+            isPresentJob = isElementPresent("id", originationAddress);
+            if (isPresentJob) {
+                jobID = driver.findElementByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).getAttribute("content-desc");
+                isJobStarted = isElementPresent("path", String.format(myLoadsCardMap.get("liveUnloadJobButton"), jobID));
+            }
+            iterationNumber++;
+        }
+        System.out.println("JOB ID: " + jobID);
+        if (!isJobStarted) {
+            driver.findElementByAccessibilityId(jobID).click();
+            Thread.sleep(5000);
+            return true;
+        }
+        return false;
     }
 
     public boolean findAndClickNotStartedLiveUnloadJob() throws InterruptedException {
