@@ -42,7 +42,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         Thread.sleep(20000);
     }
 
-    //@Test
+    @Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
@@ -81,85 +81,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    //@Test
-    public void modifyJobStatusToCompletedAtLastToUploadPOD() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
-                myLoadDetailsPage.submitInvoice();
-                availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-                availableLoadsAllPage.getTitle("My Loads");
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-    //@Test
-    public void checkPreOperation() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.checkPreOperation();
-                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.resume));
-                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.upLoadDocumentsButton));
-                myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
-                myLoadDetailsPage.submitInvoice();
-                availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
-                availableLoadsAllPage.getTitle("My Loads");
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-
-    //@Test
-    public void undoOperationInProgressUploadPOD() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.invoiceTitle), "Invoice");
-                myLoadDetailsPage.submitInvoice();
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-    //@Test
-    public void checkInvoiceEditPODPage() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.changeTripJobStatus(allowLocationPage);
-                Assert.assertEquals(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.editPODButton), "Edit POD");
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.editPODButton);
-                Assert.assertEquals(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAction")), "Live Unload");
-                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionBlueIcon")));
-                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("firstInstructionAddress")));
-                Assert.assertEquals(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAction")), "Drop");
-                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionBlueIcon")));
-                Assert.assertNotNull(pageProperty.getElementText("path", myLoadDetailsPage.myLoadsDetailCardMap.get("secondInstructionAddress")));
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("backToMyLoads"));
-                myLoadDetailsPage.submitInvoice();
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-    //@Test
+    @Test
     public void checkMyLoadDetail() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
         if (isPresentJob) {

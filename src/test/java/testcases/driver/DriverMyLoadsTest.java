@@ -79,54 +79,6 @@ public class DriverMyLoadsTest extends SetProperty {
         }
     }
 
-    //@Test
-    public void modifyLiveUnLoadJobStatusToCompletedAtLastToUploadPOD() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.changeTripJobStatusAtLastToUploadPOD(allowLocationPage);
-                availableLoadsAllPage.getTitle("My Loads");
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-    //@Test
-    public void checkLiveUnLoadJobPreOperation() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.checkPreOperation();
-                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.resume));
-                Assert.assertTrue(myLoadDetailsPage.isElementPresent("path", myLoadDetailsPage.upLoadDocumentsButton));
-                myLoadDetailsPage.completeJobAfterCheckPreOperation(allowLocationPage);
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-    //@Test
-    public void undoOperationInProgressUploadPOD() throws InterruptedException {
-        boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
-        if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedLiveUnloadJob();
-            if (isPresent) {
-                Thread.sleep(3000);
-                myLoadDetailsPage.checkUndoOperationInProgressUploadPOD(allowLocationPage);
-                availableLoadsAllPage.getTitle("My Loads");
-            }
-        } else {
-            Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
-        }
-    }
-
-
     @Test
     public void checkMyLoadDetail() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
