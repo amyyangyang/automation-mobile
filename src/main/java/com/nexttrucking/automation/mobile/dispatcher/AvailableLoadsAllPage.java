@@ -78,10 +78,8 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("flatbedRadio", "//*[contains(@text, 'Flatbed')]/following-sibling::*[1]/child::*[1]");
             buttonMap.put("powerOnlyRadio", "//*[contains(@text, 'Power Only')]/following-sibling::*[1]/child::*[1]");
             buttonMap.put("boxTruckRadio", "//*[contains(@text, 'Box Truck')]/following-sibling::*[1]/child::*[1]");
-            //availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
-            //availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
+            availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
             availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
-            //availableCardMap.put("liveUnloadJobAddress2", "//*[@content-desc='address_2']");
         } else {
             buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
             buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
@@ -90,8 +88,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("flatbedRadio", "(//*[contains(@name, 'Flatbed')])[last()]");
             buttonMap.put("powerOnlyRadio", "(//*[contains(@name, 'Power Only')])[last()]");
             buttonMap.put("boxTruckRadio", "(//*[contains(@name, 'Box Truck')])[last()]");
-            //availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
-            //availableCardMap.put("liveUnloadJobAddress2", "//*[@name='address_2']");
+            availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
         }
     }
 
