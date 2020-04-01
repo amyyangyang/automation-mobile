@@ -35,7 +35,7 @@ public class MyLoadDetailsPage extends PageProperty {
     //confirm buttons
     public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
     public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
-    public String confirmChassisSizeButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
+    public String confirmChassisNumberOkButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
 
     //add chassis
     public String addButton = "//*[contains(@%s, 'Add')]";
@@ -204,6 +204,11 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(3000);
     }
 
+    //We have 7 types of job.I divided them into 4 classes.hookAndDrop,hookAndMount,hookAndLiveUnload,hookAndDismount
+    //hookAndDrop: Hook-Drop
+    //hookAndMount: Hook-Mount-Drop  Hook-Mount-LiveUnload-Dismount-Drop  Hook-Mount-LiveUnload-Drop
+    //hookAndLiveUnload: Hook-LiveUnload-Drop  Hook-LiveUnload-Dismount-Drop
+    //hookAndDismount: Hook-Dismount-Drop
     public String getTypeOfTripsJob() {
         int count = driver.findElementsByAccessibilityId(originalAddress).size();
         String addressList = new String();
@@ -228,9 +233,9 @@ public class MyLoadDetailsPage extends PageProperty {
         clickElement(nextButton);
         Thread.sleep(3000);
         clickElement(chassisSizeRadio);
-        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeButton);
+        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
         if (isPresentConfirmSizeButton) {
-            clickElementByLocator("path", confirmChassisSizeButton);
+            clickElementByLocator("path", confirmChassisNumberOkButton);
         }
         clickElement(addButton);
         Thread.sleep(6000);
@@ -248,9 +253,9 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(3000);
         clickElementByLocator("path", hookCompletedButton);
         Thread.sleep(3000);
-        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeButton);
+        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
         if (isPresentConfirmSizeButton) {
-            clickElementByLocator("path", confirmChassisSizeButton);
+            clickElementByLocator("path", confirmChassisNumberOkButton);
         }
         clickElementByLocator("path", dropCompletedButton);
         Thread.sleep(3000);
