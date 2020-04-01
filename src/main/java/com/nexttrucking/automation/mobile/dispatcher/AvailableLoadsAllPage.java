@@ -9,6 +9,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +29,13 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String shortHaulButton = "SHORT_HAUL";
     public String longHaulButton = "LONG_HAUL";
     public String allButton = "ALL";
-    public String portButton="PORT";
+    public String portButton = "PORT";
 
     public String shortHaulNumber = "SHORT_HAUL_Count";
     public String longHaulNumber = "LONG_HAUL_Count";
     public String localNumber = "LOCAL_Count";
     public String allNumber = "ALL_Count";
-    public String portNumber= "PORT_Count";
+    public String portNumber = "PORT_Count";
 
     public Map<String, String> buttonMap;
     public Map<String, String> availableCardMap;
@@ -47,6 +48,9 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String deliveryTime = "time_1";
     public String getTextInAddress = "textGroupValue_1";
     public String getTextInTime = "textGroupValue_0";
+    public String getTextInArriveBetweenTime = "textGroupValue_1";
+    public String timeElementListOfTripsJob = "//*[contains(@content-desc,'timeGroup')]";
+    public String timeElementListOfLegacyJob = "//*[contains(@content-desc,'time_')]";
 
     public String jobType = "jobType";
     public String equipmentType = "equipmentView";
@@ -144,8 +148,8 @@ public class AvailableLoadsAllPage extends PageProperty {
         }
     }
 
-    public void bookTenderForFleet(int times,JobDetailPage jobDetailPage) throws InterruptedException {
-        for(int loop=0;loop<times;++loop){
+    public void bookTenderForFleet(int times, JobDetailPage jobDetailPage) throws InterruptedException {
+        for (int loop = 0; loop < times; ++loop) {
             Boolean isPresentException = false;
             do {
                 boolean isPresentLoad = isElementPresent("id", originationAddress);
@@ -171,8 +175,8 @@ public class AvailableLoadsAllPage extends PageProperty {
         }
     }
 
-    public void bookTenderForOwnerOperator(int times,JobDetailPage jobDetailPage) throws InterruptedException {
-        for(int step=0;step<times;step++){
+    public void bookTenderForOwnerOperator(int times, JobDetailPage jobDetailPage) throws InterruptedException {
+        for (int step = 0; step < times; step++) {
             boolean isPresentException = false;
             int loop = 0;
             do {
@@ -200,6 +204,42 @@ public class AvailableLoadsAllPage extends PageProperty {
                 }
             } while ((isPresentException) && (loop < 3));
         }
+    }
+
+    public HashMap getLoadCardData(String element) {
+        HashMap cardData = new HashMap();
+        String jobNumber = driver.findElementByXPath(element).getAttribute("content-desc");
+        MobileElement jobCard = driver.findElementByXPath(element);
+        List<MobileElement> addressElements = jobCard.findElementsByAccessibilityId(originationAddress);
+        int addressCount = jobCard.findElementsByAccessibilityId(originationAddress).size();
+        for (int i = 0; i < addressCount; i++) {
+            cardData.put("address" + i, addressElements.get(i).findElementByAccessibilityId(getTextInAddress).getText());
+        }
+        cardData.put("equipmentType", jobCard.findElementByAccessibilityId(equipmentType).getText());
+        cardData.put("payout", jobCard.findElementByAccessibilityId(payout).getText());
+        List<MobileElement> timeElements;
+        int timeCount;
+        if (jobNumber.contains("J-")) {
+            timeElements = jobCard.findElementsByXPath(timeElementListOfTripsJob);
+            timeCount = timeElements.size();
+            for (int i = 0; i < timeCount; i++) {
+                String time = timeElements.get(i).findElementByAccessibilityId(getTextInTime).getText();
+                cardData.put("time" + i, timeElements.get(i).findElementByAccessibilityId(getTextInTime).getText());
+                boolean isPresentArriveBetweenTime = isSubElementPresent("id", timeElements.get(i), getTextInArriveBetweenTime);
+                if (isPresentArriveBetweenTime) {
+                    cardData.put("time" + i, time + timeElements.get(i).findElementByAccessibilityId(getTextInArriveBetweenTime).getText());
+                }
+            }
+        } else {
+            timeElements = jobCard.findElementsByXPath(timeElementListOfLegacyJob);
+            timeCount = timeElements.size();
+            for (int i = 0; i < timeCount; i++) {
+                cardData.put("time" + i, timeElements.get(i).getText());
+            }
+        }
+        cardData.put("addressCount", addressCount);
+        cardData.put("timeCount", timeCount);
+        return cardData;
     }
 }
 
