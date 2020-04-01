@@ -78,10 +78,10 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("flatbedRadio", "//*[contains(@text, 'Flatbed')]/following-sibling::*[1]/child::*[1]");
             buttonMap.put("powerOnlyRadio", "//*[contains(@text, 'Power Only')]/following-sibling::*[1]/child::*[1]");
             buttonMap.put("boxTruckRadio", "//*[contains(@text, 'Box Truck')]/following-sibling::*[1]/child::*[1]");
-            availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
-            availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
+            //availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
+            //availableCardMap.put("numberOfLoadTwo", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*");
             availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
-            availableCardMap.put("liveUnloadJobAddress2", "//*[@content-desc='address_2']");
+            //availableCardMap.put("liveUnloadJobAddress2", "//*[@content-desc='address_2']");
         } else {
             buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
             buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
@@ -90,8 +90,8 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("flatbedRadio", "(//*[contains(@name, 'Flatbed')])[last()]");
             buttonMap.put("powerOnlyRadio", "(//*[contains(@name, 'Power Only')])[last()]");
             buttonMap.put("boxTruckRadio", "(//*[contains(@name, 'Box Truck')])[last()]");
-            availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
-            availableCardMap.put("liveUnloadJobAddress2", "//*[@name='address_2']");
+            //availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
+            //availableCardMap.put("liveUnloadJobAddress2", "//*[@name='address_2']");
         }
     }
 
@@ -206,17 +206,16 @@ public class AvailableLoadsAllPage extends PageProperty {
         }
     }
 
-    public HashMap getLoadCardData(String element) {
-        HashMap cardData = new HashMap();
-        String jobNumber = driver.findElementByXPath(element).getAttribute("content-desc");
-        MobileElement jobCard = driver.findElementByXPath(element);
+    public HashMap getLoadCardData(MobileElement jobCard) {
+        HashMap jobCardData = new HashMap();
+        String jobNumber = jobCard.getAttribute("content-desc");
         List<MobileElement> addressElements = jobCard.findElementsByAccessibilityId(originationAddress);
         int addressCount = jobCard.findElementsByAccessibilityId(originationAddress).size();
         for (int i = 0; i < addressCount; i++) {
-            cardData.put("address" + i, addressElements.get(i).findElementByAccessibilityId(getTextInAddress).getText());
+            jobCardData.put("address" + i, addressElements.get(i).findElementByAccessibilityId(getTextInAddress).getText());
         }
-        cardData.put("equipmentType", jobCard.findElementByAccessibilityId(equipmentType).getText());
-        cardData.put("payout", jobCard.findElementByAccessibilityId(payout).getText());
+        jobCardData.put("equipmentType", jobCard.findElementByAccessibilityId(equipmentType).getText());
+        jobCardData.put("payout", jobCard.findElementByAccessibilityId(payout).getText());
         List<MobileElement> timeElements;
         int timeCount;
         if (jobNumber.contains("J-")) {
@@ -224,22 +223,33 @@ public class AvailableLoadsAllPage extends PageProperty {
             timeCount = timeElements.size();
             for (int i = 0; i < timeCount; i++) {
                 String time = timeElements.get(i).findElementByAccessibilityId(getTextInTime).getText();
-                cardData.put("time" + i, timeElements.get(i).findElementByAccessibilityId(getTextInTime).getText());
+                jobCardData.put("time" + i, timeElements.get(i).findElementByAccessibilityId(getTextInTime).getText());
                 boolean isPresentArriveBetweenTime = isSubElementPresent("id", timeElements.get(i), getTextInArriveBetweenTime);
                 if (isPresentArriveBetweenTime) {
-                    cardData.put("time" + i, time + timeElements.get(i).findElementByAccessibilityId(getTextInArriveBetweenTime).getText());
+                    jobCardData.put("time" + i, time + timeElements.get(i).findElementByAccessibilityId(getTextInArriveBetweenTime).getText());
                 }
             }
         } else {
             timeElements = jobCard.findElementsByXPath(timeElementListOfLegacyJob);
             timeCount = timeElements.size();
             for (int i = 0; i < timeCount; i++) {
-                cardData.put("time" + i, timeElements.get(i).getText());
+                jobCardData.put("time" + i, timeElements.get(i).getText());
             }
         }
-        cardData.put("addressCount", addressCount);
-        cardData.put("timeCount", timeCount);
-        return cardData;
+        jobCardData.put("addressCount", addressCount);
+        jobCardData.put("timeCount", timeCount);
+        return jobCardData;
+    }
+
+    public MobileElement getMobileElementOfFirstCard() {
+        int size = driver.findElementsByXPath(availableCardMap.get("jobNumber")).size();
+        for (int index = 0; index < size; index++) {
+            String text = driver.findElementsByXPath(availableCardMap.get("jobNumber")).get(index).getAttribute("content-desc");
+            if (text != null) {
+                return driver.findElementsByXPath(availableCardMap.get("jobNumber")).get(index);
+            }
+        }
+        return null;
     }
 }
 

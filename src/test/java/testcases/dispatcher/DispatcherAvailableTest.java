@@ -8,6 +8,7 @@ import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -46,7 +47,8 @@ public class DispatcherAvailableTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
-            HashMap cardData=availableLoadsAllPage.getLoadCardData("//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]");
+            MobileElement cardElement=availableLoadsAllPage.getMobileElementOfFirstCard();
+            HashMap cardData=availableLoadsAllPage.getLoadCardData(cardElement);
 
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allButton, 1), "All");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
@@ -84,7 +86,8 @@ public class DispatcherAvailableTest extends SetProperty {
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
-                HashMap cardData=availableLoadsAllPage.getLoadCardData("//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]");
+                MobileElement cardElement=availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData=availableLoadsAllPage.getLoadCardData(cardElement);
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
                 Assert.assertTrue(cardData.get("payout").toString().contains("$"));
                 int addressCount=Integer.parseInt(cardData.get("addressCount").toString());
@@ -111,7 +114,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(10000);
             boolean isPresentLocalTypeLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLocalTypeLoad) {
-                HashMap cardData=availableLoadsAllPage.getLoadCardData("//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]");
+                MobileElement cardElement=availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData=availableLoadsAllPage.getLoadCardData(cardElement);
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
                 Assert.assertTrue(cardData.get("payout").toString().contains("$"));
                 int addressCount=Integer.parseInt(cardData.get("addressCount").toString());
@@ -142,7 +146,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(5000);
             boolean isPresentShortHaulTypeLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentShortHaulTypeLoad) {
-                HashMap cardData=availableLoadsAllPage.getLoadCardData("//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]");
+                MobileElement cardElement=availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData=availableLoadsAllPage.getLoadCardData(cardElement);
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
                 Assert.assertTrue(cardData.get("payout").toString().contains("$"));
                 int addressCount=Integer.parseInt(cardData.get("addressCount").toString());
@@ -175,7 +180,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(10000);
             boolean isPresentLongHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLongHaulLoad) {
-                HashMap cardData=availableLoadsAllPage.getLoadCardData("//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*[2]/child::*[1]");
+                MobileElement cardElement=availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData=availableLoadsAllPage.getLoadCardData(cardElement);
                 Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
                 Assert.assertTrue(cardData.get("payout").toString().contains("$"));
                 int addressCount=Integer.parseInt(cardData.get("addressCount").toString());
