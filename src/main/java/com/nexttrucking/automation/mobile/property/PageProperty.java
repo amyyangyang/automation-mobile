@@ -232,7 +232,7 @@ public abstract class PageProperty {
         }
     }
 
-    public void swipeToUpForiOS() throws InterruptedException {
+    public void swipeToUpForIOS() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Map<String, Object> params = new HashMap<>();
         params.put("duration", 1.0);
@@ -249,7 +249,7 @@ public abstract class PageProperty {
         if (attributeName.equals("text")) {
             swipeToUpForAndroid();
         } else {
-            swipeToUpForiOS();
+            swipeToUpForIOS();
         }
     }
 
