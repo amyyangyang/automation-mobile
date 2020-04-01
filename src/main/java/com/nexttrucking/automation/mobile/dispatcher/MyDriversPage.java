@@ -19,26 +19,26 @@ public class MyDriversPage extends PageProperty {
     private String phoneNumberInput = "createAccount_input_phone";
     private String sendInviteButton = "(//*[@%s='Send Invite'])[last()]";
     private String firstDriver = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
-    private String selectedDriverForiOS = "//*[@name='driver_view_list']/*/*/*[2]/*";
+    private String selectedDriverForIOS = "//*[@name='driver_view_list']/*/*/*[2]/*";
     private String selectedDriverForAndroid = "//*[@content-desc='driver_view_list']/*/*/*/*";
     private String selectedField = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String saveButtonAndroid = "(//*[contains(@%s, 'Save')])[last()]/..";
-    private String saveButtoniOS = "(//*[contains(@%s, 'Save')])[last()]";
-    private String editFirstNameInputForiOS = "(//*[contains(@name, 'First')]/following-sibling::*/*)[1]";
+    private String saveButtonIOS = "(//*[contains(@%s, 'Save')])[last()]";
+    private String editFirstNameInputForIOS = "(//*[contains(@name, 'First')]/following-sibling::*/*)[1]";
     private String editFirstNameInputForAndroid = "(//*[contains(@text, 'First')]/following-sibling::*)[2]";
-    private String editLastNameInputForiOS = "(//*[contains(@name, 'Last')]/following-sibling::*/*)[1]";
+    private String editLastNameInputForIOS = "(//*[contains(@name, 'Last')]/following-sibling::*/*)[1]";
     private String editLastNameInputForAndroid = "(//*[contains(@text, 'Last')]/following-sibling::*)[2]";
-    private String editPhoneInputForiOS = "(//*[contains(@name, 'Phone')]/*/*)[last()]";
+    private String editPhoneInputForIOS = "(//*[contains(@name, 'Phone')]/*/*)[last()]";
     private String editPhoneInputForAndroid = "(//*[contains(@text, 'Phone')]/following-sibling::*)[1]";
     private String editedData = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
     private String addDriverTitle = "//*[contains(@%s, 'You')]";
     private String loadDriverInfo = "//*[contains(@text, 'load')]";
     private String earnedDriverInfo = "//*[contains(@text, 'earned')]";
-    private String newPasswordInputForiOS = "//*[contains(@name, 'New Password')]/*/XCUIElementTypeSecureTextField";
+    private String newPasswordInputForIOS = "//*[contains(@name, 'New Password')]/*/XCUIElementTypeSecureTextField";
     private String newPasswordInputForAndroid = "//*[contains(@text, 'New')]/following-sibling::*[1]";
-    private String editedEquipmentForiOS = "(//*[contains(@name, 'Equipment')])[last()]";
+    private String editedEquipmentForIOS = "(//*[contains(@name, 'Equipment')])[last()]";
     private String editedEquipmentForAndroid = "//*[contains(@text, '53 ft Reefer')]";
-    private String fixedEquipmentForiOS = "//*[contains(@name, 'Equipment')]";
+    private String fixedEquipmentForIOS = "//*[contains(@name, 'Equipment')]";
     private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
 
 
@@ -95,7 +95,7 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void selectFirstDriver() {
-        clickElementWithDifferentLocator(selectedDriverForAndroid, selectedDriverForiOS);
+        clickElementWithDifferentLocator(selectedDriverForAndroid, selectedDriverForIOS);
     }
 
     public void selectField(String elementName) throws InterruptedException {
@@ -104,25 +104,25 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void clickSaveButton() throws InterruptedException {
-        clickElementWithDifferentLocator(saveButtonAndroid, saveButtoniOS);
+        clickElementWithDifferentLocator(saveButtonAndroid, saveButtonIOS);
         Thread.sleep(2000);
     }
 
     public void editFirstName(String newFirstName) throws InterruptedException {
         String currentFirstName = getCurrentName("FirstName");
         int clickDeleteAmount = currentFirstName.length();
-        editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
+        editInputValue(editFirstNameInputForIOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
         while (!getWrittenData("FirstName").contains(newFirstName)) {
-            editInputValue(editFirstNameInputForiOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
+            editInputValue(editFirstNameInputForIOS, editFirstNameInputForAndroid, newFirstName, "words", clickDeleteAmount);
         }
     }
 
     public void editLastName(String newLastName) throws InterruptedException {
         String currentFirstName = getCurrentName("LastName");
         int clickDeleteAmount = currentFirstName.length();
-        editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
+        editInputValue(editLastNameInputForIOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
         while (!getWrittenData("LastName").contains(newLastName)) {
-            editInputValue(editLastNameInputForiOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
+            editInputValue(editLastNameInputForIOS, editLastNameInputForAndroid, newLastName, "words", clickDeleteAmount);
         }
     }
 
@@ -130,10 +130,10 @@ public class MyDriversPage extends PageProperty {
         int round = 2;
         String currentFirstName = getCurrentName("Phone");
         int clickDeleteAmount = currentFirstName.length();
-        editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
+        editInputValue(editPhoneInputForIOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
         String newPhoneNumber = newPhone.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3");
         while (!getWrittenData("Phone").contains(newPhoneNumber)) {
-            editInputValue(editPhoneInputForiOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
+            editInputValue(editPhoneInputForIOS, editPhoneInputForAndroid, newPhone, "number", clickDeleteAmount);
             System.out.println("ROUND NUMBER IS: " + round);
             round++;
         }
@@ -143,7 +143,7 @@ public class MyDriversPage extends PageProperty {
         if (attributeName.equals("text")) {
             return selectedDriverForAndroid;
         } else {
-            return selectedDriverForiOS;
+            return selectedDriverForIOS;
         }
     }
 
@@ -181,24 +181,24 @@ public class MyDriversPage extends PageProperty {
     }
 
     public String getDriverLoadInfo() {
-        return getElementTextWithDifferentLocator(loadDriverInfo, selectedDriverForiOS);
+        return getElementTextWithDifferentLocator(loadDriverInfo, selectedDriverForIOS);
     }
 
     public String getDriverEarnedInfo() {
-        return getElementTextWithDifferentLocator(earnedDriverInfo, selectedDriverForiOS);
+        return getElementTextWithDifferentLocator(earnedDriverInfo, selectedDriverForIOS);
     }
 
     public String getWrittenData(String dataName) {
         String newString = null;
         switch (dataName) {
             case "FirstName":
-                newString = getElementTextWithDifferentLocator(editFirstNameInputForAndroid, editFirstNameInputForiOS);
+                newString = getElementTextWithDifferentLocator(editFirstNameInputForAndroid, editFirstNameInputForIOS);
                 break;
             case "LastName":
-                newString = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForiOS);
+                newString = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForIOS);
                 break;
             case "Phone":
-                newString = getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS);
+                newString = getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForIOS);
                 break;
         }
         return newString;
@@ -208,13 +208,13 @@ public class MyDriversPage extends PageProperty {
         String currentname = null;
         switch (dataName) {
             case "FirstName":
-                currentname = getElementTextWithDifferentLocator(editFirstNameInputForAndroid, editFirstNameInputForiOS);
+                currentname = getElementTextWithDifferentLocator(editFirstNameInputForAndroid, editFirstNameInputForIOS);
                 break;
             case "LastName":
-                currentname = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForiOS);
+                currentname = getElementTextWithDifferentLocator(editLastNameInputForAndroid, editLastNameInputForIOS);
                 break;
             case "Phone":
-                currentname = getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForiOS);
+                currentname = getElementTextWithDifferentLocator(editPhoneInputForAndroid, editPhoneInputForIOS);
                 break;
         }
         return currentname;
@@ -243,14 +243,14 @@ public class MyDriversPage extends PageProperty {
     }
 
     public void typeNewPassword(String keys) {
-        sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForiOS, keys);
+        sendKeyToElementWithDifferentLocators(newPasswordInputForAndroid, newPasswordInputForIOS, keys);
     }
 
     public boolean isEquipmentEdited() {
         if (attributeName.equals("text")) {
             return isElementPresent("path", editedEquipmentForAndroid);
         } else {
-            return isElementPresent("path", editedEquipmentForiOS);
+            return isElementPresent("path", editedEquipmentForIOS);
         }
     }
 
@@ -258,7 +258,7 @@ public class MyDriversPage extends PageProperty {
         if (attributeName.equals("text")) {
             return isElementPresent("path", fixedEquipmentForAndroid);
         } else {
-            return isElementPresent("path", fixedEquipmentForiOS);
+            return isElementPresent("path", fixedEquipmentForIOS);
         }
     }
 

@@ -290,7 +290,7 @@ public class DispatcherAvailableTest extends SetProperty {
             boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
             if (isLiveUnloadPresent) {
                 pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
+                Assert.assertTrue(jobDetailPage.isLiveUnloadJobStatusCorrect());
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 0));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 1));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 2));

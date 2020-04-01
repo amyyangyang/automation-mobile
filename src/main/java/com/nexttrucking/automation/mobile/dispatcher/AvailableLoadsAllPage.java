@@ -140,7 +140,7 @@ public class AvailableLoadsAllPage extends PageProperty {
                 int location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
                 while (location > 800 && i < 16) {
                     System.out.println("SWIPE STEP: " + i);
-                    swipeToUpForiOS();
+                    swipeToUpForIOS();
                     location = driver.findElementByAccessibilityId(liveLoadAddress).getLocation().y;
                     i++;
                 }

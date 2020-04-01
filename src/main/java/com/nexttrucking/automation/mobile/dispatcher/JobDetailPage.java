@@ -170,7 +170,7 @@ public class JobDetailPage extends PageProperty {
         return isPresentAvailableLoadButton;
     }
 
-    public boolean isliveUnloadJobStatusCorrect() {
+    public boolean isLiveUnloadJobStatusCorrect() {
         boolean correctStatus = false;
         String paymentStatus = getElementText("path", jobDetailCard.get("liveUnloadJobStatus"));
         for (int i = 0; i < 2; i++) {
