@@ -123,7 +123,7 @@ public class MyLoadsPage extends PageProperty {
             int location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             while (location > 660 && iterationNumber < 16) {
                 System.out.println("SWIPE STEP: " + iterationNumber);
-                swipeToUpForiOS();
+                swipeToUpForIOS();
                 iterationNumber++;
                 location = driver.findElementByAccessibilityId(jobID).getLocation().y;
             }

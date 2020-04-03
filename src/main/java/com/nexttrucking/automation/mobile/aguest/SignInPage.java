@@ -16,7 +16,6 @@ public class SignInPage extends PageProperty {
     private String passwordInput = "//*[@%s='Password']/following-sibling::*[1]";
     private String emailInput = "//*[@%s='Email']/following-sibling::*[1]";
     private String signInButton = "//*[@%s='Sign In']";
-    private String email = "//*[@%s='Email']";
     private String forgotPasswordButton = "//*[@%s='Forgot?']";
     private String forgotPasswordEmail = "(//*[@%s='Enter your email to find your account']/following-sibling::*[1])[1]";
     private String sendNewPasswordButton = "//*[@%s='Send']";

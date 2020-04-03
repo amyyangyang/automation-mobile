@@ -6,7 +6,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class PaymentsPage extends PageProperty {
 
