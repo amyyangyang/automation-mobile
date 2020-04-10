@@ -34,32 +34,25 @@ public class OwnerPaymentsTest extends SetProperty {
     }
 
     @Test
-    public void checkPaymentsListPage() throws InterruptedException {
+    public void checkPaymentsListPage() {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
+        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentJobNumber);
         if (isPresentPayments) {
-            int num = driver.findElementsByXPath(paymentsPage.paymentList.get("paymentNumber")).size();
-            String status = paymentsPage.getElementText("path", paymentsPage.paymentList.get("paymentStatus"));
-            if ((num == 1) && (status.equals("CANCELED"))) {
-                Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-                Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPriceSpecial")).contains("$"));
-            } else {
-                Assert.assertTrue(pageProperty.isTextPresent("THIS MONTH"));
-                Assert.assertTrue(pageProperty.isTextPresent("THIS YEAR"));
-                Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-                Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPrice")).contains("$"));
-            }
+            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentStatus));
+            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentJobNumber));
+            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentJobPrice));
+            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentAddressAndTimeInfo));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
     }
 
-    //@Test
+    @Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
+        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentJobNumber);
         if (isPresentPayments) {
-            pageProperty.clickElement(paymentsPage.paymentList.get("firstPayment"));
+            pageProperty.clickElement(paymentsPage.paymentJobNumber);
             Assert.assertTrue(pageProperty.isTextPresent("Locations"));
             Assert.assertTrue(pageProperty.isTextPresent("Details for"));
 
@@ -70,6 +63,11 @@ public class OwnerPaymentsTest extends SetProperty {
             pageProperty.clickAnyElementByName("Details");
             Assert.assertTrue(pageProperty.isTextPresent("You'll Make"));
             Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
+            Assert.assertTrue(pageProperty.isTextPresent("Uploaded Documents"));
+            Assert.assertTrue(pageProperty.isTextPresent("Commodity"));
+            Assert.assertTrue(pageProperty.isTextPresent("Goods Value"));
+            Assert.assertTrue(pageProperty.isTextPresent("Weight"));
+
             if (isTerminalJob) {
                 Assert.assertFalse(pageProperty.isTextPresent("Rate Contract"));
             } else {

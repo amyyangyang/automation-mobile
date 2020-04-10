@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class PaymentDetailPage extends PageProperty {
 
-    public String addressText = "textGroupValue_0";
+    public String addressText = "address_1";
     public String locationPanel = "(//*[contains(@%s,'Locations')])[last()]";
 
     public PaymentDetailPage(AppiumDriver<MobileElement> driver, String attributeName) {
@@ -17,7 +17,7 @@ public class PaymentDetailPage extends PageProperty {
     }
 
     public boolean isTerminalJob(String instructionAddress) throws InterruptedException {
-        String pattern = ".*Terminal.*";
+        String pattern = ".*Terminal.*|.*BNSF.*|.*Shippers Harbor.*|.*ICTF.*";
         boolean isTerminalJob = false;
         List<MobileElement> AddressElementsArray = driver.findElementsByAccessibilityId(instructionAddress);
         for (MobileElement addressElement : AddressElementsArray) {
@@ -29,4 +29,5 @@ public class PaymentDetailPage extends PageProperty {
         }
         return isTerminalJob;
     }
+
 }
