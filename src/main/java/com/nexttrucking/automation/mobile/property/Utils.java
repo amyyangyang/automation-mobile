@@ -15,6 +15,7 @@ public class Utils {
     public static List<String> jobStateList = new ArrayList<>(asList("ON WAY TO PICK UP", "MISSING INVOICE", "LOADED AT PICK UP", "ARRIVED AT DROP OFF", "ON WAY TO DROP OFF", "MISSING POD", "NO DRIVER ASSIGNED"));
     public static List<String> paymentsStatusList = new ArrayList<String>(asList("CANCELED", "VERIFYING", "PAYMENT SENT"));
     public static List<String> liveUnloadJobStatus = new ArrayList<String>(asList("Loaded Container", "Empty Container"));
+    public static List<String> paymentStatusList = new ArrayList<>(asList("VERIFYING","PAYMENT SENT, CANCELED"));
 
     public static boolean isInteger(String number) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
