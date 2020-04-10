@@ -7,10 +7,10 @@ import io.appium.java_client.MobileElement;
 
 public class PaymentsPage extends PageProperty {
 
-    public String paymentStatus = "//*[contains(@content-desc,'paymentStatus')]";
-    public String paymentJobNumber = "//*[contains(@content-desc, 'jobNumber')]";
-    public String paymentJobPrice = "//*[contains(@content-desc, 'price')]";
-    public String paymentAddressAndTimeInfo = "//*[contains(@content-desc, 'addressAndTimeInfo')]";
+    public String paymentStatus = "paymentStatus";
+    public String paymentJobNumber = "jobNumber";
+    public String paymentJobPrice = "price";
+    public String paymentAddressAndTimeInfo = "addressAndTimeInfo";
 
     public PaymentsPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);

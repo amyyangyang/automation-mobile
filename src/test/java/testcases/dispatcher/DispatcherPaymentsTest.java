@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.PaymentsPage;
 import com.nexttrucking.automation.mobile.dispatcher.PaymentDetailPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import property.SetProperty;
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
+import static org.hamcrest.CoreMatchers.hasItem;
 
 public class DispatcherPaymentsTest extends SetProperty {
 
@@ -36,12 +38,12 @@ public class DispatcherPaymentsTest extends SetProperty {
     @Test
     public void checkPaymentsListPage() {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentJobNumber);
+        boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentStatus);
         if (isPresentPayments) {
-            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentStatus));
-            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentJobNumber));
-            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentJobPrice));
-            Assert.assertNotNull(driver.findElementsByXPath(paymentsPage.paymentAddressAndTimeInfo));
+            Assert.assertThat(Utils.paymentStatusList, hasItem(driver.findElementByAccessibilityId(paymentsPage.paymentStatus).getText()));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobNumber));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobPrice));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentAddressAndTimeInfo));
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
@@ -50,7 +52,7 @@ public class DispatcherPaymentsTest extends SetProperty {
     @Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentJobNumber);
+        boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentJobNumber);
         if (isPresentPayments) {
             pageProperty.clickElement(paymentsPage.paymentJobNumber);
             Assert.assertTrue(pageProperty.isTextPresent("Locations"));
