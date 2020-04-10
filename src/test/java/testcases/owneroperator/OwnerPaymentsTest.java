@@ -42,9 +42,9 @@ public class OwnerPaymentsTest extends SetProperty {
         boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentStatus);
         if (isPresentPayments) {
             Assert.assertThat(Utils.paymentStatusList, hasItem(driver.findElementByAccessibilityId(paymentsPage.paymentStatus).getText()));
-            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobNumber));
-            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobPrice));
-            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentAddressAndTimeInfo));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobNumber).getText());
+            Assert.assertTrue(driver.findElementByAccessibilityId(paymentsPage.paymentJobPrice).getText().startsWith("$"));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentAddressAndTimeInfo).getText());
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
