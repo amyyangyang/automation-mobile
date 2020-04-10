@@ -55,7 +55,7 @@ public class OwnerPaymentsTest extends SetProperty {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentJobNumber);
         if (isPresentPayments) {
-            pageProperty.clickElement(paymentsPage.paymentJobNumber);
+            pageProperty.clickElementByLocator("id",paymentsPage.paymentJobNumber);
             Assert.assertTrue(pageProperty.isTextPresent("Locations"));
             Assert.assertTrue(pageProperty.isTextPresent("Details for"));
 
