@@ -56,6 +56,16 @@ public class MyLoadDetailsPage extends PageProperty {
     public String submitInvoiceButton = "(//*[@%s='Submit Invoice'])[last()]";
     public String skipInvoiceButton = "(//*[@%s='Skip invoice for now'])[last()]";
     public String goToMyLoadsButton = "(//*[contains(@%s,'Go back to My Loads')])[last()]";
+    public String addInvoiceButton = "(//*[contains(@%s,'Add')])[last()]";
+    public String detentionFee = "(//*[contains(@%s,'Detention')])[last()]";
+    public String chassisSplitFee = "(//*[contains(@%s,'Chassis Split')])[last()]";
+    public String stopChargeFee = "(//*[contains(@%s,'Stop Charge')])[last()]";
+    public String tounFee = "(//*[contains(@%s,'TONU')])[last()]";
+    public String scaleFee = "(//*[contains(@%s,'Scale')])[last()]";
+    public String driverAssistFee = "(//*[contains(@%s,'Driver Assist')])[last()]";
+    public String otherFee = "(//*[contains(@%s,'Other')])[last()]";
+    public String continueFeeButton = "(//*[contains(@%s,'Continue')])[last()]";
+    public String AddTounButton = "(//*[contains(@%s,'Add TONU')])[last()]";
 
     //tab
     public String liveUnload = "(//*[contains(@text,'Live Unload')])[last()]";
@@ -107,6 +117,7 @@ public class MyLoadDetailsPage extends PageProperty {
             myLoadsDetailCardMap.put("equipmentValue", "//*[@text='Equipment']/following-sibling::*[1]");
             myLoadsDetailCardMap.put("containerNumberText", "//*[@text='Container Number']");
             myLoadsDetailCardMap.put("containerNumberValue", "//*[@text='Container Number']/following-sibling::*[1]");
+            myLoadsDetailCardMap.put("tounFeeOrdio", "//*[contains(@text, 'TONU')]/..");
         } else {
             myLoadsDetailCardMap = new HashMap<>();
             myLoadsDetailCardMap.put("takePhoto", "//*[@name='camera']");
