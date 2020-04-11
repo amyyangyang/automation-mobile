@@ -43,6 +43,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
     public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
     public String chassisSizeRadio = "(//*[contains(@%s,'20 ft')]/following-sibling::*)[1]";
+    public String useADifferentChassis="(//*[@%s='Use a Different Chassis'])[last()]";
 
     //buttons to upload pod or not
     public String continueButton = "(//*[contains(@%s, 'Continue')])[last()]";
@@ -230,17 +231,22 @@ public class MyLoadDetailsPage extends PageProperty {
     }
 
     public void addChassisNumber(String chassisNumber) throws InterruptedException {
-        clickElement(addChassisNumberButton);
-        driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
-        clickElement(nextButton);
-        Thread.sleep(3000);
-        clickElement(chassisSizeRadio);
-        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
-        if (isPresentConfirmSizeButton) {
-            clickElementByLocator("path", confirmChassisNumberOkButton);
+        boolean isPresentChassis=isElementPresent("xpath",useADifferentChassis);
+        if(isPresentChassis){
+            clickElementByLocator("path",confirmButton);
+        }else{
+            clickElement(addChassisNumberButton);
+            driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
+            clickElement(nextButton);
+            Thread.sleep(3000);
+            clickElement(chassisSizeRadio);
+            boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
+            if (isPresentConfirmSizeButton) {
+                clickElementByLocator("path", confirmChassisNumberOkButton);
+            }
+            clickElement(addButton);
+            Thread.sleep(6000);
         }
-        clickElement(addButton);
-        Thread.sleep(6000);
     }
 
     public String generateChassisNumber() {
@@ -255,6 +261,8 @@ public class MyLoadDetailsPage extends PageProperty {
         Thread.sleep(3000);
         clickElementByLocator("path", hookCompletedButton);
         Thread.sleep(3000);
+        String chassisNumber = generateChassisNumber();
+        addChassisNumber(chassisNumber);
         boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
         if (isPresentConfirmSizeButton) {
             clickElementByLocator("path", confirmChassisNumberOkButton);
