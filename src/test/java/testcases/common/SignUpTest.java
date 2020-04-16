@@ -1,6 +1,5 @@
 package testcases.common;
 
-import com.microsoft.appcenter.appium.Factory;
 import com.nexttrucking.automation.mobile.aguest.SignInPage;
 import com.nexttrucking.automation.mobile.aguest.SignUpPage;
 import com.nexttrucking.automation.mobile.aguest.WelcomePage;
