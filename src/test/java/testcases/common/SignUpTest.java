@@ -12,7 +12,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.*;
-import org.junit.jupiter.api.Tag;
 import property.SetProperty;
 
 import java.net.MalformedURLException;
@@ -36,7 +35,6 @@ public class SignUpTest extends SetProperty {
     }
 
     @Test
-    @Tag("write")
     public void signUpAsDispatcher() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
         signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
@@ -82,7 +80,6 @@ public class SignUpTest extends SetProperty {
     }
 
     @Test
-    @Tag("write")
     public void signUpAsOwnerOperator() throws InterruptedException, ParserConfigurationException {
         welcomePage.clickSignUpButton();
         signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
@@ -133,7 +130,6 @@ public class SignUpTest extends SetProperty {
     }
 
     @Test
-    @Tag("write")
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
         String driverEmail = "seraabel2017+newd" + Utils.getRandomString(2) + "@gmail.com";
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
