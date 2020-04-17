@@ -1,14 +1,14 @@
 <dev>
     <signin id="SignInAsDispatcher">
-        <dispatcherEmail>seraabel2017+fleettest@gmail.com</dispatcherEmail>
+        <dispatcherEmail>rftest+fleettest@nexttrucking.com</dispatcherEmail>
         <dispatcherPassword>111111</dispatcherPassword>
     </signin>
     <signin id="SignInAsOwnerOperator">
-        <ownerOperatorEmail>seraabel2017+truckertest@gmail.com</ownerOperatorEmail>
+        <ownerOperatorEmail>rftest+truckertest@nexttrucking.com</ownerOperatorEmail>
         <ownerOperatorPassword>111111</ownerOperatorPassword>
     </signin>
     <signin id="SignInAsDriver">
-        <driverEmail>seraabel2017+drivertest@gmail.com</driverEmail>
+        <driverEmail>rftest+drivertest@nexttrucking.com</driverEmail>
         <driverPassword>111111</driverPassword>
     </signin>
 
@@ -16,8 +16,8 @@
         <usDocket>888888</usDocket>
         <companyName>NEXT</companyName>
         <emailForGuest>neeck@gmail.com</emailForGuest>
-        <emailForGuestOO>seraabel2017+oo@gmail.com</emailForGuestOO>
-        <emailForGuestDispatcher>seraabel2017+dispatcher@gmail.com</emailForGuestDispatcher>
+        <emailForGuestOO>rftest+oo@nexttrucking.com</emailForGuestOO>
+        <emailForGuestDispatcher>rftest+dispatcher@nexttrucking.com</emailForGuestDispatcher>
         <firstName>Nik</firstName>
         <cityName>New York</cityName>
         <lastName>Serg</lastName>
@@ -27,7 +27,7 @@
         <mode>test</mode>>
     </signup>
     <signup id="Driver">
-        <driverAddEmail>seraabel2017+d@gmail.com</driverAddEmail>
+        <driverAddEmail>rftest+d@nexttrucking.com</driverAddEmail>
         <driverAddPassword>111111</driverAddPassword>
         <driveFirstName>TestFirstName</driveFirstName>
         <driveLastName>TestLastName</driveLastName>
