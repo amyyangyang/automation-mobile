@@ -8,6 +8,7 @@ import com.nexttrucking.automation.mobile.dispatcher.MyLoadsPage;
 import com.nexttrucking.automation.mobile.property.Utils;
 import com.nexttrucking.automation.mobile.dispatcher.AllowLocationPage;
 import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
+import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -17,6 +18,7 @@ import property.SetProperty;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
@@ -37,6 +39,7 @@ public class DispatcherAvailableTest extends SetProperty {
         jobDetailPage = new JobDetailPage(driver, attributeName);
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        Thread.sleep(10000);
     }
 
     @Test
@@ -44,6 +47,9 @@ public class DispatcherAvailableTest extends SetProperty {
         Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
+            MobileElement cardElement = availableLoadsAllPage.getMobileElementOfFirstCard();
+            HashMap cardData = availableLoadsAllPage.getLoadCardData(cardElement);
+
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allButton, 1), "All");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.allNumber)));
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.portButton, 1), "Port");
@@ -51,23 +57,27 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localButton, 1), "Local");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.localNumber)));
 
-            Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-            Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 0));
-            Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 1));
-            boolean isLegacy = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.pickupTime);
-            if (isLegacy) {
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-            } else {
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
+            Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
+            Assert.assertTrue(cardData.get("payout").toString().contains("$"));
+            int addressCount = Integer.parseInt(cardData.get("addressCount").toString());
+            for (int count = 0; count < addressCount; count++) {
+                Assert.assertNotNull(cardData.get("address" + count).toString());
             }
+            int timeCount = Integer.parseInt(cardData.get("timeCount").toString());
+            for (int count = 0; count < timeCount; count++) {
+                Assert.assertNotNull(cardData.get("time" + count).toString());
+            }
+
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulButton, 1), "Short Haul");
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.shortHaulButton);
+            Thread.sleep(3000);
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.shortHaulNumber)));
             Assert.assertEquals(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulButton, 1), "Long Haul");
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulNumber)));
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
+            Thread.sleep(10000);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
+            Thread.sleep(10000);
         } else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
@@ -79,18 +89,17 @@ public class DispatcherAvailableTest extends SetProperty {
         if (isPresentLoad) {
             int size = availableLoadsAllPage.driver.findElementsByXPath(availableLoadsAllPage.availableCardMap.get("numberOfLoad")).size();
             if (size > 1) {
-//                availableLoadsAllPage.swipeToUpForAndroid();
-                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 0));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 1));
-                boolean isLegacy = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.pickupTime);
-                if (isLegacy) {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-                } else {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
+                MobileElement cardElement = availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData = availableLoadsAllPage.getLoadCardData(cardElement);
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
+                Assert.assertTrue(cardData.get("payout").toString().contains("$"));
+                int addressCount = Integer.parseInt(cardData.get("addressCount").toString());
+                for (int count = 0; count < addressCount; count++) {
+                    Assert.assertNotNull(cardData.get("address" + count).toString());
+                }
+                int timeCount = Integer.parseInt(cardData.get("timeCount").toString());
+                for (int count = 0; count < timeCount; count++) {
+                    Assert.assertNotNull(cardData.get("time" + count).toString());
                 }
             }
         } else {
@@ -102,21 +111,19 @@ public class DispatcherAvailableTest extends SetProperty {
     public void checkFirstLoadOfLocal() throws InterruptedException {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-            Thread.sleep(10000);
             boolean isPresentLocalTypeLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLocalTypeLoad) {
-                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 0));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 1));
-                boolean isLegacy = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.pickupTime);
-                if (isLegacy) {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-                } else {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
+                MobileElement cardElement = availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData = availableLoadsAllPage.getLoadCardData(cardElement);
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
+                Assert.assertTrue(cardData.get("payout").toString().contains("$"));
+                int addressCount = Integer.parseInt(cardData.get("addressCount").toString());
+                for (int count = 0; count < addressCount; count++) {
+                    Assert.assertNotNull(cardData.get("address" + count).toString());
+                }
+                int timeCount = Integer.parseInt(cardData.get("timeCount").toString());
+                for (int count = 0; count < timeCount; count++) {
+                    Assert.assertNotNull(cardData.get("time" + count).toString());
                 }
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
@@ -136,23 +143,21 @@ public class DispatcherAvailableTest extends SetProperty {
             Thread.sleep(5000);
             boolean isPresentShortHaulTypeLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentShortHaulTypeLoad) {
-                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 0));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 1));
-                boolean isLegacy = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.pickupTime);
-                if (isLegacy) {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-                } else {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
+                MobileElement cardElement = availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData = availableLoadsAllPage.getLoadCardData(cardElement);
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
+                Assert.assertTrue(cardData.get("payout").toString().contains("$"));
+                int addressCount = Integer.parseInt(cardData.get("addressCount").toString());
+                for (int count = 0; count < addressCount; count++) {
+                    Assert.assertNotNull(cardData.get("address" + count).toString());
+                }
+                int timeCount = Integer.parseInt(cardData.get("timeCount").toString());
+                for (int count = 0; count < timeCount; count++) {
+                    Assert.assertNotNull(cardData.get("time" + count).toString());
                 }
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
-            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
-            Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
             Thread.sleep(10000);
         } else {
@@ -164,21 +169,23 @@ public class DispatcherAvailableTest extends SetProperty {
     public void checkFirstLoadOfLongHaul() throws InterruptedException {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.shortHaulButton);
+            Thread.sleep(3000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.longHaulButton);
             Thread.sleep(10000);
             boolean isPresentLongHaulLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLongHaulLoad) {
-                Assert.assertThat(Utils.equipmentTypeList, hasItem(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.equipmentType)));
-                Assert.assertTrue(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.payout).contains("$"));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 0));
-                Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInAddress, 1));
-                boolean isLegacy = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.pickupTime);
-                if (isLegacy) {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.pickupTime));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.deliveryTime));
-                } else {
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
-                    Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
+                MobileElement cardElement = availableLoadsAllPage.getMobileElementOfFirstCard();
+                HashMap cardData = availableLoadsAllPage.getLoadCardData(cardElement);
+                Assert.assertThat(Utils.equipmentTypeList, hasItem(cardData.get("equipmentType").toString()));
+                Assert.assertTrue(cardData.get("payout").toString().contains("$"));
+                int addressCount = Integer.parseInt(cardData.get("addressCount").toString());
+                for (int count = 0; count < addressCount; count++) {
+                    Assert.assertNotNull(cardData.get("address" + count).toString());
+                }
+                int timeCount = Integer.parseInt(cardData.get("timeCount").toString());
+                for (int count = 0; count < timeCount; count++) {
+                    Assert.assertNotNull(cardData.get("time" + count).toString());
                 }
             } else {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
@@ -276,7 +283,7 @@ public class DispatcherAvailableTest extends SetProperty {
             boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
             if (isLiveUnloadPresent) {
                 pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                Assert.assertTrue(jobDetailPage.isliveUnloadJobStatusCorrect());
+                Assert.assertTrue(jobDetailPage.isLiveUnloadJobStatusCorrect());
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 0));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 1));
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 2));

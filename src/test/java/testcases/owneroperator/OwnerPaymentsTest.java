@@ -5,6 +5,7 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.PaymentsPage;
 import com.nexttrucking.automation.mobile.dispatcher.PaymentDetailPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import com.nexttrucking.automation.mobile.property.Utils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,6 +13,8 @@ import property.SetProperty;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
+
+import static org.hamcrest.CoreMatchers.hasItem;
 
 
 public class OwnerPaymentsTest extends SetProperty {
@@ -34,32 +37,25 @@ public class OwnerPaymentsTest extends SetProperty {
     }
 
     @Test
-    public void checkPaymentsListPage() throws InterruptedException {
+    public void checkPaymentsListPage() {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
+        boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentStatus);
         if (isPresentPayments) {
-            int num = driver.findElementsByXPath(paymentsPage.paymentList.get("paymentNumber")).size();
-            String status = paymentsPage.getElementText("path", paymentsPage.paymentList.get("paymentStatus"));
-            if ((num == 1) && (status.equals("CANCELED"))) {
-                Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-                Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPriceSpecial")).contains("$"));
-            } else {
-                Assert.assertTrue(pageProperty.isTextPresent("THIS MONTH"));
-                Assert.assertTrue(pageProperty.isTextPresent("THIS YEAR"));
-                Assert.assertTrue(paymentsPage.isPaymentStatusCorrect());
-                Assert.assertTrue(pageProperty.getElementText("path", paymentsPage.paymentList.get("paymentPrice")).contains("$"));
-            }
+            Assert.assertThat(Utils.paymentStatusList, hasItem(driver.findElementByAccessibilityId(paymentsPage.paymentStatus).getText()));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentJobNumber).getText());
+            Assert.assertTrue(driver.findElementByAccessibilityId(paymentsPage.paymentJobPrice).getText().startsWith("$"));
+            Assert.assertNotNull(driver.findElementByAccessibilityId(paymentsPage.paymentAddressAndTimeInfo).getText());
         } else {
             Assert.assertEquals(pageProperty.getTextByName("Book"), "Book a load below so we can start paying you tons of money!");
         }
     }
 
-    //@Test
+    @Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
-        boolean isPresentPayments = pageProperty.isElementPresent("path", paymentsPage.paymentList.get("firstPayment"));
+        boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentJobNumber);
         if (isPresentPayments) {
-            pageProperty.clickElement(paymentsPage.paymentList.get("firstPayment"));
+            pageProperty.clickElementByLocator("id",paymentsPage.paymentJobNumber);
             Assert.assertTrue(pageProperty.isTextPresent("Locations"));
             Assert.assertTrue(pageProperty.isTextPresent("Details for"));
 
@@ -70,6 +66,11 @@ public class OwnerPaymentsTest extends SetProperty {
             pageProperty.clickAnyElementByName("Details");
             Assert.assertTrue(pageProperty.isTextPresent("You'll Make"));
             Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
+            Assert.assertTrue(pageProperty.isTextPresent("Uploaded Documents"));
+            Assert.assertTrue(pageProperty.isTextPresent("Commodity"));
+            Assert.assertTrue(pageProperty.isTextPresent("Goods Value"));
+            Assert.assertTrue(pageProperty.isTextPresent("Weight"));
+
             if (isTerminalJob) {
                 Assert.assertFalse(pageProperty.isTextPresent("Rate Contract"));
             } else {

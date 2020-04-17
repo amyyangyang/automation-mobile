@@ -232,7 +232,7 @@ public abstract class PageProperty {
         }
     }
 
-    public void swipeToUpForiOS() throws InterruptedException {
+    public void swipeToUpForIOS() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Map<String, Object> params = new HashMap<>();
         params.put("duration", 1.0);
@@ -249,11 +249,11 @@ public abstract class PageProperty {
         if (attributeName.equals("text")) {
             swipeToUpForAndroid();
         } else {
-            swipeToUpForiOS();
+            swipeToUpForIOS();
         }
     }
 
-    public String getELementAttribute(String locator, String element, String attribute) {
+    public String getElementAttribute(String locator, String element, String attribute) {
         if (locator.equals("id")) {
             return driver.findElementByAccessibilityId(element).getAttribute(attribute);
         } else {
@@ -261,5 +261,19 @@ public abstract class PageProperty {
         }
     }
 
+    public boolean isSubElementPresent(String locator, MobileElement element,String subElement) {
+        try {
+            if (locator.equals("id")) {
+                element.findElementByAccessibilityId(subElement);
+            } else {
+                element.findElement(By.xpath(String.format(subElement, attributeName)));
+            }
+            return true;
+        } catch (NoSuchElementException exception) {
+            return false;
+        } catch (WebDriverException exception) {
+            return false;
+        }
+    }
 
 }

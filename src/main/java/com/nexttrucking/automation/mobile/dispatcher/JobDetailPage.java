@@ -160,23 +160,17 @@ public class JobDetailPage extends PageProperty {
         //Thread.sleep(3000);
     }
 
-    public Boolean checkBookJobForErrors(JobDetailPage jobDetailPage) throws InterruptedException {
-        Boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
+    public boolean checkBookJobForErrors() throws InterruptedException {
+        boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
         if (isPresentAvailableLoadButton) {
             clickElementByLocator("path", goToAvailableLoadsButton);
         }
-        Boolean isPresentRefreshNowButton = isElementPresent("path", refreshButton);
-        if (isPresentRefreshNowButton) {
-            clickElementByLocator("path", refreshButton);
-            clickElementByLocator("path", jobDetailPage.bookButton);
-            if (isElementPresent("path", bookButton)) {
-                clickElementByLocator("path", jobDetailPage.bookButton);
-            }
-        }
+        Thread.sleep(3000);
+        swipeForAnyPlatform();
         return isPresentAvailableLoadButton;
     }
 
-    public boolean isliveUnloadJobStatusCorrect() {
+    public boolean isLiveUnloadJobStatusCorrect() {
         boolean correctStatus = false;
         String paymentStatus = getElementText("path", jobDetailCard.get("liveUnloadJobStatus"));
         for (int i = 0; i < 2; i++) {
