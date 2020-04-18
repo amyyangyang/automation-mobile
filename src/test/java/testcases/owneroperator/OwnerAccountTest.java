@@ -118,6 +118,7 @@ public class OwnerAccountTest extends SetProperty {
         Assert.assertNotNull(accountPage.accountCardMap.get("commoditiesValue"));
         Assert.assertEquals(accountPage.getElementText("path", accountPage.maxWeightTitle), "Max Weight");
         Assert.assertNotNull(accountPage.accountCardMap.get("maxWeightValue"));
+        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
 }

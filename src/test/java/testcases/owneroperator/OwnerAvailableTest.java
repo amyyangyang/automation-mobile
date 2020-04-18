@@ -72,6 +72,8 @@ public class OwnerAvailableTest extends SetProperty {
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulNumber)));
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
             Thread.sleep(10000);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.portButton);
+            Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
             Thread.sleep(10000);
         } else {
@@ -158,6 +160,8 @@ public class OwnerAvailableTest extends SetProperty {
                 Assert.assertEquals(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoad), "Please try another type of load or let us know what you like and we'll text you loads that match your preferences.");
             }
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
+            Thread.sleep(10000);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.portButton);
             Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
             Thread.sleep(10000);

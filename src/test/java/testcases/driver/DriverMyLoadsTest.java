@@ -79,7 +79,7 @@ public class DriverMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkMyLoadDetail() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
         if (isPresentJob) {
