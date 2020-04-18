@@ -60,3 +60,9 @@ Depend on value of PLATFORM_NAME variable we can choose platform (android or ios
 Depend on value of ENV_NAME variable we can choose environment (dev, test, demo or prod) where is we want to run our Java project (default: -DENV_NAME=dev).
 Depend on value of LOCATION_NAME variable we can choose environment (local or server) where is we want to run our Java project (default: -DLOCATION_NAME=server).
 
+1. Now we have many types of loads,So if we pick any one to change status,we need to add more validation to judge which process i should follow.But if i find a specified type,i need to swipe down
+on android devices. When I tried the swiping function on devices, the same code slides at different distances,so it is difficult to find a specified type load.
+2. payment list page:
+Payment has 3 types of status,if status of these payments are all verifying or canceled, this month and this year do not display on the page.So we need to check status of these payments.But if we use UI to assert status of these payments,it is difficult.
+If we can use API tests ,it will be more convenient for us.
+3.Now we have a lot of data on available loads,so when we switch tabs,it is too slowly.So is there any way we can delete this data?
