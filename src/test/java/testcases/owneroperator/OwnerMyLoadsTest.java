@@ -163,6 +163,7 @@ public class OwnerMyLoadsTest extends SetProperty {
                 Thread.sleep(2000);
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.submitInvoiceButton);
             }
+            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.goToMyLoadsButton);
         }
     }
 }
