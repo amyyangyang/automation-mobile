@@ -42,7 +42,7 @@ public class ForgotPasswordTest extends SetProperty {
     @Test
     public void getSignUp() {
         welcomePage.clickSignUpButton();
-        Assert.assertTrue(welcomePage.getTitle("Let's").contains("Let's"));
+        Assert.assertTrue(welcomePage.getTitle("Company Name").contains("Company Name"));
     }
 
     @After
