@@ -150,7 +150,7 @@ public class OwnerMyLoadsTest extends SetProperty {
                 }
                 Thread.sleep(6000);
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addInvoiceButton);
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detentionFee), containsString("Chassis Split"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detentionFee), containsString("Detention"));
                 Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.chassisSplitFee), containsString("Chassis Split"));
                 Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.stopChargeFee), containsString("Stop Charge"));
                 Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.tounFee), containsString("TONU"));
