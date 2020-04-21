@@ -340,6 +340,7 @@ public class MyLoadDetailsPage extends PageProperty {
             boolean isDropButton = isElementPresent("path", dropCompletedButton);
             if (isDropButton) {
                 clickElementByLocator("path", dropCompletedButton);
+                Thread.sleep(3000);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadDoc(allowLocationPage, false, 0);
                 clickElementByLocator("path", continueButton);

@@ -75,6 +75,9 @@ public class MyLoadsPage extends PageProperty {
             isPresentJob = isElementPresent("id", originationAddress);
             if (isPresentJob) {
                 jobID = driver.findElementByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).getAttribute("content-desc");
+                if(jobID.contains("Load")){
+                    continue;
+                }
                 isJobStarted = isElementPresent("path", String.format(myLoadsCardMap.get("liveUnloadJobButton"), jobID));
             }
             iterationNumber++;

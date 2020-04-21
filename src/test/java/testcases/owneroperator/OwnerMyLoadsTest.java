@@ -135,7 +135,7 @@ public class OwnerMyLoadsTest extends SetProperty {
 
 
     @Test
-    public void checkInvoiceFeeType() throws InterruptedException{
+    public void checkInvoiceFeeType() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
             boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
@@ -150,20 +150,20 @@ public class OwnerMyLoadsTest extends SetProperty {
                 }
                 Thread.sleep(6000);
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addInvoiceButton);
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.detentionFee), containsString("Detention"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.chassisSplitFee), containsString("Chassis Split"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.stopChargeFee), containsString("Stop Charge"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.tounFee), containsString("TONU"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.scaleFee), containsString("Scale"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.driverAssistFee), containsString("Driver Assist"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path",myLoadDetailsPage.otherFee), containsString("Other"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.detentionFee), containsString("Detention"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.chassisSplitFee), containsString("Chassis Split"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.stopChargeFee), containsString("Stop Charge"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.tounFee), containsString("TONU"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.scaleFee), containsString("Scale"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.driverAssistFee), containsString("Driver Assist"));
+                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.otherFee), containsString("Other"));
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("tounFeeOrdio"));
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.continueFeeButton);
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.AddTounButton);
                 Thread.sleep(2000);
                 myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.submitInvoiceButton);
             }
-            myLoadDetailsPage.clickElementByLocator("path",myLoadDetailsPage.goToMyLoadsButton);
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.goToMyLoadsButton);
         }
     }
 }
