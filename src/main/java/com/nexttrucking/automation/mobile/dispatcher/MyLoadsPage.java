@@ -100,6 +100,7 @@ public class MyLoadsPage extends PageProperty {
                 isPresentLiveUnloadJob = isElementPresent("id", liveLoadAddress);
                 if (isPresentLiveUnloadJob) {
                     jobID = driver.findElementByXPath(myLoadsCardMap.get("getLiveUnloadJobID")).getAttribute("content-desc");
+                    System.out.println(jobID);
                     if(jobID.contains("Load")){
                         continue;
                     }
