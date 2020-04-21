@@ -82,7 +82,7 @@ public class MyLoadsPage extends PageProperty {
         System.out.println("JOB ID: " + jobID);
         if (!isJobStarted) {
             driver.findElementByAccessibilityId(jobID).click();
-            Thread.sleep(5000);
+            Thread.sleep(8000);
             return true;
         }
         return false;
