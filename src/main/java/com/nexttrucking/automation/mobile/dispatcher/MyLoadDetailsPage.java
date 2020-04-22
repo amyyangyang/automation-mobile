@@ -35,7 +35,7 @@ public class MyLoadDetailsPage extends PageProperty {
     //confirm buttons
     public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
     public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
-    public String confirmChassisNumberOkButton = "//*[contains(@%s, 'Yes, I’m Sure')]";
+    public String confirmChassisNumberOkButton = "//*[contains(@%s, \"Yes, I’m Sure\")]";
 
     //add chassis
     public String addButton = "//*[contains(@%s, 'Add')]";
