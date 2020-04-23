@@ -76,6 +76,8 @@ public class DispatcherAvailableTest extends SetProperty {
             Assert.assertTrue(Utils.isInteger(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.longHaulNumber)));
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.localButton);
             Thread.sleep(10000);
+            availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.portButton);
+            Thread.sleep(10000);
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.allButton);
             Thread.sleep(10000);
         } else {

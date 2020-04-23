@@ -232,7 +232,7 @@ workflows:
   app-onlineVersion:
     triggers:
       - schedule:
-          cron: "0 3 * * *"
+          cron: "30 6 * * *"
           filters:
             branches:
               only:
