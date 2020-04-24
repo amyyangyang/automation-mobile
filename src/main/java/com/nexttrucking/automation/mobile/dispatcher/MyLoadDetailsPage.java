@@ -43,7 +43,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
     public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
     public String chassisSizeRadio = "(//*[contains(@%s,'20 ft')]/following-sibling::*)[1]";
-    public String useADifferentChassis="(//*[@%s='Use a Different Chassis'])[last()]";
+    public String useADifferentChassis = "(//*[@%s='Use a Different Chassis'])[last()]";
 
     //buttons to upload pod or not
     public String continueButton = "(//*[contains(@%s, 'Continue')])[last()]";
@@ -79,6 +79,7 @@ public class MyLoadDetailsPage extends PageProperty {
     public String getTextInAddress = "textGroupValue_0";
     public String getTextInTime = "textGroupValue_0";
     public String addressText = "textGroupValue_0";
+    public String promptMessage = "(//*[contains(@%s,'Complete the previous load before starting this one')])[last()]";
 
     public Map<String, String> myLoadsDetailCardMap;
 
@@ -182,7 +183,7 @@ public class MyLoadDetailsPage extends PageProperty {
         }
         clickElementByLocator("path", myLoadsDetailCardMap.get("takePhoto"));
         Thread.sleep(10000);
-       clickElementByLocator("path", myLoadsDetailCardMap.get("cropButton"));
+        clickElementByLocator("path", myLoadsDetailCardMap.get("cropButton"));
         Thread.sleep(10000);
         clickElementByLocator("path", myLoadsDetailCardMap.get("submitPOD"));
         Thread.sleep(10000);
@@ -230,10 +231,10 @@ public class MyLoadDetailsPage extends PageProperty {
             System.out.print(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
             addressList += (driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
         }
-        if (addressList.contains("Hook") && addressList.contains("Live Unload")) {
-            return "HookAndLiveUnload";
-        } else if (addressList.contains("Hook") && addressList.contains("Mount")) {
+        if (addressList.contains("Hook") && addressList.contains("Mount")) {
             return "hookAndMount";
+        } else if (addressList.contains("Hook") && addressList.contains("Live Unload")) {
+            return "HookAndLiveUnload";
         } else if (addressList.contains("Hook") && addressList.contains("Dismount")) {
             return "HookAndDismount";
         } else {
@@ -241,11 +242,15 @@ public class MyLoadDetailsPage extends PageProperty {
         }
     }
 
+    public boolean checkJobIsHasManyLoads() {
+        return isElementPresent("path", promptMessage);
+    }
+
     public void addChassisNumber(String chassisNumber) throws InterruptedException {
-        boolean isPresentChassis=isElementPresent("xpath",useADifferentChassis);
-        if(isPresentChassis){
-            clickElementByLocator("path",confirmButton);
-        }else{
+        boolean isPresentChassis = isElementPresent("xpath", useADifferentChassis);
+        if (isPresentChassis) {
+            clickElementByLocator("path", confirmButton);
+        } else {
             clickElement(addChassisNumberButton);
             driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
             clickElement(nextButton);
@@ -351,6 +356,7 @@ public class MyLoadDetailsPage extends PageProperty {
                 clickElementByLocator("path", continueButton);
                 clickElementByLocator("path", chassisDroppedButton);
                 Thread.sleep(3000);
+                clickElementByLocator("path", continueButton);
             }
         }
     }
@@ -375,6 +381,11 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void changeJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
         String jobType = getTypeOfTripsJob();
+        if (checkJobIsHasManyLoads()) {
+            clickElementByLocator("path", promptMessage);
+            Thread.sleep(6000);
+            jobType = getTypeOfTripsJob();
+        }
         switch (jobType) {
             case "hookAndDrop":
                 changeHookDropJobToCompleted(allowLocationPage);
