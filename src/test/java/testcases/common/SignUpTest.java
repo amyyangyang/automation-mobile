@@ -129,7 +129,7 @@ public class SignUpTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void signUpDriver() throws InterruptedException, ParserConfigurationException {
         String driverEmail = "rftest+newd" + Utils.getRandomString(2) + "@nexttrucking.com";
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
