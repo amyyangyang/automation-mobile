@@ -38,7 +38,7 @@ public class DispatcherBookTenderTest extends SetProperty {
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
         availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.portButton);
-        Thread.sleep(3000);
+        Thread.sleep(6000);
     }
 
     @Test
@@ -75,10 +75,7 @@ public class DispatcherBookTenderTest extends SetProperty {
                 ++loop;
                 boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
-                    availableLoadsAllPage.findLiveUnloadJob();
-                    boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
-                    if (isLiveUnloadPresent) {
-                        pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
+                        pageProperty.clickElementByLocator("id", availableLoadsAllPage.originationAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         Thread.sleep(3000);
                         isPresentException = jobDetailPage.checkBookJobForErrors();
@@ -95,7 +92,6 @@ public class DispatcherBookTenderTest extends SetProperty {
                         if (isPresentException) {
                             availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
                         }
-                    }
                 } else {
                     Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }

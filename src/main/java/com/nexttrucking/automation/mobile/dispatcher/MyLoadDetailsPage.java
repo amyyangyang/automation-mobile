@@ -167,8 +167,9 @@ public class MyLoadDetailsPage extends PageProperty {
             clickElementByLocator("path", status.get(step));
             Thread.sleep(6000);
         }
-        clickElementByLocator("path", continueButton);
+        clickElementByLocator("path", upLoadDocumentsButton);
         uploadDoc(allowLocationPage, true, 0);
+        clickElementByLocator("path", continueButton);
     }
 
     public void uploadDoc(AllowLocationPage allowLocationPage, Boolean isFirst, int index) throws InterruptedException {
@@ -231,7 +232,9 @@ public class MyLoadDetailsPage extends PageProperty {
             System.out.print(driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
             addressList += (driver.findElementsByAccessibilityId(originalAddress).get(i).getText());
         }
-        if (addressList.contains("Hook") && addressList.contains("Mount")) {
+        if (addressList.contains("Pick Up") && addressList.contains("Drop Off")) {
+            return "legacyJob";
+        } else if (addressList.contains("Hook") && addressList.contains("Mount")) {
             return "hookAndMount";
         } else if (addressList.contains("Hook") && addressList.contains("Live Unload")) {
             return "HookAndLiveUnload";
@@ -381,12 +384,15 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void changeJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
         String jobType = getTypeOfTripsJob();
-        if (checkJobIsHasManyLoads()) {
+        if ((checkJobIsHasManyLoads()) && (!jobType.equals("legacyJob"))) {
             clickElementByLocator("path", promptMessage);
             Thread.sleep(6000);
             jobType = getTypeOfTripsJob();
         }
         switch (jobType) {
+            case "legacyJob":
+                changeLegacyJobStatusToCompleted(allowLocationPage);
+                break;
             case "hookAndDrop":
                 changeHookDropJobToCompleted(allowLocationPage);
                 break;

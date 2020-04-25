@@ -63,7 +63,7 @@ public class DispatcherMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkMyLoadDetail() throws InterruptedException {
         Boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.jobNumber);
         if (isPresentJob) {

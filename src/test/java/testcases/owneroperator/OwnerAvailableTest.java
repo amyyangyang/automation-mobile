@@ -275,7 +275,7 @@ public class OwnerAvailableTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkLiveUnloadJobDetail() throws InterruptedException {
         boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {

@@ -46,9 +46,6 @@ public class OwnerBookTenderTest extends SetProperty {
                 ++loop;
                 boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
                 if (isPresentLoad) {
-                    availableLoadsAllPage.findLiveUnloadJob();
-                    boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
-                    if (isLiveUnloadPresent) {
                         availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.originationAddress);
                         jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                         isPresentException = jobDetailPage.checkBookJobForErrors();
@@ -64,7 +61,6 @@ public class OwnerBookTenderTest extends SetProperty {
                         Assert.assertTrue(jobDetailPage.getElementText("path", jobDetailPage.booked).contains("You're booked!"));
                         jobDetailPage.goToMyLoadsOrAvailableLoadsPage(jobDetailPage.goToMyLoadsButton);
                         availableLoadsAllPage.clickMenuButtonFirstLevel("Available Loads");
-                    }
                 } else {
                     Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of these loads are taken"));
                 }
