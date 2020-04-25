@@ -259,11 +259,11 @@ public class MyLoadDetailsPage extends PageProperty {
             clickElement(nextButton);
             Thread.sleep(3000);
             clickElement(chassisSizeRadio);
+            clickElement(addButton);
             boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
             if (isPresentConfirmSizeButton) {
                 clickElementByLocator("path", confirmChassisNumberOkButton);
             }
-            clickElement(addButton);
             Thread.sleep(6000);
         }
     }
