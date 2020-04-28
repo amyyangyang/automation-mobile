@@ -263,45 +263,18 @@ public class OwnerAvailableTest extends SetProperty {
                     Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 0));
                     Assert.assertNotNull(availableLoadsAllPage.getElementText("id", availableLoadsAllPage.getTextInTime, 1));
                 }
-
             }
             jobDetailPage.swipeForAnyPlatform();
             jobDetailPage.swipeForAnyPlatform();
             Assert.assertThat(Utils.equipmentTypeListOnDetail, hasItem(jobDetailPage.getElementText("id", jobDetailPage.equipment)));
             Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.distance));
+            //Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
+            Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
+            Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
+            Assert.assertTrue(pageProperty.isTextPresent("$"));
             jobDetailPage.clickElementByLocator("path", jobDetailPage.jobDetailCard.get("backButton"));
         } else {
             Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
         }
     }
-
-    //@Test
-    public void checkLiveUnloadJobDetail() throws InterruptedException {
-        boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
-        if (isPresentLoad) {
-            availableLoadsAllPage.findLiveUnloadJob();
-            boolean isLiveUnloadPresent = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.liveLoadAddress);
-            if (isLiveUnloadPresent) {
-                pageProperty.clickElementByLocator("id", availableLoadsAllPage.liveLoadAddress);
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 0));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 1));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInTime, 2));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress, 0));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress, 1));
-                Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress, 2));
-                pageProperty.swipeForAnyPlatform();
-                Assert.assertTrue(pageProperty.isTextPresent("Equipment"));
-                Assert.assertTrue(pageProperty.isTextPresent("Total Distance"));
-                Assert.assertTrue(pageProperty.isTextPresent("Specifications"));
-                Assert.assertTrue(pageProperty.isTextPresent("You'll make"));
-                Assert.assertTrue(pageProperty.isTextPresent("Book Now"));
-                Assert.assertTrue(pageProperty.isTextPresent("$"));
-                signInPage.clickBackButton();
-            }
-        } else {
-            Assert.assertTrue(availableLoadsAllPage.getElementText("path", availableLoadsAllPage.noLoadAllType).contains("All of our loads have been taken"));
-        }
-    }
-
-
 }
