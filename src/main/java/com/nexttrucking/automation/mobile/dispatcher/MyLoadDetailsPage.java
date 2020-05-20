@@ -34,14 +34,15 @@ public class MyLoadDetailsPage extends PageProperty {
 
     //confirm buttons
     public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
-    public String confirmButton = "//*[contains(@%s, 'Yes, I Confirm')]";
-    public String confirmChassisNumberOkButton = "//*[contains(@%s, \"Yes, I’m Sure\")]";
+    public String confirmButton = "(//*[contains(@%s, 'Yes, I Confirm')])[last()]";
+    public String confirmChassisNumberOkButton = "(//*[contains(@%s, \"Yes, I’m Sure\")])[last()]";
 
     //add chassis
     public String addButton = "//*[contains(@%s, 'Add')]";
     public String nextButton = "//*[@%s='Next']";
     public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
     public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
+    public String chassisNumberInoutForIOS="//XCUIElementTypeOther[@name='']/XCUIElementTypeOther/XCUIElementTypeTextField";
     public String chassisSizeRadio = "(//*[contains(@%s,'20 ft')]/following-sibling::*)[1]";
     public String useADifferentChassis = "(//*[@%s='Use a Different Chassis'])[last()]";
 
@@ -203,9 +204,17 @@ public class MyLoadDetailsPage extends PageProperty {
     public void submitInvoice() throws InterruptedException {
         boolean isPresentReviewInvoiceButton = isElementPresent("path", reviewInvoiceButton);
         if (isPresentReviewInvoiceButton) {
-            clickElementByLocator("path", reviewInvoiceButton);
+            if(attributeName.equals("text")){
+                clickElementByLocator("path", reviewInvoiceButton);
+            }else{
+                new TouchAction(driver).press(PointOption.point(190, 750)).perform();
+            }
         } else {
-            clickElementByLocator("path", completeInvoiceButton);
+            if(attributeName.equals("text")){
+                clickElementByLocator("path", completeInvoiceButton);
+            }else{
+                new TouchAction(driver).press(PointOption.point(190, 750)).perform();
+            }
         }
         Thread.sleep(6000);
         clickElementByLocator("path", submitInvoiceButton);
@@ -251,18 +260,34 @@ public class MyLoadDetailsPage extends PageProperty {
 
     public void addChassisNumber(String chassisNumber) throws InterruptedException {
         boolean isPresentChassis = isElementPresent("xpath", useADifferentChassis);
+        TouchAction touchAction = new TouchAction(driver);
         if (isPresentChassis) {
-            clickElementByLocator("path", confirmButton);
+            if(attributeName.equals("name")){
+                touchAction.tap(PointOption.point(270, 660)).perform();
+            }else{
+                clickElementByLocator("path", confirmButton);
+            }
+            Thread.sleep(2000);
         } else {
-            clickElement(addChassisNumberButton);
-            driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
+            if(attributeName.equals("text")){
+                clickElement(addChassisNumberButton);
+                driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
+            } else{
+                touchAction.tap(PointOption.point(270, 750)).perform();
+                Thread.sleep(3000);
+                driver.findElementByXPath(chassisNumberInoutForIOS).sendKeys(chassisNumber);
+            }
             clickElement(nextButton);
             Thread.sleep(3000);
             clickElement(chassisSizeRadio);
             clickElement(addButton);
             boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
             if (isPresentConfirmSizeButton) {
-                clickElementByLocator("path", confirmChassisNumberOkButton);
+                if (attributeName.equals("text")) {
+                    clickElementByLocator("path", confirmChassisNumberOkButton);
+                } else {
+                    new TouchAction(driver).tap(PointOption.point(270, 660)).perform();
+                }
             }
             Thread.sleep(6000);
         }
@@ -276,17 +301,23 @@ public class MyLoadDetailsPage extends PageProperty {
     }
 
     public void changeHookDropJobToCompleted(AllowLocationPage allowLocationPage) throws InterruptedException {
-        clickElementByLocator("path", readyToStart);
-        Thread.sleep(3000);
-        clickElementByLocator("path", hookCompletedButton);
-        Thread.sleep(3000);
-        String chassisNumber = generateChassisNumber();
-        addChassisNumber(chassisNumber);
-        boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
-        if (isPresentConfirmSizeButton) {
-            clickElementByLocator("path", confirmChassisNumberOkButton);
+        if (attributeName.equals("text")) {
+            clickElementByLocator("path", readyToStart);
+            Thread.sleep(3000);
+            clickElementByLocator("path", hookCompletedButton);
+            Thread.sleep(3000);
+            String chassisNumber = generateChassisNumber();
+            addChassisNumber(chassisNumber);
+            clickElementByLocator("path", dropCompletedButton);
+        } else {
+            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            Thread.sleep(6000);
+            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            Thread.sleep(6000);
+            String chassisNumber = generateChassisNumber();
+            addChassisNumber(chassisNumber);
+            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
         }
-        clickElementByLocator("path", dropCompletedButton);
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
         uploadDoc(allowLocationPage, true, 0);
@@ -385,7 +416,11 @@ public class MyLoadDetailsPage extends PageProperty {
     public void changeJobStatus(AllowLocationPage allowLocationPage) throws InterruptedException {
         String jobType = getTypeOfTripsJob();
         if ((checkJobIsHasManyLoads()) && (!jobType.equals("legacyJob"))) {
-            clickElementByLocator("path", promptMessage);
+            if (attributeName.equals("text")) {
+                clickElementByLocator("path", promptMessage);
+            } else {
+                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            }
             Thread.sleep(6000);
             jobType = getTypeOfTripsJob();
         }

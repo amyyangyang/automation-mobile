@@ -18,8 +18,6 @@ import property.SetProperty;
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DispatcherBookTenderTest extends SetProperty {
     public static JobDetailPage jobDetailPage;
@@ -47,7 +45,7 @@ public class DispatcherBookTenderTest extends SetProperty {
         do {
             boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
             if (isPresentLoad) {
-                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
+                availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.originationAddress);
                 jobDetailPage.clickElementByLocator("path", jobDetailPage.bookButton);
                 Thread.sleep(3000);
                 isPresentException = jobDetailPage.checkBookJobForErrors();
