@@ -42,7 +42,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         Thread.sleep(20000);
     }
 
-    @Test
+    //@Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
@@ -64,7 +64,7 @@ public class OwnerMyLoadsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void modifyJobStatusToCompleted() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
@@ -134,7 +134,7 @@ public class OwnerMyLoadsTest extends SetProperty {
     }
 
 
-    @Test
+    //@Test
     public void checkInvoiceFeeType() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
