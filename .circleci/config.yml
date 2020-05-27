@@ -267,6 +267,15 @@ workflows:
           context: next-platform-build
           requires:
             - dev_init_data_android
+
+      - run_case:
+          name: testDevIOS
+          envType: dev
+          deviceType: ios
+          context: next-platform-build
+          requires:
+            - dev_init_data_android
+
 #      - hold_testTestUI:
 #          type: approval
 #          requires:
