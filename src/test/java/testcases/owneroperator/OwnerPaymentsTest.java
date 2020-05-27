@@ -36,7 +36,7 @@ public class OwnerPaymentsTest extends SetProperty {
         availableLoadsAllPage.clickMenuButtonFirstLevel("Payments");
     }
 
-    @Test
+    //@Test
     public void checkPaymentsListPage() {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentStatus);
@@ -50,7 +50,7 @@ public class OwnerPaymentsTest extends SetProperty {
         }
     }
 
-    @Test
+    //@Test
     public void checkPaymentDetailsPage() throws InterruptedException {
         Assert.assertTrue(pageProperty.getTextByName("Payments").contains("Payments"));
         boolean isPresentPayments = pageProperty.isElementPresent("id", paymentsPage.paymentJobNumber);
