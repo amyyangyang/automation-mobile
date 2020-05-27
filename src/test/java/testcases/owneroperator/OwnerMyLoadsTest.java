@@ -136,7 +136,6 @@ public class OwnerMyLoadsTest extends SetProperty {
 
     @Test
     public void checkInvoiceFeeType() throws InterruptedException {
-        pageProperty.swipeToDownForAndroid();
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
             boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
