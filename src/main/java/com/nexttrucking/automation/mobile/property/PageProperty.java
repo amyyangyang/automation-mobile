@@ -232,6 +232,17 @@ public abstract class PageProperty {
         }
     }
 
+    public void swipeToDownForAndroid() {
+        try {
+            new TouchAction(driver).press(PointOption.point(width / 2, height * 1 / 4)).
+                    waitAction(WaitOptions.waitOptions(duration)).
+                    moveTo(PointOption.point(width / 2, height * 3 / 4)).release().perform();
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void swipeToUpForIOS() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Map<String, Object> params = new HashMap<>();
@@ -261,7 +272,7 @@ public abstract class PageProperty {
         }
     }
 
-    public boolean isSubElementPresent(String locator, MobileElement element,String subElement) {
+    public boolean isSubElementPresent(String locator, MobileElement element, String subElement) {
         try {
             if (locator.equals("id")) {
                 element.findElementByAccessibilityId(subElement);
