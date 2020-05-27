@@ -39,7 +39,7 @@ public class DispatcherBookTenderTest extends SetProperty {
         Thread.sleep(6000);
     }
 
-    @Test
+    //@Test
     public void bookJobOnly() throws InterruptedException {
         Boolean isPresentException = false;
         do {
