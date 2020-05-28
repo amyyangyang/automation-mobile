@@ -232,7 +232,7 @@ workflows:
   app-onlineVersion:
     triggers:
       - schedule:
-          cron: "20 6 * * *"
+          cron: "20 8 * * *"
           filters:
             branches:
               only:
@@ -274,7 +274,7 @@ workflows:
           deviceType: ios
           context: next-platform-build
           requires:
-            - dev_init_data_android
+            - testDevAndroid
 
 #      - hold_testTestUI:
 #          type: approval
