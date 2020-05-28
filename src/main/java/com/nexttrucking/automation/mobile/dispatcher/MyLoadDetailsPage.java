@@ -35,10 +35,11 @@ public class MyLoadDetailsPage extends PageProperty {
     //confirm buttons
     public String undoButton = "(//*[contains(@%s, 'Undo')])[last()]";
     public String confirmButton = "(//*[contains(@%s, 'Yes, I Confirm')])[last()]";
-    public String confirmChassisNumberOkButton = "(//*[contains(@%s, \"Are you sure\")])[last()]";
+    public String confirmChassisSizeModal= "(//*[contains(@%s, \"Are you sure\")])[last()]";
+    public String confirmChassisSizeOkButton="(//*[contains(@%s, \"Yes, I’m Sure\")])[last()]";
 
     //add chassis
-    public String addButton = "//*[@%s='Add']";
+    public String addButton = "(//*[@%s='Add'])[last()]";
     public String nextButton = "//*[@%s='Next']";
     public String addChassisNumberButton = "//*[contains(@%s, 'Add Chassis Number')]";
     public String chassisNumberInput = "//*[contains(@%s, \"What's the chassis number?\")]/following-sibling::*/following-sibling::*/child::*[2]";
@@ -289,10 +290,10 @@ public class MyLoadDetailsPage extends PageProperty {
             Thread.sleep(3000);
             clickElement(chassisSizeRadio);
             clickElement(addButton);
-            boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisNumberOkButton);
+            boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeModal);
             if (isPresentConfirmSizeButton) {
                 if (attributeName.equals("text")) {
-                    clickElementByLocator("path", confirmChassisNumberOkButton);
+                    clickElementByLocator("path", confirmChassisSizeOkButton);
                 } else {
                     new TouchAction(driver).tap(PointOption.point(190, 700)).perform();
                 }
