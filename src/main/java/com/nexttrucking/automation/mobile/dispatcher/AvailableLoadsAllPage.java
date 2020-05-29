@@ -51,6 +51,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String getTextInArriveBetweenTime = "textGroupValue_1";
     public String timeElementListOfTripsJob = "//*[contains(@content-desc,'timeGroup')]";
     public String timeElementListOfLegacyJob = "//*[contains(@content-desc,'time_')]";
+    public String jobIdElement="jobID";
 
     public String jobType = "jobType";
     public String equipmentType = "equipmentView";
@@ -79,7 +80,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("powerOnlyRadio", "//*[contains(@text, 'Power Only')]/following-sibling::*[1]/child::*[1]");
             buttonMap.put("boxTruckRadio", "//*[contains(@text, 'Box Truck')]/following-sibling::*[1]/child::*[1]");
             availableCardMap.put("numberOfLoad", "(//*[@content-desc='available_view_list']//*[@content-desc])[1]");
-            availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*[1]");
+            availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*/child::*[1]");
         } else {
             buttonMap.put("filterButton", "//XCUIElementTypeStaticText[@name=\"\uF182\"]");
             buttonMap.put("backButton", "//XCUIElementTypeStaticText[@name=\"\uF406\"]");
@@ -89,6 +90,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             buttonMap.put("powerOnlyRadio", "(//*[contains(@name, 'Power Only')])[last()]");
             buttonMap.put("boxTruckRadio", "(//*[contains(@name, 'Box Truck')])[last()]");
             availableCardMap.put("numberOfLoad", "(//XCUIElementTypeScrollView/*/*[2]/*)[2]");
+            availableCardMap.put("jobNumber", "//*[contains(@content-desc, 'available_view_list')]/child::*[1]/child::*/child::*/child::*[1]");
         }
     }
 
@@ -115,7 +117,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             clickElement(confirmLogOutButton);
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(270, 600)).perform();
+            touchAction.tap(PointOption.point(270, 750)).perform();
         }
         Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);
@@ -211,8 +213,8 @@ public class AvailableLoadsAllPage extends PageProperty {
         for (int i = 0; i < addressCount; i++) {
             jobCardData.put("address" + i, addressElements.get(i).findElementByAccessibilityId(getTextInAddress).getText());
         }
-        jobCardData.put("equipmentType", jobCard.findElementByAccessibilityId(equipmentType).getText());
-        jobCardData.put("payout", jobCard.findElementByAccessibilityId(payout).getText());
+        jobCardData.put("equipmentType", jobCard.findElementsByAccessibilityId(jobIdElement).get(0).findElementByAccessibilityId(equipmentType).getText());
+        jobCardData.put("payout", jobCard.findElementsByAccessibilityId(jobIdElement).get(0).findElementByAccessibilityId(payout).getText());
         List<MobileElement> timeElements;
         int timeCount;
         if (jobNumber.contains("J-")) {

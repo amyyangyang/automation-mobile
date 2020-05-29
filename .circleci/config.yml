@@ -229,10 +229,10 @@ jobs:
 
 workflows:
   version: 2
-  app-onlineVersion:
+  app-onlineVersion-android-timing:
     triggers:
       - schedule:
-          cron: "20 13 * * *"
+          cron: "0 8 * * *"
           filters:
             branches:
               only:
@@ -268,14 +268,37 @@ workflows:
           requires:
             - dev_init_data_android
 
+  app-onlineVersion-ios-timing:
+    triggers:
+      - schedule:
+          cron: "30 9 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+                - ci.onlineVersion
+    jobs:
+      - build
+
+      - prepare_test_cases_and_mobile_app:
+          context: next-platform-build
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - onlineVersion
+                - ci.onlineVersion
+
       - run_case:
           name: testDevIOS
           envType: dev
           deviceType: ios
           context: next-platform-build
           requires:
-            - testDevAndroid
-
+            - prepare_test_cases_and_mobile_app
 #      - hold_testTestUI:
 #          type: approval
 #          requires:
@@ -293,81 +316,81 @@ workflows:
 #          context: next-platform-build
 #          requires:
 #            - test_init_data_android
-  app-ui-test:
-    jobs:
-      - build
-
-      - prepare_test_cases_and_mobile_app:
-          context: next-platform-build
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - /^release\/.*/
-                - feature/circleci
-
-      - hold_testDevUI:
-          type: approval
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - init_data:
-          name: dev_init_data_android
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - hold_testDevUI
-      - run_case:
-          name: testDevAndroid
-          envType: dev
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - dev_init_data_android
-      - init_data:
-          name: dev_init_data_ios
-          ENV: dev
-          context: next-platform-build
-          requires:
-            - testDevAndroid
-      - run_case:
-          name: testDevIOS
-          envType: dev
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - dev_init_data_ios
-      - hold_testTestUI:
-          type: approval
-          requires:
-            - prepare_test_cases_and_mobile_app
-      - init_data:
-          name: test_init_data_android
-          ENV: test
-          context: next-platform-build
-          requires:
-            - hold_testTestUI
-      - run_case:
-          name: testTestAndroid
-          envType: test
-          deviceType: android
-          context: next-platform-build
-          requires:
-            - test_init_data_android
-      - init_data:
-          name: test_init_data_ios
-          ENV: test
-          context: next-platform-build
-          requires:
-            - testTestAndroid
-      - run_case:
-          name: testTestIOS
-          envType: test
-          deviceType: ios
-          context: next-platform-build
-          requires:
-            - test_init_data_ios
+#  app-ui-test:
+#    jobs:
+#      - build
+#
+#      - prepare_test_cases_and_mobile_app:
+#          context: next-platform-build
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - /^release\/.*/
+#                - feature/circleci
+#
+#      - hold_testDevUI:
+#          type: approval
+#          requires:
+#            - prepare_test_cases_and_mobile_app
+#      - init_data:
+#          name: dev_init_data_android
+#          ENV: dev
+#          context: next-platform-build
+#          requires:
+#            - hold_testDevUI
+#      - run_case:
+#          name: testDevAndroid
+#          envType: dev
+#          deviceType: android
+#          context: next-platform-build
+#          requires:
+#            - dev_init_data_android
+#      - init_data:
+#          name: dev_init_data_ios
+#          ENV: dev
+#          context: next-platform-build
+#          requires:
+#            - testDevAndroid
+#      - run_case:
+#          name: testDevIOS
+#          envType: dev
+#          deviceType: ios
+#          context: next-platform-build
+#          requires:
+#            - dev_init_data_ios
+#      - hold_testTestUI:
+#          type: approval
+#          requires:
+#            - prepare_test_cases_and_mobile_app
+#      - init_data:
+#          name: test_init_data_android
+#          ENV: test
+#          context: next-platform-build
+#          requires:
+#            - hold_testTestUI
+#      - run_case:
+#          name: testTestAndroid
+#          envType: test
+#          deviceType: android
+#          context: next-platform-build
+#          requires:
+#            - test_init_data_android
+#      - init_data:
+#          name: test_init_data_ios
+#          ENV: test
+#          context: next-platform-build
+#          requires:
+#            - testTestAndroid
+#      - run_case:
+#          name: testTestIOS
+#          envType: test
+#          deviceType: ios
+#          context: next-platform-build
+#          requires:
+#            - test_init_data_ios
 #  app-ui-timing-test:
 #    triggers:
 #      - schedule:
