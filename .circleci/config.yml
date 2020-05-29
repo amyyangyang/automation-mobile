@@ -232,7 +232,7 @@ workflows:
   app-onlineVersion-android-timing:
     triggers:
       - schedule:
-          cron: "0 8 * * *"
+          cron: "0 12 * * *"
           filters:
             branches:
               only:
@@ -271,7 +271,7 @@ workflows:
   app-onlineVersion-ios-timing:
     triggers:
       - schedule:
-          cron: "30 9 * * *"
+          cron: "30 13 * * *"
           filters:
             branches:
               only:
