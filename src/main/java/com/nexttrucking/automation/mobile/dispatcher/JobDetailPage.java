@@ -111,7 +111,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", isBookButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(229, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(190, 750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -163,7 +163,11 @@ public class JobDetailPage extends PageProperty {
     public boolean checkBookJobForErrors() throws InterruptedException {
         boolean isPresentAvailableLoadButton = isElementPresent("path", goToAvailableLoadsButton);
         if (isPresentAvailableLoadButton) {
-            clickElementByLocator("path", goToAvailableLoadsButton);
+            if(attributeName.equals("text")){
+                clickElementByLocator("path", goToAvailableLoadsButton);
+            }else{
+                new TouchAction(driver).press(PointOption.point(270, 750)).perform();
+            }
         }
         Thread.sleep(3000);
         swipeForAnyPlatform();

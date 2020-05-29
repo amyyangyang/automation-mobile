@@ -40,7 +40,7 @@ public class MyDriversPage extends PageProperty {
     private String editedEquipmentForAndroid = "//*[contains(@text, '53 ft Reefer')]";
     private String fixedEquipmentForIOS = "//*[contains(@name, 'Equipment')]";
     private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
-
+    private String closeModal="//*[contains(@%s, '\uF406')]";
 
     public MyDriversPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -156,8 +156,9 @@ public class MyDriversPage extends PageProperty {
             clickElementByName(editedData, "OK");
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190, 750)).perform();
+            touchAction.tap(PointOption.point(190, 670)).perform();
         }
+     //   clickElementByLocator("path",closeModal);
     }
 
     public void selectPriceVisibilityRadio(String radioButton) {

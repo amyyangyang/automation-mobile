@@ -20,7 +20,7 @@ public class AccountPage extends PageProperty {
     public String equipmentTitle = "(//*[@%s='Equipment'])[last()]";
     public String carrierDocsTitle = "(//*[@%s='Carrier Docs'])[last()]";
     public String bankAccountTitle = "(//*[@%s='Bank Account'])[last()]";
-    public String loadPreferenceBtn = "(//*[@%s='Load Preferences'])[last()]";
+    public String loadPreferenceBtn = "(//*[contains(@%s,'Load Preferences')])[last()]";
     public String LogoutBtn = "(//*[@%s='Logout'])[last()]";
     public String accountPageTitle = "(//*[@%s='Account'])[last()]";
     public String preferenceModalTitle = "(//*[contains(@%s,\"Don't waste time\")])[last()]";

@@ -31,7 +31,8 @@ public class SignUpPage extends PageProperty {
     public String equipmentTitle = "(//*[contains(@%s, 'What do you have?')])[last()]";
     private String usDocketInput = "selectCarrier_input_docket";
     private String companyNameInput = "selectCarrier_input_company";
-    private String firstModal = "(//*[contains(@text, 'Which modes do you do?')]/parent::*/following-sibling::*)[2]/child::*/child::*";
+    private String firstModal = "(//*[contains(@%s, 'Which modes do you do?')]/parent::*/following-sibling::*)[2]/child::*/child::*";
+    private String firstModalForIOS="(//*[contains(@%s,'Full Truckload')]/following-sibling::*)[1]";
     private String submitInformationButton = "(//*[contains(@%s, 'Submit Information')])[last()]";
     public String promptMessage = "(//*[contains(@%s, 'Just so you')])[last()]";
     private String showWhatButton = "(//*[contains(@%s, 'Show')])[last()]";
@@ -125,7 +126,11 @@ public class SignUpPage extends PageProperty {
     }
 
     public void chooseMode(String mode) {
-        clickElement(firstModal);
+        if(attributeName.equals("text")) {
+            clickElement(firstModal);
+        }else{
+            clickElement(firstModalForIOS);
+        }
     }
 
     public void submitInformation() {
