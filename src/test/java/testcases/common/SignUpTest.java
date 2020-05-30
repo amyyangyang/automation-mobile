@@ -175,9 +175,11 @@ public class SignUpTest extends SetProperty {
 
     @After
     public void logOut() throws InterruptedException {
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-        availableLoadsAllPage.confirmLogout();
+        if(attributeName.equals("text")){
+            availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+            availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+            availableLoadsAllPage.confirmLogout();
+        }
     }
 
 
