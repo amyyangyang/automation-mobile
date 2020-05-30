@@ -68,14 +68,15 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompleted() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
-            if (isPresent) {
+            pageProperty.clickElementByLocator("id", myLoadsPage.originationAddress);
+//            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
+//            if (isPresent) {
                 Thread.sleep(6000);
                 myLoadDetailsPage.changeJobStatus(allowLocationPage);
                 myLoadDetailsPage.submitInvoice();
                 availableLoadsAllPage.clickMenuButtonFirstLevel("My Loads");
                 availableLoadsAllPage.getTitle("My Loads");
-            }
+//            }
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");
         }
@@ -138,36 +139,37 @@ public class OwnerMyLoadsTest extends SetProperty {
     public void checkInvoiceFeeType() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
-            if (isPresent) {
-                Thread.sleep(6000);
-                myLoadDetailsPage.changeJobStatus(allowLocationPage);
-                boolean isPresentReviewInvoiceButton = myLoadsPage.isElementPresent("path", myLoadDetailsPage.reviewInvoiceButton);
-                if (isPresentReviewInvoiceButton) {
-                    myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.reviewInvoiceButton);
-                } else {
-                    myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.completeInvoiceButton);
-                }
-                Thread.sleep(6000);
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addInvoiceButton);
-                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.detentionFee), containsString("Detention"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.chassisSplitFee), containsString("Chassis Split"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.stopChargeFee), containsString("Stop Charge"));
-                //Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.tounFee), containsString("TONU"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.scaleFee), containsString("Scale"));
-                //Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.driverAssistFee), containsString("Driver Assist"));
-                Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.otherFee), containsString("Other"));
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("stopChargeAudio"));
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.continueFeeButton);
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addStopChargeButton);
-                Thread.sleep(2000);
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.submitInvoiceButton);
-                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.goToMyLoadsButton);
-                Thread.sleep(3000);
-                pageProperty.swipeToDownForAndroid();
-                Thread.sleep(3000);
+            pageProperty.clickElementByLocator("id", myLoadsPage.originationAddress);
+//            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
+//            if (isPresent) {
+            Thread.sleep(6000);
+            myLoadDetailsPage.changeJobStatus(allowLocationPage);
+            boolean isPresentReviewInvoiceButton = myLoadsPage.isElementPresent("path", myLoadDetailsPage.reviewInvoiceButton);
+            if (isPresentReviewInvoiceButton) {
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.reviewInvoiceButton);
+            } else {
+                myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.completeInvoiceButton);
             }
+            Thread.sleep(6000);
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addInvoiceButton);
+            Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.detentionFee), containsString("Detention"));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.chassisSplitFee), containsString("Chassis Split"));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.stopChargeFee), containsString("Stop Charge"));
+            //Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.tounFee), containsString("TONU"));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.scaleFee), containsString("Scale"));
+            //Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.driverAssistFee), containsString("Driver Assist"));
+            Assert.assertThat(myLoadDetailsPage.getElementText("path", myLoadDetailsPage.otherFee), containsString("Other"));
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.myLoadsDetailCardMap.get("stopChargeAudio"));
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.continueFeeButton);
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.addStopChargeButton);
+            Thread.sleep(2000);
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.submitInvoiceButton);
+            myLoadDetailsPage.clickElementByLocator("path", myLoadDetailsPage.goToMyLoadsButton);
+            Thread.sleep(3000);
+            pageProperty.swipeToDownForAndroid();
+            Thread.sleep(3000);
         }
+        // }
     }
 }
 

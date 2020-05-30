@@ -7,6 +7,8 @@ import com.nexttrucking.automation.mobile.dispatcher.AvailableLoadsAllPage;
 import com.nexttrucking.automation.mobile.dispatcher.MyDriversPage;
 import com.nexttrucking.automation.mobile.dispatcher.AccountPage;
 import com.nexttrucking.automation.mobile.property.PageProperty;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -49,76 +51,93 @@ public class OwnerAccountTest extends SetProperty {
 
     @Test
     public void checkEditProfilePage() throws InterruptedException {
-        accountPage.clickElementByLocator("path", accountPage.editProfileBtn);
-        AccountTitle AccountTitles[] = {
-                new AccountTitle(accountPage.nameTitle, "Name", "nameValue"),
-                new AccountTitle(accountPage.phoneNumberTitle, "Phone Number", "phoneNumberValue"),
-                new AccountTitle(accountPage.emailTitle, "Email", "emailValue"),
-                new AccountTitle(accountPage.homeBaseTitle, "Home Base", "homeBaseValue"),
-                new AccountTitle(accountPage.passwordTitle, "Password", "passwordValue"),
-                new AccountTitle(accountPage.languageTitle, "Language", "languageValue"),
-                new AccountTitle(accountPage.carrierInfoTitle, "Carrier Info", "carrierInfoValue"),
-                new AccountTitle(accountPage.equipmentTitle, "Equipment", "equipmentValue"),
-                new AccountTitle(accountPage.carrierDocsTitle, "Carrier Docs", "carrierDocsValue"),
-                new AccountTitle(accountPage.bankAccountTitle, "Bank Account", "bankAccountValue")
-        };
+        if (attributeName.equals("text")) {
+            accountPage.clickElementByLocator("path", accountPage.editProfileBtn);
+            AccountTitle AccountTitles[] = {
+                    new AccountTitle(accountPage.nameTitle, "Name", "nameValue"),
+                    new AccountTitle(accountPage.phoneNumberTitle, "Phone Number", "phoneNumberValue"),
+                    new AccountTitle(accountPage.emailTitle, "Email", "emailValue"),
+                    new AccountTitle(accountPage.homeBaseTitle, "Home Base", "homeBaseValue"),
+                    new AccountTitle(accountPage.passwordTitle, "Password", "passwordValue"),
+                    new AccountTitle(accountPage.languageTitle, "Language", "languageValue"),
+                    new AccountTitle(accountPage.carrierInfoTitle, "Carrier Info", "carrierInfoValue"),
+                    new AccountTitle(accountPage.equipmentTitle, "Equipment", "equipmentValue"),
+                    new AccountTitle(accountPage.carrierDocsTitle, "Carrier Docs", "carrierDocsValue"),
+                    new AccountTitle(accountPage.bankAccountTitle, "Bank Account", "bankAccountValue")
+            };
 
-        for (int i = 0; i < AccountTitles.length; i++) {
-            AccountTitle name = AccountTitles[i];
-            if (name.titleText == accountPage.passwordTitle) {
-                accountPage.swipeToUpForAndroid();
+            for (int i = 0; i < AccountTitles.length; i++) {
+                AccountTitle name = AccountTitles[i];
+                if (name.titleText == accountPage.passwordTitle) {
+                    accountPage.swipeToUpForAndroid();
+                }
+                Assert.assertEquals(accountPage.getElementText("path", name.titleText), name.title);
+                Assert.assertNotNull(accountPage.accountCardMap.get(name.titleValue));
             }
-            Assert.assertEquals(accountPage.getElementText("path", name.titleText), name.title);
-            Assert.assertNotNull(accountPage.accountCardMap.get(name.titleValue));
+            accountPage.clickElementByLocator("path", accountPage.backBtn);
         }
-        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
     @Test
     public void checkAccountPage() throws InterruptedException {
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle), "Account");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn), "Edit Profile");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn), "Load Preferences");
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn), "Logout");
+        if (attributeName.equals("text")) {
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle), "Account");
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn), "Edit Profile");
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn), "Load Preferences");
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn), "Logout");
+        }
     }
 
     @Test
     public void loadPreferenceModal() throws InterruptedException {
-        accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
-        Thread.sleep(3000);
-        boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
-        if (showModal) {
-            Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalTitle), "Don't waste time looking for loads");
-            Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalBodyText), "Let us know what you like and we’ll text you loads that match your preferences");
-            accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+        if (attributeName.equals("text")) {
+            accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
             Thread.sleep(3000);
-            Assert.assertFalse(accountPage.isElementPresent("path", accountPage.preferenceModalBodyText));
+            boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
+            if (showModal) {
+                Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalTitle), "Don't waste time looking for loads");
+                Assert.assertEquals(accountPage.getElementText("path", accountPage.preferenceModalBodyText), "Let us know what you like and we’ll text you loads that match your preferences");
+                //accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+                if (attributeName.equals("text")) {
+                    accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+                } else if (attributeName.equals("name")) {
+                    new TouchAction(driver).tap(PointOption.point(270, 690)).perform();
+                }
+                Thread.sleep(3000);
+                Assert.assertFalse(accountPage.isElementPresent("path", accountPage.preferenceModalBodyText));
+            }
+            accountPage.clickElementByLocator("path", accountPage.backBtn);
         }
-        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
     @Test
     public void checkLoadPreferenceFields() throws InterruptedException {
-        accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
-        Thread.sleep(3000);
-        boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
-        if (showModal) {
-            accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+        if (attributeName.equals("text")) {
+            accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
             Thread.sleep(3000);
+            boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
+            if (showModal) {
+                if (attributeName.equals("text")) {
+                    accountPage.clickElementByLocator("'path", accountPage.preferenceModalButton);
+                } else {
+                    new TouchAction(driver).press(PointOption.point(270, 750)).perform();
+                }
+                Thread.sleep(3000);
+            }
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.loadCostTitle), "Minimum Load Cost");
+            Assert.assertNotNull(accountPage.accountCardMap.get("loadCostValue"));
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.distanceFromTitle), "Maximum distance from you");
+            Assert.assertNotNull(accountPage.accountCardMap.get("distanceFromValue"));
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.loadDistanceTitle), "Load Distance");
+            Assert.assertNotNull(accountPage.accountCardMap.get("loadDistanceValue"));
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.desiredDestinationTitle), "Desired Destinations");
+            Assert.assertNotNull(accountPage.accountCardMap.get("desiredDestinationValue"));
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.commoditiesTitle), "Commodities to avoid");
+            Assert.assertNotNull(accountPage.accountCardMap.get("commoditiesValue"));
+            Assert.assertEquals(accountPage.getElementText("path", accountPage.maxWeightTitle), "Max Weight");
+            Assert.assertNotNull(accountPage.accountCardMap.get("maxWeightValue"));
+            accountPage.clickElementByLocator("path", accountPage.backBtn);
         }
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadCostTitle), "Minimum Load Cost");
-        Assert.assertNotNull(accountPage.accountCardMap.get("loadCostValue"));
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.distanceFromTitle), "Maximum distance from you");
-        Assert.assertNotNull(accountPage.accountCardMap.get("distanceFromValue"));
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.loadDistanceTitle), "Load Distance");
-        Assert.assertNotNull(accountPage.accountCardMap.get("loadDistanceValue"));
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.desiredDestinationTitle), "Desired Destinations");
-        Assert.assertNotNull(accountPage.accountCardMap.get("desiredDestinationValue"));
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.commoditiesTitle), "Commodities to avoid");
-        Assert.assertNotNull(accountPage.accountCardMap.get("commoditiesValue"));
-        Assert.assertEquals(accountPage.getElementText("path", accountPage.maxWeightTitle), "Max Weight");
-        Assert.assertNotNull(accountPage.accountCardMap.get("maxWeightValue"));
-        accountPage.clickElementByLocator("path", accountPage.backBtn);
     }
 
 }

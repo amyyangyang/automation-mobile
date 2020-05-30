@@ -11,6 +11,8 @@ import com.nexttrucking.automation.mobile.property.PageProperty;
 import javax.xml.parsers.ParserConfigurationException;
 
 import com.nexttrucking.automation.mobile.property.Utils;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.*;
 import property.SetProperty;
 
@@ -36,96 +38,112 @@ public class SignUpTest extends SetProperty {
 
     @Test
     public void signUpAsDispatcher() throws InterruptedException, ParserConfigurationException {
-        welcomePage.clickSignUpButton();
-        signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseUserRole("Dispatcher");
-        signUpPage.clickContinueButton();
-        signUpPage.typeFirstName(getTestData("firstName"));
-        signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseCity(getTestData("cityName"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseMode(getTestData("mode"));
-        signUpPage.clickContinueButton();
-        signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
-        signUpPage.typePassword(getTestData("passwordForGuest"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickSignUpButton();
-        Thread.sleep(5000);
-        boolean isPageTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
-        if (isPageTitlePresent) {
-            signUpPage.clickSignInButton();
-            signUpPage.typePassword(getTestData("passwordForGuest"));
-            signInPage.clickSignInButton();
-            Thread.sleep(5000);
-            allowLocationPage.clickOkAllowLocationButton();
-            allowLocationPage.clickAllowLocationButton();
+        if (attributeName.equals("text")) {
+            welcomePage.clickSignUpButton();
+            signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
+            signUpPage.chooseUserRole("Dispatcher");
+            signUpPage.clickContinueButton();
+            signUpPage.typeFirstName(getTestData("firstName"));
+            signUpPage.typeLastName(getTestData("lastName"));
+            signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
+            signUpPage.chooseCity(getTestData("cityName"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
             Thread.sleep(3000);
-            boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
-            if (isAlertPresent) {
-                signUpPage.clickAlert();
+            if (attributeName.equals("name")) {
+                TouchAction touchAction = new TouchAction(driver);
+                touchAction.tap(PointOption.point(270, 750)).perform();
+                signUpPage.clickContinueButton();
             }
-            Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
-        } else {
-            allowLocationPage.clickOkAllowLocationButton();
-            Thread.sleep(3000);
-            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)),Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText)) ;
-            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
+            signUpPage.chooseMode(getTestData("mode"));
+            signUpPage.clickContinueButton();
+            signUpPage.typeEmail(getTestData("emailForGuestDispatcher"));
+            signUpPage.typePassword(getTestData("passwordForGuest"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickSignUpButton();
+            Thread.sleep(5000);
+            boolean isPageTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
+            if (isPageTitlePresent) {
+                signUpPage.clickSignInButton();
+                signUpPage.typePassword(getTestData("passwordForGuest"));
+                signInPage.clickSignInButton();
+                Thread.sleep(5000);
+                allowLocationPage.clickOkAllowLocationButton();
+                allowLocationPage.clickAllowLocationButton();
+                Thread.sleep(3000);
+                boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
+                if (isAlertPresent) {
+                    signUpPage.clickAlert();
+                }
+                Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
+            } else {
+                allowLocationPage.clickOkAllowLocationButton();
+                Thread.sleep(3000);
+                Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)), Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText));
+                Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
+            }
         }
     }
 
     @Test
     public void signUpAsOwnerOperator() throws InterruptedException, ParserConfigurationException {
-        welcomePage.clickSignUpButton();
-        signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseUserRole("OwnerOperator");
-        signUpPage.clickContinueButton();
-        signUpPage.typeFirstName(getTestData("firstName"));
-        signUpPage.typeLastName(getTestData("lastName"));
-        signUpPage.typePhoneNumber(getTestData("phoneNumber"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseCity(getTestData("cityName"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickContinueButton();
-        signUpPage.chooseMode(getTestData("mode"));
-        signUpPage.clickContinueButton();
-        signUpPage.typeEmail(getTestData("emailForGuestOO"));
-        signUpPage.typePassword(getTestData("passwordForGuest"));
-        signUpPage.hideKeyboard();
-        signUpPage.clickSignUpButton();
-        Thread.sleep(5000);
-        boolean isRoleTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
-        if (isRoleTitlePresent) {
-            signUpPage.clickSignInButton();
-            signUpPage.typePassword(getTestData("passwordForGuest"));
-            signInPage.clickSignInButton();
-            Thread.sleep(5000);
-            allowLocationPage.clickOkAllowLocationButton();
-            allowLocationPage.clickAllowLocationButton();
+        if (attributeName.equals("text")) {
+            welcomePage.clickSignUpButton();
+            signUpPage.typeCompanyInformation(getTestData("usDocket"), getTestData("companyName"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
+            signUpPage.chooseUserRole("OwnerOperator");
+            signUpPage.clickContinueButton();
+            signUpPage.typeFirstName(getTestData("firstName"));
+            signUpPage.typeLastName(getTestData("lastName"));
+            signUpPage.typePhoneNumber(getTestData("phoneNumber"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
+            signUpPage.chooseCity(getTestData("cityName"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickContinueButton();
             Thread.sleep(3000);
-            boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
-            if (isAlertPresent) {
-                signUpPage.clickAlert();
+            if (attributeName.equals("name")) {
+                TouchAction touchAction = new TouchAction(driver);
+                touchAction.tap(PointOption.point(270, 750)).perform();
+                //signUpPage.clickContinueButton();
             }
-            Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
-        } else {
-            allowLocationPage.clickOkAllowLocationButton();
-            allowLocationPage.clickAllowLocationButton();
-            myDriversPage.selectDriverType("Power Only");
-            myDriversPage.clickContinueButton();
-            myDriversPage.selectDriverSize("3");
-            signUpPage.submitInformation();
+            signUpPage.chooseMode(getTestData("mode"));
+            signUpPage.clickContinueButton();
+            signUpPage.typeEmail(getTestData("emailForGuestOO"));
+            signUpPage.typePassword(getTestData("passwordForGuest"));
+            signUpPage.hideKeyboard();
+            signUpPage.clickSignUpButton();
             Thread.sleep(5000);
-            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)),Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText)) ;
-            Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
+            boolean isRoleTitlePresent = signUpPage.isElementPresent("path", signUpPage.pageTitle);
+            if (isRoleTitlePresent) {
+                signUpPage.clickSignInButton();
+                signUpPage.typePassword(getTestData("passwordForGuest"));
+                signInPage.clickSignInButton();
+                Thread.sleep(5000);
+                allowLocationPage.clickOkAllowLocationButton();
+                allowLocationPage.clickAllowLocationButton();
+                Thread.sleep(3000);
+                boolean isAlertPresent = signUpPage.isElementPresent("path", signUpPage.promptMessage);
+                if (isAlertPresent) {
+                    signUpPage.clickAlert();
+                }
+                Assert.assertTrue(availableLoadsAllPage.getTitle("Available").contains("Available"));
+            } else {
+                allowLocationPage.clickOkAllowLocationButton();
+                allowLocationPage.clickAllowLocationButton();
+                myDriversPage.selectDriverType("Power Only");
+                myDriversPage.clickContinueButton();
+                myDriversPage.selectDriverSize("3");
+                signUpPage.submitInformation();
+                Thread.sleep(5000);
+                Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)), Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText));
+                Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.messageAfterSigningUp)), Utils.removeSpace(signUpPage.messageAfterSigningUpText));
+            }
         }
     }
 

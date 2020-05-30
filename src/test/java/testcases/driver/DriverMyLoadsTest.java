@@ -34,16 +34,16 @@ public class DriverMyLoadsTest extends SetProperty {
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         paymentDetailPage = new PaymentDetailPage(driver, attributeName);
-        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        availableLoadsAllPage.bookTenderForFleet(1, jobDetailPage);
-        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-        availableLoadsAllPage.confirmLogout();
+        //signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        //availableLoadsAllPage.bookTenderForFleet(1, jobDetailPage);
+//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+//        availableLoadsAllPage.confirmLogout();
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(15000);
     }
 
-    @Test
+    //@Test
     public void myLoadsPage() {
         Assert.assertTrue(availableLoadsAllPage.getTitle("My Loads").contains("My Loads"));
         boolean isPresentLoad = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
@@ -68,11 +68,12 @@ public class DriverMyLoadsTest extends SetProperty {
     public void modifyJobStatusToCompleted() throws InterruptedException {
         boolean isPresentJob = myLoadsPage.isElementPresent("id", myLoadsPage.originationAddress);
         if (isPresentJob) {
-            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
-            if (isPresent) {
+            myLoadsPage.clickElementByLocator("id",myLoadsPage.originationAddress);
+//            boolean isPresent = myLoadsPage.findAndClickNotStartedJob();
+//            if (isPresent) {
                 myLoadDetailsPage.changeJobStatus(allowLocationPage);
                 availableLoadsAllPage.getTitle("My Loads");
-            }
+            //}
             Thread.sleep(3000);
         } else {
             Assert.assertEquals(availableLoadsAllPage.getElementText("path", myLoadsPage.noLoadOnMyLoads), "You don't have any loads");

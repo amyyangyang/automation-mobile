@@ -101,64 +101,70 @@ public class DispatcherMyDriversTest extends SetProperty {
 
     @Test
     public void editDriverPassword() throws InterruptedException, ParserConfigurationException {
-        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
-        if (isDriversExist) {
-            myDriversPage.selectFirstDriver();
-            myDriversPage.selectField("Password");
-            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Edit").contains("Edit Password"));
-            myDriversPage.typeNewPassword(getTestData("driverAddPassword"));
-            myDriversPage.clickSaveButton();
-            signInPage.clickBackButton();
-            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
-        } else {
-            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        if(attributeName.equals("text")){
+            boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+            if (isDriversExist) {
+                myDriversPage.selectFirstDriver();
+                myDriversPage.selectField("Password");
+                Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Edit").contains("Edit Password"));
+                myDriversPage.typeNewPassword(getTestData("driverAddPassword"));
+                myDriversPage.clickSaveButton();
+                signInPage.clickBackButton();
+                Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "My").contains("My Drivers"));
+            } else {
+                Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+            }
         }
     }
 
     @Test
     public void editDriverEquipment() throws InterruptedException {
-        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
-        if (isDriversExist) {
-            myDriversPage.selectFirstDriver();
-            myDriversPage.selectField("Equipment");
-            myDriversPage.selectDriverType("Reefer");
-            myDriversPage.clickContinueButton();
-            myDriversPage.selectDriverSize("53");
-            myDriversPage.clickSaveButton();
-            Assert.assertTrue(myDriversPage.isEquipmentEdited());
-            myDriversPage.selectField("Equipment");
-            myDriversPage.selectDriverType("Flatbed");
-            myDriversPage.clickContinueButton();
-            myDriversPage.selectDriverSize("48");
-            myDriversPage.clickSaveButton();
-            Assert.assertTrue(myDriversPage.isEquipmentFixed());
-            signInPage.clickBackButton();
-        } else {
-            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        if (attributeName.equals("text")) {
+            boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+            if (isDriversExist) {
+                myDriversPage.selectFirstDriver();
+                myDriversPage.selectField("Equipment");
+                myDriversPage.selectDriverType("Reefer");
+                myDriversPage.clickContinueButton();
+                myDriversPage.selectDriverSize("53");
+                myDriversPage.clickSaveButton();
+                Assert.assertTrue(myDriversPage.isEquipmentEdited());
+                myDriversPage.selectField("Equipment");
+                myDriversPage.selectDriverType("Flatbed");
+                myDriversPage.clickContinueButton();
+                myDriversPage.selectDriverSize("48");
+                myDriversPage.clickSaveButton();
+                Assert.assertTrue(myDriversPage.isEquipmentFixed());
+                signInPage.clickBackButton();
+            } else {
+                Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+            }
         }
     }
 
     @Test
     public void editDriverPriceVisibility() throws InterruptedException {
-        boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
-        if (isDriversExist) {
-            myDriversPage.selectFirstDriver();
-            Thread.sleep(3000);
-            pageProperty.swipeForAnyPlatform();
-            myDriversPage.selectField("Edit");
-            myDriversPage.selectPriceVisibilityRadio("Show");
-            myDriversPage.selectPriceVisibilityRadio("Save");
-            Thread.sleep(3000);
-            pageProperty.swipeForAnyPlatform();
-            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
-            myDriversPage.selectField("Edit");
-            myDriversPage.selectPriceVisibilityRadio("Hide");
-            myDriversPage.selectPriceVisibilityRadio("Save");
-            Thread.sleep(3000);
-            Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver won't see the price"));
-            signInPage.clickBackButton();
-        } else {
-            Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+        if (attributeName.equals("text")) {
+            boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
+            if (isDriversExist) {
+                myDriversPage.selectFirstDriver();
+                Thread.sleep(3000);
+                pageProperty.swipeForAnyPlatform();
+                myDriversPage.selectField("Edit");
+                myDriversPage.selectPriceVisibilityRadio("Show");
+                myDriversPage.selectPriceVisibilityRadio("Save");
+                Thread.sleep(3000);
+                pageProperty.swipeForAnyPlatform();
+                Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver will see the price"));
+                myDriversPage.selectField("Edit");
+                myDriversPage.selectPriceVisibilityRadio("Hide");
+                myDriversPage.selectPriceVisibilityRadio("Save");
+                Thread.sleep(3000);
+                Assert.assertTrue(myDriversPage.getText(myDriversPage.getAnyTitle(), "Your").contains("Your driver won't see the price"));
+                signInPage.clickBackButton();
+            } else {
+                Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
+            }
         }
     }
 
