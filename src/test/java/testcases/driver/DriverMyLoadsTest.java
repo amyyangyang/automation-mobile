@@ -34,11 +34,11 @@ public class DriverMyLoadsTest extends SetProperty {
         myLoadsPage = new MyLoadsPage(driver, attributeName);
         myLoadDetailsPage = new MyLoadDetailsPage(driver, attributeName);
         paymentDetailPage = new PaymentDetailPage(driver, attributeName);
-        //signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
-        //availableLoadsAllPage.bookTenderForFleet(1, jobDetailPage);
-//        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
-//        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
-//        availableLoadsAllPage.confirmLogout();
+        signInPage.signIn(getTestData("dispatcherEmail"), getTestData("dispatcherPassword"));
+        availableLoadsAllPage.bookTenderForFleet(1, jobDetailPage);
+        availableLoadsAllPage.clickMenuButtonFirstLevel("Account");
+        availableLoadsAllPage.clickMenuButtonSecondLevel("Logout");
+        availableLoadsAllPage.confirmLogout();
         signInPage.signIn(getTestData("driverEmail"), getTestData("driverPassword"));
         Thread.sleep(15000);
     }
