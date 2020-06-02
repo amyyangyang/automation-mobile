@@ -246,6 +246,7 @@ public class OwnerAvailableTest extends SetProperty {
         Boolean isPresentLoad = availableLoadsAllPage.isElementPresent("id", availableLoadsAllPage.originationAddress);
         if (isPresentLoad) {
             availableLoadsAllPage.clickElementByLocator("id", availableLoadsAllPage.equipmentType);
+            Thread.sleep(3000);
             Boolean isTrips = jobDetailPage.isElementPresent("xpath", jobDetailPage.isTrips);
             if (isTrips) {
                 Assert.assertNotNull(jobDetailPage.getElementText("id", jobDetailPage.getTextInAddress, 0));
