@@ -132,11 +132,11 @@ public class SignUpPage extends PageProperty {
             clickElement(firstModalForIOS);
             TouchAction touchAction = new TouchAction(driver);
             touchAction.tap(PointOption.point(190, 200)).perform();
-            touchAction.tap(PointOption.point(190, 260)).perform();
-            touchAction.tap(PointOption.point(190, 290)).perform();
-            touchAction.tap(PointOption.point(190, 330)).perform();
-            touchAction.tap(PointOption.point(190, 360)).perform();
-            touchAction.tap(PointOption.point(190, 390)).perform();
+//            touchAction.tap(PointOption.point(190, 260)).perform();
+//            touchAction.tap(PointOption.point(190, 290)).perform();
+//            touchAction.tap(PointOption.point(190, 330)).perform();
+//            touchAction.tap(PointOption.point(190, 360)).perform();
+//            touchAction.tap(PointOption.point(190, 390)).perform();
             Thread.sleep(3000);
         }
     }
