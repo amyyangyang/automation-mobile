@@ -114,7 +114,7 @@ public class SignUpPage extends PageProperty {
     public void clickSignInButton() {
         if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(100 / 375 * width, 750 / 812 * height)).perform();
+            touchAction.tap(PointOption.point(100, 750)).perform();
         } else {
             clickAnyElementByName("Sign In");
         }

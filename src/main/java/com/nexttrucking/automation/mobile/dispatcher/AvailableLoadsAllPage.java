@@ -117,7 +117,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             clickElement(confirmLogOutButton);
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
+            touchAction.tap(PointOption.point(270, 750)).perform();
         }
         Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);

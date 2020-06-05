@@ -156,7 +156,7 @@ public class MyDriversPage extends PageProperty {
             clickElementByName(editedData, "OK");
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190 / 375 * width, 670 / 812 * height)).perform();
+            touchAction.tap(PointOption.point(190, 670)).perform();
         }
         //   clickElementByLocator("path",closeModal);
     }
@@ -167,11 +167,11 @@ public class MyDriversPage extends PageProperty {
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
             if (radioButton.equals("Hide")) {
-                touchAction.tap(PointOption.point(190 / 375 * width, 610 / 812 * height)).perform();
+                touchAction.tap(PointOption.point(190, 610)).perform();
             } else if (radioButton.equals("Show")) {
-                touchAction.tap(PointOption.point(190 / 375 * width, 680 / 812 * height)).perform();
+                touchAction.tap(PointOption.point(190, 680)).perform();
             } else if (radioButton.equals("Save")) {
-                touchAction.tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
+                touchAction.tap(PointOption.point(190, 750)).perform();
             }
         }
     }

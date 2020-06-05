@@ -111,7 +111,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", isBookButton);
         } else {
-            new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(190, 750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -120,7 +120,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", assignOkButton);
         } else {
-            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
         }
         Thread.sleep(3000);
         clickElementByLocator("path", driverElement);
@@ -131,7 +131,7 @@ public class JobDetailPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", assignOkButton);
             } else {
-                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
             }
             return true;
         }
@@ -146,7 +146,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", skipButton);
         } else {
-            new TouchAction(driver).tap(PointOption.point(95 / 375 * width, 750 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(95, 750)).perform();
         }
         Thread.sleep(3000);
     }
@@ -155,7 +155,7 @@ public class JobDetailPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", element);
         } else {
-            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
         }
         //Thread.sleep(3000);
     }
@@ -166,7 +166,7 @@ public class JobDetailPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", goToAvailableLoadsButton);
             } else {
-                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
             }
         }
         Thread.sleep(3000);

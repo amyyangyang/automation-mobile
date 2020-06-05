@@ -78,7 +78,7 @@ public class SignInPage extends PageProperty {
             clickElement(emailSentOKButton);
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
+            touchAction.tap(PointOption.point(190, 750)).perform();
         }
         Thread.sleep(3000);
     }
