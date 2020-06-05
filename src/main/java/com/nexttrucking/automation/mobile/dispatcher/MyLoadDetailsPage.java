@@ -197,7 +197,7 @@ public class MyLoadDetailsPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", skipInvoiceButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(171 / 375 * width, 750 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(171 / 375 * width, 750 / 812 * height)).perform();
         }
         clickElementByLocator("path", myLoadsDetailCardMap.get("backToMyLoads"));
     }
@@ -208,13 +208,13 @@ public class MyLoadDetailsPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", reviewInvoiceButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
         } else {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", completeInvoiceButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
         }
         Thread.sleep(6000);
@@ -223,9 +223,9 @@ public class MyLoadDetailsPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", goToMyLoadsButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(183 / 375 * width, 766 / 812 * height)).perform();
-            new TouchAction(driver).press(PointOption.point(150 / 375 * width, 760 / 812 * height)).perform();
-            new TouchAction(driver).press(PointOption.point(180 / 375 * width, 765 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(183 / 375 * width, 766 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(150 / 375 * width, 760 / 812 * height)).perform();
+            new TouchAction(driver).tap(PointOption.point(180 / 375 * width, 765 / 812 * height)).perform();
         }
         Thread.sleep(3000);
     }
