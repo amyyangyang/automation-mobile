@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class PageProperty {
-    private int width;
-    private int height;
+    public int width;
+    public int height;
     public int nanos = (int) (2 * 1000);
     public Duration duration = Duration.ofNanos(nanos);
     String anyElement = "(//*[contains(@%1$s, \"%2$s\")])[last()]";
