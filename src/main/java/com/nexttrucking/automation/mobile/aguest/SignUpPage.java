@@ -32,7 +32,7 @@ public class SignUpPage extends PageProperty {
     private String usDocketInput = "selectCarrier_input_docket";
     private String companyNameInput = "selectCarrier_input_company";
     private String firstModal = "(//*[contains(@%s, 'Which modes do you do?')]/parent::*/following-sibling::*)[2]/child::*/child::*";
-    private String firstModalForIOS="(//*[contains(@%s,'Full Truckload')]/following-sibling::*)[1]";
+    private String firstModalForIOS = "(//*[contains(@%s,'Full Truckload')]/following-sibling::*)[1]";
     private String submitInformationButton = "(//*[contains(@%s, 'Submit Information')])[last()]";
     public String promptMessage = "(//*[contains(@%s, 'Just so you')])[last()]";
     private String showWhatButton = "(//*[contains(@%s, 'Show')])[last()]";
@@ -114,7 +114,7 @@ public class SignUpPage extends PageProperty {
     public void clickSignInButton() {
         if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(100, 750)).perform();
+            touchAction.tap(PointOption.point(100 / 375 * width, 750 / 812 * height)).perform();
         } else {
             clickAnyElementByName("Sign In");
         }
@@ -125,11 +125,19 @@ public class SignUpPage extends PageProperty {
         driver.findElementByAccessibilityId(companyNameInput).sendKeys(companyName);
     }
 
-    public void chooseMode(String mode) {
-        if(attributeName.equals("text")) {
+    public void chooseMode(String mode) throws InterruptedException {
+        if (attributeName.equals("text")) {
             clickElement(firstModal);
-        }else{
+        } else {
             clickElement(firstModalForIOS);
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point(190, 200)).perform();
+            touchAction.tap(PointOption.point(190, 260)).perform();
+            touchAction.tap(PointOption.point(190, 290)).perform();
+            touchAction.tap(PointOption.point(190, 330)).perform();
+            touchAction.tap(PointOption.point(190, 360)).perform();
+            touchAction.tap(PointOption.point(190, 390)).perform();
+            Thread.sleep(3000);
         }
     }
 

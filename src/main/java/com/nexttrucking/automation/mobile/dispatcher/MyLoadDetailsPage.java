@@ -197,7 +197,7 @@ public class MyLoadDetailsPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", skipInvoiceButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(171, 750)).perform();
+            new TouchAction(driver).press(PointOption.point(171 / 375 * width, 750 / 812 * height)).perform();
         }
         clickElementByLocator("path", myLoadsDetailCardMap.get("backToMyLoads"));
     }
@@ -208,13 +208,13 @@ public class MyLoadDetailsPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", reviewInvoiceButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(190, 750)).perform();
+                new TouchAction(driver).press(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
         } else {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", completeInvoiceButton);
             } else {
-                new TouchAction(driver).press(PointOption.point(190, 750)).perform();
+                new TouchAction(driver).press(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
         }
         Thread.sleep(6000);
@@ -223,9 +223,9 @@ public class MyLoadDetailsPage extends PageProperty {
         if (attributeName.equals("text")) {
             clickElementByLocator("path", goToMyLoadsButton);
         } else {
-            new TouchAction(driver).press(PointOption.point(183, 766)).perform();
-            new TouchAction(driver).press(PointOption.point(150, 760)).perform();
-            new TouchAction(driver).press(PointOption.point(180, 765)).perform();
+            new TouchAction(driver).press(PointOption.point(183 / 375 * width, 766 / 812 * height)).perform();
+            new TouchAction(driver).press(PointOption.point(150 / 375 * width, 760 / 812 * height)).perform();
+            new TouchAction(driver).press(PointOption.point(180 / 375 * width, 765 / 812 * height)).perform();
         }
         Thread.sleep(3000);
     }
@@ -264,7 +264,7 @@ public class MyLoadDetailsPage extends PageProperty {
         TouchAction touchAction = new TouchAction(driver);
         if (isPresentChassis) {
             if (attributeName.equals("name")) {
-                touchAction.tap(PointOption.point(190, 700)).perform();
+                touchAction.tap(PointOption.point(190 / 375 * width, 700 / 812 * height)).perform();
             } else {
                 clickElementByLocator("path", confirmButton);
             }
@@ -272,7 +272,7 @@ public class MyLoadDetailsPage extends PageProperty {
             isPresentChassis = isElementPresent("xpath", useADifferentChassis);
             if (isPresentChassis) {
                 if (attributeName.equals("name")) {
-                    touchAction.tap(PointOption.point(190, 700)).perform();
+                    touchAction.tap(PointOption.point(190 / 375 * width, 700 / 812 * height)).perform();
                 } else {
                     clickElementByLocator("path", confirmButton);
                 }
@@ -282,7 +282,7 @@ public class MyLoadDetailsPage extends PageProperty {
                 clickElement(addChassisNumberButton);
                 driver.findElementByXPath(String.format(chassisNumberInput, attributeName)).sendKeys(chassisNumber);
             } else {
-                touchAction.tap(PointOption.point(190, 700)).perform();
+                touchAction.tap(PointOption.point(190 / 375 * width, 700 / 812 * height)).perform();
                 Thread.sleep(3000);
                 driver.findElementByXPath(chassisNumberInputForIOS).sendKeys(chassisNumber);
             }
@@ -292,10 +292,10 @@ public class MyLoadDetailsPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElement(addButton);
             } else {
-                new TouchAction(driver).tap(PointOption.point(190, 600)).perform();
-                new TouchAction(driver).tap(PointOption.point(190, 630)).perform();
-                new TouchAction(driver).tap(PointOption.point(190, 660)).perform();
-                new TouchAction(driver).tap(PointOption.point(190, 690)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 600 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 630 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 660 / 812 * height)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 690 / 812 * height)).perform();
                 Thread.sleep(3000);
             }
             boolean isPresentConfirmSizeButton = isElementPresent("path", confirmChassisSizeModal);
@@ -303,7 +303,7 @@ public class MyLoadDetailsPage extends PageProperty {
                 if (attributeName.equals("text")) {
                     clickElementByLocator("path", confirmChassisSizeOkButton);
                 } else {
-                    new TouchAction(driver).tap(PointOption.point(190, 700)).perform();
+                    new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 700 / 812 * height)).perform();
                 }
             }
             Thread.sleep(6000);
@@ -328,15 +328,15 @@ public class MyLoadDetailsPage extends PageProperty {
             clickElementByLocator("path", dropCompletedButton);
         } else {
             getElementText("xpath", readyToStart);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             getElementText("xpath", hookCompletedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             String chassisNumber = generateChassisNumber();
             addChassisNumber(chassisNumber);
             getElementText("xpath", dropCompletedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
         }
         Thread.sleep(3000);
         clickElementByLocator("path", upLoadDocumentsButton);
@@ -375,15 +375,15 @@ public class MyLoadDetailsPage extends PageProperty {
             }
         } else {
             System.out.println(getElementText("path", readyToStart));
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             System.out.println(getElementText("path", hookCompletedButton));
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             String chassisNumber = generateChassisNumber();
             addChassisNumber(chassisNumber);
             System.out.println(getElementText("xpath", liveUnloadCompletedButton));
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(6000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadDoc(allowLocationPage, true, 0);
@@ -394,14 +394,14 @@ public class MyLoadDetailsPage extends PageProperty {
             } else {
                 System.out.println(getElementText("path", containerDismountedButton));
             }
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadDoc(allowLocationPage, false, 0);
             clickElementByLocator("path", continueButton);
             if (!isPresentDroppedButton) {
                 System.out.println(getElementText("path", chassisDroppedButton));
-                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                 Thread.sleep(3000);
             }
         }
@@ -448,27 +448,27 @@ public class MyLoadDetailsPage extends PageProperty {
             }
         } else {
             getElementText("path", readyToStart);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             getElementText("path", chassisHookedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(6000);
             String chassisNumber = generateChassisNumber();
             addChassisNumber(chassisNumber);
             getElementText("path", containerMountedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             boolean isLiveUnloadJob = isElementPresent("path", liveUnloadCompletedButton);
             if (!isLiveUnloadJob) {
                 getElementText("path", dropCompletedButton);
-                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                 Thread.sleep(3000);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadDoc(allowLocationPage, true, 0);
                 clickElementByLocator("path", continueButton);
             } else {
                 getElementText("path", liveUnloadCompletedButton);
-                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                 Thread.sleep(3000);
                 clickElementByLocator("path", upLoadDocumentsButton);
                 uploadDoc(allowLocationPage, true, 0);
@@ -476,19 +476,19 @@ public class MyLoadDetailsPage extends PageProperty {
                 boolean isDropButton = isElementPresent("path", dropCompletedButton);
                 if (isDropButton) {
                     getElementText("path", dropCompletedButton);
-                    new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                    new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                     Thread.sleep(3000);
                     clickElementByLocator("path", upLoadDocumentsButton);
                     uploadDoc(allowLocationPage, false, 0);
                     clickElementByLocator("path", continueButton);
                 } else {
                     getElementText("path", containerDismountedButton);
-                    new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                    new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                     clickElementByLocator("path", upLoadDocumentsButton);
                     uploadDoc(allowLocationPage, false, 0);
                     clickElementByLocator("path", continueButton);
                     getElementText("path", chassisDroppedButton);
-                    new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                    new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
                     Thread.sleep(3000);
                     clickElementByLocator("path", continueButton);
                 }
@@ -515,23 +515,23 @@ public class MyLoadDetailsPage extends PageProperty {
             Thread.sleep(3000);
         } else {
             getElementText("path", readyToStart);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             getElementText("path", hookCompletedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             boolean isPresentConfirmButton = isElementPresent("path", confirmButton);
             if (isPresentConfirmButton) {
-                new TouchAction(driver).tap(PointOption.point(190, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
             getElementText("path", containerDismountedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
             clickElementByLocator("path", upLoadDocumentsButton);
             uploadDoc(allowLocationPage, true, 0);
             clickElementByLocator("path", continueButton);
             getElementText("path", chassisDroppedButton);
-            new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+            new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             Thread.sleep(3000);
         }
     }
@@ -542,7 +542,7 @@ public class MyLoadDetailsPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", promptMessage);
             } else {
-                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
             }
             Thread.sleep(6000);
             jobType = getTypeOfTripsJob();

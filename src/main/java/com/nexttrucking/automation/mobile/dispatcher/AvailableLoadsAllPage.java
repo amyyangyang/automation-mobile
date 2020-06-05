@@ -51,7 +51,7 @@ public class AvailableLoadsAllPage extends PageProperty {
     public String getTextInArriveBetweenTime = "textGroupValue_1";
     public String timeElementListOfTripsJob = "//*[contains(@content-desc,'timeGroup')]";
     public String timeElementListOfLegacyJob = "//*[contains(@content-desc,'time_')]";
-    public String jobIdElement="jobID";
+    public String jobIdElement = "jobID";
 
     public String jobType = "jobType";
     public String equipmentType = "equipmentView";
@@ -117,7 +117,7 @@ public class AvailableLoadsAllPage extends PageProperty {
             clickElement(confirmLogOutButton);
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(270, 750)).perform();
+            touchAction.tap(PointOption.point(270 / 375 * width, 750 / 812 * height)).perform();
         }
         Thread.sleep(3000);
         return new WelcomePage(driver, attributeName);

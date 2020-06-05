@@ -40,7 +40,7 @@ public class MyDriversPage extends PageProperty {
     private String editedEquipmentForAndroid = "//*[contains(@text, '53 ft Reefer')]";
     private String fixedEquipmentForIOS = "//*[contains(@name, 'Equipment')]";
     private String fixedEquipmentForAndroid = "//*[contains(@text, '48 ft Flatbed')]";
-    private String closeModal="//*[contains(@%s, '\uF406')]";
+    private String closeModal = "//*[contains(@%s, '\uF406')]";
 
     public MyDriversPage(AppiumDriver<MobileElement> driver, String attributeName) {
         super(driver, attributeName);
@@ -156,9 +156,9 @@ public class MyDriversPage extends PageProperty {
             clickElementByName(editedData, "OK");
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190, 670)).perform();
+            touchAction.tap(PointOption.point(190 / 375 * width, 670 / 812 * height)).perform();
         }
-     //   clickElementByLocator("path",closeModal);
+        //   clickElementByLocator("path",closeModal);
     }
 
     public void selectPriceVisibilityRadio(String radioButton) {
@@ -167,11 +167,11 @@ public class MyDriversPage extends PageProperty {
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
             if (radioButton.equals("Hide")) {
-                touchAction.tap(PointOption.point(190, 610)).perform();
+                touchAction.tap(PointOption.point(190 / 375 * width, 610 / 812 * height)).perform();
             } else if (radioButton.equals("Show")) {
-                touchAction.tap(PointOption.point(190, 680)).perform();
+                touchAction.tap(PointOption.point(190 / 375 * width, 680 / 812 * height)).perform();
             } else if (radioButton.equals("Save")) {
-                touchAction.tap(PointOption.point(190, 750)).perform();
+                touchAction.tap(PointOption.point(190 / 375 * width, 750 / 812 * height)).perform();
             }
         }
     }
