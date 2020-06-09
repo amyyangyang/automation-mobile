@@ -156,9 +156,8 @@ public class MyDriversPage extends PageProperty {
             clickElementByName(editedData, "OK");
         } else if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190, 670)).perform();
+            touchAction.tap(PointOption.point(190, 750)).perform();
         }
-        //   clickElementByLocator("path",closeModal);
     }
 
     public void selectPriceVisibilityRadio(String radioButton) {

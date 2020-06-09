@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class AccountPage extends PageProperty {
 
-    public String editProfileBtn = "(//*[@%s='Edit Profile'])[last()]";
+    public String editProfileBtn = "(//*[contains(@%s, 'Edit Profile')])[last()]";
     public String nameTitle = "(//*[@%s='Name'])[last()]";
     public String phoneNumberTitle = "(//*[@%s='Phone Number'])[last()]";
     public String emailTitle = "(//*[@%s='Email'])[last()]";
@@ -21,7 +21,7 @@ public class AccountPage extends PageProperty {
     public String carrierDocsTitle = "(//*[@%s='Carrier Docs'])[last()]";
     public String bankAccountTitle = "(//*[@%s='Bank Account'])[last()]";
     public String loadPreferenceBtn = "(//*[contains(@%s,'Load Preferences')])[last()]";
-    public String LogoutBtn = "(//*[@%s='Logout'])[last()]";
+    public String LogoutBtn = "(//*[contains(@%s, 'Logout')])[last()]";
     public String accountPageTitle = "(//*[@%s='Account'])[last()]";
     public String preferenceModalTitle = "(//*[contains(@%s,\"Don't waste time\")])[last()]";
     public String preferenceModalBodyText = "(//*[contains(@%s,'Let us know what you like')])[last()]";

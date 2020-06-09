@@ -52,7 +52,6 @@ public class DispatcherMyDriversTest extends SetProperty {
 
     @Test
     public void editDriverInfo() throws InterruptedException {
-        if (attributeName.equals("text")) {
             boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
             if (isDriversExist) {
                 myDriversPage.selectFirstDriver();
@@ -81,7 +80,6 @@ public class DispatcherMyDriversTest extends SetProperty {
             } else {
                 Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
             }
-        }
     }
 
 
@@ -101,7 +99,6 @@ public class DispatcherMyDriversTest extends SetProperty {
 
     @Test
     public void editDriverPassword() throws InterruptedException, ParserConfigurationException {
-        if(attributeName.equals("text")){
             boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
             if (isDriversExist) {
                 myDriversPage.selectFirstDriver();
@@ -114,12 +111,10 @@ public class DispatcherMyDriversTest extends SetProperty {
             } else {
                 Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
             }
-        }
     }
 
     @Test
     public void editDriverEquipment() throws InterruptedException {
-        if (attributeName.equals("text")) {
             boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
             if (isDriversExist) {
                 myDriversPage.selectFirstDriver();
@@ -139,12 +134,10 @@ public class DispatcherMyDriversTest extends SetProperty {
             } else {
                 Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
             }
-        }
     }
 
     @Test
     public void editDriverPriceVisibility() throws InterruptedException {
-        if (attributeName.equals("text")) {
             boolean isDriversExist = myDriversPage.isElementPresent("path", myDriversPage.getDrivers());
             if (isDriversExist) {
                 myDriversPage.selectFirstDriver();
@@ -166,6 +159,4 @@ public class DispatcherMyDriversTest extends SetProperty {
                 Assert.assertTrue(myDriversPage.isElementPresent("path", myDriversPage.getAddDriverTitle()));
             }
         }
-    }
-
 }

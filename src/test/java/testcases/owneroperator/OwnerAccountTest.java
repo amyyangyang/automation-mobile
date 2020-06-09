@@ -51,7 +51,6 @@ public class OwnerAccountTest extends SetProperty {
 
     @Test
     public void checkEditProfilePage() throws InterruptedException {
-        if (attributeName.equals("text")) {
             accountPage.clickElementByLocator("path", accountPage.editProfileBtn);
             AccountTitle AccountTitles[] = {
                     new AccountTitle(accountPage.nameTitle, "Name", "nameValue"),
@@ -74,23 +73,19 @@ public class OwnerAccountTest extends SetProperty {
                 Assert.assertEquals(accountPage.getElementText("path", name.titleText), name.title);
                 Assert.assertNotNull(accountPage.accountCardMap.get(name.titleValue));
             }
-            accountPage.clickElementByLocator("path", accountPage.backBtn);
-        }
+            signInPage.clickBackButton();
     }
 
     @Test
     public void checkAccountPage() throws InterruptedException {
-        if (attributeName.equals("text")) {
             Assert.assertEquals(accountPage.getElementText("path", accountPage.accountPageTitle), "Account");
-            Assert.assertEquals(accountPage.getElementText("path", accountPage.editProfileBtn), "Edit Profile");
-            Assert.assertEquals(accountPage.getElementText("path", accountPage.loadPreferenceBtn), "Load Preferences");
-            Assert.assertEquals(accountPage.getElementText("path", accountPage.LogoutBtn), "Logout");
-        }
+            Assert.assertTrue(accountPage.getElementText("path", accountPage.editProfileBtn).contains("Edit Profile") );
+            Assert.assertTrue(accountPage.getElementText("path", accountPage.loadPreferenceBtn).contains("Load Preferences"));
+            Assert.assertTrue(accountPage.getElementText("path", accountPage.LogoutBtn).contains("Logout"));
     }
 
     @Test
     public void loadPreferenceModal() throws InterruptedException {
-        if (attributeName.equals("text")) {
             accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
             Thread.sleep(3000);
             boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
@@ -106,13 +101,11 @@ public class OwnerAccountTest extends SetProperty {
                 Thread.sleep(3000);
                 Assert.assertFalse(accountPage.isElementPresent("path", accountPage.preferenceModalBodyText));
             }
-            accountPage.clickElementByLocator("path", accountPage.backBtn);
-        }
+            signInPage.clickBackButton();
     }
 
     @Test
     public void checkLoadPreferenceFields() throws InterruptedException {
-        if (attributeName.equals("text")) {
             accountPage.clickElementByLocator("path", accountPage.loadPreferenceBtn);
             Thread.sleep(3000);
             boolean showModal = accountPage.isElementPresent("path", accountPage.preferenceModalTitle);
@@ -136,8 +129,7 @@ public class OwnerAccountTest extends SetProperty {
             Assert.assertNotNull(accountPage.accountCardMap.get("commoditiesValue"));
             Assert.assertEquals(accountPage.getElementText("path", accountPage.maxWeightTitle), "Max Weight");
             Assert.assertNotNull(accountPage.accountCardMap.get("maxWeightValue"));
-            accountPage.clickElementByLocator("path", accountPage.backBtn);
-        }
+            signInPage.clickBackButton();
     }
 
 }
