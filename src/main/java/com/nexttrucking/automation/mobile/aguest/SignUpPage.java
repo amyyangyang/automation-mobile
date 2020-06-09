@@ -27,7 +27,7 @@ public class SignUpPage extends PageProperty {
     private String closeButtonIOS = "(//XCUIElementTypeStaticText)[1]";
     private String editPhoneInputForIOS = "(//*[@name='createAccount_input_phone'])[last()]";
     private String editPhoneInputForAndroid = "(//*[@text='createAccount_input_phone'])[last()]";
-    public String pageTitle = "(//*[contains(@%s, \"You’re already registered\")])[last()]";
+    public String pageTitle = "(//*[contains(@%s, \"already registered\")])[last()]";
     public String equipmentTitle = "(//*[contains(@%s, 'What do you have?')])[last()]";
     private String usDocketInput = "selectCarrier_input_docket";
     private String companyNameInput = "selectCarrier_input_company";
@@ -114,7 +114,7 @@ public class SignUpPage extends PageProperty {
     public void clickSignInButton() {
         if (attributeName.equals("name")) {
             TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(100, 750)).perform();
+            touchAction.tap(PointOption.point(70, 750)).perform();
         } else {
             clickAnyElementByName("Sign In");
         }
@@ -130,13 +130,6 @@ public class SignUpPage extends PageProperty {
             clickElement(firstModal);
         } else {
             clickElement(firstModalForIOS);
-            TouchAction touchAction = new TouchAction(driver);
-            touchAction.tap(PointOption.point(190, 200)).perform();
-//            touchAction.tap(PointOption.point(190, 260)).perform();
-//            touchAction.tap(PointOption.point(190, 290)).perform();
-//            touchAction.tap(PointOption.point(190, 330)).perform();
-//            touchAction.tap(PointOption.point(190, 360)).perform();
-//            touchAction.tap(PointOption.point(190, 390)).perform();
             Thread.sleep(3000);
         }
     }
@@ -150,6 +143,11 @@ public class SignUpPage extends PageProperty {
     }
 
     public void clickAlert() {
-        clickElement(showWhatButton);
+        if (attributeName.equals("text")) {
+            clickElement(showWhatButton);
+        } else {
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point(190, 750)).perform();
+        }
     }
 }
