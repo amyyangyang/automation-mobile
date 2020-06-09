@@ -123,12 +123,14 @@ public class DispatcherMyDriversTest extends SetProperty {
                 myDriversPage.clickContinueButton();
                 myDriversPage.selectDriverSize("53");
                 myDriversPage.clickSaveButton();
+                Thread.sleep(3000);
                 Assert.assertTrue(myDriversPage.isEquipmentEdited());
                 myDriversPage.selectField("Equipment");
                 myDriversPage.selectDriverType("Flatbed");
                 myDriversPage.clickContinueButton();
                 myDriversPage.selectDriverSize("48");
                 myDriversPage.clickSaveButton();
+                Thread.sleep(3000);
                 Assert.assertTrue(myDriversPage.isEquipmentFixed());
                 signInPage.clickBackButton();
             } else {
