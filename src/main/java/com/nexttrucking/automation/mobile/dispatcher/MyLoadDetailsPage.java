@@ -203,6 +203,7 @@ public class MyLoadDetailsPage extends PageProperty {
     }
 
     public void submitInvoice() throws InterruptedException {
+        Thread.sleep(3000);
         boolean isPresentReviewInvoiceButton = isElementPresent("path", reviewInvoiceButton);
         if (isPresentReviewInvoiceButton) {
             if (attributeName.equals("text")) {
@@ -542,7 +543,7 @@ public class MyLoadDetailsPage extends PageProperty {
             if (attributeName.equals("text")) {
                 clickElementByLocator("path", promptMessage);
             } else {
-                new TouchAction(driver).tap(PointOption.point(270, 750)).perform();
+                new TouchAction(driver).tap(PointOption.point(170, 670)).perform();
             }
             Thread.sleep(6000);
             jobType = getTypeOfTripsJob();
