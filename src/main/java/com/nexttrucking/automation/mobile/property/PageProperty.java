@@ -48,6 +48,7 @@ public abstract class PageProperty {
     }
 
     public void sendKeyToElement(String element, String keys) {
+        driver.findElement(By.xpath(String.format(element, attributeName))).click();
         driver.findElement(By.xpath(String.format(element, attributeName))).sendKeys(keys);
     }
 
