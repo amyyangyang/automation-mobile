@@ -75,7 +75,7 @@ public class SignUpTest extends SetProperty {
                 allowLocationPage.clickAllowLocationButton();
                 myDriversPage.selectDriverType("Power Only");
                 myDriversPage.clickContinueButton();
-                myDriversPage.selectDriverSize("3");
+                myDriversPage.selectDriverSize("3 axle Power Only");
                 signUpPage.submitInformation();
                 Thread.sleep(5000);
                 Assert.assertEquals(Utils.removeSpace(signUpPage.getElementText("path", signUpPage.followingMessageAfterSigningUp)), Utils.removeSpace(signUpPage.followingMessageAfterSigningUpText));
